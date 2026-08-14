@@ -1,0 +1,27 @@
+{
+    "Diamond": {
+        "translation": "Diamante",
+        "type": "item",
+        "source": "manual"
+    },
+    "Iron Ingot": {
+        "translation": "Lingote de Hierro",
+        "type": "item",
+        "source": "manual"
+    },
+    "Dirt": {
+        "translation": "Tierra",
+        "type": "block",
+        "source": "manual"
+    },
+    "Stone": {
+        "translation": "Piedra",
+        "type": "block",
+        "source": "manual"
+    },
+    "Machine": {
+        "translation": "Máquina",
+        "type": "technical_term",
+        "source": "manual"
+    }
+}

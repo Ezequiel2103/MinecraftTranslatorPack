@@ -1,0 +1,16 @@
+{
+    "app_title": "Minecraft Translator Pack",
+    "texts_found": "Textos encontrados",
+    "translatable_texts": "Textos traducibles",
+    "technical_texts": "Textos técnicos",
+    "uncertain_texts": "Textos dudosos",
+    "translation_found": "Traducción encontrada",
+    "translation_not_found": "Traducción no encontrada",
+    "translate": "Traducir",
+    "settings": "Configuración",
+    "translation_memory": "Memoria de traducción",
+    "source_language": "Idioma de origen",
+    "target_language": "Idioma de destino",
+    "error": "Error",
+    "success": "Éxito"
+}

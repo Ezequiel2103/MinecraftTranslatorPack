@@ -2,9 +2,13 @@ from analyzer.json_reader import read_json
 from analyzer.text_extractor import extract_texts
 from analyzer.text_classifier import classify_text
 
+
 from translation.translation_memory import translate_with_memory
 
 from localization.localization_manager import load_interface
+
+from analyzer.json_writer import write_json
+from analyzer.text_replacer import apply_translations
 
 
 # Application language
@@ -53,6 +57,19 @@ for item in texts:
 # Search translation memory
 results = translate_with_memory(translatable_texts)
 
+# Apply translations
+data = apply_translations(
+    data,
+    results
+)
+
+# Write translated JSON
+output_path = "test_modpack/lang/es_es.json"
+
+write_json(
+    data,
+    output_path
+)
 
 # Interface
 print("===================================")
@@ -101,3 +118,5 @@ for result in results:
         )
 
     print()
+    
+print(f"✅ Archivo traducido creado: {output_path}")

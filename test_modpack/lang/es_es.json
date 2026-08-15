@@ -1,0 +1,26 @@
+{
+    "item.minecraft.diamond": "Diamante",
+    "item.minecraft.iron_ingot": "Lingote de Hierro",
+    "block.minecraft.dirt": "Tierra",
+    "block.minecraft.stone": "Piedra",
+    "quest": {
+        "title": "Getting Started",
+        "description": "Craft your first machine.",
+        "rewards": {
+            "text": "You received a reward!"
+        }
+    },
+    "examples": [
+        "First text",
+        "Second text",
+        {
+            "name": "Nested text"
+        }
+    ],
+    "technical": {
+        "item_id": "minecraft:diamond",
+        "count": 4,
+        "enabled": true,
+        "color": "&6"
+    }
+}

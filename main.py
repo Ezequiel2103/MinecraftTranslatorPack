@@ -10,6 +10,8 @@ from localization.localization_manager import load_interface
 from analyzer.json_writer import write_json
 from analyzer.text_replacer import apply_translations
 from analyzer.translation_decision import decide_translation
+from review.pending_manager import save_pending
+
 
 # Application language
 interface = load_interface("es")
@@ -75,7 +77,28 @@ for item in translatable_texts:
         "original": item["text"],
         "translation": result["translation"],
         "source": result["source"]
+    
     })
+pending_items = [
+    result
+    for result in results
+    if not result["translation"]
+]
+
+for item in uncertain_texts:
+
+    pending_items.append({
+        "path": item["path"],
+        "original": item["text"],
+        "translation": None,
+        "source": "decision_engine",
+        "reason": "uncertain_context"
+    })
+
+save_pending(
+    pending_items,
+    "en_es"
+)
 
 # Apply translations
 data = apply_translations(

@@ -23,5 +23,15 @@
         "translation": "Máquina",
         "type": "technical_term",
         "source": "manual"
+    },
+    "Craft your first machine.": {
+        "translation": "Construye tu primera máquina.",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Getting Started": {
+        "translation": "Comencemos",
+        "type": "manual",
+        "source": "manual"
     }
 }

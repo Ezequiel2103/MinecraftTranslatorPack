@@ -43,3 +43,31 @@ def translate_with_memory(texts):
         })
 
     return results
+def add_translation(
+    original,
+    translation,
+    translation_type="manual"
+):
+    """
+    Adds a translation to the translation memory.
+    """
+
+    memory = load_memory()
+
+    memory[original] = {
+        "translation": translation,
+        "type": translation_type,
+        "source": "manual"
+    }
+
+    with MEMORY_PATH.open(
+        "w",
+        encoding="utf-8"
+    ) as file:
+
+        json.dump(
+            memory,
+            file,
+            ensure_ascii=False,
+            indent=4
+        )

@@ -1,0 +1,12 @@
+{
+    "You received a reward!": {
+        "path": "quest.rewards.text",
+        "status": "pending",
+        "reason": "translation_not_found"
+    },
+    "Nested text": {
+        "path": "examples[2].name",
+        "status": "pending",
+        "reason": "translation_not_found"
+    }
+}

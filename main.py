@@ -1,6 +1,6 @@
 from analyzer.json_reader import read_json
 from analyzer.text_extractor import extract_texts
-
+from analyzer.translation_validator import validate_translation
 
 
 from translation.translation_service import TranslationService
@@ -71,18 +71,26 @@ for item in translatable_texts:
         item["text"],
         item["path"]
     )
-
+    validation = validate_translation(
+        item["text"],
+        result["translation"]
+    )
     results.append({
-        "path": item["path"],
-        "original": item["text"],
-        "translation": result["translation"],
-        "source": result["source"]
-    
-    })
+    "path": item["path"],
+    "original": item["text"],
+    "translation": result["translation"],
+    "source": result["source"],
+    "valid": validation["valid"],
+    "validation_reason": validation["reason"]
+})
+
 pending_items = [
     result
     for result in results
-    if not result["translation"]
+    if (
+        not result["translation"]
+        or not result["valid"]
+    )
 ]
 
 for item in uncertain_texts:

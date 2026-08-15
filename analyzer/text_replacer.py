@@ -1,9 +1,15 @@
 def apply_translations(data, translations):
+
     for item in translations:
 
         translation = item["translation"]
 
+        # Skip missing translations
         if translation is None:
+            continue
+
+        # Skip invalid translations
+        if not item.get("valid", True):
             continue
 
         path = item["path"]
@@ -15,7 +21,6 @@ def apply_translations(data, translations):
         )
 
     return data
-
 
 def _replace_value(data, path, new_value):
 

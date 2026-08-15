@@ -4,8 +4,8 @@
     "block.minecraft.dirt": "Tierra",
     "block.minecraft.stone": "Piedra",
     "quest": {
-        "title": "Getting Started",
-        "description": "Craft your first machine.",
+        "title": "Comencemos",
+        "description": "Construye tu primera máquina.",
         "rewards": {
             "text": "You received a reward!"
         }

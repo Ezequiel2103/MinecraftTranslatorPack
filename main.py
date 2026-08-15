@@ -17,6 +17,14 @@ def parse_args():
     parser.add_argument("--output", default="test_modpack/lang/es_es.json")
     parser.add_argument("--input-folder", default=None)
     parser.add_argument("--output-folder", default="translated_modpack")
+    parser.add_argument(
+        "--mods-folder",
+        default=None,
+        help=(
+            "Optional mods folder. Its jar metadata is scanned so mod "
+            "display names are never translated."
+        )
+    )
     parser.add_argument("--source-language", default="en")
     parser.add_argument("--target-language", default="es")
     parser.add_argument("--target-locale", default=None)
@@ -42,7 +50,8 @@ def main():
             interface_language=args.interface_language,
             ai_provider=args.ai_provider,
             ai_model=args.ai_model,
-            target_locale_name=args.target_locale
+            target_locale_name=args.target_locale,
+            mods_folder=args.mods_folder
         )
         for report in reports:
             print_report(report)
@@ -56,7 +65,8 @@ def main():
         target_language=args.target_language,
         interface_language=args.interface_language,
         ai_provider=args.ai_provider,
-        ai_model=args.ai_model
+        ai_model=args.ai_model,
+        mods_folder=args.mods_folder
     )
     print_report(report)
 

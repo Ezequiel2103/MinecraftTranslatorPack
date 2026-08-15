@@ -1,3 +1,5 @@
+import re
+
 from translation.translation_memory import translate_with_memory
 from ai.ai_translator import MockAITranslator
 from analyzer.text_protector import protect_text, restore_text
@@ -14,10 +16,12 @@ class TranslationService:
     def __init__(
         self,
         language_pair,
-        ai_translator=None
+        ai_translator=None,
+        protected_terms=None
     ):
         self.language_pair = language_pair
         self.terminology = load_terminology(language_pair)
+        self.protected_terms = protected_terms or []
 
         if ai_translator is None:
             ai_translator = MockAITranslator()
@@ -92,7 +96,26 @@ class TranslationService:
 
         # 3. AI translation with automatic retry
 
-        protected_text, protected_tokens = protect_text(text)
+        protected_text, protected_tokens = protect_text(
+            text,
+            extra_terms=self.protected_terms
+        )
+
+        # Nothing left to translate once placeholders/protected terms are
+        # removed (e.g. a title that is only a formatting code plus a
+        # protected mod name): keep the original text instead of asking
+        # the AI to "translate" an empty string.
+        if protected_tokens and not re.sub(
+            r"__MTP_PROTECTED_\d+__", "", protected_text
+        ).strip():
+            return {
+                "translation": text,
+                "source": "fully_protected",
+                "valid": True,
+                "validation_reason": None,
+                "attempts": 0
+            }
+
         previous_translation = None
         validation_error = None
 

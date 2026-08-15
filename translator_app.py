@@ -8,6 +8,7 @@ from ai.ai_translator import (
     OllamaTranslator,
     OpenAITranslator
 )
+from analyzer.mod_scanner import scan_mod_names
 from analyzer.text_extractor import extract_texts
 from analyzer.text_replacer import apply_translations
 from analyzer.translation_decision import decide_translation
@@ -15,6 +16,10 @@ from analyzer.translation_validator import validate_translation
 from formats.handler import get_handler
 from localization.localization_manager import load_interface
 from review.pending_manager import save_pending
+from translation.protected_terms_manager import (
+    load_protected_terms,
+    save_protected_terms
+)
 from translation.translation_service import TranslationService
 
 
@@ -46,6 +51,22 @@ def create_ai_translator(provider, model=None):
     return MockAITranslator()
 
 
+def resolve_protected_terms(language_pair, mods_folder):
+    if mods_folder:
+        names, unresolved = scan_mod_names(mods_folder)
+        save_protected_terms(names, language_pair)
+
+        if unresolved:
+            print(
+                "⚠️ No se pudo leer el nombre de "
+                f"{len(unresolved)} mod(s): {', '.join(unresolved)}"
+            )
+
+        return names
+
+    return load_protected_terms(language_pair)
+
+
 def translate_file(
     input_path,
     output_path,
@@ -55,12 +76,17 @@ def translate_file(
     ai_provider="mock",
     ai_model=None,
     replace_pending=True,
-    review_root="review"
+    review_root="review",
+    mods_folder=None,
+    protected_terms=None
 ):
     input_path = Path(input_path)
     output_path = Path(output_path)
     language_pair = f"{source_language}_{target_language}"
     interface = load_interface(interface_language)
+
+    if protected_terms is None:
+        protected_terms = resolve_protected_terms(language_pair, mods_folder)
     data = get_handler(input_path).read(input_path)
     texts = extract_texts(data)
     translatable_texts = []
@@ -78,7 +104,8 @@ def translate_file(
 
     service = TranslationService(
         language_pair,
-        ai_translator=create_ai_translator(ai_provider, ai_model)
+        ai_translator=create_ai_translator(ai_provider, ai_model),
+        protected_terms=protected_terms
     )
     results = []
     total_translatable = len(translatable_texts)
@@ -187,7 +214,8 @@ def translate_folder(
     ai_provider="mock",
     ai_model=None,
     review_root="review",
-    target_locale_name=None
+    target_locale_name=None,
+    mods_folder=None
 ):
     input_folder = Path(input_folder)
     output_folder = Path(output_folder)
@@ -204,6 +232,7 @@ def translate_folder(
     )
     reports = []
     interface = load_interface(interface_language)
+    protected_terms = resolve_protected_terms(language_pair, mods_folder)
     total_files = len(files)
 
     for index, input_path in enumerate(files, start=1):
@@ -228,7 +257,8 @@ def translate_folder(
             ai_provider=ai_provider,
             ai_model=ai_model,
             replace_pending=False,
-            review_root=review_root
+            review_root=review_root,
+            protected_terms=protected_terms
         ))
 
     return reports

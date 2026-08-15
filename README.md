@@ -19,8 +19,8 @@ main.py         Punto de entrada de la aplicación
 
 El núcleo (`formats`, `analyzer`, `translation` y `review`) no depende de un proveedor
 concreto. `MockAITranslator` se usa para pruebas, `OllamaTranslator` es un
-backend local opcional y `OpenAITranslator` queda disponible para un proveedor
-cloud futuro.
+backend local opcional, y `OpenAITranslator`, `ClaudeTranslator` y
+`DeepSeekTranslator` son proveedores cloud alternativos.
 
 Los formatos iniciales soportados son:
 
@@ -33,7 +33,15 @@ Los formatos iniciales soportados son:
 El flujo implementado y probado incluye extracción recursiva, clasificación,
 terminología, memoria por combinación de idiomas, protección de placeholders,
 validación de calidad, retry automático, fallback a `pending.json`, revisión
-manual y los proveedores `mock`, `ollama` y `openai`.
+manual y los proveedores `mock`, `ollama`, `openai`, `claude` y `deepseek`.
+
+Con `--mods-folder` se puede indicar la carpeta `mods` de un modpack: el
+programa lee el nombre real de cada mod desde su propio `.jar` (sin depender
+del nombre de archivo) y protege esos nombres para que la IA nunca los
+traduzca (por ejemplo, el mod "Create" no se traduce como "Crear"). La lista
+detectada queda guardada en `translation/<idioma>/protected_terms.json`,
+editable a mano para sacar nombres ambiguos (palabras comunes del idioma
+de origen) antes de traducir el modpack completo.
 
 El soporte de formatos forma parte de la primera versión: JSON, `.lang` y SNBT.
 El lector SNBT acepta la variante que genera FTB Quests (campos separados por
@@ -80,6 +88,16 @@ Para traducir una carpeta completa y conservar su estructura:
 python main.py `
   --input-folder modpack/lang `
   --output-folder translated_modpack/lang
+```
+
+Para que los nombres de mods no se traduzcan, sumá `--mods-folder` apuntando
+a la carpeta `mods` del modpack:
+
+```powershell
+python main.py `
+  --input-folder modpack/lang `
+  --output-folder translated_modpack/lang `
+  --mods-folder modpack/mods
 ```
 
 Si la fuente se llama `en_us.json`, la salida se genera como `es_es.json`.
@@ -200,6 +218,8 @@ Las entradas rechazadas quedan en `review/en_es/pending.json`.
 6. Adaptadores `mock`, Ollama local, OpenAI, Claude y DeepSeek opcionales.
 7. Pruebas deterministas y prueba de extremo a extremo de los tres formatos.
 8. Progreso visible (`texto N de M`, `archivo N de M`) durante carpetas grandes.
+9. Protección automática de nombres de mods vía `--mods-folder`, leyendo el
+   nombre real desde los metadatos de cada `.jar` (Forge/NeoForge/Fabric).
 
 ### Próximos pasos
 

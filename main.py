@@ -9,6 +9,7 @@ from localization.localization_manager import load_interface
 
 from analyzer.json_writer import write_json
 from analyzer.text_replacer import apply_translations
+from analyzer.translation_filter import should_translate
 
 
 # Application language
@@ -42,7 +43,18 @@ uncertain_texts = []
 
 for item in texts:
 
-    classification = classify_text(item["text"])
+    text = item["text"]
+
+    classification = classify_text(text)
+
+    if not should_translate(
+        text,
+        item.get("key"),
+        item.get("path"),
+        item.get("parent_path")
+    ):
+        technical_texts.append(item)
+        continue
 
     if classification == "translatable":
         translatable_texts.append(item)
@@ -118,5 +130,5 @@ for result in results:
         )
 
     print()
-    
+
 print(f"✅ Archivo traducido creado: {output_path}")

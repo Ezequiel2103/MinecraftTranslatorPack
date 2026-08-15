@@ -1,7 +1,8 @@
 def extract_texts(data):
     texts = []
 
-    def walk(element, path=""):
+    def walk(element, path="", parent_path=""):
+
         if isinstance(element, dict):
 
             for key, value in element.items():
@@ -9,19 +10,33 @@ def extract_texts(data):
                 new_path = f"{path}.{key}" if path else key
 
                 if isinstance(value, str):
+
                     texts.append({
                         "path": new_path,
-                        "text": value
+                        "key": key,
+                        "text": value,
+                        "parent_path": path
                     })
 
                 else:
-                    walk(value, new_path)
+
+                    walk(
+                        value,
+                        new_path,
+                        path
+                    )
 
         elif isinstance(element, list):
 
             for index, value in enumerate(element):
+
                 new_path = f"{path}[{index}]"
-                walk(value, new_path)
+
+                walk(
+                    value,
+                    new_path,
+                    path
+                )
 
     walk(data)
 

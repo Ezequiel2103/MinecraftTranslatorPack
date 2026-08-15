@@ -1,64 +1,75 @@
-from translation.terminology_manager import (
-    load_terminology,
-    find_term
-)
-
-from translation.translation_memory import (
-    translate_with_memory
-)
+from translation.translation_memory import translate_with_memory
+from ai.ai_translator import MockAITranslator
+from analyzer.translation_validator import validate_translation
 
 
 class TranslationService:
 
-    def __init__(self, language_pair):
-
+    def __init__(
+        self,
+        language_pair,
+        ai_translator=None
+    ):
         self.language_pair = language_pair
 
-        self.terminology = load_terminology(
-            language_pair
-        )
+        if ai_translator is None:
+            ai_translator = MockAITranslator()
 
-    def translate(self, text, path=""):
+        self.ai_translator = ai_translator
 
-        # 1. Terminology
+    def translate(
+        self,
+        text,
+        path=None,
+        source_language="en",
+        target_language="es"
+    ):
 
-        terminology_translation = find_term(
-            text,
-            self.terminology
-        )
-
-        if terminology_translation:
-
-            return {
-                "translation": terminology_translation,
-                "source": "terminology"
-            }
-
-        # 2. Translation memory
+        # 1. Translation memory
 
         memory_results = translate_with_memory([
             {
                 "text": text,
-                "path": path
+                "path": path or ""
             }
         ])
 
-        if memory_results:
+        memory_result = memory_results[0]
 
-            memory_translation = (
-                memory_results[0]["translation"]
+        if memory_result["translation"]:
+
+            validation = validate_translation(
+                text,
+                memory_result["translation"]
             )
 
-            if memory_translation:
+            if validation["valid"]:
 
                 return {
-                    "translation": memory_translation,
-                    "source": "memory"
+                    "translation": memory_result["translation"],
+                    "source": "memory",
+                    "valid": True,
+                    "validation_reason": None
                 }
 
-        # 3. Not found
+        # 2. AI translation
+
+        result = self.ai_translator.translate(
+            text,
+            source_language,
+            target_language
+        )
+
+        translation = result["translation"]
+
+        validation = validate_translation(
+            text,
+            translation
+        )
 
         return {
-            "translation": None,
-            "source": "unknown"
+            "translation": translation,
+            "source": result["source"],
+            "valid": validation["valid"],
+            "validation_reason": validation["reason"]
         }

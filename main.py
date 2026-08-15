@@ -23,7 +23,7 @@ def parse_args():
     parser.add_argument("--interface-language", default="es")
     parser.add_argument(
         "--ai-provider",
-        choices=("mock", "ollama", "openai"),
+        choices=("mock", "ollama", "openai", "claude", "deepseek"),
         default="mock"
     )
     parser.add_argument("--ai-model", default=None)

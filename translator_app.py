@@ -1,7 +1,13 @@
 from pathlib import Path
 import re
 
-from ai.ai_translator import MockAITranslator, OllamaTranslator, OpenAITranslator
+from ai.ai_translator import (
+    ClaudeTranslator,
+    DeepSeekTranslator,
+    MockAITranslator,
+    OllamaTranslator,
+    OpenAITranslator
+)
 from analyzer.text_extractor import extract_texts
 from analyzer.text_replacer import apply_translations
 from analyzer.translation_decision import decide_translation
@@ -33,6 +39,10 @@ def create_ai_translator(provider, model=None):
         return OpenAITranslator(model=model)
     if provider == "ollama":
         return OllamaTranslator(model=model)
+    if provider == "claude":
+        return ClaudeTranslator(model=model)
+    if provider == "deepseek":
+        return DeepSeekTranslator(model=model)
     return MockAITranslator()
 
 

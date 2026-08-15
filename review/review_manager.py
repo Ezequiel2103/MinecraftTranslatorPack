@@ -79,7 +79,8 @@ def approve_translation(
 
     add_translation(
         original,
-        translation
+        translation,
+        language_pair=language_pair
     )
 
     # Remove from pending

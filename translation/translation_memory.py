@@ -2,23 +2,25 @@ import json
 from pathlib import Path
 
 
-MEMORY_PATH = (
-    Path(__file__).parent
-    / "en_es"
-    / "memory.json"
-)
+MEMORY_ROOT = Path(__file__).parent
 
 
-def load_memory():
-    if not MEMORY_PATH.exists():
+def memory_path(language_pair="en_es"):
+    return MEMORY_ROOT / language_pair / "memory.json"
+
+
+def load_memory(language_pair="en_es"):
+    path = memory_path(language_pair)
+
+    if not path.exists():
         return {}
 
-    with MEMORY_PATH.open("r", encoding="utf-8") as file:
+    with path.open("r", encoding="utf-8") as file:
         return json.load(file)
 
 
-def find_translation(text):
-    memory = load_memory()
+def find_translation(text, language_pair="en_es"):
+    memory = load_memory(language_pair)
 
     entry = memory.get(text)
 
@@ -28,13 +30,13 @@ def find_translation(text):
     return None
 
 
-def translate_with_memory(texts):
+def translate_with_memory(texts, language_pair="en_es"):
     results = []
 
     for item in texts:
 
         text = item["text"]
-        translation = find_translation(text)
+        translation = find_translation(text, language_pair)
 
         results.append({
             "path": item["path"],
@@ -46,13 +48,15 @@ def translate_with_memory(texts):
 def add_translation(
     original,
     translation,
-    translation_type="manual"
+    translation_type="manual",
+    language_pair="en_es"
 ):
     """
     Adds a translation to the translation memory.
     """
 
-    memory = load_memory()
+    path = memory_path(language_pair)
+    memory = load_memory(language_pair)
 
     memory[original] = {
         "translation": translation,
@@ -60,7 +64,9 @@ def add_translation(
         "source": "manual"
     }
 
-    with MEMORY_PATH.open(
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    with path.open(
         "w",
         encoding="utf-8"
     ) as file:

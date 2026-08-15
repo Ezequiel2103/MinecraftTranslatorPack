@@ -1,6 +1,12 @@
 from translation.translation_memory import translate_with_memory
 from ai.ai_translator import MockAITranslator
-from analyzer.translation_validator import validate_translation
+from analyzer.text_protector import protect_text, restore_text
+from analyzer.translation_validator import (
+    validate_translation,
+    validate_translation_quality
+)
+from translation.retry_manager import TranslationRetryManager
+from translation.terminology_manager import load_terminology
 
 
 class TranslationService:
@@ -11,28 +17,59 @@ class TranslationService:
         ai_translator=None
     ):
         self.language_pair = language_pair
+        self.terminology = load_terminology(language_pair)
 
         if ai_translator is None:
             ai_translator = MockAITranslator()
 
         self.ai_translator = ai_translator
 
+        self.retry_manager = TranslationRetryManager(
+            max_attempts=3
+        )
+
     def translate(
         self,
         text,
         path=None,
         source_language="en",
-        target_language="es"
+        target_language="es",
+        terminology=None,
+        context=None
     ):
 
-        # 1. Translation memory
+        active_terminology = (
+            terminology
+            if terminology is not None
+            else self.terminology
+        )
+
+        # 1. Exact terminology match
+        terminology_translation = active_terminology.get(text)
+
+        if terminology_translation:
+            validation = validate_translation(
+                text,
+                terminology_translation
+            )
+
+            if validation["valid"]:
+                return {
+                    "translation": terminology_translation,
+                    "source": "terminology",
+                    "valid": True,
+                    "validation_reason": None,
+                    "attempts": 0
+                }
+
+        # 2. Translation memory
 
         memory_results = translate_with_memory([
             {
                 "text": text,
                 "path": path or ""
             }
-        ])
+        ], self.language_pair)
 
         memory_result = memory_results[0]
 
@@ -49,27 +86,68 @@ class TranslationService:
                     "translation": memory_result["translation"],
                     "source": "memory",
                     "valid": True,
-                    "validation_reason": None
+                    "validation_reason": None,
+                    "attempts": 0
                 }
 
-        # 2. AI translation
+        # 3. AI translation with automatic retry
 
-        result = self.ai_translator.translate(
-            text,
-            source_language,
-            target_language
-        )
+        protected_text, protected_tokens = protect_text(text)
+        previous_translation = None
+        validation_error = None
 
-        translation = result["translation"]
+        for attempt in range(
+            self.retry_manager.max_attempts
+        ):
 
-        validation = validate_translation(
-            text,
-            translation
-        )
+            result = self.ai_translator.translate(
+                protected_text,
+                source_language,
+                target_language,
+                terminology=active_terminology,
+                context=context,
+                previous_translation=previous_translation,
+                validation_error=validation_error
+            )
+
+            translation = result.get("translation")
+            restored_translation = restore_text(
+                translation or "",
+                protected_tokens
+            )
+
+            validation = validate_translation(
+                text,
+                restored_translation
+            )
+
+            quality = validate_translation_quality(
+                text,
+                restored_translation
+            )
+
+            if validation["valid"] and quality["valid"]:
+
+                return {
+                    "translation": restored_translation,
+                    "source": result["source"],
+                    "valid": True,
+                    "validation_reason": None,
+                    "attempts": attempt + 1
+                }
+
+            previous_translation = translation
+
+            validation_error = (
+                validation["reason"]
+                if not validation["valid"]
+                else quality["reason"]
+            )
 
         return {
-            "translation": translation,
-            "source": result["source"],
-            "valid": validation["valid"],
-            "validation_reason": validation["reason"]
+            "translation": None,
+            "source": "ai_failed",
+            "valid": False,
+            "validation_reason": validation_error,
+            "attempts": self.retry_manager.max_attempts
         }

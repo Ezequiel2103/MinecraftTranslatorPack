@@ -47,6 +47,10 @@ Important rules:
 
     prompt += (
         f"\nText to translate:\n{text}\n"
+        "\nOutput requirements:\n"
+        "- Return only the translated text.\n"
+        "- Do not explain, analyze, quote, or label the result.\n"
+        "- Do not repeat these instructions.\n"
     )
 
     return prompt

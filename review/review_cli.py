@@ -1,16 +1,24 @@
+import argparse
+import sys
+from pathlib import Path
+
+
+if __package__ in (None, ""):
+    sys.path.insert(
+        0,
+        str(Path(__file__).resolve().parent.parent)
+    )
+
 from review.review_manager import (
     load_pending,
     approve_translation
 )
 
 
-LANGUAGE_PAIR = "en_es"
-
-
-def show_pending():
+def show_pending(language_pair):
 
     pending = load_pending(
-        LANGUAGE_PAIR
+        language_pair
     )
 
     if not pending:
@@ -46,10 +54,10 @@ def show_pending():
         print()
 
 
-def review():
+def review(language_pair):
 
     pending = load_pending(
-        LANGUAGE_PAIR
+        language_pair
     )
 
     if not pending:
@@ -140,7 +148,7 @@ def review():
     success = approve_translation(
         original,
         translation,
-        LANGUAGE_PAIR
+        language_pair
     )
 
     if success:
@@ -165,5 +173,27 @@ def review():
         )
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Review pending Minecraft translations."
+    )
+    parser.add_argument(
+        "--language-pair",
+        default="en_es",
+        help="Language pair, for example en_es or en_pt."
+    )
+    parser.add_argument(
+        "--list",
+        action="store_true",
+        help="List pending translations without reviewing one."
+    )
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
-    review()
+    args = parse_args()
+
+    if args.list:
+        show_pending(args.language_pair)
+    else:
+        review(args.language_pair)

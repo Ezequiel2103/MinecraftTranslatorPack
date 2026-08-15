@@ -9,7 +9,11 @@ class BrokenAITranslator:
         self,
         text,
         source_language,
-        target_language
+        target_language,
+        terminology=None,
+        context=None,
+        previous_translation=None,
+        validation_error=None
     ):
 
         return {

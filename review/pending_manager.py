@@ -4,17 +4,16 @@ from pathlib import Path
 
 def save_pending(
     items,
-    language_pair
+    language_pair,
+    replace=False,
+    review_root="review"
 ):
     """
     Saves texts that require translation review.
     """
 
-    if not items:
-        return
-
     review_directory = (
-        Path("review")
+        Path(review_root)
         / language_pair
     )
 
@@ -30,7 +29,7 @@ def save_pending(
 
     pending = {}
 
-    if pending_path.exists():
+    if not replace and pending_path.exists():
 
         with pending_path.open(
             "r",
@@ -48,11 +47,19 @@ def save_pending(
             "translation_not_found"
         )
 
-        pending[text] = {
+        entry = {
             "path": item["path"],
             "status": "pending",
             "reason": reason
         }
+
+        if "source" in item:
+            entry["source"] = item["source"]
+
+        if "attempts" in item:
+            entry["attempts"] = item["attempts"]
+
+        pending[text] = entry
 
     with pending_path.open(
         "w",

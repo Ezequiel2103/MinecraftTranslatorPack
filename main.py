@@ -1,20 +1,20 @@
 from analyzer.json_reader import read_json
 from analyzer.text_extractor import extract_texts
-from analyzer.text_classifier import classify_text
 
 
-from translation.translation_memory import translate_with_memory
+
+from translation.translation_service import TranslationService
 
 from localization.localization_manager import load_interface
 
 from analyzer.json_writer import write_json
 from analyzer.text_replacer import apply_translations
-from analyzer.translation_filter import should_translate
-
+from analyzer.translation_decision import decide_translation
 
 # Application language
 interface = load_interface("es")
 
+translation_service = TranslationService("en_es")
 
 # Modpack language configuration
 source_language = "en"
@@ -43,31 +43,39 @@ uncertain_texts = []
 
 for item in texts:
 
-    text = item["text"]
+    decision = decide_translation(item)
 
-    classification = classify_text(text)
+    action = decision["action"]
 
-    if not should_translate(
-        text,
-        item.get("key"),
-        item.get("path"),
-        item.get("parent_path")
-    ):
-        technical_texts.append(item)
-        continue
+    if action == "translate":
 
-    if classification == "translatable":
         translatable_texts.append(item)
 
-    elif classification == "technical":
+    elif action == "ignore":
+
         technical_texts.append(item)
 
-    else:
+    elif action == "review":
+
         uncertain_texts.append(item)
 
 
 # Search translation memory
-results = translate_with_memory(translatable_texts)
+results = []
+
+for item in translatable_texts:
+
+    result = translation_service.translate(
+        item["text"],
+        item["path"]
+    )
+
+    results.append({
+        "path": item["path"],
+        "original": item["text"],
+        "translation": result["translation"],
+        "source": result["source"]
+    })
 
 # Apply translations
 data = apply_translations(

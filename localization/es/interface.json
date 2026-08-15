@@ -12,5 +12,7 @@
     "source_language": "Idioma de origen",
     "target_language": "Idioma de destino",
     "error": "Error",
-    "success": "Éxito"
+    "success": "Éxito",
+    "translating_progress": "Traduciendo texto {current} de {total}...",
+    "translating_file_progress": "Archivo {current} de {total}: {name}"
 }

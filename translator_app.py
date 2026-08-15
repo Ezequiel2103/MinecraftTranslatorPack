@@ -81,8 +81,17 @@ def translate_file(
         ai_translator=create_ai_translator(ai_provider, ai_model)
     )
     results = []
+    total_translatable = len(translatable_texts)
 
-    for item in translatable_texts:
+    for index, item in enumerate(translatable_texts, start=1):
+        print(
+            interface["translating_progress"].format(
+                current=index,
+                total=total_translatable
+            ),
+            end="\r",
+            flush=True
+        )
         result = service.translate(
             item["text"],
             item["path"],
@@ -106,6 +115,9 @@ def translate_file(
             ),
             "attempts": result.get("attempts", 0)
         })
+
+    if total_translatable:
+        print()
 
     pending_items = []
     for result in results:
@@ -191,8 +203,17 @@ def translate_folder(
         review_root=review_root
     )
     reports = []
+    interface = load_interface(interface_language)
+    total_files = len(files)
 
-    for input_path in files:
+    for index, input_path in enumerate(files, start=1):
+        print(
+            interface["translating_file_progress"].format(
+                current=index,
+                total=total_files,
+                name=input_path.name
+            )
+        )
         relative_path = translated_relative_path(
             input_path.relative_to(input_folder),
             target_language,

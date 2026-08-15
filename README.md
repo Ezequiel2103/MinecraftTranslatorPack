@@ -197,18 +197,18 @@ Las entradas rechazadas quedan en `review/en_es/pending.json`.
 3. Compatibilidad con SNBT real de FTB Quests y preservación de formato.
 4. Protección de placeholders como `%s` y `\\n`.
 5. Memoria, terminología, validación, retry y revisión manual.
-6. Adaptadores `mock`, Ollama local y OpenAI opcional.
+6. Adaptadores `mock`, Ollama local, OpenAI, Claude y DeepSeek opcionales.
 7. Pruebas deterministas y prueba de extremo a extremo de los tres formatos.
+8. Progreso visible (`texto N de M`, `archivo N de M`) durante carpetas grandes.
 
 ### Próximos pasos
 
-1. Añadir progreso visible (`texto N de M`) durante carpetas grandes.
-2. Reutilizar automáticamente traducciones aprobadas para evitar repetir
-   llamadas a Ollama.
-3. Ejecutar la prueba real con `en_us.snbt` y revisar `pending.json`.
-4. Mejorar la aprobación de pendientes y generar un informe final.
-5. Añadir respaldo automático y aplicación explícita a una copia del modpack.
-6. Optimizar rendimiento (lotes, concurrencia controlada y caché).
+1. Reutilizar automáticamente traducciones aprobadas para evitar repetir
+   llamadas a la IA.
+2. Ejecutar la prueba real con `en_us.snbt` y revisar `pending.json`.
+3. Mejorar la aprobación de pendientes y generar un informe final.
+4. Añadir respaldo automático y aplicación explícita a una copia del modpack.
+5. Optimizar rendimiento (lotes, concurrencia controlada y caché).
 
 El orden recomendado es: prueba pequeña con `mock`, prueba pequeña con Ollama,
 revisión de pendientes, traducción completa a una carpeta separada y prueba

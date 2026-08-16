@@ -141,6 +141,11 @@ async function saveSettingsFromForm() {
   setTimeout(() => confirmEl.classList.add("hidden"), 1500);
 }
 
+async function changeUiLanguage(langCode) {
+  await loadLocale(langCode);
+  currentSettings = await api().save_settings({ ui_language: langCode });
+}
+
 async function rememberPaths() {
   await api().save_settings({
     last_modpack_root: document.getElementById("input-modpack-path").value,
@@ -365,6 +370,10 @@ function escapeHtml(text) {
 
 window.addEventListener("pywebviewready", async () => {
   await loadSettings();
+
+  document.getElementById("select-ui-language").addEventListener("change", (event) => {
+    changeUiLanguage(event.target.value);
+  });
 
   document.getElementById("btn-home").addEventListener("click", () => showView("home"));
   document.getElementById("btn-settings").addEventListener("click", () => showView("settings"));

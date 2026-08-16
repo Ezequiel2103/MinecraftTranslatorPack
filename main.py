@@ -25,6 +25,14 @@ def parse_args():
             "display names are never translated."
         )
     )
+    parser.add_argument(
+        "--translate-mod-names",
+        action="store_true",
+        help=(
+            "Let the AI translate mod display names instead of protecting "
+            "them (ignores --mods-folder protection for this run)."
+        )
+    )
     parser.add_argument("--source-language", default="en")
     parser.add_argument("--target-language", default="es")
     parser.add_argument("--target-locale", default=None)
@@ -51,7 +59,8 @@ def main():
             ai_provider=args.ai_provider,
             ai_model=args.ai_model,
             target_locale_name=args.target_locale,
-            mods_folder=args.mods_folder
+            mods_folder=args.mods_folder,
+            translate_mod_names=args.translate_mod_names
         )
         for report in reports:
             print_report(report)
@@ -66,7 +75,8 @@ def main():
         interface_language=args.interface_language,
         ai_provider=args.ai_provider,
         ai_model=args.ai_model,
-        mods_folder=args.mods_folder
+        mods_folder=args.mods_folder,
+        translate_mod_names=args.translate_mod_names
     )
     print_report(report)
 

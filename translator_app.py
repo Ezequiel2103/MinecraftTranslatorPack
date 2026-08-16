@@ -51,7 +51,10 @@ def create_ai_translator(provider, model=None):
     return MockAITranslator()
 
 
-def resolve_protected_terms(language_pair, mods_folder):
+def resolve_protected_terms(language_pair, mods_folder, translate_mod_names=False):
+    if translate_mod_names:
+        return []
+
     if mods_folder:
         names, unresolved = scan_mod_names(mods_folder)
         save_protected_terms(names, language_pair)
@@ -78,7 +81,8 @@ def translate_file(
     replace_pending=True,
     review_root="review",
     mods_folder=None,
-    protected_terms=None
+    protected_terms=None,
+    translate_mod_names=False
 ):
     input_path = Path(input_path)
     output_path = Path(output_path)
@@ -86,7 +90,11 @@ def translate_file(
     interface = load_interface(interface_language)
 
     if protected_terms is None:
-        protected_terms = resolve_protected_terms(language_pair, mods_folder)
+        protected_terms = resolve_protected_terms(
+            language_pair,
+            mods_folder,
+            translate_mod_names=translate_mod_names
+        )
     data = get_handler(input_path).read(input_path)
     texts = extract_texts(data)
     translatable_texts = []
@@ -215,7 +223,8 @@ def translate_folder(
     ai_model=None,
     review_root="review",
     target_locale_name=None,
-    mods_folder=None
+    mods_folder=None,
+    translate_mod_names=False
 ):
     input_folder = Path(input_folder)
     output_folder = Path(output_folder)
@@ -232,7 +241,11 @@ def translate_folder(
     )
     reports = []
     interface = load_interface(interface_language)
-    protected_terms = resolve_protected_terms(language_pair, mods_folder)
+    protected_terms = resolve_protected_terms(
+        language_pair,
+        mods_folder,
+        translate_mod_names=translate_mod_names
+    )
     total_files = len(files)
 
     for index, input_path in enumerate(files, start=1):

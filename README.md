@@ -100,6 +100,19 @@ python main.py `
   --mods-folder modpack/mods
 ```
 
+Si en cambio preferís que la IA sí traduzca los nombres de mods (por ejemplo,
+para otro idioma donde eso tenga sentido), agregá `--translate-mod-names`.
+Ese flag ignora la protección para esa corrida puntual, sin necesidad de
+editar `protected_terms.json`:
+
+```powershell
+python main.py `
+  --input-folder modpack/lang `
+  --output-folder translated_modpack/lang `
+  --mods-folder modpack/mods `
+  --translate-mod-names
+```
+
 Si la fuente se llama `en_us.json`, la salida se genera como `es_es.json`.
 Podés indicar otra variante con `--target-locale`. La carpeta de entrada debe
 contener las fuentes; evitá incluir dentro de ella los archivos de salida ya
@@ -219,7 +232,10 @@ Las entradas rechazadas quedan en `review/en_es/pending.json`.
 7. Pruebas deterministas y prueba de extremo a extremo de los tres formatos.
 8. Progreso visible (`texto N de M`, `archivo N de M`) durante carpetas grandes.
 9. Protección automática de nombres de mods vía `--mods-folder`, leyendo el
-   nombre real desde los metadatos de cada `.jar` (Forge/NeoForge/Fabric).
+   nombre real desde los metadatos de cada `.jar` (Forge/NeoForge/Fabric),
+   con `--translate-mod-names` para desactivarla en una corrida puntual.
+10. Revisión de pendientes asistida por IA (`review_cli.py --ai-filter`)
+    para filtrar automáticamente traducciones "sin cambios" correctas.
 
 ### Próximos pasos
 

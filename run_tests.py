@@ -18,6 +18,7 @@ TESTS = [
     "test_retry.py",
     "test_terminology_context.py",
     "test_text_protection.py",
+    "test_translate_mod_names_toggle.py",
     "test_translation_quality.py",
     "test_translation_service_ai.py",
     "test_validator_service.py",

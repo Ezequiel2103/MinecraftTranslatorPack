@@ -39,7 +39,9 @@ def translate_mod_lang_files(
     concurrency=4,
     review_root="review",
     content_only=False,
-    pack_icon=None
+    pack_icon=None,
+    on_mod_progress=None,
+    on_text_progress=None
 ):
     """
     Translates every mod's own en_us.json (skipping mods that already
@@ -89,9 +91,13 @@ def translate_mod_lang_files(
         "mods": []
     }
     pending_items = []
+    total_sources = len(sources)
 
-    for source in sources:
+    for index, source in enumerate(sources, start=1):
         modid = source["modid"]
+
+        if on_mod_progress:
+            on_mod_progress(index, total_sources, modid)
 
         if modid not in classification:
             classification[modid] = has_real_content(source["en_us"])
@@ -122,7 +128,8 @@ def translate_mod_lang_files(
                 ai_provider,
                 ai_model,
                 protected_terms,
-                concurrency
+                concurrency,
+                on_text_progress
             )
 
             for item in failed_results:
@@ -186,7 +193,8 @@ def _translate_lang_dict(
     ai_provider,
     ai_model,
     protected_terms,
-    concurrency
+    concurrency,
+    on_text_progress=None
 ):
     texts = extract_texts(en_us)
     translatable = [
@@ -205,7 +213,8 @@ def _translate_lang_dict(
         service,
         source_language=source_language,
         target_language=target_language,
-        concurrency=concurrency
+        concurrency=concurrency,
+        on_progress=on_text_progress
     )
 
     service.save_new_translations()

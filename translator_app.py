@@ -83,7 +83,8 @@ def translate_file(
     mods_folder=None,
     protected_terms=None,
     translate_mod_names=False,
-    concurrency=4
+    concurrency=4,
+    on_text_progress=None
 ):
     input_path = Path(input_path)
     output_path = Path(output_path)
@@ -119,6 +120,10 @@ def translate_file(
     total_translatable = len(translatable_texts)
 
     def report_progress(completed, total):
+        if on_text_progress:
+            on_text_progress(completed, total)
+            return
+
         print(
             interface["translating_progress"].format(
                 current=completed,
@@ -137,7 +142,7 @@ def translate_file(
         on_progress=report_progress if total_translatable else None
     )
 
-    if total_translatable:
+    if total_translatable and not on_text_progress:
         print()
 
     service.save_new_translations()
@@ -214,7 +219,9 @@ def translate_folder(
     target_locale_name=None,
     mods_folder=None,
     translate_mod_names=False,
-    concurrency=4
+    concurrency=4,
+    on_file_progress=None,
+    on_text_progress=None
 ):
     input_folder = Path(input_folder)
     output_folder = Path(output_folder)
@@ -239,13 +246,16 @@ def translate_folder(
     total_files = len(files)
 
     for index, input_path in enumerate(files, start=1):
-        print(
-            interface["translating_file_progress"].format(
-                current=index,
-                total=total_files,
-                name=input_path.name
+        if on_file_progress:
+            on_file_progress(index, total_files, input_path.name)
+        else:
+            print(
+                interface["translating_file_progress"].format(
+                    current=index,
+                    total=total_files,
+                    name=input_path.name
+                )
             )
-        )
         relative_path = translated_relative_path(
             input_path.relative_to(input_folder),
             target_language,
@@ -262,7 +272,8 @@ def translate_folder(
             replace_pending=False,
             review_root=review_root,
             protected_terms=protected_terms,
-            concurrency=concurrency
+            concurrency=concurrency,
+            on_text_progress=on_text_progress
         ))
 
     return reports

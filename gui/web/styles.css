@@ -1,0 +1,346 @@
+/*
+  Placeholder skin. Every visual piece here (title bar, buttons, panels,
+  progress bar) is meant to be swapped for the pixel-art assets later —
+  the class names are the hooks, keep them when re-skinning.
+*/
+
+:root {
+  --bg: #1b1712;
+  --panel: #2a231a;
+  --panel-border: #4a3d2c;
+  --accent: #7cb342;
+  --accent-dark: #5a8a2c;
+  --text: #e8ddc8;
+  --text-dim: #a89a80;
+  --input-bg: #14110d;
+  --danger: #b3402f;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Consolas", "Courier New", monospace;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+}
+
+.window-frame {
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--panel-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* ---------- title bar ---------- */
+
+.title-bar {
+  -webkit-app-region: drag;
+  background: linear-gradient(180deg, #3a2f20, #241d14);
+  border-bottom: 2px solid var(--panel-border);
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title-icon {
+  font-size: 18px;
+}
+
+.title-text {
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 14px;
+}
+
+.title-bar-right {
+  -webkit-app-region: no-drag;
+  display: flex;
+  gap: 4px;
+}
+
+.title-btn {
+  -webkit-app-region: no-drag;
+  background: #3a2f20;
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  width: 28px;
+  height: 24px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.title-btn:hover {
+  background: var(--accent-dark);
+}
+
+.title-btn-close:hover {
+  background: var(--danger);
+}
+
+/* ---------- content ---------- */
+
+.content {
+  flex: 1;
+  position: relative;
+  padding: 20px 24px;
+  overflow-y: auto;
+}
+
+.view.hidden {
+  display: none;
+}
+
+.field-label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  margin: 14px 0 6px;
+}
+
+.field-row {
+  display: flex;
+  gap: 8px;
+}
+
+.input-field, .select-field {
+  flex: 1;
+  background: var(--input-bg);
+  border: 2px solid var(--panel-border);
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.input-field:focus, .select-field:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+  cursor: pointer;
+  border: 2px solid var(--panel-border);
+  border-radius: 4px;
+  background: #3a2f20;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn:hover {
+  border-color: var(--accent);
+}
+
+.btn:active {
+  background: var(--accent-dark);
+}
+
+.btn-icon {
+  width: 40px;
+  font-size: 16px;
+}
+
+.btn-primary {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px;
+  background: var(--accent-dark);
+  border-color: var(--accent);
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.btn-primary:hover {
+  background: var(--accent);
+}
+
+.btn-secondary {
+  padding: 8px 14px;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+/* ---------- action buttons ---------- */
+
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.btn-action {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: linear-gradient(180deg, #3a2f20, #241d14);
+}
+
+.btn-action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-action-icon {
+  font-size: 28px;
+}
+
+/* ---------- progress ---------- */
+
+.progress-wrap {
+  margin-top: 24px;
+}
+
+.progress-bar {
+  position: relative;
+  height: 26px;
+  background: var(--input-bg);
+  border: 2px solid var(--panel-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--accent-dark),
+    var(--accent-dark) 10px,
+    var(--accent) 10px,
+    var(--accent) 20px
+  );
+  transition: width 0.2s ease;
+}
+
+.progress-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.status-line {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--text-dim);
+  min-height: 14px;
+}
+
+/* ---------- result box ---------- */
+
+.result-box {
+  margin-top: 18px;
+  font-size: 12px;
+  color: var(--text-dim);
+  white-space: pre-line;
+}
+
+.result-box.success {
+  color: var(--accent);
+}
+
+.result-box.error {
+  color: var(--danger);
+}
+
+/* ---------- settings / pending panels ---------- */
+
+.view-panel {
+  max-width: 480px;
+}
+
+.panel-title {
+  font-size: 15px;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+.save-confirm {
+  margin-top: 10px;
+  color: var(--accent);
+  font-size: 12px;
+}
+
+/* ---------- pending list ---------- */
+
+.pending-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 640px;
+}
+
+.pending-item {
+  border: 2px solid var(--panel-border);
+  border-radius: 4px;
+  padding: 10px 12px;
+  background: var(--panel);
+}
+
+.pending-original {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+  word-break: break-word;
+}
+
+.pending-path {
+  font-size: 10px;
+  color: #6b5f4a;
+  margin-bottom: 8px;
+}
+
+.pending-row {
+  display: flex;
+  gap: 8px;
+}
+
+.pending-empty {
+  color: var(--text-dim);
+  font-size: 12px;
+  padding: 20px 0;
+}

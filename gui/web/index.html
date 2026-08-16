@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Traductor de Modpacks</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="window-frame">
+
+  <div class="title-bar" id="title-bar">
+    <div class="title-bar-left">
+      <span class="title-icon">🌐</span>
+      <span class="title-text">TRADUCTOR DE MODPACKS</span>
+    </div>
+    <div class="title-bar-right">
+      <button class="title-btn" id="btn-settings" title="Configuración">⚙</button>
+      <button class="title-btn" id="btn-pending" title="Pendientes">📋</button>
+      <button class="title-btn" id="btn-minimize" title="Minimizar">—</button>
+      <button class="title-btn title-btn-close" id="btn-close" title="Cerrar">✕</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ================= HOME VIEW ================= -->
+    <section id="view-home" class="view">
+
+      <label class="field-label">RUTA DEL MODPACK (carpeta de misiones/idioma)</label>
+      <div class="field-row">
+        <input type="text" id="input-modpack-path" class="input-field" placeholder="C:\Users\...\config\ftbquests\quests\lang">
+        <button class="btn btn-icon" id="btn-browse-modpack">📁</button>
+      </div>
+
+      <label class="field-label">CARPETA DE MODS (opcional — protege nombres de mods)</label>
+      <div class="field-row">
+        <input type="text" id="input-mods-path" class="input-field" placeholder="C:\Users\...\mods">
+        <button class="btn btn-icon" id="btn-browse-mods">📁</button>
+      </div>
+
+      <label class="field-label">CARPETA DE SALIDA</label>
+      <div class="field-row">
+        <input type="text" id="input-output-path" class="input-field" placeholder="C:\Users\...\salida">
+        <button class="btn btn-icon" id="btn-browse-output">📁</button>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+          <span class="progress-label" id="progress-label">EN ESPERA</span>
+        </div>
+        <div class="status-line" id="status-line"></div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-action" id="btn-translate-modpack">
+          <span class="btn-action-icon">📖⬇</span>
+          <span>cargar diccionario<br>modpack</span>
+        </button>
+        <button class="btn btn-action" id="btn-translate-mods">
+          <span class="btn-action-icon">⛏🧪⬇</span>
+          <span>cargar diccionario<br>mods</span>
+        </button>
+      </div>
+
+      <div class="result-box" id="result-box"></div>
+
+    </section>
+
+    <!-- ================= SETTINGS VIEW ================= -->
+    <section id="view-settings" class="view view-panel hidden">
+      <h2 class="panel-title">CONFIGURACIÓN</h2>
+
+      <label class="field-label">API KEY</label>
+      <input type="password" id="input-api-key" class="input-field" placeholder="API_KEY: ****-****-****-****">
+
+      <label class="field-label">MOTOR DE IA</label>
+      <select id="select-provider" class="select-field"></select>
+
+      <label class="field-label">TRADUCIR A</label>
+      <select id="select-language" class="select-field"></select>
+
+      <label class="field-label">TEXTOS EN PARALELO</label>
+      <input type="number" id="input-concurrency" class="input-field" min="1" max="10" value="4">
+
+      <label class="checkbox-row">
+        <input type="checkbox" id="input-content-only" checked>
+        <span>Saltar mods sin contenido real (solo config/optimización)</span>
+      </label>
+
+      <label class="field-label">ÍCONO DEL RESOURCE PACK (opcional)</label>
+      <div class="field-row">
+        <input type="text" id="input-pack-icon" class="input-field" placeholder="C:\...\icono.png">
+        <button class="btn btn-icon" id="btn-browse-icon">🖼</button>
+      </div>
+
+      <button class="btn btn-primary" id="btn-save-settings">GUARDAR</button>
+      <div class="save-confirm hidden" id="save-confirm">✔ Guardado</div>
+    </section>
+
+    <!-- ================= PENDING VIEW ================= -->
+    <section id="view-pending" class="view view-panel hidden">
+      <h2 class="panel-title">TEXTOS PENDIENTES</h2>
+      <button class="btn btn-secondary" id="btn-refresh-pending">↻ Actualizar</button>
+      <div id="pending-list" class="pending-list"></div>
+    </section>
+
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

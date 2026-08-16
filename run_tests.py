@@ -4,6 +4,7 @@ import sys
 
 TESTS = [
     "test_ai_review.py",
+    "test_concurrency_order.py",
     "test_claude_translator.py",
     "test_deepseek_translator.py",
     "test_end_to_end_formats.py",
@@ -17,6 +18,7 @@ TESTS = [
     "test_pending_fallback.py",
     "test_protected_terms.py",
     "test_retry.py",
+    "test_service_memory_reuse.py",
     "test_snbt_count_guard.py",
     "test_terminology_context.py",
     "test_text_protection.py",

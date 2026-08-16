@@ -1,3 +1,4 @@
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 import re
 
@@ -82,7 +83,8 @@ def translate_file(
     review_root="review",
     mods_folder=None,
     protected_terms=None,
-    translate_mod_names=False
+    translate_mod_names=False,
+    concurrency=4
 ):
     input_path = Path(input_path)
     output_path = Path(output_path)
@@ -115,18 +117,10 @@ def translate_file(
         ai_translator=create_ai_translator(ai_provider, ai_model),
         protected_terms=protected_terms
     )
-    results = []
     total_translatable = len(translatable_texts)
+    results = [None] * total_translatable
 
-    for index, item in enumerate(translatable_texts, start=1):
-        print(
-            interface["translating_progress"].format(
-                current=index,
-                total=total_translatable
-            ),
-            end="\r",
-            flush=True
-        )
+    def translate_item(item):
         result = service.translate(
             item["text"],
             item["path"],
@@ -138,7 +132,7 @@ def translate_file(
             item["text"],
             result["translation"]
         )
-        results.append({
+        return {
             "path": item["path"],
             "original": item["text"],
             "translation": result["translation"],
@@ -149,10 +143,33 @@ def translate_file(
                 or validation["reason"]
             ),
             "attempts": result.get("attempts", 0)
-        })
+        }
+
+    completed = 0
+
+    with ThreadPoolExecutor(max_workers=max(1, concurrency)) as executor:
+        future_to_index = {
+            executor.submit(translate_item, item): index
+            for index, item in enumerate(translatable_texts)
+        }
+
+        for future in as_completed(future_to_index):
+            index = future_to_index[future]
+            results[index] = future.result()
+            completed += 1
+            print(
+                interface["translating_progress"].format(
+                    current=completed,
+                    total=total_translatable
+                ),
+                end="\r",
+                flush=True
+            )
 
     if total_translatable:
         print()
+
+    service.save_new_translations()
 
     pending_items = []
     for result in results:
@@ -225,7 +242,8 @@ def translate_folder(
     review_root="review",
     target_locale_name=None,
     mods_folder=None,
-    translate_mod_names=False
+    translate_mod_names=False,
+    concurrency=4
 ):
     input_folder = Path(input_folder)
     output_folder = Path(output_folder)
@@ -272,7 +290,8 @@ def translate_folder(
             ai_model=ai_model,
             replace_pending=False,
             review_root=review_root,
-            protected_terms=protected_terms
+            protected_terms=protected_terms,
+            concurrency=concurrency
         ))
 
     return reports

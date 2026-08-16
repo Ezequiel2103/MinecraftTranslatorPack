@@ -43,6 +43,12 @@ def parse_args():
         default="mock"
     )
     parser.add_argument("--ai-model", default=None)
+    parser.add_argument(
+        "--concurrency",
+        type=int,
+        default=4,
+        help="How many texts to translate at the same time (default: 4)."
+    )
     return parser.parse_args()
 
 
@@ -60,7 +66,8 @@ def main():
             ai_model=args.ai_model,
             target_locale_name=args.target_locale,
             mods_folder=args.mods_folder,
-            translate_mod_names=args.translate_mod_names
+            translate_mod_names=args.translate_mod_names,
+            concurrency=args.concurrency
         )
         for report in reports:
             print_report(report)
@@ -76,7 +83,8 @@ def main():
         ai_provider=args.ai_provider,
         ai_model=args.ai_model,
         mods_folder=args.mods_folder,
-        translate_mod_names=args.translate_mod_names
+        translate_mod_names=args.translate_mod_names,
+        concurrency=args.concurrency
     )
     print_report(report)
 

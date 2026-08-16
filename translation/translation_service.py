@@ -1,6 +1,13 @@
 import re
+import threading
 
-from translation.translation_memory import translate_with_memory
+import json
+
+from translation.translation_memory import (
+    load_memory,
+    memory_path,
+    translate_with_memory
+)
 from ai.ai_translator import MockAITranslator
 from analyzer.text_protector import protect_text, restore_text
 from analyzer.translation_validator import (
@@ -31,6 +38,9 @@ class TranslationService:
         self.retry_manager = TranslationRetryManager(
             max_attempts=3
         )
+
+        self._new_memory_entries = {}
+        self._new_memory_lock = threading.Lock()
 
     def translate(
         self,
@@ -66,7 +76,25 @@ class TranslationService:
                     "attempts": 0
                 }
 
-        # 2. Translation memory
+        # 2. Translations already learned earlier in this same run
+        # (avoids repeating an AI call for text that appears more than
+        # once before it has been flushed to disk).
+        with self._new_memory_lock:
+            cached_translation = self._new_memory_entries.get(text)
+
+        if cached_translation is not None:
+            validation = validate_translation(text, cached_translation)
+
+            if validation["valid"]:
+                return {
+                    "translation": cached_translation,
+                    "source": "run_cache",
+                    "valid": True,
+                    "validation_reason": None,
+                    "attempts": 0
+                }
+
+        # 3. Translation memory
 
         memory_results = translate_with_memory([
             {
@@ -94,7 +122,7 @@ class TranslationService:
                     "attempts": 0
                 }
 
-        # 3. AI translation with automatic retry
+        # 4. AI translation with automatic retry
 
         protected_text, protected_tokens = protect_text(
             text,
@@ -151,6 +179,9 @@ class TranslationService:
 
             if validation["valid"] and quality["valid"]:
 
+                with self._new_memory_lock:
+                    self._new_memory_entries[text] = restored_translation
+
                 return {
                     "translation": restored_translation,
                     "source": result["source"],
@@ -174,3 +205,29 @@ class TranslationService:
             "validation_reason": validation_error,
             "attempts": self.retry_manager.max_attempts
         }
+
+    def save_new_translations(self):
+        """
+        Persists everything learned during this run to translation
+        memory in a single write, instead of one disk write per text.
+        """
+
+        if not self._new_memory_entries:
+            return
+
+        memory = load_memory(self.language_pair)
+
+        for original, translation in self._new_memory_entries.items():
+            memory[original] = {
+                "translation": translation,
+                "type": "ai",
+                "source": "manual"
+            }
+
+        path = memory_path(self.language_pair)
+        path.parent.mkdir(parents=True, exist_ok=True)
+
+        with path.open("w", encoding="utf-8") as file:
+            json.dump(memory, file, ensure_ascii=False, indent=4)
+
+        self._new_memory_entries = {}

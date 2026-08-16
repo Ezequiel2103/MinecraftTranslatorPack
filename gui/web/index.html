@@ -28,17 +28,12 @@
     <!-- ================= HOME VIEW ================= -->
     <section id="view-home" class="view">
 
-      <label class="field-label">RUTA DEL MODPACK (carpeta de misiones/idioma)</label>
+      <label class="field-label">RUTA DEL MODPACK</label>
       <div class="field-row">
-        <input type="text" id="input-modpack-path" class="input-field" placeholder="C:\Users\...\config\ftbquests\quests\lang">
+        <input type="text" id="input-modpack-path" class="input-field" placeholder="C:\Users\...\Instances\MiModpack">
         <button class="btn btn-icon" id="btn-browse-modpack">📁</button>
       </div>
-
-      <label class="field-label">CARPETA DE MODS (opcional — protege nombres de mods)</label>
-      <div class="field-row">
-        <input type="text" id="input-mods-path" class="input-field" placeholder="C:\Users\...\mods">
-        <button class="btn btn-icon" id="btn-browse-mods">📁</button>
-      </div>
+      <div class="scan-status" id="scan-status"></div>
 
       <label class="field-label">CARPETA DE SALIDA</label>
       <div class="field-row">

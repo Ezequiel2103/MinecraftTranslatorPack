@@ -21,6 +21,7 @@ TESTS = [
     "test_mod_lang_scanner.py",
     "test_mod_lang_translator.py",
     "test_mod_scanner.py",
+    "test_modpack_locator.py",
     "test_ollama_translator.py",
     "test_openai_translator.py",
     "test_pending_fallback.py",

@@ -123,6 +123,21 @@ html, body {
   gap: 8px;
 }
 
+.scan-status {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--text-dim);
+  min-height: 14px;
+}
+
+.scan-status .found {
+  color: var(--accent);
+}
+
+.scan-status .missing {
+  color: var(--danger);
+}
+
 .input-field, .select-field {
   flex: 1;
   background: var(--input-bg);

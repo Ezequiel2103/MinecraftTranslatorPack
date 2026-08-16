@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from gui.settings_store import load_settings, save_settings
 from mod_lang_translator import translate_mod_lang_files
+from modpack_locator import locate_modpack_paths
 from review.review_manager import approve_translation, load_pending
 from translator_app import translate_folder
 
@@ -91,27 +92,51 @@ class Api:
         )
         return result[0] if result else None
 
+    # --- modpack discovery ------------------------------------------------
+
+    def scan_modpack(self, modpack_root):
+        return locate_modpack_paths(modpack_root)
+
     # --- translation actions --------------------------------------------
 
-    def translate_modpack(self, input_folder, output_folder, mods_folder):
+    def translate_modpack(self, modpack_root, output_folder):
         if self._busy:
             return {"ok": False, "error": "Ya hay una traducción en curso."}
 
+        paths = locate_modpack_paths(modpack_root)
+
+        if not paths["quests_lang_folder"]:
+            return {
+                "ok": False,
+                "error": (
+                    "No encontré la carpeta de misiones (config/.../quests/lang) "
+                    "dentro de esa ruta."
+                )
+            }
+
         thread = threading.Thread(
             target=self._run_translate_modpack,
-            args=(input_folder, output_folder, mods_folder),
+            args=(paths["quests_lang_folder"], output_folder, paths["mods_folder"]),
             daemon=True
         )
         thread.start()
         return {"ok": True}
 
-    def translate_mods(self, mods_folder, output_resourcepack, pack_icon):
+    def translate_mods(self, modpack_root, output_resourcepack, pack_icon):
         if self._busy:
             return {"ok": False, "error": "Ya hay una traducción en curso."}
 
+        paths = locate_modpack_paths(modpack_root)
+
+        if not paths["mods_folder"]:
+            return {
+                "ok": False,
+                "error": "No encontré una carpeta 'mods' dentro de esa ruta."
+            }
+
         thread = threading.Thread(
             target=self._run_translate_mods,
-            args=(mods_folder, output_resourcepack, pack_icon),
+            args=(paths["mods_folder"], output_resourcepack, pack_icon),
             daemon=True
         )
         thread.start()

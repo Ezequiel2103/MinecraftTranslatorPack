@@ -1,5 +1,6 @@
 let currentSettings = null;
 let isBusy = false;
+let lastScan = null;
 
 function api() {
   return window.pywebview.api;
@@ -62,9 +63,12 @@ async function loadSettings() {
   document.getElementById("input-content-only").checked = !!currentSettings.content_only;
   document.getElementById("input-pack-icon").value = currentSettings.last_pack_icon || "";
 
-  document.getElementById("input-modpack-path").value = currentSettings.last_modpack_input || "";
-  document.getElementById("input-mods-path").value = currentSettings.last_mods_input || "";
+  document.getElementById("input-modpack-path").value = currentSettings.last_modpack_root || "";
   document.getElementById("input-output-path").value = currentSettings.last_output_folder || "";
+
+  if (currentSettings.last_modpack_root) {
+    scanModpackPath(currentSettings.last_modpack_root);
+  }
 }
 
 async function saveSettingsFromForm() {
@@ -86,10 +90,33 @@ async function saveSettingsFromForm() {
 
 async function rememberPaths() {
   await api().save_settings({
-    last_modpack_input: document.getElementById("input-modpack-path").value,
-    last_mods_input: document.getElementById("input-mods-path").value,
+    last_modpack_root: document.getElementById("input-modpack-path").value,
     last_output_folder: document.getElementById("input-output-path").value
   });
+}
+
+// ---------------- modpack path scanning ----------------
+
+async function scanModpackPath(path) {
+  const statusEl = document.getElementById("scan-status");
+
+  if (!path) {
+    statusEl.innerHTML = "";
+    lastScan = null;
+    return;
+  }
+
+  statusEl.innerHTML = "Buscando...";
+  lastScan = await api().scan_modpack(path);
+
+  const questsMark = lastScan.quests_lang_folder
+    ? "<span class=\"found\">✓ Misiones encontradas</span>"
+    : "<span class=\"missing\">✗ No se encontraron misiones</span>";
+  const modsMark = lastScan.mods_folder
+    ? "<span class=\"found\">✓ Mods encontrados</span>"
+    : "<span class=\"missing\">✗ No se encontró carpeta de mods</span>";
+
+  statusEl.innerHTML = `${questsMark} &nbsp;·&nbsp; ${modsMark}`;
 }
 
 // ---------------- folder pickers ----------------
@@ -106,11 +133,10 @@ async function browseInto(inputId) {
 async function translateModpack() {
   if (isBusy) return;
 
-  const inputFolder = document.getElementById("input-modpack-path").value.trim();
+  const modpackRoot = document.getElementById("input-modpack-path").value.trim();
   const outputFolder = document.getElementById("input-output-path").value.trim();
-  const modsFolder = document.getElementById("input-mods-path").value.trim();
 
-  if (!inputFolder || !outputFolder) {
+  if (!modpackRoot || !outputFolder) {
     setResult("Completá la ruta del modpack y la carpeta de salida.", "error");
     return;
   }
@@ -120,7 +146,7 @@ async function translateModpack() {
   setProgress(0, "INICIANDO...");
   setResult("");
 
-  const response = await api().translate_modpack(inputFolder, outputFolder, modsFolder);
+  const response = await api().translate_modpack(modpackRoot, outputFolder);
   if (!response.ok) {
     setResult(response.error, "error");
     setBusy(false);
@@ -130,12 +156,12 @@ async function translateModpack() {
 async function translateMods() {
   if (isBusy) return;
 
-  const modsFolder = document.getElementById("input-mods-path").value.trim();
+  const modpackRoot = document.getElementById("input-modpack-path").value.trim();
   const outputFolder = document.getElementById("input-output-path").value.trim();
   const packIcon = document.getElementById("input-pack-icon").value.trim();
 
-  if (!modsFolder || !outputFolder) {
-    setResult("Completá la carpeta de mods y la carpeta de salida.", "error");
+  if (!modpackRoot || !outputFolder) {
+    setResult("Completá la ruta del modpack y la carpeta de salida.", "error");
     return;
   }
 
@@ -144,7 +170,7 @@ async function translateMods() {
   setProgress(0, "INICIANDO...");
   setResult("");
 
-  const response = await api().translate_mods(modsFolder, outputFolder, packIcon);
+  const response = await api().translate_mods(modpackRoot, outputFolder, packIcon);
   if (!response.ok) {
     setResult(response.error, "error");
     setBusy(false);
@@ -255,8 +281,13 @@ window.addEventListener("pywebviewready", async () => {
   document.getElementById("btn-minimize").addEventListener("click", () => api().minimize_window());
   document.getElementById("btn-close").addEventListener("click", () => api().close_window());
 
-  document.getElementById("btn-browse-modpack").addEventListener("click", () => browseInto("input-modpack-path"));
-  document.getElementById("btn-browse-mods").addEventListener("click", () => browseInto("input-mods-path"));
+  document.getElementById("btn-browse-modpack").addEventListener("click", async () => {
+    await browseInto("input-modpack-path");
+    scanModpackPath(document.getElementById("input-modpack-path").value.trim());
+  });
+  document.getElementById("input-modpack-path").addEventListener("change", (event) => {
+    scanModpackPath(event.target.value.trim());
+  });
   document.getElementById("btn-browse-output").addEventListener("click", () => browseInto("input-output-path"));
   document.getElementById("btn-browse-icon").addEventListener("click", async () => {
     const path = await api().pick_image_file();

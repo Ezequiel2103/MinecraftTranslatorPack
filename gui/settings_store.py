@@ -11,9 +11,9 @@ DEFAULT_SETTINGS = {
     "target_language": "es",
     "concurrency": 4,
     "content_only": True,
-    "last_modpack_input": "",
-    "last_mods_input": "",
-    "last_output_folder": ""
+    "last_modpack_root": "",
+    "last_output_folder": "",
+    "last_pack_icon": ""
 }
 
 

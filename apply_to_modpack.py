@@ -1,7 +1,8 @@
 import argparse
 import sys
+from pathlib import Path
 
-from deploy_manager import apply_to_modpack_copy
+from deploy_manager import apply_to_modpack_copy, build_curseforge_import_zip
 
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -43,6 +44,21 @@ def parse_args():
         action="store_true",
         help="Re-copy the whole instance even if destination already exists."
     )
+    parser.add_argument(
+        "--build-zip",
+        default=None,
+        help=(
+            "Optional output .zip path. Packages the result in the "
+            "manifest.json + overrides format CurseForge expects for "
+            "importing, so mods, config and the translated quests all "
+            "come through correctly instead of a fresh reinstall."
+        )
+    )
+    parser.add_argument(
+        "--pack-name",
+        default=None,
+        help="Name to use inside the zip's manifest.json (--build-zip only)."
+    )
     return parser.parse_args()
 
 
@@ -64,6 +80,15 @@ def main():
 
     if result["backup_dir"]:
         print(f"🗄️ Respaldo de archivos reemplazados en: {result['backup_dir']}")
+
+    if args.build_zip:
+        zip_path = build_curseforge_import_zip(
+            result["destination"],
+            args.build_zip,
+            pack_name=args.pack_name,
+            manifest_source=Path(args.instance) / "manifest.json"
+        )
+        print(f"📦 Paquete para importar en CurseForge: {zip_path}")
 
 
 if __name__ == "__main__":

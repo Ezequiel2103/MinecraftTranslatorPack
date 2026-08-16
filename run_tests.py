@@ -15,6 +15,7 @@ TESTS = [
     "test_format_handlers.py",
     "test_fully_protected_text.py",
     "test_language_pair_memory.py",
+    "test_mod_content_filter.py",
     "test_mod_lang_cache.py",
     "test_mod_lang_scanner.py",
     "test_mod_lang_translator.py",

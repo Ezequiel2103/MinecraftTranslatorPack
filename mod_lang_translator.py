@@ -32,13 +32,15 @@ def translate_mod_lang_files(
     ai_provider="mock",
     ai_model=None,
     concurrency=4,
-    review_root="review"
+    review_root="review",
+    content_only=False
 ):
     """
     Translates every mod's own en_us.json (skipping mods that already
     ship their own translation for the target locale) and assembles the
-    result as a resource pack, so mods are translated without touching
-    their jars.
+    result as a single resource pack (all mods under the same
+    assets/<modid>/lang/es_es.json layout), so mods are translated
+    without touching their jars and the player only installs one pack.
 
     Each mod's translation is cached by content hash under
     mod_lang_cache/<language_pair>/<modid>.json, independent of any
@@ -50,10 +52,14 @@ def translate_mod_lang_files(
     review/<language_pair>/pending.json (prefixed with "mods/<modid>/")
     instead of being silently left in the source language, same as the
     quest/lang-folder flow.
+
+    content_only=True skips mods with no real in-game content (see
+    analyzer.mod_lang_scanner.has_real_content) — mostly optimization
+    and utility mods whose text is config options a player rarely sees.
     """
 
     language_pair = f"{source_language}_{target_language}"
-    sources = scan_mod_lang_sources(mods_folder)
+    sources = scan_mod_lang_sources(mods_folder, content_only=content_only)
     protected_terms = resolve_protected_terms(language_pair, mods_folder)
 
     output_resourcepack = Path(output_resourcepack)

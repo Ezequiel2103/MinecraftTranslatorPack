@@ -43,6 +43,15 @@ def parse_args():
         default=4,
         help="How many texts to translate at the same time (default: 4)."
     )
+    parser.add_argument(
+        "--content-only",
+        action="store_true",
+        help=(
+            "Skip mods with no real in-game content (items, blocks, "
+            "advancements) — mostly optimization/utility mods whose "
+            "text is config options a player rarely sees."
+        )
+    )
     return parser.parse_args()
 
 
@@ -56,7 +65,8 @@ def main():
         target_language=args.target_language,
         ai_provider=args.ai_provider,
         ai_model=args.ai_model,
-        concurrency=args.concurrency
+        concurrency=args.concurrency,
+        content_only=args.content_only
     )
 
     print(f"✅ Resource pack generado en: {args.output_resourcepack}")

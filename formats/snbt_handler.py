@@ -52,7 +52,14 @@ class SnbtHandler:
         source = path.read_text(encoding="utf-8")
         return parse_nbt(_normalize_ftb_snbt(source))
 
-    def write(self, data, path, source_text=None, replacements=None):
+    def write(
+        self,
+        data,
+        path,
+        source_text=None,
+        replacements=None,
+        expected_value_count=None
+    ):
         try:
             from nbtlib import serialize_tag
         except ImportError as error:
@@ -63,7 +70,11 @@ class SnbtHandler:
 
         if source_text is not None:
             path.write_text(
-                self._replace_preserving_format(source_text, replacements or {}),
+                self._replace_preserving_format(
+                    source_text,
+                    replacements or {},
+                    expected_value_count
+                ),
                 encoding="utf-8"
             )
             return
@@ -71,7 +82,11 @@ class SnbtHandler:
         path.write_text(serialize_tag(data), encoding="utf-8")
 
     @staticmethod
-    def _replace_preserving_format(source_text, replacements):
+    def _replace_preserving_format(
+        source_text,
+        replacements,
+        expected_value_count=None
+    ):
         """Replace translated string values while retaining original layout."""
         value_index = 0
 
@@ -84,4 +99,23 @@ class SnbtHandler:
                 return token
             return json.dumps(replacement, ensure_ascii=False)
 
-        return _QUOTED_VALUE.sub(replace, source_text)
+        result = _QUOTED_VALUE.sub(replace, source_text)
+
+        # Every quoted value found in the raw text must line up 1:1 with
+        # the parsed structure's traversal order, since replacements are
+        # matched by position. If they diverge (an unhandled SNBT shape
+        # the parser and the raw scan disagree on), translations would
+        # silently land on the wrong lines instead of failing loudly.
+        if (
+            expected_value_count is not None
+            and value_index != expected_value_count
+        ):
+            raise RuntimeError(
+                "SNBT quoted-value count mismatch: found "
+                f"{value_index} quoted value(s) in the source text but "
+                f"the parsed structure has {expected_value_count}. "
+                "Refusing to write, since translations could land on "
+                "the wrong lines."
+            )
+
+        return result

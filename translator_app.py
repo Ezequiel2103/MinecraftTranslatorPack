@@ -195,7 +195,8 @@ def translate_file(
             data,
             output_path,
             source_text=input_path.read_text(encoding="utf-8"),
-            replacements=replacement_by_index
+            replacements=replacement_by_index,
+            expected_value_count=len(texts)
         )
     else:
         handler.write(data, output_path)

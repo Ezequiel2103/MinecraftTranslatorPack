@@ -17,6 +17,7 @@ TESTS = [
     "test_pending_fallback.py",
     "test_protected_terms.py",
     "test_retry.py",
+    "test_snbt_count_guard.py",
     "test_terminology_context.py",
     "test_text_protection.py",
     "test_translate_mod_names_toggle.py",

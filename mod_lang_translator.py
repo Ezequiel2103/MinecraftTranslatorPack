@@ -41,7 +41,9 @@ def translate_mod_lang_files(
     content_only=False,
     pack_icon=None,
     on_mod_progress=None,
-    on_text_progress=None
+    on_text_progress=None,
+    cancel_event=None,
+    resume_event=None
 ):
     """
     Translates every mod's own en_us.json (skipping mods that already
@@ -94,6 +96,9 @@ def translate_mod_lang_files(
     total_sources = len(sources)
 
     for index, source in enumerate(sources, start=1):
+        if cancel_event is not None and cancel_event.is_set():
+            break
+
         modid = source["modid"]
 
         if on_mod_progress:
@@ -129,7 +134,9 @@ def translate_mod_lang_files(
                 ai_model,
                 protected_terms,
                 concurrency,
-                on_text_progress
+                on_text_progress,
+                cancel_event,
+                resume_event
             )
 
             for item in failed_results:
@@ -194,7 +201,9 @@ def _translate_lang_dict(
     ai_model,
     protected_terms,
     concurrency,
-    on_text_progress=None
+    on_text_progress=None,
+    cancel_event=None,
+    resume_event=None
 ):
     texts = extract_texts(en_us)
     translatable = [
@@ -214,7 +223,10 @@ def _translate_lang_dict(
         source_language=source_language,
         target_language=target_language,
         concurrency=concurrency,
-        on_progress=on_text_progress
+        on_progress=on_text_progress,
+        cancel_event=cancel_event,
+        resume_event=resume_event,
+        flush_callback=service.save_new_translations
     )
 
     service.save_new_translations()

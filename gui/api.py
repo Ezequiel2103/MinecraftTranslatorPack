@@ -51,6 +51,8 @@ class Api:
     def __init__(self):
         self._window = None
         self._busy = False
+        self._cancel_event = None
+        self._resume_event = None
 
     def set_window(self, window):
         self._window = window
@@ -191,6 +193,10 @@ class Api:
                 )
             }
 
+        self._cancel_event = threading.Event()
+        self._resume_event = threading.Event()
+        self._resume_event.set()
+
         thread = threading.Thread(
             target=self._run_translate_now,
             args=(paths, output_folder),
@@ -199,11 +205,32 @@ class Api:
         thread.start()
         return {"ok": True}
 
+    def pause_translation(self):
+        if self._resume_event:
+            self._resume_event.clear()
+            self._emit("paused", {})
+
+    def resume_translation(self):
+        if self._resume_event:
+            self._resume_event.set()
+            self._emit("resumed", {})
+
+    def cancel_translation(self):
+        if self._cancel_event:
+            self._cancel_event.set()
+
+        # A cancel while paused would otherwise block forever on
+        # resume_event.wait() and never see the cancellation.
+        if self._resume_event:
+            self._resume_event.set()
+
     def _run_translate_now(self, paths, output_folder):
         self._busy = True
         settings = load_settings()
         self._apply_api_key(settings)
         output_folder = Path(output_folder)
+        cancel_event = self._cancel_event
+        resume_event = self._resume_event
 
         summary = {"files": 0, "mods": 0, "pending": 0}
 
@@ -230,14 +257,16 @@ class Api:
                     mods_folder=paths["mods_folder"],
                     concurrency=settings["concurrency"],
                     on_file_progress=on_file_progress,
-                    on_text_progress=on_text_progress
+                    on_text_progress=on_text_progress,
+                    cancel_event=cancel_event,
+                    resume_event=resume_event
                 )
                 summary["files"] = len(reports)
                 summary["pending"] += sum(
                     len(report["pending_items"]) for report in reports
                 )
 
-            if paths["mods_folder"]:
+            if paths["mods_folder"] and not cancel_event.is_set():
                 self._emit("start", {"phase": "mods"})
 
                 def on_mod_progress(current, total, modid):
@@ -260,12 +289,15 @@ class Api:
                     content_only=settings["content_only"],
                     pack_icon=PACK_ICON_PATH if PACK_ICON_PATH.exists() else None,
                     on_mod_progress=on_mod_progress,
-                    on_text_progress=on_text_progress_mods
+                    on_text_progress=on_text_progress_mods,
+                    cancel_event=cancel_event,
+                    resume_event=resume_event
                 )
                 summary["mods"] = len(stats["mods"])
                 summary["pending"] += stats["pending_items"]
 
-            self._emit("done", {
+            done_event = "cancelled" if cancel_event.is_set() else "done"
+            self._emit(done_event, {
                 "files": summary["files"],
                 "mods": summary["mods"],
                 "pending": summary["pending"],

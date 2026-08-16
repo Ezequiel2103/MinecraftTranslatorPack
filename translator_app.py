@@ -84,7 +84,9 @@ def translate_file(
     protected_terms=None,
     translate_mod_names=False,
     concurrency=4,
-    on_text_progress=None
+    on_text_progress=None,
+    cancel_event=None,
+    resume_event=None
 ):
     input_path = Path(input_path)
     output_path = Path(output_path)
@@ -139,7 +141,10 @@ def translate_file(
         source_language=source_language,
         target_language=target_language,
         concurrency=concurrency,
-        on_progress=report_progress if total_translatable else None
+        on_progress=report_progress if total_translatable else None,
+        cancel_event=cancel_event,
+        resume_event=resume_event,
+        flush_callback=service.save_new_translations
     )
 
     if total_translatable and not on_text_progress:
@@ -221,7 +226,9 @@ def translate_folder(
     translate_mod_names=False,
     concurrency=4,
     on_file_progress=None,
-    on_text_progress=None
+    on_text_progress=None,
+    cancel_event=None,
+    resume_event=None
 ):
     input_folder = Path(input_folder)
     output_folder = Path(output_folder)
@@ -246,6 +253,9 @@ def translate_folder(
     total_files = len(files)
 
     for index, input_path in enumerate(files, start=1):
+        if cancel_event is not None and cancel_event.is_set():
+            break
+
         if on_file_progress:
             on_file_progress(index, total_files, input_path.name)
         else:
@@ -273,7 +283,9 @@ def translate_folder(
             review_root=review_root,
             protected_terms=protected_terms,
             concurrency=concurrency,
-            on_text_progress=on_text_progress
+            on_text_progress=on_text_progress,
+            cancel_event=cancel_event,
+            resume_event=resume_event
         ))
 
     return reports

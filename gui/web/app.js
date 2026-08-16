@@ -1,5 +1,6 @@
 let currentSettings = null;
 let isBusy = false;
+let isPaused = false;
 let lastScan = null;
 let currentLocale = {};
 
@@ -47,6 +48,7 @@ function applyLocale() {
   if (!isBusy) {
     setProgress(0, t("progress_waiting"));
   }
+  updatePauseButtonLabel();
 }
 
 // ---------------- small state setters ----------------
@@ -59,6 +61,32 @@ function showView(name) {
 function setBusy(busy) {
   isBusy = busy;
   document.getElementById("btn-translate-now").disabled = busy;
+  document.getElementById("run-controls").classList.toggle("hidden", !busy);
+
+  if (!busy) {
+    isPaused = false;
+  }
+  updatePauseButtonLabel();
+}
+
+function updatePauseButtonLabel() {
+  document.getElementById("btn-pause-resume").textContent = t(isPaused ? "btn_resume" : "btn_pause");
+}
+
+async function togglePauseResume() {
+  if (isPaused) {
+    await api().resume_translation();
+    isPaused = false;
+  } else {
+    await api().pause_translation();
+    isPaused = true;
+  }
+  updatePauseButtonLabel();
+}
+
+async function cancelTranslation() {
+  if (!confirm(t("confirm_cancel"))) return;
+  await api().cancel_translation();
 }
 
 function setProgress(percent, label) {
@@ -312,6 +340,31 @@ window.onBackendEvent = function (event, payload) {
     return;
   }
 
+  if (event === "cancelled") {
+    setProgress(0, t("progress_cancelled"));
+    setBusy(false);
+    setResult(
+      t("result_cancelled", {
+        files: payload.files,
+        mods: payload.mods,
+        pending: payload.pending,
+        output: payload.output_folder
+      }),
+      "success"
+    );
+    return;
+  }
+
+  if (event === "paused") {
+    setStatus(t("status_paused"));
+    return;
+  }
+
+  if (event === "resumed") {
+    setStatus(t("status_resumed"));
+    return;
+  }
+
   if (event === "error") {
     setProgress(0, t("progress_error"));
     setBusy(false);
@@ -405,6 +458,8 @@ window.addEventListener("pywebviewready", async () => {
   });
 
   document.getElementById("btn-translate-now").addEventListener("click", translateNow);
+  document.getElementById("btn-pause-resume").addEventListener("click", togglePauseResume);
+  document.getElementById("btn-cancel").addEventListener("click", cancelTranslation);
   document.getElementById("btn-save-settings").addEventListener("click", saveSettingsFromForm);
   document.getElementById("btn-refresh-pending").addEventListener("click", loadPending);
 

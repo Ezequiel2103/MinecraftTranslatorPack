@@ -6,6 +6,7 @@ import sys
 TESTS = [
     "test_ai_review.py",
     "test_concurrency_order.py",
+    "test_concurrent_control.py",
     "test_claude_translator.py",
     "test_curseforge_zip.py",
     "test_deepseek_translator.py",

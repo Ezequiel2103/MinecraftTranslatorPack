@@ -214,6 +214,28 @@ html, body {
   margin-bottom: 12px;
 }
 
+/* ---------- run controls (pause/cancel) ---------- */
+
+.run-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.run-controls.hidden {
+  display: none;
+}
+
+.run-controls .btn {
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.btn-cancel:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
 /* ---------- action buttons ---------- */
 
 .action-buttons {

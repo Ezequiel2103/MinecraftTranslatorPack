@@ -246,6 +246,7 @@ function escapeHtml(text) {
 window.addEventListener("pywebviewready", async () => {
   await loadSettings();
 
+  document.getElementById("btn-home").addEventListener("click", () => showView("home"));
   document.getElementById("btn-settings").addEventListener("click", () => showView("settings"));
   document.getElementById("btn-pending").addEventListener("click", () => {
     showView("pending");

@@ -20,7 +20,7 @@ def main():
         height=700,
         min_size=(820, 600),
         frameless=True,
-        easy_drag=False,
+        easy_drag=True,
         background_color="#1b1712"
     )
 

@@ -99,6 +99,7 @@ html, body {
 /* ---------- content ---------- */
 
 .content {
+  -webkit-app-region: no-drag;
   flex: 1;
   position: relative;
   padding: 20px 24px;

@@ -1,12 +1,44 @@
 {
-    "You received a reward!": {
-        "path": "quest.rewards.text",
+    " &ePump Dat Oil": {
+        "path": "chapter.06DB0353E8EA3593.title",
         "status": "pending",
-        "reason": "translation_not_found"
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
     },
-    "Nested text": {
-        "path": "examples[2].name",
+    " &6All of Create": {
+        "path": "file.0000000000000001.title",
         "status": "pending",
-        "reason": "translation_not_found"
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "&6Welcome to All of Create!": {
+        "path": "quest.1742597D48E37800.title",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "&9Important Controls": {
+        "path": "quest.2165E80C52C79992.title",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Bitterballen": {
+        "path": "quest.7DD05DDD6A816DFC.title",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "&aTutorial Complete!": {
+        "path": "task.3B2CC7DEE30E3AB8.title",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
     }
 }

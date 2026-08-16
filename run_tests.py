@@ -3,6 +3,7 @@ import sys
 
 
 TESTS = [
+    "test_ai_review.py",
     "test_claude_translator.py",
     "test_deepseek_translator.py",
     "test_end_to_end_formats.py",

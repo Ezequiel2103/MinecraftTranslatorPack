@@ -96,6 +96,14 @@ class OpenAITranslator(AITranslator):
             "source": "openai"
         }
 
+    def ask(self, prompt):
+        response = self.client.responses.create(
+            model=self.model,
+            input=prompt
+        )
+
+        return response.output_text.strip()
+
 
 class OllamaTranslator(OpenAITranslator):
     """Local Ollama provider through its native HTTP API."""
@@ -176,6 +184,36 @@ class OllamaTranslator(OpenAITranslator):
             "source": "ollama"
         }
 
+    def ask(self, prompt):
+        if self.client is not None:
+            response = self.client.responses.create(
+                model=self.model,
+                input=prompt
+            )
+            return response.output_text.strip()
+
+        payload = json.dumps({
+            "model": self.model,
+            "prompt": prompt,
+            "stream": False,
+            "think": False,
+            "options": {
+                "num_predict": 16,
+                "temperature": 0.0
+            }
+        }).encode("utf-8")
+        request = Request(
+            f"{self.base_url}/api/generate",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST"
+        )
+
+        with urlopen(request, timeout=180) as response:
+            result = json.loads(response.read().decode("utf-8"))
+
+        return result.get("response", "").strip()
+
 
 class ClaudeTranslator(AITranslator):
     """Anthropic Claude provider loaded only when explicitly selected."""
@@ -244,6 +282,15 @@ class ClaudeTranslator(AITranslator):
             "translation": translation,
             "source": "claude"
         }
+
+    def ask(self, prompt):
+        response = self.client.messages.create(
+            model=self.model,
+            max_tokens=16,
+            messages=[{"role": "user", "content": prompt}]
+        )
+
+        return response.content[0].text.strip()
 
 
 class DeepSeekTranslator(AITranslator):
@@ -319,6 +366,14 @@ class DeepSeekTranslator(AITranslator):
             "source": "deepseek"
         }
 
+    def ask(self, prompt):
+        response = self.client.chat.completions.create(
+            model=self.model,
+            messages=[{"role": "user", "content": prompt}]
+        )
+
+        return response.choices[0].message.content.strip()
+
 
 class MockAITranslator(AITranslator):
     """
@@ -339,6 +394,9 @@ class MockAITranslator(AITranslator):
             "translation": f"[AI] {text}",
             "source": "ai_mock"
         }
+
+    def ask(self, prompt):
+        return "CORRECT"
 
 
 class RetryMockAITranslator(AITranslator):

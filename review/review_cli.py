@@ -13,6 +13,8 @@ from review.review_manager import (
     load_pending,
     approve_translation
 )
+from review.ai_review import ai_review_pending
+from translator_app import create_ai_translator
 
 
 def show_pending(language_pair):
@@ -187,11 +189,50 @@ def parse_args():
         action="store_true",
         help="List pending translations without reviewing one."
     )
+    parser.add_argument(
+        "--ai-filter",
+        action="store_true",
+        help=(
+            "Before reviewing, ask the AI to auto-approve pending entries "
+            "that were only rejected for looking unchanged (proper nouns, "
+            "mod names, loanwords)."
+        )
+    )
+    parser.add_argument(
+        "--ai-provider",
+        choices=("mock", "ollama", "openai", "claude", "deepseek"),
+        default="deepseek"
+    )
+    parser.add_argument("--ai-model", default=None)
+    parser.add_argument("--source-language", default="en")
+    parser.add_argument("--target-language", default="es")
     return parser.parse_args()
+
+
+def run_ai_filter(args):
+    ai_translator = create_ai_translator(args.ai_provider, args.ai_model)
+    result = ai_review_pending(
+        args.language_pair,
+        ai_translator,
+        source_language=args.source_language,
+        target_language=args.target_language
+    )
+
+    print()
+    print(
+        f"🤖 Revisión IA: {len(result['approved'])} aprobados "
+        f"automáticamente, {len(result['kept'])} siguen pendientes."
+    )
+
+    for text in result["approved"]:
+        print(f"  ✅ {text}")
 
 
 if __name__ == "__main__":
     args = parse_args()
+
+    if args.ai_filter:
+        run_ai_filter(args)
 
     if args.list:
         show_pending(args.language_pair)

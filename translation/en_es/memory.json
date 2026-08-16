@@ -33,5 +33,30 @@
         "translation": "Comencemos",
         "type": "manual",
         "source": "manual"
+    },
+    " &eTutorial": {
+        "translation": " &eTutorial",
+        "type": "manual",
+        "source": "manual"
+    },
+    "&6Extras": {
+        "translation": "&6Extras",
+        "type": "manual",
+        "source": "manual"
+    },
+    "&bJust Enough Items (JEI)": {
+        "translation": "&bJust Enough Items (JEI)",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Reactor 101": {
+        "translation": "Reactor 101",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Craft Roost": {
+        "translation": "Craft Roost",
+        "type": "manual",
+        "source": "manual"
     }
 }

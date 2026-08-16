@@ -54,3 +54,27 @@ Important rules:
     )
 
     return prompt
+
+
+def build_review_prompt(text, source_language, target_language):
+    """
+    Builds the prompt used to double-check a translation that came back
+    identical to the original text, in a Minecraft mod/modpack context.
+    """
+
+    return f"""
+You are reviewing a {source_language} to {target_language} translation used
+in a Minecraft mod or modpack.
+
+The following {target_language} output was left identical to the original
+{source_language} text:
+
+Text: {text}
+
+Decide whether leaving it unchanged is CORRECT (it is a proper noun, a mod
+or brand name, an acronym, or a word spelled the same in both languages) or
+INCORRECT (it is ordinary {source_language} text that should have been
+translated into {target_language} but was not).
+
+Answer with exactly one word: CORRECT or INCORRECT.
+"""

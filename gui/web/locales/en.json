@@ -1,0 +1,68 @@
+{
+  "app_title": "MODPACK TRANSLATOR",
+  "title_home": "Home",
+  "title_settings": "Settings",
+  "title_pending": "Pending",
+  "title_minimize": "Minimize",
+  "title_close": "Close",
+
+  "label_modpack_path": "MODPACK PATH",
+  "placeholder_modpack_path": "C:\\Users\\...\\Instances\\MyModpack",
+  "label_output_path": "OUTPUT FOLDER",
+  "placeholder_output_path": "C:\\Users\\...\\output",
+
+  "progress_waiting": "WAITING",
+  "progress_starting": "STARTING...",
+  "progress_translating_quests": "TRANSLATING QUESTS...",
+  "progress_translating_mods": "TRANSLATING MODS...",
+  "progress_percent": "TRANSLATING: {percent}%",
+  "progress_done": "DONE",
+  "progress_error": "ERROR",
+
+  "btn_import_modpack_dict": "load modpack<br>dictionary",
+  "btn_import_mods_dict": "load mods<br>dictionary",
+  "link_export_modpack_dict": "Export modpack dictionary…",
+  "link_export_mods_dict": "Export mods dictionary…",
+  "btn_translate_now": "TRANSLATE NOW",
+
+  "settings_title": "SETTINGS",
+  "label_api_key": "API KEY",
+  "placeholder_api_key": "API_KEY: ****-****-****-****",
+  "label_ai_provider": "AI ENGINE",
+  "label_target_language": "TRANSLATE TO",
+  "label_ui_language": "PROGRAM LANGUAGE",
+  "label_concurrency": "PARALLEL TEXTS",
+  "hint_concurrency": "How many texts the program asks the AI to translate at the same time, instead of waiting for one to finish before starting the next. Higher = faster, but puts more load on whichever AI provider you picked. 4 worked well in our tests; lower it if something starts failing.",
+  "label_content_only": "Skip mods with no real content (config/optimization only)",
+  "btn_save": "SAVE",
+  "save_confirm": "✔ Saved",
+
+  "pending_title": "PENDING TEXTS",
+  "btn_refresh_pending": "↻ Refresh",
+  "placeholder_pending_translation": "Translation...",
+  "btn_approve": "Approve",
+  "pending_empty": "No pending texts.",
+  "pending_loading": "Loading...",
+
+  "scan_searching": "Searching...",
+  "scan_quests_found": "✓ Quests found",
+  "scan_quests_missing": "✗ No quests found",
+  "scan_mods_found": "✓ Mods found",
+  "scan_mods_missing": "✗ No mods folder found",
+
+  "error_missing_paths": "Fill in the modpack path and the output folder.",
+  "status_file_progress": "File {current}/{total}: {name}",
+  "status_mod_progress": "Mod {current}/{total}: {modid}",
+
+  "result_done": "✔ Done.\nQuest files: {files}\nMods translated: {mods}\nPending review: {pending}\nOutput: {output}",
+  "result_error": "✖ Error: {message}",
+  "result_import_modpack_success": "✔ Modpack dictionary loaded.\nNew texts added: {added}\nTotal in memory: {total}",
+  "result_import_mods_success": "✔ Mods dictionary loaded.\nNew mods: {added_mods}\nNew classifications: {added_classifications}",
+  "result_export_modpack_success": "✔ Modpack dictionary exported to:\n{path}",
+  "result_export_mods_success": "✔ Mods dictionary exported to:\n{path}",
+
+  "file_type_quest_dictionary_json": "Quest dictionary (*.json)",
+  "file_type_mods_dictionary_zip": "Mods dictionary (*.zip)",
+  "save_default_name_quest": "modpack_dictionary.json",
+  "save_default_name_mods": "mods_dictionary.zip"
+}

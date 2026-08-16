@@ -1,10 +1,55 @@
 let currentSettings = null;
 let isBusy = false;
 let lastScan = null;
+let currentLocale = {};
 
 function api() {
   return window.pywebview.api;
 }
+
+// ---------------- i18n ----------------
+
+async function loadLocale(langCode) {
+  currentLocale = await api().get_locale(langCode);
+  document.documentElement.lang = langCode;
+  applyLocale();
+}
+
+function t(key, vars) {
+  let text = currentLocale[key] || key;
+
+  if (vars) {
+    Object.keys(vars).forEach((name) => {
+      text = text.replace(`{${name}}`, vars[name]);
+    });
+  }
+
+  return text;
+}
+
+function applyLocale() {
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    el.textContent = t(el.dataset.i18n);
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+    el.innerHTML = t(el.dataset.i18nHtml);
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+    el.placeholder = t(el.dataset.i18nPlaceholder);
+  });
+  document.querySelectorAll("[data-i18n-title]").forEach((el) => {
+    el.title = t(el.dataset.i18nTitle);
+  });
+
+  // Elements not currently showing user-entered content get their default
+  // label back; anything with real state (progress %, scan results, a
+  // result message) is refreshed by whatever last set it, not here.
+  if (!isBusy) {
+    setProgress(0, t("progress_waiting"));
+  }
+}
+
+// ---------------- small state setters ----------------
 
 function showView(name) {
   document.querySelectorAll(".view").forEach((el) => el.classList.add("hidden"));
@@ -36,6 +81,9 @@ function setResult(text, kind) {
 async function loadSettings() {
   const data = await api().get_settings();
   currentSettings = data.settings;
+
+  await loadLocale(currentSettings.ui_language || "es");
+  document.getElementById("select-ui-language").value = currentSettings.ui_language || "es";
 
   const providerSelect = document.getElementById("select-provider");
   providerSelect.innerHTML = "";
@@ -70,7 +118,11 @@ async function loadSettings() {
 }
 
 async function saveSettingsFromForm() {
+  const newLanguage = document.getElementById("select-ui-language").value;
+  const languageChanged = newLanguage !== (currentSettings.ui_language || "es");
+
   const settings = {
+    ui_language: newLanguage,
     ai_provider: document.getElementById("select-provider").value,
     api_key: document.getElementById("input-api-key").value,
     target_language: document.getElementById("select-language").value,
@@ -79,6 +131,10 @@ async function saveSettingsFromForm() {
   };
 
   currentSettings = await api().save_settings(settings);
+
+  if (languageChanged) {
+    await loadLocale(newLanguage);
+  }
 
   const confirmEl = document.getElementById("save-confirm");
   confirmEl.classList.remove("hidden");
@@ -103,15 +159,15 @@ async function scanModpackPath(path) {
     return;
   }
 
-  statusEl.innerHTML = "Buscando...";
+  statusEl.textContent = t("scan_searching");
   lastScan = await api().scan_modpack(path);
 
   const questsMark = lastScan.quests_lang_folder
-    ? "<span class=\"found\">✓ Misiones encontradas</span>"
-    : "<span class=\"missing\">✗ No se encontraron misiones</span>";
+    ? `<span class="found">${t("scan_quests_found")}</span>`
+    : `<span class="missing">${t("scan_quests_missing")}</span>`;
   const modsMark = lastScan.mods_folder
-    ? "<span class=\"found\">✓ Mods encontrados</span>"
-    : "<span class=\"missing\">✗ No se encontró carpeta de mods</span>";
+    ? `<span class="found">${t("scan_mods_found")}</span>`
+    : `<span class="missing">${t("scan_mods_missing")}</span>`;
 
   statusEl.innerHTML = `${questsMark} &nbsp;·&nbsp; ${modsMark}`;
 }
@@ -128,51 +184,60 @@ async function browseInto(inputId) {
 // ---------------- dictionaries: import (load a shared file) ----------------
 
 async function importModpackDictionary() {
-  const path = await api().pick_open_file(["Diccionario de misiones (*.json)"]);
+  const path = await api().pick_open_file([t("file_type_quest_dictionary_json")]);
   if (!path) return;
 
   const result = await api().import_quest_dictionary(path);
   if (result.ok) {
-    setResult(`✔ Diccionario de modpack cargado.\nTextos nuevos agregados: ${result.added}\nTotal en memoria: ${result.total}`, "success");
+    setResult(t("result_import_modpack_success", { added: result.added, total: result.total }), "success");
   } else {
-    setResult(`✖ ${result.error}`, "error");
+    setResult(t("result_error", { message: result.error }), "error");
   }
 }
 
 async function importModsDictionary() {
-  const path = await api().pick_open_file(["Diccionario de mods (*.zip)"]);
+  const path = await api().pick_open_file([t("file_type_mods_dictionary_zip")]);
   if (!path) return;
 
   const result = await api().import_mods_dictionary(path);
   if (result.ok) {
     setResult(
-      `✔ Diccionario de mods cargado.\nMods nuevos: ${result.added_mods}\nClasificaciones nuevas: ${result.added_classifications}`,
+      t("result_import_mods_success", {
+        added_mods: result.added_mods,
+        added_classifications: result.added_classifications
+      }),
       "success"
     );
   } else {
-    setResult(`✖ ${result.error}`, "error");
+    setResult(t("result_error", { message: result.error }), "error");
   }
 }
 
 // ---------------- dictionaries: export (share yours) ----------------
 
 async function exportModpackDictionary() {
-  const path = await api().pick_save_file("diccionario_modpack.json", ["Diccionario de misiones (*.json)"]);
+  const path = await api().pick_save_file(
+    t("save_default_name_quest"),
+    [t("file_type_quest_dictionary_json")]
+  );
   if (!path) return;
 
   const result = await api().export_quest_dictionary(path);
   if (result.ok) {
-    setResult(`✔ Diccionario de modpack exportado a:\n${result.path}`, "success");
+    setResult(t("result_export_modpack_success", { path: result.path }), "success");
   }
 }
 
 async function exportModsDictionary() {
-  const path = await api().pick_save_file("diccionario_mods.zip", ["Diccionario de mods (*.zip)"]);
+  const path = await api().pick_save_file(
+    t("save_default_name_mods"),
+    [t("file_type_mods_dictionary_zip")]
+  );
   if (!path) return;
 
   const result = await api().export_mods_dictionary(path);
   if (result.ok) {
-    setResult(`✔ Diccionario de mods exportado a:\n${result.path}`, "success");
+    setResult(t("result_export_mods_success", { path: result.path }), "success");
   }
 }
 
@@ -185,13 +250,13 @@ async function translateNow() {
   const outputFolder = document.getElementById("input-output-path").value.trim();
 
   if (!modpackRoot || !outputFolder) {
-    setResult("Completá la ruta del modpack y la carpeta de salida.", "error");
+    setResult(t("error_missing_paths"), "error");
     return;
   }
 
   await rememberPaths();
   setBusy(true);
-  setProgress(0, "INICIANDO...");
+  setProgress(0, t("progress_starting"));
   setStatus("");
   setResult("");
 
@@ -206,41 +271,46 @@ async function translateNow() {
 
 window.onBackendEvent = function (event, payload) {
   if (event === "start") {
-    setProgress(0, payload.phase === "mods" ? "TRADUCIENDO MODS..." : "TRADUCIENDO MISIONES...");
+    setProgress(0, t(payload.phase === "mods" ? "progress_translating_mods" : "progress_translating_quests"));
     setStatus("");
     return;
   }
 
   if (event === "file_progress") {
-    setStatus(`Archivo ${payload.current}/${payload.total}: ${payload.name}`);
+    setStatus(t("status_file_progress", payload));
     return;
   }
 
   if (event === "mod_progress") {
-    setStatus(`Mod ${payload.current}/${payload.total}: ${payload.modid}`);
+    setStatus(t("status_mod_progress", payload));
     return;
   }
 
   if (event === "text_progress") {
     const percent = payload.total ? Math.round((payload.current / payload.total) * 100) : 0;
-    setProgress(percent, `TRADUCIENDO: ${percent}%`);
+    setProgress(percent, t("progress_percent", { percent }));
     return;
   }
 
   if (event === "done") {
-    setProgress(100, "COMPLETADO");
+    setProgress(100, t("progress_done"));
     setBusy(false);
     setResult(
-      `✔ Listo.\nArchivos de misiones: ${payload.files}\nMods traducidos: ${payload.mods}\nPendientes de revisión: ${payload.pending}\nSalida: ${payload.output_folder}`,
+      t("result_done", {
+        files: payload.files,
+        mods: payload.mods,
+        pending: payload.pending,
+        output: payload.output_folder
+      }),
       "success"
     );
     return;
   }
 
   if (event === "error") {
-    setProgress(0, "ERROR");
+    setProgress(0, t("progress_error"));
     setBusy(false);
-    setResult(`✖ Error: ${payload.message}`, "error");
+    setResult(t("result_error", { message: payload.message }), "error");
   }
 };
 
@@ -248,13 +318,13 @@ window.onBackendEvent = function (event, payload) {
 
 async function loadPending() {
   const list = document.getElementById("pending-list");
-  list.innerHTML = "<div class=\"pending-empty\">Cargando...</div>";
+  list.innerHTML = `<div class="pending-empty">${t("pending_loading")}</div>`;
 
   const languagePair = `${currentSettings.source_language || "en"}_${currentSettings.target_language}`;
   const items = await api().get_pending(languagePair);
 
   if (!items.length) {
-    list.innerHTML = "<div class=\"pending-empty\">No hay textos pendientes.</div>";
+    list.innerHTML = `<div class="pending-empty">${t("pending_empty")}</div>`;
     return;
   }
 
@@ -266,8 +336,8 @@ async function loadPending() {
       <div class="pending-original">${escapeHtml(item.original)}</div>
       <div class="pending-path">${escapeHtml(item.path || "")} — ${escapeHtml(item.reason || "")}</div>
       <div class="pending-row">
-        <input type="text" class="input-field pending-translation" placeholder="Traducción...">
-        <button class="btn btn-secondary pending-approve">Aprobar</button>
+        <input type="text" class="input-field pending-translation" placeholder="${escapeHtml(t("placeholder_pending_translation"))}">
+        <button class="btn btn-secondary pending-approve">${t("btn_approve")}</button>
       </div>
     `;
 

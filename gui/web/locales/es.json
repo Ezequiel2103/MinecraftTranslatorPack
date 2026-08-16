@@ -1,0 +1,68 @@
+{
+  "app_title": "TRADUCTOR DE MODPACKS",
+  "title_home": "Inicio",
+  "title_settings": "Configuración",
+  "title_pending": "Pendientes",
+  "title_minimize": "Minimizar",
+  "title_close": "Cerrar",
+
+  "label_modpack_path": "RUTA DEL MODPACK",
+  "placeholder_modpack_path": "C:\\Users\\...\\Instances\\MiModpack",
+  "label_output_path": "CARPETA DE SALIDA",
+  "placeholder_output_path": "C:\\Users\\...\\salida",
+
+  "progress_waiting": "EN ESPERA",
+  "progress_starting": "INICIANDO...",
+  "progress_translating_quests": "TRADUCIENDO MISIONES...",
+  "progress_translating_mods": "TRADUCIENDO MODS...",
+  "progress_percent": "TRADUCIENDO: {percent}%",
+  "progress_done": "COMPLETADO",
+  "progress_error": "ERROR",
+
+  "btn_import_modpack_dict": "cargar diccionario<br>modpack",
+  "btn_import_mods_dict": "cargar diccionario<br>mods",
+  "link_export_modpack_dict": "Exportar diccionario de modpack…",
+  "link_export_mods_dict": "Exportar diccionario de mods…",
+  "btn_translate_now": "TRADUCIR AHORA",
+
+  "settings_title": "CONFIGURACIÓN",
+  "label_api_key": "API KEY",
+  "placeholder_api_key": "API_KEY: ****-****-****-****",
+  "label_ai_provider": "MOTOR DE IA",
+  "label_target_language": "TRADUCIR A",
+  "label_ui_language": "IDIOMA DEL PROGRAMA",
+  "label_concurrency": "TEXTOS EN PARALELO",
+  "hint_concurrency": "Cuántos textos le pide el programa a la IA al mismo tiempo, en vez de esperar a que termine uno para recién empezar el siguiente. Más alto = más rápido, pero exige más al proveedor de IA que elijas. 4 anduvo bien en nuestras pruebas; si algo empieza a fallar, bajalo.",
+  "label_content_only": "Saltar mods sin contenido real (solo config/optimización)",
+  "btn_save": "GUARDAR",
+  "save_confirm": "✔ Guardado",
+
+  "pending_title": "TEXTOS PENDIENTES",
+  "btn_refresh_pending": "↻ Actualizar",
+  "placeholder_pending_translation": "Traducción...",
+  "btn_approve": "Aprobar",
+  "pending_empty": "No hay textos pendientes.",
+  "pending_loading": "Cargando...",
+
+  "scan_searching": "Buscando...",
+  "scan_quests_found": "✓ Misiones encontradas",
+  "scan_quests_missing": "✗ No se encontraron misiones",
+  "scan_mods_found": "✓ Mods encontrados",
+  "scan_mods_missing": "✗ No se encontró carpeta de mods",
+
+  "error_missing_paths": "Completá la ruta del modpack y la carpeta de salida.",
+  "status_file_progress": "Archivo {current}/{total}: {name}",
+  "status_mod_progress": "Mod {current}/{total}: {modid}",
+
+  "result_done": "✔ Listo.\nArchivos de misiones: {files}\nMods traducidos: {mods}\nPendientes de revisión: {pending}\nSalida: {output}",
+  "result_error": "✖ Error: {message}",
+  "result_import_modpack_success": "✔ Diccionario de modpack cargado.\nTextos nuevos agregados: {added}\nTotal en memoria: {total}",
+  "result_import_mods_success": "✔ Diccionario de mods cargado.\nMods nuevos: {added_mods}\nClasificaciones nuevas: {added_classifications}",
+  "result_export_modpack_success": "✔ Diccionario de modpack exportado a:\n{path}",
+  "result_export_mods_success": "✔ Diccionario de mods exportado a:\n{path}",
+
+  "file_type_quest_dictionary_json": "Diccionario de misiones (*.json)",
+  "file_type_mods_dictionary_zip": "Diccionario de mods (*.zip)",
+  "save_default_name_quest": "diccionario_modpack.json",
+  "save_default_name_mods": "diccionario_mods.zip"
+}

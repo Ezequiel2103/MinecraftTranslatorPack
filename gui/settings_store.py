@@ -5,6 +5,7 @@ from pathlib import Path
 SETTINGS_PATH = Path(__file__).resolve().parent.parent / "gui_settings.json"
 
 DEFAULT_SETTINGS = {
+    "ui_language": "es",
     "ai_provider": "mock",
     "api_key": "",
     "source_language": "en",

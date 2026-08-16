@@ -12,14 +12,14 @@
   <div class="title-bar" id="title-bar">
     <div class="title-bar-left">
       <span class="title-icon">🌐</span>
-      <span class="title-text">TRADUCTOR DE MODPACKS</span>
+      <span class="title-text" data-i18n="app_title">TRADUCTOR DE MODPACKS</span>
     </div>
     <div class="title-bar-right">
-      <button class="title-btn" id="btn-home" title="Inicio">🏠</button>
-      <button class="title-btn" id="btn-settings" title="Configuración">⚙</button>
-      <button class="title-btn" id="btn-pending" title="Pendientes">📋</button>
-      <button class="title-btn" id="btn-minimize" title="Minimizar">—</button>
-      <button class="title-btn title-btn-close" id="btn-close" title="Cerrar">✕</button>
+      <button class="title-btn" id="btn-home" data-i18n-title="title_home" title="Inicio">🏠</button>
+      <button class="title-btn" id="btn-settings" data-i18n-title="title_settings" title="Configuración">⚙</button>
+      <button class="title-btn" id="btn-pending" data-i18n-title="title_pending" title="Pendientes">📋</button>
+      <button class="title-btn" id="btn-minimize" data-i18n-title="title_minimize" title="Minimizar">—</button>
+      <button class="title-btn title-btn-close" id="btn-close" data-i18n-title="title_close" title="Cerrar">✕</button>
     </div>
   </div>
 
@@ -28,23 +28,23 @@
     <!-- ================= HOME VIEW ================= -->
     <section id="view-home" class="view">
 
-      <label class="field-label">RUTA DEL MODPACK</label>
+      <label class="field-label" data-i18n="label_modpack_path">RUTA DEL MODPACK</label>
       <div class="field-row">
-        <input type="text" id="input-modpack-path" class="input-field" placeholder="C:\Users\...\Instances\MiModpack">
+        <input type="text" id="input-modpack-path" class="input-field" data-i18n-placeholder="placeholder_modpack_path" placeholder="C:\Users\...\Instances\MiModpack">
         <button class="btn btn-icon" id="btn-browse-modpack">📁</button>
       </div>
       <div class="scan-status" id="scan-status"></div>
 
-      <label class="field-label">CARPETA DE SALIDA</label>
+      <label class="field-label" data-i18n="label_output_path">CARPETA DE SALIDA</label>
       <div class="field-row">
-        <input type="text" id="input-output-path" class="input-field" placeholder="C:\Users\...\salida">
+        <input type="text" id="input-output-path" class="input-field" data-i18n-placeholder="placeholder_output_path" placeholder="C:\Users\...\salida">
         <button class="btn btn-icon" id="btn-browse-output">📁</button>
       </div>
 
       <div class="progress-wrap">
         <div class="progress-bar">
           <div class="progress-fill" id="progress-fill" style="width:0%"></div>
-          <span class="progress-label" id="progress-label">EN ESPERA</span>
+          <span class="progress-label" id="progress-label" data-i18n="progress_waiting">EN ESPERA</span>
         </div>
         <div class="status-line" id="status-line"></div>
       </div>
@@ -52,19 +52,19 @@
       <div class="action-buttons">
         <button class="btn btn-action" id="btn-import-modpack-dict">
           <span class="btn-action-icon">📖⬇</span>
-          <span>cargar diccionario<br>modpack</span>
+          <span data-i18n-html="btn_import_modpack_dict">cargar diccionario<br>modpack</span>
         </button>
         <button class="btn btn-action" id="btn-import-mods-dict">
           <span class="btn-action-icon">⛏🧪⬇</span>
-          <span>cargar diccionario<br>mods</span>
+          <span data-i18n-html="btn_import_mods_dict">cargar diccionario<br>mods</span>
         </button>
       </div>
       <div class="dict-links">
-        <a href="#" id="link-export-modpack-dict">Exportar diccionario de modpack…</a>
-        <a href="#" id="link-export-mods-dict">Exportar diccionario de mods…</a>
+        <a href="#" id="link-export-modpack-dict" data-i18n="link_export_modpack_dict">Exportar diccionario de modpack…</a>
+        <a href="#" id="link-export-mods-dict" data-i18n="link_export_mods_dict">Exportar diccionario de mods…</a>
       </div>
 
-      <button class="btn btn-translate-now" id="btn-translate-now">TRADUCIR AHORA</button>
+      <button class="btn btn-translate-now" id="btn-translate-now" data-i18n="btn_translate_now">TRADUCIR AHORA</button>
 
       <div class="result-box" id="result-box"></div>
 
@@ -72,20 +72,26 @@
 
     <!-- ================= SETTINGS VIEW ================= -->
     <section id="view-settings" class="view view-panel hidden">
-      <h2 class="panel-title">CONFIGURACIÓN</h2>
+      <h2 class="panel-title" data-i18n="settings_title">CONFIGURACIÓN</h2>
 
-      <label class="field-label">API KEY</label>
-      <input type="password" id="input-api-key" class="input-field" placeholder="API_KEY: ****-****-****-****">
+      <label class="field-label" data-i18n="label_ui_language">IDIOMA DEL PROGRAMA</label>
+      <select id="select-ui-language" class="select-field">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+      </select>
 
-      <label class="field-label">MOTOR DE IA</label>
+      <label class="field-label" data-i18n="label_api_key">API KEY</label>
+      <input type="password" id="input-api-key" class="input-field" data-i18n-placeholder="placeholder_api_key" placeholder="API_KEY: ****-****-****-****">
+
+      <label class="field-label" data-i18n="label_ai_provider">MOTOR DE IA</label>
       <select id="select-provider" class="select-field"></select>
 
-      <label class="field-label">TRADUCIR A</label>
+      <label class="field-label" data-i18n="label_target_language">TRADUCIR A</label>
       <select id="select-language" class="select-field"></select>
 
-      <label class="field-label">TEXTOS EN PARALELO</label>
+      <label class="field-label" data-i18n="label_concurrency">TEXTOS EN PARALELO</label>
       <input type="number" id="input-concurrency" class="input-field" min="1" max="10" value="4">
-      <p class="field-hint">
+      <p class="field-hint" data-i18n="hint_concurrency">
         Cuántos textos le pide el programa a la IA al mismo tiempo, en vez de
         esperar a que termine uno para recién empezar el siguiente. Más alto
         = más rápido, pero exige más al proveedor de IA que elijas. 4 anduvo
@@ -94,17 +100,17 @@
 
       <label class="checkbox-row">
         <input type="checkbox" id="input-content-only" checked>
-        <span>Saltar mods sin contenido real (solo config/optimización)</span>
+        <span data-i18n="label_content_only">Saltar mods sin contenido real (solo config/optimización)</span>
       </label>
 
-      <button class="btn btn-primary" id="btn-save-settings">GUARDAR</button>
-      <div class="save-confirm hidden" id="save-confirm">✔ Guardado</div>
+      <button class="btn btn-primary" id="btn-save-settings" data-i18n="btn_save">GUARDAR</button>
+      <div class="save-confirm hidden" id="save-confirm" data-i18n="save_confirm">✔ Guardado</div>
     </section>
 
     <!-- ================= PENDING VIEW ================= -->
     <section id="view-pending" class="view view-panel hidden">
-      <h2 class="panel-title">TEXTOS PENDIENTES</h2>
-      <button class="btn btn-secondary" id="btn-refresh-pending">↻ Actualizar</button>
+      <h2 class="panel-title" data-i18n="pending_title">TEXTOS PENDIENTES</h2>
+      <button class="btn btn-secondary" id="btn-refresh-pending" data-i18n="btn_refresh_pending">↻ Actualizar</button>
       <div id="pending-list" class="pending-list"></div>
     </section>
 

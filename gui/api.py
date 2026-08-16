@@ -29,8 +29,10 @@ PROVIDER_ENV_VAR = {
 }
 
 AI_PROVIDERS = ["mock", "ollama", "openai", "claude", "deepseek"]
+UI_LANGUAGES = ["es", "en"]
 
 PACK_ICON_PATH = Path(__file__).resolve().parent / "assets" / "pack_icon.png"
+LOCALES_DIR = Path(__file__).resolve().parent / "web" / "locales"
 
 TARGET_LANGUAGES = [
     {"code": "es", "label": "Español (ES)"},
@@ -81,6 +83,15 @@ class Api:
 
     def save_settings(self, settings):
         return save_settings(settings)
+
+    def get_locale(self, lang_code):
+        if lang_code not in UI_LANGUAGES:
+            lang_code = "es"
+
+        path = LOCALES_DIR / f"{lang_code}.json"
+
+        with path.open("r", encoding="utf-8") as file:
+            return json.load(file)
 
     # --- file / folder pickers -------------------------------------------
 

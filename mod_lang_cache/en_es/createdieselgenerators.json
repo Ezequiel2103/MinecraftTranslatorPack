@@ -69,7 +69,7 @@
         "createdieselgenerators.actionbar.distillation_controller.too_short": "¡Torre de destilación demasiado corta! Altura mínima: %s",
         "createdieselgenerators.actionbar.oil_scanner.oil_bottomless": "%1$s Suministro Interminable",
         "createdieselgenerators.actionbar.oil_scanner.oil_high": "%1$s Montones de Petróleo",
-        "createdieselgenerators.actionbar.oil_scanner.oil_low": "%1$s A bit of Oil",
+        "createdieselgenerators.actionbar.oil_scanner.oil_low": "%1$s Un poco de Petróleo",
         "createdieselgenerators.actionbar.oil_scanner.oil_none": "%1$s Sin Petróleo",
         "createdieselgenerators.actionbar.oil_scanner.searching": "Buscando petróleo...",
         "createdieselgenerators.actionbar.oil_scanner.too_high_up": "¡Estás demasiado alto para buscar depósitos de petróleo!",

@@ -3,7 +3,7 @@
     "lang": {
         "item.create_confectionery.dark_chocolate_glazed_berries": "Bayas Glaseadas con Chocolate Negro",
         "block.create_confectionery.gingerbread_stairs": "§eEscaleras de Pan de Jengibre",
-        "item.create_confectionery.chocolate_candy_1.description_0": "§9Rest (0:30)",
+        "item.create_confectionery.chocolate_candy_1.description_0": "§9Reposo (0:30)",
         "item.create_confectionery.caramel_glazed_berries": "Bayas Glaseadas con Caramelo",
         "item.create_confectionery.full_ruby_chocolate_bar.description_0": "§9Saturación (0:02)",
         "block.create_confectionery.gingerbread_block": "§eBloque de Pan de Jengibre",
@@ -36,7 +36,7 @@
         "item.create_confectionery.white_chocolate_glazed_berries.description_0": "§9Descanso (0:30)",
         "item.create_confectionery.bar_of_black_chocolate.description_0": "§9Estimulación (0:06)",
         "item.create_confectionery.white_chocolate_candy_2.description_0": "§9Descanso (0:30)",
-        "block.create_confectionery.gingerbread_brick_slab": "§eGingerbread Brick Slab",
+        "block.create_confectionery.gingerbread_brick_slab": "§eLosa de Ladrillo de Pan de Jengibre",
         "item.create_confectionery.white_chocolate_candy_2.description_1": "§9Estimulación (0:06)",
         "item.create_confectionery.ruby_chocolate_candy_2.description_0": "§9Saturación (0:02)",
         "item.create_confectionery.candy_cane_sword": "Espada de Bastón de Caramelo",

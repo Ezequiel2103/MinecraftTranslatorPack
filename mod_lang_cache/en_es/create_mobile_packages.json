@@ -2,7 +2,7 @@
     "source_hash": "051d2bc02eadac77d602add7f538e8a3f4aba71b16c7b98ad5366e32d7c52c1f",
     "lang": {
         "itemGroup.create_mobile_packages": "Create: Mobile Packages",
-        "block.create_mobile_packages.bee_port": "Robo Bee Port",
+        "block.create_mobile_packages.bee_port": "Puerto de Robo-Abeja",
         "item.create_mobile_packages.bee_port": "Puerto de Robo Bee",
         "item.create_mobile_packages.portable_stock_ticker": "Ticker de Valores Portátil",
         "item.create_mobile_packages.portable_stock_ticker.screen_title": "Ticker de Valores Portátil",

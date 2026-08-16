@@ -13,7 +13,7 @@
         "gui.create_wrapped.wrapping_station_gui.label_inventory": "Inventario",
         "item.create_wrapped.cyan_wrapping_paper": "Papel de Envoltura Cian",
         "item.create_wrapped.blue_wrapping_paper": "Papel de Regalo Azul",
-        "gui.create_wrapped.present_gui.tooltip_tooltip": "§7Place your item and close this GUI to wrap your gift",
+        "gui.create_wrapped.present_gui.tooltip_tooltip": "§7Coloca tu objeto y cierra esta interfaz para envolver tu regalo",
         "gui.create_wrapped.present_gui.label_present": "Presente",
         "block.create_wrapped.wrapping_station.description_0": "§7Se usa para envolver regalos de Navidad",
         "item_group.create_wrapped.create_wrapped": "Envueltos",

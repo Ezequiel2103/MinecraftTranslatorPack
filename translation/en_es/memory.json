@@ -155,8 +155,8 @@
         "source": "manual"
     },
     " &eOptical": {
-        "translation": "&eÓptico",
-        "type": "ai",
+        "translation": " &eÓptico",
+        "type": "manual",
         "source": "manual"
     },
     "&e Totem Factory": {
@@ -8875,8 +8875,8 @@
         "source": "manual"
     },
     "§9Rest (0:30)": {
-        "translation": "§9Descanso (0:30)",
-        "type": "ai",
+        "translation": "§9Reposo (0:30)",
+        "type": "manual",
         "source": "manual"
     },
     "§eGingerbread": {
@@ -10470,8 +10470,8 @@
         "source": "manual"
     },
     "Robo Bee Port": {
-        "translation": "Puerto de Robo Bee",
-        "type": "ai",
+        "translation": "Puerto de Robo-Abeja",
+        "type": "manual",
         "source": "manual"
     },
     "No Robo Bee on Travel": {
@@ -17110,8 +17110,8 @@
         "source": "manual"
     },
     "Calzone": {
-        "translation": "Bocadillo",
-        "type": "ai",
+        "translation": "Calzone",
+        "type": "manual",
         "source": "manual"
     },
     "Fishcake": {
@@ -17785,8 +17785,8 @@
         "source": "manual"
     },
     "Taco": {
-        "translation": "Taquitos",
-        "type": "ai",
+        "translation": "Taco",
+        "type": "manual",
         "source": "manual"
     },
     "Pressed Cocoa": {
@@ -18510,8 +18510,8 @@
         "source": "manual"
     },
     "Fright's Delight+": {
-        "translation": "El Deleite del Terror+",
-        "type": "ai",
+        "translation": "Fright's Delight+",
+        "type": "manual",
         "source": "manual"
     },
     " + Apple Cream Frosting": {
@@ -33270,8 +33270,8 @@
         "source": "manual"
     },
     "Cama - calidum": {
-        "translation": "Cama - cálido",
-        "type": "ai",
+        "translation": "Cama - calidum",
+        "type": "manual",
         "source": "manual"
     },
     "Disc Fragment": {
@@ -35282,6 +35282,441 @@
     "This action cannot be undone! Non-profile options aren't affected.": {
         "translation": "¡Esta acción no se puede deshacer! Las opciones que no son de perfil no se ven afectadas.",
         "type": "ai",
+        "source": "manual"
+    },
+    "AERO: %s / %s": {
+        "translation": "AERO: %s / %s",
+        "type": "manual",
+        "source": "manual"
+    },
+    "AERO: ": {
+        "translation": "AERO: ",
+        "type": "manual",
+        "source": "manual"
+    },
+    "UUID: %s": {
+        "translation": "UUID: %s",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Pos: %s, %s, %s": {
+        "translation": "Pos: %s, %s, %s",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Aeroworks": {
+        "translation": "Aeroworks",
+        "type": "manual",
+        "source": "manual"
+    },
+    "CW": {
+        "translation": "CW",
+        "type": "manual",
+        "source": "manual"
+    },
+    "John_Create": {
+        "translation": "John_Create",
+        "type": "manual",
+        "source": "manual"
+    },
+    "12 RPM": {
+        "translation": "12 RPM",
+        "type": "manual",
+        "source": "manual"
+    },
+    "16 RPM": {
+        "translation": "16 RPM",
+        "type": "manual",
+        "source": "manual"
+    },
+    "32 RPM": {
+        "translation": "32 RPM",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Slime": {
+        "translation": "Slime",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Create 2 0 2 2": {
+        "translation": "Create 2 0 2 2",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Radar": {
+        "translation": "Radar",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Riesling": {
+        "translation": "Riesling",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Cabernet Sauvignon": {
+        "translation": "Cabernet Sauvignon",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Merlot": {
+        "translation": "Merlot",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Zinfandel": {
+        "translation": "Zinfandel",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Rosé": {
+        "translation": "Rosé",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Chardonnay": {
+        "translation": "Chardonnay",
+        "type": "manual",
+        "source": "manual"
+    },
+    "mB/s": {
+        "translation": "mB/s",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Alt": {
+        "translation": "Alt",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Pizza": {
+        "translation": "Pizza",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Burrito": {
+        "translation": "Burrito",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Nachos": {
+        "translation": "Nachos",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Pasta": {
+        "translation": "Pasta",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Pasta ": {
+        "translation": "Pasta ",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Awooo": {
+        "translation": "Awooo",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Voltfish": {
+        "translation": "Voltfish",
+        "type": "manual",
+        "source": "manual"
+    },
+    "%s / %s": {
+        "translation": "%s / %s",
+        "type": "manual",
+        "source": "manual"
+    },
+    "pN": {
+        "translation": "pN",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Incremental": {
+        "translation": "Incremental",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Plasma": {
+        "translation": "Plasma",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Ion": {
+        "translation": "Ion",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Coral": {
+        "translation": "Coral",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Mod": {
+        "translation": "Mod",
+        "type": "manual",
+        "source": "manual"
+    },
+    "JEI": {
+        "translation": "JEI",
+        "type": "manual",
+        "source": "manual"
+    },
+    "REI": {
+        "translation": "REI",
+        "type": "manual",
+        "source": "manual"
+    },
+    "EMI": {
+        "translation": "EMI",
+        "type": "manual",
+        "source": "manual"
+    },
+    "FTB Suite": {
+        "translation": "FTB Suite",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Kekie6": {
+        "translation": "Kekie6",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Ad Astra": {
+        "translation": "Ad Astra",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Cama - Slither": {
+        "translation": "Cama - Slither",
+        "type": "manual",
+        "source": "manual"
+    },
+    "IDAS": {
+        "translation": "IDAS",
+        "type": "manual",
+        "source": "manual"
+    },
+    "ms": {
+        "translation": "ms",
+        "type": "manual",
+        "source": "manual"
+    },
+    " &eBB Fuels": {
+        "translation": " &eCombustibles BB",
+        "type": "manual",
+        "source": "manual"
+    },
+    " &eConfectionery": {
+        "translation": " &eConfitería",
+        "type": "manual",
+        "source": "manual"
+    },
+    "&6Obtain a Blaze Enchanter and Blaze Forger": {
+        "translation": "&6Obtén un Encantador de Blaze y un Forjador de Blaze",
+        "type": "manual",
+        "source": "manual"
+    },
+    "&2Welcome to Blaze Burner Fuels": {
+        "translation": "&2Bienvenido a Blaze Burner Fuels",
+        "type": "manual",
+        "source": "manual"
+    },
+    "&2Craft Cake o Enchanting.": {
+        "translation": "&2Fabrica el Pastel del Encantamiento.",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§aSuccessfully transferred %s claim(s) to opac. §eAero claims: %s / %s": {
+        "translation": "§aTransferido(s) correctamente %s reclamo(s) a opac. §eReclamos aéreos: %s / %s",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§aClaim activated and borders refreshed": {
+        "translation": "§aReclamo activado y límites actualizados",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§cFailed to get ship object!": {
+        "translation": "§c¡Error al obtener el objeto de la nave!",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§cCannot reduce claims, ship already exceeds the limit!": {
+        "translation": "§cNo se pueden reducir los reclamos, ¡la nave ya excede el límite!",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§aParty + Ally": {
+        "translation": "§aGrupo + Aliado",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§cInvalid ship UUID: %s": {
+        "translation": "§cUUID de nave inválido: %s",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§cThis command is disabled in config. Enable 'enableClearCommand' to use it.": {
+        "translation": "§cEste comando está deshabilitado en la configuración. Habilita 'enableClearCommand' para usarlo.",
+        "type": "manual",
+        "source": "manual"
+    },
+    "8 RPM": {
+        "translation": "8 RPM",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§eGingerbread Brick Slab": {
+        "translation": "§eLosa de Ladrillo de Pan de Jengibre",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§7Hold §eRIGHT-CLICK §7to throw": {
+        "translation": "§7Mantén §eCLIC DERECHO §7para lanzar",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§2Put a §acard §2in your §asecond hand §2and use the Magnifying Glass to §asee the scrip §2of a card": {
+        "translation": "§2Pon una §acarta §2en tu §asegunda mano §2y usa la Lupa para §aver el guion §2de una carta",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§4Repair item in your §csecond hand §4or in your §carmors slots §4enchant with the §cmending§4 enchantement. The mending rune take xp from your §cxp bar§4 to repair items. The mending rune need to be in your main hand to work !": {
+        "translation": "§4Repara un objeto en tu §csegunda mano §4o en tus §cranuras de armadura §4con el encantamiento de §creparación§4. La runa de reparación toma experiencia de tu §cbarra de experiencia§4 para reparar objetos. ¡La runa de reparación debe estar en tu mano principal para funcionar!",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§5Jump like a §drabbit !": {
+        "translation": "§5¡Salta como un §dconejo !",
+        "type": "manual",
+        "source": "manual"
+    },
+    "<BNBT:text:SpeakerText>": {
+        "translation": "<BNBT:text:SpeakerText>",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§2Put a §aCard §2in a card inscriber and make §aunique §2cards scripted card §acan’t be reproduced §2by other players": {
+        "translation": "§2Pon una §aCarta §2en un inscriptor de cartas y crea §aúnicas §2cartas con script que §ano pueden ser reproducidas §2por otros jugadores",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§2The sprinkler spread §a 1000mB of diluted bonemeal§2 on a §a5x5 area§2.": {
+        "translation": "§2El aspersor esparció §a1000mB de harina de hueso diluida§2 en un §aárea de 5x5§2.",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§7Fragrant white wine with a hint of sweetness": {
+        "translation": "§7Vino blanco aromático con un toque de dulzor",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§7Sweet drink made of grape pomace": {
+        "translation": "§7Bebida dulce hecha de orujo de uva",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§7Sweet drink made of apple must": {
+        "translation": "§7Bebida dulce hecha de mosto de manzana",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§7Bold red wine with rich flavors": {
+        "translation": "§7Vino tinto intenso con sabores ricos",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§7Robust red wine with jammy flavors": {
+        "translation": "§7Vino tinto robusto con sabores a mermelada",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§7Beverage made from fermented apples": {
+        "translation": "§7Bebida hecha de manzanas fermentadas",
+        "type": "manual",
+        "source": "manual"
+    },
+    "§7Place your item and close this GUI to wrap your gift": {
+        "translation": "§7Coloca tu objeto y cierra esta interfaz para envolver tu regalo",
+        "type": "manual",
+        "source": "manual"
+    },
+    "%1$s A bit of Oil": {
+        "translation": "%1$s Un poco de Petróleo",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Normal": {
+        "translation": "Normal",
+        "type": "manual",
+        "source": "manual"
+    },
+    "S'more": {
+        "translation": "S'more",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Tater Tots": {
+        "translation": "Croquetas de Papa",
+        "type": "manual",
+        "source": "manual"
+    },
+    " + Chocolate": {
+        "translation": " + Chocolate",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Volt Struck": {
+        "translation": "Electrocutado",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Wah Wah, Wah Wah": {
+        "translation": "Wah Wah, Wah Wah",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Cable": {
+        "translation": "Cable",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Neutral": {
+        "translation": "Neutral",
+        "type": "manual",
+        "source": "manual"
+    },
+    "%s min.": {
+        "translation": "%s min.",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Inv": {
+        "translation": "Inv",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Info": {
+        "translation": "Info",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Color": {
+        "translation": "Color",
+        "type": "manual",
+        "source": "manual"
+    },
+    "%ss": {
+        "translation": "%ss",
+        "type": "manual",
+        "source": "manual"
+    },
+    "auto": {
+        "translation": "auto",
+        "type": "manual",
         "source": "manual"
     }
 }

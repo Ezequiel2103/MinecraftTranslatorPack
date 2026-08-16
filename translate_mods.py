@@ -67,6 +67,7 @@ def main():
     )
     print(f"♻️ Reutilizados desde el caché: {stats['reused_from_cache']}")
     print(f"🌎 Traducidos ahora: {stats['translated_fresh']}")
+    print(f"❓ Pendientes de revisión manual: {stats['pending_items']}")
 
 
 if __name__ == "__main__":

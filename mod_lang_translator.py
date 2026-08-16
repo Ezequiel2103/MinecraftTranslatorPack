@@ -5,6 +5,7 @@ from analyzer.mod_lang_scanner import scan_mod_lang_sources
 from analyzer.text_extractor import extract_texts
 from analyzer.text_replacer import apply_translations
 from analyzer.translation_decision import decide_translation
+from review.pending_manager import save_pending
 from translation.concurrent_translate import translate_items_concurrently
 from translation.mod_lang_cache import (
     content_hash,
@@ -30,7 +31,8 @@ def translate_mod_lang_files(
     target_language="es",
     ai_provider="mock",
     ai_model=None,
-    concurrency=4
+    concurrency=4,
+    review_root="review"
 ):
     """
     Translates every mod's own en_us.json (skipping mods that already
@@ -43,6 +45,11 @@ def translate_mod_lang_files(
     specific modpack: the same mod in a different modpack reuses the
     cached translation instead of being translated again, and a mod
     update (different text) is detected and re-translated automatically.
+
+    Texts that fail validation are recorded in the usual
+    review/<language_pair>/pending.json (prefixed with "mods/<modid>/")
+    instead of being silently left in the source language, same as the
+    quest/lang-folder flow.
     """
 
     language_pair = f"{source_language}_{target_language}"
@@ -57,6 +64,7 @@ def translate_mod_lang_files(
         "translated_fresh": 0,
         "mods": []
     }
+    pending_items = []
 
     for source in sources:
         modid = source["modid"]
@@ -74,7 +82,7 @@ def translate_mod_lang_files(
             translated_lang = cached_translation
             stats["reused_from_cache"] += 1
         else:
-            translated_lang = _translate_lang_dict(
+            translated_lang, failed_results = _translate_lang_dict(
                 source["en_us"],
                 language_pair,
                 source_language,
@@ -84,6 +92,20 @@ def translate_mod_lang_files(
                 protected_terms,
                 concurrency
             )
+
+            for item in failed_results:
+                pending_items.append({
+                    "path": f"mods/{modid}/{item['path']}",
+                    "original": item["original"],
+                    "translation": item["translation"],
+                    "source": item["source"],
+                    "attempts": item.get("attempts", 0),
+                    "reason": (
+                        item.get("validation_reason")
+                        or "translation_not_found"
+                    )
+                })
+
             save_cached_translation(
                 modid, source_hash, translated_lang, language_pair
             )
@@ -98,6 +120,16 @@ def translate_mod_lang_files(
             json.dump(translated_lang, file, ensure_ascii=False, indent=4)
 
         stats["mods"].append(modid)
+
+    if pending_items:
+        save_pending(
+            pending_items,
+            language_pair,
+            replace=False,
+            review_root=review_root
+        )
+
+    stats["pending_items"] = len(pending_items)
 
     mcmeta_path = output_resourcepack / "pack.mcmeta"
     mcmeta_path.parent.mkdir(parents=True, exist_ok=True)
@@ -140,4 +172,11 @@ def _translate_lang_dict(
 
     service.save_new_translations()
 
-    return apply_translations(dict(en_us), results)
+    failed_results = [
+        result for result in results
+        if not (result["translation"] and result["valid"])
+    ]
+
+    translated_lang = apply_translations(dict(en_us), results)
+
+    return translated_lang, failed_results

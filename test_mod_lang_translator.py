@@ -13,6 +13,7 @@ LANGUAGE_PAIR = "en_estest"
 def main():
     cache_dir = Path("mod_lang_cache") / LANGUAGE_PAIR
     protected_terms_dir = Path("translation") / LANGUAGE_PAIR
+    review_dir = Path("review") / LANGUAGE_PAIR
 
     try:
         with TemporaryDirectory() as tmp:
@@ -48,6 +49,16 @@ def main():
             assert first["translated_fresh"] == 1
             assert first["reused_from_cache"] == 0
             assert first["mods"] == ["moda"]
+            # mock's "[AI] ..." output fails the quality check, so the
+            # failure must be recorded instead of silently discarded.
+            assert first["pending_items"] == 1
+            pending = json.loads(
+                Path("review/en_estest/pending.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            assert "Thing" in pending
+            assert pending["Thing"]["path"] == "mods/moda/item.moda.thing"
 
             moda_lang_path = output / "assets" / "moda" / "lang" / "es_es.json"
             assert moda_lang_path.exists()
@@ -72,6 +83,7 @@ def main():
     finally:
         shutil.rmtree(cache_dir, ignore_errors=True)
         shutil.rmtree(protected_terms_dir, ignore_errors=True)
+        shutil.rmtree(review_dir, ignore_errors=True)
 
     print("Mod lang translator OK")
 

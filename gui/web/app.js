@@ -60,7 +60,6 @@ async function loadSettings() {
   document.getElementById("input-api-key").value = currentSettings.api_key || "";
   document.getElementById("input-concurrency").value = currentSettings.concurrency || 4;
   document.getElementById("input-content-only").checked = !!currentSettings.content_only;
-  document.getElementById("input-pack-icon").value = currentSettings.last_pack_icon || "";
 
   document.getElementById("input-modpack-path").value = currentSettings.last_modpack_root || "";
   document.getElementById("input-output-path").value = currentSettings.last_output_folder || "";
@@ -76,8 +75,7 @@ async function saveSettingsFromForm() {
     api_key: document.getElementById("input-api-key").value,
     target_language: document.getElementById("select-language").value,
     concurrency: parseInt(document.getElementById("input-concurrency").value, 10) || 4,
-    content_only: document.getElementById("input-content-only").checked,
-    last_pack_icon: document.getElementById("input-pack-icon").value
+    content_only: document.getElementById("input-content-only").checked
   };
 
   currentSettings = await api().save_settings(settings);
@@ -185,7 +183,6 @@ async function translateNow() {
 
   const modpackRoot = document.getElementById("input-modpack-path").value.trim();
   const outputFolder = document.getElementById("input-output-path").value.trim();
-  const packIcon = document.getElementById("input-pack-icon").value.trim();
 
   if (!modpackRoot || !outputFolder) {
     setResult("Completá la ruta del modpack y la carpeta de salida.", "error");
@@ -198,7 +195,7 @@ async function translateNow() {
   setStatus("");
   setResult("");
 
-  const response = await api().translate_now(modpackRoot, outputFolder, packIcon);
+  const response = await api().translate_now(modpackRoot, outputFolder);
   if (!response.ok) {
     setResult(response.error, "error");
     setBusy(false);
@@ -316,10 +313,6 @@ window.addEventListener("pywebviewready", async () => {
     scanModpackPath(event.target.value.trim());
   });
   document.getElementById("btn-browse-output").addEventListener("click", () => browseInto("input-output-path"));
-  document.getElementById("btn-browse-icon").addEventListener("click", async () => {
-    const path = await api().pick_image_file();
-    if (path) document.getElementById("input-pack-icon").value = path;
-  });
 
   document.getElementById("btn-import-modpack-dict").addEventListener("click", importModpackDictionary);
   document.getElementById("btn-import-mods-dict").addEventListener("click", importModsDictionary);

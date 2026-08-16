@@ -85,17 +85,17 @@
 
       <label class="field-label">TEXTOS EN PARALELO</label>
       <input type="number" id="input-concurrency" class="input-field" min="1" max="10" value="4">
+      <p class="field-hint">
+        Cuántos textos le pide el programa a la IA al mismo tiempo, en vez de
+        esperar a que termine uno para recién empezar el siguiente. Más alto
+        = más rápido, pero exige más al proveedor de IA que elijas. 4 anduvo
+        bien en nuestras pruebas; si algo empieza a fallar, bajalo.
+      </p>
 
       <label class="checkbox-row">
         <input type="checkbox" id="input-content-only" checked>
         <span>Saltar mods sin contenido real (solo config/optimización)</span>
       </label>
-
-      <label class="field-label">ÍCONO DEL RESOURCE PACK (opcional)</label>
-      <div class="field-row">
-        <input type="text" id="input-pack-icon" class="input-field" placeholder="C:\...\icono.png">
-        <button class="btn btn-icon" id="btn-browse-icon">🖼</button>
-      </div>
 
       <button class="btn btn-primary" id="btn-save-settings">GUARDAR</button>
       <div class="save-confirm hidden" id="save-confirm">✔ Guardado</div>

@@ -30,6 +30,8 @@ PROVIDER_ENV_VAR = {
 
 AI_PROVIDERS = ["mock", "ollama", "openai", "claude", "deepseek"]
 
+PACK_ICON_PATH = Path(__file__).resolve().parent / "assets" / "pack_icon.png"
+
 TARGET_LANGUAGES = [
     {"code": "es", "label": "Español (ES)"},
     {"code": "pt", "label": "Português (PT)"},
@@ -163,7 +165,7 @@ class Api:
 
     # --- translation (the actual AI-backed run) ---------------------------
 
-    def translate_now(self, modpack_root, output_folder, pack_icon):
+    def translate_now(self, modpack_root, output_folder):
         if self._busy:
             return {"ok": False, "error": "Ya hay una traducción en curso."}
 
@@ -180,13 +182,13 @@ class Api:
 
         thread = threading.Thread(
             target=self._run_translate_now,
-            args=(paths, output_folder, pack_icon),
+            args=(paths, output_folder),
             daemon=True
         )
         thread.start()
         return {"ok": True}
 
-    def _run_translate_now(self, paths, output_folder, pack_icon):
+    def _run_translate_now(self, paths, output_folder):
         self._busy = True
         settings = load_settings()
         self._apply_api_key(settings)
@@ -245,7 +247,7 @@ class Api:
                     ai_provider=settings["ai_provider"],
                     concurrency=settings["concurrency"],
                     content_only=settings["content_only"],
-                    pack_icon=pack_icon or None,
+                    pack_icon=PACK_ICON_PATH if PACK_ICON_PATH.exists() else None,
                     on_mod_progress=on_mod_progress,
                     on_text_progress=on_text_progress_mods
                 )

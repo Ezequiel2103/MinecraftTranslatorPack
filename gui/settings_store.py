@@ -12,8 +12,7 @@ DEFAULT_SETTINGS = {
     "concurrency": 4,
     "content_only": True,
     "last_modpack_root": "",
-    "last_output_folder": "",
-    "last_pack_icon": ""
+    "last_output_folder": ""
 }
 
 

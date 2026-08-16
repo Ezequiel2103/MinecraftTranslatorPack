@@ -13,8 +13,7 @@ function showView(name) {
 
 function setBusy(busy) {
   isBusy = busy;
-  document.getElementById("btn-translate-modpack").disabled = busy;
-  document.getElementById("btn-translate-mods").disabled = busy;
+  document.getElementById("btn-translate-now").disabled = busy;
 }
 
 function setProgress(percent, label) {
@@ -128,32 +127,60 @@ async function browseInto(inputId) {
   }
 }
 
-// ---------------- translation actions ----------------
+// ---------------- dictionaries: import (load a shared file) ----------------
 
-async function translateModpack() {
-  if (isBusy) return;
+async function importModpackDictionary() {
+  const path = await api().pick_open_file(["Diccionario de misiones (*.json)"]);
+  if (!path) return;
 
-  const modpackRoot = document.getElementById("input-modpack-path").value.trim();
-  const outputFolder = document.getElementById("input-output-path").value.trim();
-
-  if (!modpackRoot || !outputFolder) {
-    setResult("Completá la ruta del modpack y la carpeta de salida.", "error");
-    return;
-  }
-
-  await rememberPaths();
-  setBusy(true);
-  setProgress(0, "INICIANDO...");
-  setResult("");
-
-  const response = await api().translate_modpack(modpackRoot, outputFolder);
-  if (!response.ok) {
-    setResult(response.error, "error");
-    setBusy(false);
+  const result = await api().import_quest_dictionary(path);
+  if (result.ok) {
+    setResult(`✔ Diccionario de modpack cargado.\nTextos nuevos agregados: ${result.added}\nTotal en memoria: ${result.total}`, "success");
+  } else {
+    setResult(`✖ ${result.error}`, "error");
   }
 }
 
-async function translateMods() {
+async function importModsDictionary() {
+  const path = await api().pick_open_file(["Diccionario de mods (*.zip)"]);
+  if (!path) return;
+
+  const result = await api().import_mods_dictionary(path);
+  if (result.ok) {
+    setResult(
+      `✔ Diccionario de mods cargado.\nMods nuevos: ${result.added_mods}\nClasificaciones nuevas: ${result.added_classifications}`,
+      "success"
+    );
+  } else {
+    setResult(`✖ ${result.error}`, "error");
+  }
+}
+
+// ---------------- dictionaries: export (share yours) ----------------
+
+async function exportModpackDictionary() {
+  const path = await api().pick_save_file("diccionario_modpack.json", ["Diccionario de misiones (*.json)"]);
+  if (!path) return;
+
+  const result = await api().export_quest_dictionary(path);
+  if (result.ok) {
+    setResult(`✔ Diccionario de modpack exportado a:\n${result.path}`, "success");
+  }
+}
+
+async function exportModsDictionary() {
+  const path = await api().pick_save_file("diccionario_mods.zip", ["Diccionario de mods (*.zip)"]);
+  if (!path) return;
+
+  const result = await api().export_mods_dictionary(path);
+  if (result.ok) {
+    setResult(`✔ Diccionario de mods exportado a:\n${result.path}`, "success");
+  }
+}
+
+// ---------------- translate now ----------------
+
+async function translateNow() {
   if (isBusy) return;
 
   const modpackRoot = document.getElementById("input-modpack-path").value.trim();
@@ -168,9 +195,10 @@ async function translateMods() {
   await rememberPaths();
   setBusy(true);
   setProgress(0, "INICIANDO...");
+  setStatus("");
   setResult("");
 
-  const response = await api().translate_mods(modpackRoot, outputFolder, packIcon);
+  const response = await api().translate_now(modpackRoot, outputFolder, packIcon);
   if (!response.ok) {
     setResult(response.error, "error");
     setBusy(false);
@@ -181,7 +209,7 @@ async function translateMods() {
 
 window.onBackendEvent = function (event, payload) {
   if (event === "start") {
-    setProgress(0, "TRADUCIENDO...");
+    setProgress(0, payload.phase === "mods" ? "TRADUCIENDO MODS..." : "TRADUCIENDO MISIONES...");
     setStatus("");
     return;
   }
@@ -205,9 +233,8 @@ window.onBackendEvent = function (event, payload) {
   if (event === "done") {
     setProgress(100, "COMPLETADO");
     setBusy(false);
-    const kindLabel = payload.kind === "mods" ? `Mods traducidos: ${payload.mods}` : `Archivos traducidos: ${payload.files}`;
     setResult(
-      `✔ Listo.\n${kindLabel}\nPendientes de revisión: ${payload.pending}\nSalida: ${payload.output_folder}`,
+      `✔ Listo.\nArchivos de misiones: ${payload.files}\nMods traducidos: ${payload.mods}\nPendientes de revisión: ${payload.pending}\nSalida: ${payload.output_folder}`,
       "success"
     );
     return;
@@ -294,8 +321,18 @@ window.addEventListener("pywebviewready", async () => {
     if (path) document.getElementById("input-pack-icon").value = path;
   });
 
-  document.getElementById("btn-translate-modpack").addEventListener("click", translateModpack);
-  document.getElementById("btn-translate-mods").addEventListener("click", translateMods);
+  document.getElementById("btn-import-modpack-dict").addEventListener("click", importModpackDictionary);
+  document.getElementById("btn-import-mods-dict").addEventListener("click", importModsDictionary);
+  document.getElementById("link-export-modpack-dict").addEventListener("click", (event) => {
+    event.preventDefault();
+    exportModpackDictionary();
+  });
+  document.getElementById("link-export-mods-dict").addEventListener("click", (event) => {
+    event.preventDefault();
+    exportModsDictionary();
+  });
+
+  document.getElementById("btn-translate-now").addEventListener("click", translateNow);
   document.getElementById("btn-save-settings").addEventListener("click", saveSettingsFromForm);
   document.getElementById("btn-refresh-pending").addEventListener("click", loadPending);
 

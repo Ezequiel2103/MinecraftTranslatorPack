@@ -10,6 +10,7 @@ TESTS = [
     "test_curseforge_zip.py",
     "test_deepseek_translator.py",
     "test_deploy_manager.py",
+    "test_dictionary_io.py",
     "test_end_to_end_formats.py",
     "test_extract_texts_lists.py",
     "test_format_handlers.py",

@@ -236,15 +236,38 @@ Las entradas rechazadas quedan en `review/en_es/pending.json`.
    con `--translate-mod-names` para desactivarla en una corrida puntual.
 10. Revisión de pendientes asistida por IA (`review_cli.py --ai-filter`)
     para filtrar automáticamente traducciones "sin cambios" correctas.
+11. Traducción del contenido de los mods (objetos, bloques, logros) vía
+    `translate_mods.py`, con un único resource pack de salida y un caché
+    por mod (`mod_lang_cache/`) reutilizable entre modpacks distintos.
+12. Filtro `--content-only` para saltar mods sin contenido real
+    (optimización/configuración), con la clasificación de cada mod
+    guardada una sola vez (`content_classification.json`, editable a mano).
+13. `--pack-icon` para poner una imagen propia como ícono del resource pack.
+14. Empaquetado en el formato real de CurseForge (`manifest.json` +
+    `overrides/`) vía `deploy_manager.build_curseforge_import_zip`, para
+    que importar no pierda la configuración generada (como las misiones).
+15. Respaldo automático y aplicación explícita a una copia de la instancia
+    (`deploy_manager.apply_to_modpack_copy` / `apply_to_modpack.py`).
+16. Reutilización automática de traducciones exitosas (memoria + caché en
+    proceso) y traducción en paralelo (`--concurrency`) para acelerar
+    corridas grandes.
+17. Corrección de un bug de fondo: `extract_texts` ignoraba las
+    descripciones de misión en varias líneas, lo que además desalineaba
+    la escritura del SNBT y mezclaba traducciones entre misiones. Se
+    agregó además una alarma de seguridad que frena la escritura si
+    vuelve a detectarse una desalineación así en otro modpack.
 
 ### Próximos pasos
 
-1. Reutilizar automáticamente traducciones aprobadas para evitar repetir
-   llamadas a la IA.
-2. Ejecutar la prueba real con `en_us.snbt` y revisar `pending.json`.
-3. Mejorar la aprobación de pendientes y generar un informe final.
-4. Añadir respaldo automático y aplicación explícita a una copia del modpack.
-5. Optimizar rendimiento (lotes, concurrencia controlada y caché).
+1. Revisar a mano los textos que quedaron pendientes (misiones y mods).
+2. Investigar el contenido de mods como "Create Aeronautics" que no usan
+   el formato estándar de lang (parece venir de un sistema de datapacks
+   propio del modpack) — hoy fuera del alcance del traductor de mods.
+3. Un resumen/informe final consolidado al terminar una corrida grande
+   (cuántos textos, cuántos pendientes, dónde quedó cada archivo).
+4. Revisar la colisión de `pending.json`: hoy se guarda por texto
+   original, así que dos mods distintos con el mismo texto sin traducir
+   pisan la misma entrada en vez de guardarse por separado.
 
 El orden recomendado es: prueba pequeña con `mock`, prueba pequeña con Ollama,
 revisión de pendientes, traducción completa a una carpeta separada y prueba

@@ -58,5 +58,3230 @@
         "translation": "Craft Roost",
         "type": "manual",
         "source": "manual"
+    },
+    " &ePump Dat Oil": {
+        "translation": " &eBombea Ese Petróleo",
+        "type": "manual",
+        "source": "manual"
+    },
+    " &6All of Create": {
+        "translation": " &6Todo lo de Create",
+        "type": "manual",
+        "source": "manual"
+    },
+    "&6Welcome to All of Create!": {
+        "translation": "&6¡Bienvenido a Todo lo de Create!",
+        "type": "manual",
+        "source": "manual"
+    },
+    "&9Important Controls": {
+        "translation": "&9Controles Importantes",
+        "type": "manual",
+        "source": "manual"
+    },
+    "Bitterballen": {
+        "translation": "Bitterballen",
+        "type": "manual",
+        "source": "manual"
+    },
+    "&aTutorial Complete!": {
+        "translation": "&a¡Tutorial Completado!",
+        "type": "manual",
+        "source": "manual"
+    },
+    " &eNew Age": {
+        "translation": "&eNueva Era",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&e Simulated": {
+        "translation": "&e Simulado",
+        "type": "ai",
+        "source": "manual"
+    },
+    " &eMinecarts": {
+        "translation": "&eVagonetas",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&e Off-Road": {
+        "translation": "&e Todo Terreno",
+        "type": "ai",
+        "source": "manual"
+    },
+    " &eConnected": {
+        "translation": "&eConectado",
+        "type": "ai",
+        "source": "manual"
+    },
+    " &eCreate Kitchen": {
+        "translation": "&eCreate Cocina",
+        "type": "ai",
+        "source": "manual"
+    },
+    " &eTo Know": {
+        "translation": "&ePara Saber",
+        "type": "ai",
+        "source": "manual"
+    },
+    " &eAircrafts": {
+        "translation": "&eAeronaves",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&e Aeronautics": {
+        "translation": "&e Aeronáutica",
+        "type": "ai",
+        "source": "manual"
+    },
+    " &eTrains": {
+        "translation": "&eTrenes",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&e Aquatic Ambitions": {
+        "translation": "&e Ambiciones Acuáticas",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&e Propulsion": {
+        "translation": "&e Propulsión",
+        "type": "ai",
+        "source": "manual"
+    },
+    " &eDeep Dark": {
+        "translation": "&eProfundidad Oscura",
+        "type": "ai",
+        "source": "manual"
+    },
+    " &eOptical": {
+        "translation": "&eÓptico",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&e Totem Factory": {
+        "translation": "&e Fábrica de Tótems",
+        "type": "ai",
+        "source": "manual"
+    },
+    " &eFun Additions": {
+        "translation": "&eAñadidos Divertidos",
+        "type": "ai",
+        "source": "manual"
+    },
+    " &eEnchantment Industry": {
+        "translation": "&eIndustria de Encantamientos",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&6Farming and Food": {
+        "translation": "&6Agricultura y Alimentación",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&6Aeronautics": {
+        "translation": "&6Aeronáutica",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Drink Mayonnaise": {
+        "translation": "Beber Mayonesa",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&6 Transportation": {
+        "translation": "&6 Transporte",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Liquid Fertilizer, a new fluid, applies a bonemeal affect to blocks": {
+        "translation": "Fertilizante Líquido, un nuevo fluido, aplica un efecto de hueso molido a los bloques",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&6Engineer's Paradise": {
+        "translation": "&6Paraíso del Ingeniero",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Bake your first Stroopwafel": {
+        "translation": "Hornea tu primer Stroopwafel",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Activate the Sprinkler by using a Liquid Fertilizer or Connecting Fluid tank": {
+        "translation": "Activa el Aspersor usando un Fertilizante Líquido o conectando un tanque de Fluido",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Plastic": {
+        "translation": "Obtén Plástico",
+        "type": "ai",
+        "source": "manual"
+    },
+    "When placed in front of the Encased Fan this allows it to haunt items.\\n\\nNotably sand into soul sand.": {
+        "translation": "Cuando se coloca frente al Ventilador Encapsulado, esto le permite asustar objetos.\\n\\nNotablemente, convierte arena en arena de almas.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Echo Sword": {
+        "translation": "Obtener Espada de Eco",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Fully automated Grindstone That can be used on removing enchantment on your tools or weapons and polishing quartz": {
+        "translation": "Piedra de afilar totalmente automatizada que se puede usar para eliminar encantamientos de tus herramientas o armas y pulir cuarzo.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&8Craft Grindstone and Item Drain.": {
+        "translation": "&8Fabrica Piedra de Afilar y Drenador de Objetos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The block that deals with train assembly and dissasembly.": {
+        "translation": "El bloque que se encarga del ensamblaje y desensamblaje de trenes.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Flanged Cogwheels": {
+        "translation": "Engranajes con pestañas",
+        "type": "ai",
+        "source": "manual"
+    },
+    "You'll need to be either lucky or have a lot of thorium for this": {
+        "translation": "Tendrás que tener suerte o un montón de torio para esto",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Press &d\"R\"&r to See Crafts and &d\"Z\"&r to See How to build Towers": {
+        "translation": "Pulsa &d\"R\"&r para Ver Recetas y &d\"Z\"&r para Ver Cómo Construir Torres",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Pollution": {
+        "translation": "Contaminación",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Finally, nuclear": {
+        "translation": "Finalmente, nuclear",
+        "type": "ai",
+        "source": "manual"
+    },
+    "An advanced item distribution machine that works if you make it point to specific points that the arm can reach, if it can't reach, the arm won't work, also requires SUs to move it.": {
+        "translation": "Una máquina avanzada de distribución de ítems que funciona si la haces apuntar a puntos específicos que el brazo pueda alcanzar; si no puede alcanzarlos, el brazo no funcionará. También requiere SUs para moverlo.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Hand cranks with a cogwheel installed. Handy for gear ratios and tight spaces": {
+        "translation": "Manivela manual con un engranaje instalado. Útil para relaciones de transmisión y espacios reducidos",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Crank wheel": {
+        "translation": "Obtener Rueda de Manivela",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A better version and used as a fuel": {
+        "translation": "Una versión mejor y utilizada como combustible",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Refined Coal Coke": {
+        "translation": "Obtén Coque de Carbón Refinado",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A redstone component that outputs a signal when in contact with another redstone contact. Perticularly useful for building contraptions.": {
+        "translation": "Un componente de redstone que emite una señal cuando está en contacto con otro contacto de redstone. Particularmente útil para construir artilugios.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Rose Quartz Catalyst Coil": {
+        "translation": "Obtener Bobina de Catalizador de Cuarzo Rosa",
+        "type": "ai",
+        "source": "manual"
+    },
+    "-20% Engine power -75% fuel requirement": {
+        "translation": "-20% de potencia del motor -75% de requisito de combustible",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A more configurable chute.": {
+        "translation": "Una tolva más configurable.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Best of the best Magnets in store, however extremely expensive": {
+        "translation": "Los mejores imanes de la tienda, sin embargo extremadamente caros",
+        "type": "ai",
+        "source": "manual"
+    },
+    "To craft Briquettes ": {
+        "translation": "Para fabricar Briquetas",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Materials": {
+        "translation": "Obtener Materiales",
+        "type": "ai",
+        "source": "manual"
+    },
+    "This Create addon adds a variety of items and recipes, introducing new fuel sources for Blaze Burners and giving players unique ways to build Steam Boiler setups.Ever wanted a renewable alternative to Blaze Cakes? Now you have one!": {
+        "translation": "Este addon de Create añade una variedad de objetos y recetas, introduciendo nuevas fuentes de combustible para los Quemadores de Blaze y brindando a los jugadores formas únicas de construir configuraciones de Caldera de Vapor. ¿Alguna vez quisiste una alternativa renovable a los Pasteles de Blaze? ¡Ahora la tienes!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "An early-game, single-use connector that breaks when the network is overstressed": {
+        "translation": "Un conector de un solo uso de principios del juego que se rompe cuando la red está sobrecargada",
+        "type": "ai",
+        "source": "manual"
+    },
+    "You will require either of these to insert fuel into the inserter": {
+        "translation": "Necesitarás uno de estos para insertar combustible en el insertador.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Inserting fuel ": {
+        "translation": "Insertando combustible",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Pushes heat to a small area, careful to not pump too much heat..": {
+        "translation": "Empuja calor a un área pequeña, cuidado con no bombear demasiado calor..",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Andesite, the Foundation": {
+        "translation": "Andesita, los Cimientos",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Lets you schedule trains so that mobs or blaze burnders can drive them.": {
+        "translation": "Te permite programar trenes para que turbas o quemadores de blaze puedan conducirlos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A redstone component that toggles on when recieving a redstone signal on one side and off when recieviing a signal on anoter side.": {
+        "translation": "Un componente de redstone que se activa al recibir una señal de redstone en un lado y se desactiva al recibir una señal en el otro lado.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Okay so, andesite is a very abundant stone that you can find in large pockets underground, and they blend really well with the stone texture so keep your eyes open for some. You'll need a lot of this stone if you are going to make any machinery around here so dig as much as you can! Mental note as well, Zinc ores are important too as using it with andesite makes the important alloy used to making machinery.": {
+        "translation": "Vale, entonces, la andesita es una piedra muy abundante que puedes encontrar en grandes vetas bajo tierra, y se mezclan muy bien con la textura de la piedra, así que mantén los ojos abiertos para encontrarla. Necesitarás mucha de esta piedra si vas a fabricar cualquier maquinaria por aquí, ¡así que excava todo lo que puedas! Nota mental también: los minerales de zinc son importantes, ya que usarlos con andesita crea la aleación clave para fabricar maquinaria.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain your Chicken Sandwich": {
+        "translation": "Obtén tu Sándwich de Pollo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "It's really just a belt that doesn't move.": {
+        "translation": "En realidad es solo una correa que no se mueve.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Press &c\"Z\"&r To see How to Build It": {
+        "translation": "Pulsa &c\"Z\"&r Para ver Cómo Construirla",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Build Crude Oil Pump": {
+        "translation": "Construir Bomba de Petróleo Crudo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain &6Vector Thruster": {
+        "translation": "Obtén &6Propulsor Vectorial",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Start by making bread slices with Farmer’s Delight’s cutting board, or craft a burger bun. Place a Sandwich Station, put a bread slice or bun on top, and begin adding ingredients of your choice.Along with food, potions can also be added. When you’re done, break the sandwich to collect it. You can place sandwiches anywhere by shift-right-clicking": {
+        "translation": "Comienza haciendo rebanadas de pan con la tabla de cortar de Farmer’s Delight, o fabrica un panecillo de hamburguesa. Coloca una Máquina de Sándwiches, pon una rebanada de pan o un panecillo encima, y comienza a añadir los ingredientes que elijas. Además de comida, también se pueden añadir pociones. Cuando termines, rompe el sándwich para recogerlo. Puedes colocar sándwiches en cualquier lugar pulsando shift-clic derecho.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The simplest way to generate kinetic energy, by using yourself as the power source. Get that arm strength!": {
+        "translation": "La forma más sencilla de generar energía cinética, usando tu propio cuerpo como fuente de poder. ¡Ejercita la fuerza de tus brazos!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Crank it all the way!": {
+        "translation": "¡Gírala hasta el tope!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Melt my heart..": {
+        "translation": "Derrite mi corazón..",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Uh oh!": {
+        "translation": "¡Oh no!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Enjoy your first Oliebollen": {
+        "translation": "Disfruta de tu primer Oliebollen",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A repeater that sends a pulse after a configurable amount of time.": {
+        "translation": "Un repetidor que envía un pulso después de una cantidad de tiempo configurable.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Do I feel a pulse?": {
+        "translation": "¿Siento un pulso?",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Beam Condenser: condense up to three beams into one combining its properties": {
+        "translation": "Condensador de Haz: condensa hasta tres haces en uno combinando sus propiedades.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A filter that can filter by attributes like \"can be smelted\" or \"from Create\".": {
+        "translation": "Un filtro que puede filtrar por atributos como \"puede ser fundido\" o \"de Create\".",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Welcome to Create:Connected": {
+        "translation": "Bienvenido a Create:Connected",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Beam Condenser": {
+        "translation": "Obtén el Condensador de Haz",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Gadgets for all situations": {
+        "translation": "Dispositivos para todas las situaciones",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Lets you see the rotational speed of a kinetic network.": {
+        "translation": "Te permite ver la velocidad rotacional de una red cinética.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain All the Engines and go bbrrrrr": {
+        "translation": "Obten todos los motores y ve bbrrrrr",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Perfect for fuel": {
+        "translation": "Perfecto para combustible",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Blazing Rocks": {
+        "translation": "Obtén Rocas Ardientes",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Put Blaze core into depot and let spout fill Blaze core with lava": {
+        "translation": "Coloca el núcleo de Blaze en el depósito y deja que el surtidor llene el núcleo de Blaze con lava.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The Gearbox is sort of like an extension cord, but for shafts where it can change the direction of the shafts and can have more than one shaft attached in a different side of the gearbox. A vertical gearbox also exists.": {
+        "translation": "La Caja de Engranajes es algo así como un cable de extensión, pero para ejes, donde puede cambiar la dirección de los ejes y puede tener más de un eje conectado en un lado diferente de la caja. También existe una caja de engranajes vertical.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Activate Spout With lava on it": {
+        "translation": "Activar el surtidor con lava encima",
+        "type": "ai",
+        "source": "manual"
+    },
+    "+10% Engine powers": {
+        "translation": "+10% de potencia del motor",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Wrap snack in Paper": {
+        "translation": "Envuelve el bocadillo en Papel",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft Glass Panes": {
+        "translation": "Craftea Paneles de Vidrio",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Weighted Ejectors can throw items accuratly long distances.": {
+        "translation": "Los Expulsores con Peso pueden lanzar objetos con precisión a largas distancias.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A Create add-on for crafting custom sandwiches. Compatible with Farmer’s Delight. Build a Sandwich Station to begin": {
+        "translation": "Un complemento de Create para crear sándwiches personalizados. Compatible con el Delicia del Granjero. Construye una Estación de Sándwiches para comenzar",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Can be Find in Treasures Hunt.": {
+        "translation": "Se puede encontrar en la Caza de Tesoros.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft Sandwich Station": {
+        "translation": "Craftear Estación de Sándwiches",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Gather Materials to Craft Conduit": {
+        "translation": "Recoge Materiales para Fabricar el Conducto",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Simulated": {
+        "translation": "Simulado",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Chair.": {
+        "translation": "Silla.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Crush Nether Wart to obtain Spices": {
+        "translation": "Triturar Verruga del Nether para obtener Especias",
+        "type": "ai",
+        "source": "manual"
+    },
+    "It's just a seat, nothing more, nothing less. But if you're in a moving contraption, might as well glue it to the contraption so you can sit and move along with it. Don't superglue yourself to the seat.": {
+        "translation": "Es solo un asiento, nada más, nada menos. Pero si estás en un artilugio en movimiento, más vale pegarlo al artilugio para poder sentarte y moverte con él. No te pegues con superglue al asiento.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Lets you use SU to break blocks, can also be attached to contraptions to make tunnel bores and the like.": {
+        "translation": "Te permite usar SU para romper bloques, también se puede acoplar a artilugios para hacer perforadoras de túneles y similares.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Glow Dust": {
+        "translation": "Obtén Polvo Luminoso",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The Conduit Cage will gradually turn it into Prismarine Crystals": {
+        "translation": "La Caja de Conductos la convertirá gradualmente en Cristales de Prismarina",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Cake": {
+        "translation": "Obtener Pastel",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Polarizing Filter: polarize the beam": {
+        "translation": "Filtro Polarizador: polariza el haz",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Polarizing Filter": {
+        "translation": "Obtener Filtro Polarizador",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A heavy crossbow with a powerful punch, requires arrows": {
+        "translation": "Una ballesta pesada con un golpe poderoso, requiere flechas",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Use to check for Crude Oil Deposits. Create Diesel Generators.": {
+        "translation": "Úsalo para buscar depósitos de Petróleo Crudo. Create Diesel Generators.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Slag": {
+        "translation": "Obtener Escoria",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Allows for the creation of contraptions that move up and down.": {
+        "translation": "Permite la creación de artilugios que se mueven hacia arriba y hacia abajo.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "When placed in front of the Encased Fan this allows it to smoke items.": {
+        "translation": "Al colocarse frente al Ventilador Encasillado, esto le permite ahumar objetos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Charge Kinetic Battery": {
+        "translation": "Cargar Batería Kinética",
+        "type": "ai",
+        "source": "manual"
+    },
+    "At the bottom of the inventory, you may have noticed a search bar.": {
+        "translation": "En la parte inferior del inventario, es posible que hayas notado una barra de búsqueda.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "This is the &dJust Enough Items&r, or &dJEI&r, search bar. ": {
+        "translation": "Esta es la &dJust Enough Items&r, o barra de búsqueda de &dJEI&r.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "If you type \"Wood\", for example, the &dJEI &ritem list at the right of the screen will show all items with \"Wood\" in the name.": {
+        "translation": "Si escribes \"Madera\", por ejemplo, la lista de elementos del &dJEI &ren el lado derecho de la pantalla mostrará todos los elementos con \"Madera\" en el nombre.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Adding a @ at the start of the search query will show the items from a specific mod, for example @Adorn": {
+        "translation": "Agregar un @ al inicio de la consulta de búsqueda mostrará los artículos de un mod específico, por ejemplo @Adorn",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Read my description!": {
+        "translation": "¡Lee mi descripción!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "To favorite an item, press &bA &rwhile hovering over it in the &dJEI &ritem list.": {
+        "translation": "Para marcar un artículo como favorito, presiona &bA &r mientras pasas el cursor sobre él en la &dJEI &rlista de artículos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "An item that allows for increased reach.": {
+        "translation": "Un objeto que permite un mayor alcance.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Generating heat": {
+        "translation": "Generando calor",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Can be used for feeding the Blaze Forger and Blaze Enchanter or for crafting other items": {
+        "translation": "Puede usarse para alimentar el Forjador de Blazes y el Encantador de Blazes o para fabricar otros objetos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&2Craft Block of Experice.": {
+        "translation": "&2Craftea un Bloque de Experiencia.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Capture Chicken by using Roost": {
+        "translation": "Captura un Pollo usando el Gallinero",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Crafts plates into rods and rods into wires.": {
+        "translation": "Transforma placas en varillas y varillas en alambres.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Non-Portable Chainsaw": {
+        "translation": "Motosierra No Portátil",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Can be find on Caves.": {
+        "translation": "Se puede encontrar en cuevas.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Blocks that can fell trees or allow contraptions to fell trees. As well as some crafting recipes like cutting blocks or stripping logs.": {
+        "translation": "Bloques que pueden talar árboles o permitir que los artilugios los talen. Así como algunas recetas de fabricación como cortar bloques o pelar troncos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Lets you turn off parts of contraptions while they are formed.": {
+        "translation": "Te permite apagar partes de los inventos mientras están formados.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain LimeStone": {
+        "translation": "Obtener Piedra Caliza",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Build Industrial Blasting": {
+        "translation": "Construir Voladura Industrial",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Materials for Crates": {
+        "translation": "Materiales para Cajas",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Engine": {
+        "translation": "Motor",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Activate Mechanical Crafter": {
+        "translation": "Activar Máquina de Fabricación Mecánica",
+        "type": "ai",
+        "source": "manual"
+    },
+    "To put all Materials you got to craft Inactive Blaze core": {
+        "translation": "Para poner todos los Materiales que tengas, tienes que fabricar el Núcleo de Blaze Inactivo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Can be used to halve or double the rotational speed of connected chaindrives when recieving a redstone signal.": {
+        "translation": "Puede usarse para reducir a la mitad o duplicar la velocidad rotacional de las transmisiones de cadena conectadas al recibir una señal de redstone.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&8[Click to read]": {
+        "translation": "&8[Clic para leer]",
+        "type": "ai",
+        "source": "manual"
+    },
+    "All of Create is based around Create, obviously, a steampunk mod that lets you build contraptions to do most things you can think of, just not how to do your laundry nor your homework, okay?": {
+        "translation": "Todo Create se basa en Create, obviamente, un mod steampunk que te permite construir artilugios para hacer la mayoría de las cosas que puedas imaginar, solo que no cómo lavar tu ropa ni hacer tu tarea, ¿de acuerdo?",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Because of this, the chapter is mostly focused on letting you know what exists and giving you a rough outline of the progression of the mod, but at the same time, it will not handhold you all the way to the end since Create is a free for all sandbox mechanic mod. Get building and be smarter.": {
+        "translation": "Debido a esto, el capítulo se centra principalmente en darte a conocer qué existe y darte un esquema general de la progresión del mod, pero al mismo tiempo, no te llevará de la mano hasta el final, ya que Create es un mod mecánico de sandbox libre para todos. Ponte a construir y sé más inteligente.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Create offers great guides for most of its items by hovering over them in REI or in your inventory and holding down 'W' to \"ponder\" the item, but sometimes it's just best to test each thing out, go big or go home, as the saying goes.": {
+        "translation": "Create ofrece excelentes guías para la mayoría de sus objetos al pasar el cursor sobre ellos en REI o en tu inventario y mantener presionada la tecla 'W' para \"reflexionar\" sobre el objeto, pero a veces es mejor probar cada cosa por uno mismo, ir a lo grande o irse a casa, como dice el refrán.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&9Tasks &rare things that need to be done to complete a quest. If a task is an item, clicking on it will show its recipe.": {
+        "translation": "&9Tareas &rson cosas que deben hacerse para completar una misión. Si una tarea es un objeto, al hacer clic en ella se mostrará su receta.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&6Rewards &rare what you get after completing all &9Tasks&r. Click to claim.": {
+        "translation": "&6Recompensas &rson lo que obtienes después de completar todas las &9Tareas&r. Haz clic para reclamarlas.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&6Quests": {
+        "translation": "&6Misiones",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The pin icon at the top right will pin a quest to your screen.": {
+        "translation": "El icono de pin en la parte superior derecha fijará una misión en tu pantalla.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Generates energy(E) from kinetic energy, the amount generated is dependent on the rpm and caps at 256E/t": {
+        "translation": "Genera energía (E) a partir de energía cinética; la cantidad generada depende de las rpm y alcanza un máximo de 256E/t.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft Millstone": {
+        "translation": "Fabricar Molino de Piedra",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Basically an advanced sign that updates faster if provided with higher RPM. It's like a Bulletin Board you see in train stations that update.": {
+        "translation": "Básicamente un cartel avanzado que se actualiza más rápido si se le proporcionan mayores RPM. Es como un Tablón de Anuncios de los que ves en las estaciones de tren que se actualizan.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Use a mill to process limestone into Suspicious Rocks.": {
+        "translation": "Usa un molino para procesar piedra caliza en Rocas Sospechosas.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A very versitile machine that can pull and push entities aswell as wash, haunt, blast and smoke items. No, this is not for household use.": {
+        "translation": "Una máquina muy versátil que puede tirar y empujar entidades, además de lavar, encantar, fundir y ahumar objetos. No, esto no es para uso doméstico.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain &6Redstone Transmission": {
+        "translation": "Obtén &6Transmisión de Redstone",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Capture Types of Fishes": {
+        "translation": "Tipos de Captura de Peces",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Peat Briquettes ": {
+        "translation": "Obtén Briquetas de Turba",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Better Than Coal Briquettes  And Charcoal Briquettes as a fuel": {
+        "translation": "Mejores que las Briquetas de Carbón y las Briquetas de Carbón Vegetal como combustible",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Connectors insert/extract energy from/into blocks and wires are used to connect between connectors.": {
+        "translation": "Los conectores insertan/extraen energía de/hacia bloques y los cables se usan para conectar entre conectores.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "When placed in front of the Encased Fan this allows it to wash items.\\n\\nNotably soul sand into nether quartz.": {
+        "translation": "Cuando se coloca delante del Ventilador Encapsulado, esto le permite lavar objetos.\\n\\nNotablemente, arena de almas en cuarzo del Nether.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Greater than everything Fuel": {
+        "translation": "Combustible más grande que todo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Blaze Core": {
+        "translation": "Obtén Núcleo de Blaze",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Build a Distillation": {
+        "translation": "Construye una Destilación",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Amethyst shards": {
+        "translation": "Obtén fragmentos de Amatista",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Attach to any inventory to expand its surface area. Great for access in tight spaces and smart setups with threshold switches. - Provides an interface to access two inventories simultaneously. Also comes with filter slots to quickly sort incoming items": {
+        "translation": "Conéctalo a cualquier inventario para expandir su área de superficie. Ideal para acceder en espacios reducidos y configuraciones inteligentes con interruptores de umbral. - Proporciona una interfaz para acceder a dos inventarios simultáneamente. También incluye ranuras de filtro para clasificar rápidamente los objetos entrantes.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Welcome to Create Kitchen! It includes three different types of mods designed to help you automate food production, cooking, and farming": {
+        "translation": "¡Bienvenido a la cocina de Create! Incluye tres tipos diferentes de mods diseñados para ayudarte a automatizar la producción de alimentos, la cocina y la agricultura.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&e Welcome to Create Kitchen": {
+        "translation": "&e Bienvenido a Create Cocina",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Sail Equipments": {
+        "translation": "Equipos de Vela",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Chutes are used to transfer between inventories vertically.": {
+        "translation": "Las Tolvas se utilizan para transferir entre inventarios verticalmente.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft Steel Mechanism": {
+        "translation": "Fabricar Mecanismo de Acero",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Gather Supplies": {
+        "translation": "Reúne Suministros",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Crude Oil": {
+        "translation": "Obtén Petróleo Crudo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Build Coke ": {
+        "translation": "Construir Coque",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Echo Shard": {
+        "translation": "Obtener Fragmento de Eco",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Lava applies a small amount of fire damage to entities below": {
+        "translation": "La lava aplica una pequeña cantidad de daño por fuego a las entidades debajo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Can be find in nether or Crafted": {
+        "translation": "Se puede encontrar en el nether o fabricarse",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Activate the Sprinkler by using a lava bucket or connecting a fluid tank": {
+        "translation": "Activa el Aspersor usando un cubo de lava o conectando un tanque de fluidos",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain or Craft Magma Block": {
+        "translation": "Obtén o Fabrica Bloque de Magma",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Press &bR &rwhile hovering over an item to view its Recipe": {
+        "translation": "Mantén presionada la tecla &bR &rmientras pasas el cursor sobre un objeto para ver su receta.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Press &bU &rwhile hovering over an item to view its Uses": {
+        "translation": "Mantén presionada &bU &r mientras pasas el cursor sobre un objeto para ver sus usos",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Press &bM &rto open the World Map": {
+        "translation": "Presiona &bM &rpara abrir el Mapa del Mundo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Press &bC &rto Crawl": {
+        "translation": "Pulsa &bC &rpara Agacharte",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Press &bU &rto Create a New Waypoint": {
+        "translation": "Pulsa &bU &rpara Create un Nuevo Punto de Referencia",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Press &bB &rto open your Backpack": {
+        "translation": "Pulsa &bB &rpara abrir tu Mochila",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Read my description! Make sure to scroll down.": {
+        "translation": "¡Lee mi descripción! Asegúrate de desplazarte hacia abajo.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Lets you reverse the direction of rotation by applying redstone.": {
+        "translation": "Te permite invertir la dirección de rotación aplicando redstone.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "No blaze burner needed! (only works on boilers if you didn't already notice the name)": {
+        "translation": "¡No necesitas quemador de blaze! (solo funciona en calderas si no notaste el nombre)",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Materials for Trading Depot": {
+        "translation": "Materiales para el Depósito de Comercio",
+        "type": "ai",
+        "source": "manual"
+    },
+    "An upgraded version of the Copper Backtank. How is there so much defense if you're not protected from the front, though?": {
+        "translation": "Una versión mejorada del Tanque de Aire de Cobre. ¿Cómo es que hay tanta defensa si no estás protegido por el frente?",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Allows for the extraction of liquids from items.": {
+        "translation": "Permite la extracción de líquidos de los objetos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain&6 Cables and Cable Relay": {
+        "translation": "Obten &6 Cables y Cable Relay",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Cover yourself in oil": {
+        "translation": "Cúbrete de aceite",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Apply a Distillation Controller to a Fluid tank to create a Distillation Tower.": {
+        "translation": "Aplica un Controlador de Destilación a un tanque de Fluidos para crear una Torre de Destilación.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Ooh, this is a fun contraption! Okay, so this thing is used to build your structures automatically, provided that you have a structure printed out in your schematic paper. You just need to prepare gunpowder and a storage unit with the required materials to build what you want. Also use a clipboard, will ya? It'll take note of the materials for you.": {
+        "translation": "¡Ooh, esto es un artilugio divertido! Vale, así que esta cosa se usa para construir tus estructuras automáticamente, siempre y cuando tengas una estructura impresa en tu papel de esquemático. Solo necesitas preparar pólvora y una unidad de almacenamiento con los materiales requeridos para construir lo que quieras. ¡Y usa un portapapeles, ¿vale?! Te anotará los materiales por ti.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A clutch that is only coupled if the input spins in the correct direction as configured": {
+        "translation": "Un embrague que solo se acopla si la entrada gira en la dirección correcta según lo configurado",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A crafting ingredient for the Sequenced Pulse Generator": {
+        "translation": "Un ingrediente de fabricación para el Generador de Pulsos Secuenciados.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Freewheel clutch": {
+        "translation": "Obtener embrague de rueda libre",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Control Chip": {
+        "translation": "Obtener Chip de Control",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Same As Optical Receptor but does more to it": {
+        "translation": "Lo mismo que el Receptor Óptico, pero le hace más cosas.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Heavy Optical Receptor": {
+        "translation": "Obtener Receptor Óptico Pesado",
+        "type": "ai",
+        "source": "manual"
+    },
+    "This produces Spiky Shells.": {
+        "translation": "Esto produce Caparazones Espinosos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Throw a Nautilus Shell into the Crushing Wheel": {
+        "translation": "Lanza una Concha de Nautilo en la Rueda Trituradora",
+        "type": "ai",
+        "source": "manual"
+    },
+    "By Crafting them.": {
+        "translation": "Al fabricarlos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Prismarine Alloy and rod": {
+        "translation": "Obtén la Aleación de Prismarina y la varilla",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Steel": {
+        "translation": "Obtener Acero",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Build an Advanced Distillation": {
+        "translation": "Construye una Destilación Avanzada",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Challenges": {
+        "translation": "Desafíos",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Golden Coil": {
+        "translation": "Obtener Bobina Dorada",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Fast and rather reliable. Make sure your runway is long enough": {
+        "translation": "Rápida y bastante confiable. Asegúrate de que tu pista de aterrizaje sea lo suficientemente larga",
+        "type": "ai",
+        "source": "manual"
+    },
+    "-75% Air friction": {
+        "translation": "-75% de fricción del aire",
+        "type": "ai",
+        "source": "manual"
+    },
+    "To cook Basic coal": {
+        "translation": "Para cocinar Carbón básico",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Deepfry fries": {
+        "translation": "Papas fritas extra crujientes",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Rails": {
+        "translation": "Vías",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Activate Encased fan with Lava": {
+        "translation": "Activa el ventilador encajado con lava",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Bake Your First Speculaas Cookie": {
+        "translation": "Hornea Tu Primera Galleta Speculaas",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Lets you clear and pave whilst riding a train.": {
+        "translation": "Te permite limpiar y pavimentar mientras conduces un tren.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&2Inventory": {
+        "translation": "&2Inventario",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The icon in the top left of the screen is the &aFTB Teams &rmenu. This allows you to add other players to your team.": {
+        "translation": "El icono en la parte superior izquierda de la pantalla es el menú &aFTB Teams &r. Esto te permite añadir a otros jugadores a tu equipo.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "On the right of the &aFTB Teams &ricon is the &6Quest Book &ricon, which allows you to access the &6Quest Book &rat any time.": {
+        "translation": "A la derecha del icono de &aFTB Teams &r está el icono de &6Libro de Misiones &r, que te permite acceder al &6Libro de Misiones &r en cualquier momento.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "When you click the square at the top left of your player display, your &8Curios &rslots will become visible. Some items, such as Elytras and Totems can be equipped here.": {
+        "translation": "Al hacer clic en el cuadrado en la parte superior izquierda de tu visualización de jugador, tus espacios de &8Curios &rse volverán visibles. Algunos objetos, como Élitros y Tótems, pueden equiparse aquí.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A lever that can be set to output any redstone level. It's basically an upgraded version of the basic lever.": {
+        "translation": "Una palanca que se puede configurar para emitir cualquier nivel de redstone. Básicamente es una versión mejorada de la palanca básica.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Levered Up!": {
+        "translation": "¡Palanca Activada!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Lets you instantly break most Create blocks by shift + right-clicking. And rotate them by right-clicking.": {
+        "translation": "Te permite romper instantáneamente la mayoría de los bloques Create al presionar shift + clic derecho. Y rotarlos con clic derecho.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "This is not a Monkey Wrench": {
+        "translation": "Esto no es una Llave de Mono",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A gearbox with shafts on all 6 sides. Conceptually uses the same internal mechanism as Parallel Gearbox, so top and bottom spins at half speed": {
+        "translation": "Una caja de engranajes con ejes en los 6 lados. Conceptualmente usa el mismo mecanismo interno que la Caja de Engranajes Paralela, por lo que la parte superior e inferior giran a media velocidad.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A basic filter.": {
+        "translation": "Un filtro básico.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain 6-way Gearbox.": {
+        "translation": "Obtén un Engranaje de 6 vías.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Place near the Block of Experience during a thunderstorm": {
+        "translation": "Coloca cerca del Bloque de Experiencia durante una tormenta",
+        "type": "ai",
+        "source": "manual"
+    },
+    "+25% Engine power +50% Fuel requirement": {
+        "translation": "+25% Potencia del motor +50% Requisito de combustible",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&6Craft Lighting rod.": {
+        "translation": "&6Crea una varilla de pararrayos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A clutch that is uncoupled unless powered": {
+        "translation": "Un embrague que está desacoplado a menos que reciba energía",
+        "type": "ai",
+        "source": "manual"
+    },
+    "An upgraded version of the Copper Diving Helmet. The icon from afar looks like a helmet for a soldier.": {
+        "translation": "Una versión mejorada del Casco de Buceo de Cobre. El icono desde lejos parece un casco de soldado.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Clutch": {
+        "translation": "Obtener Embrague",
+        "type": "ai",
+        "source": "manual"
+    },
+    "-20% Fuel requirement": {
+        "translation": "-20% de requisito de combustible",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain flint": {
+        "translation": "Obtén pedernal",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Place it into a depot and wait for the Conduit Cage to convert it into Prismarine Shards.": {
+        "translation": "Colócalo en un depósito y espera a que la Caja de Conductos lo convierta en Fragmentos de Prismarina.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Allows for contraptions that rotate around a point in space, particularly useful for farms.": {
+        "translation": "Permite mecanismos que giran alrededor de un punto en el espacio, especialmente útiles para granjas.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Trading Depot": {
+        "translation": "Obtener Depósito de Comercio",
+        "type": "ai",
+        "source": "manual"
+    },
+    "You know those hydraulic presses in real life? This is basically it. Don't put your hand under it.": {
+        "translation": "¿Conoces esas prensas hidráulicas de la vida real? Esto es básicamente eso. No pongas la mano debajo.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Blaze Burner": {
+        "translation": "Generador de Blaze",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Remember to cover your rods before activating... or it's going to be chernobyl.": {
+        "translation": "Recuerda cubrir tus varillas antes de activar... o va a ser Chernóbil.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "In order to get brass you're going to need to heat a mechanical mixer that's mixing copper and zinc.\\n\\n the Empty Blaze burner can be filled by right-clicking it on either a blaze spawner or a blaze.": {
+        "translation": "Para obtener latón, necesitarás calentar una mezcladora mecánica que esté mezclando cobre y zinc.\\n\\n el quemador de blaze vacío se puede llenar haciendo clic derecho sobre un generador de blaze o un blaze.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Full Steam Ahead!": {
+        "translation": "¡A todo vapor!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The densest kinetic source. Although it also has the highest complexity, requiring a steady source of water and heat, and no this is not a steam locomotive like Thomas the Tank Engine.": {
+        "translation": "La fuente cinética más densa. Aunque también tiene la mayor complejidad, requiriendo una fuente constante de agua y calor, y no, esto no es una locomotora de vapor como Thomas el Motor de Tanque.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Simply a Potato Cannon.": {
+        "translation": "Simplemente un Cañón de Patatas.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "+50% Takeoff speed": {
+        "translation": "+50 % Velocidad de despegue",
+        "type": "ai",
+        "source": "manual"
+    },
+    "An item used to craft more advanced mechanical items.": {
+        "translation": "Un objeto utilizado para fabricar objetos mecánicos más avanzados.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Grapplin Whisk": {
+        "translation": "Obtener Bigote Grapplin",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain &6Liquid Vector Thruster": {
+        "translation": "Obtén &6Liquid Vector Thruster",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Hologram: display text or items in a hologram style": {
+        "translation": "Holograma: muestra texto o ítems en estilo holograma",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Hologram Source.": {
+        "translation": "Obtener Fuente de Holograma.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Fast-firing cannon running with gunpowder": {
+        "translation": "Cañón de disparo rápido que funciona con pólvora",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Burger": {
+        "translation": "Obtener Hamburguesa",
+        "type": "ai",
+        "source": "manual"
+    },
+    "After crafting your first Chicken Sandwich, you gain access to a wide range of custom sandwich recipes, allowing you to create your own unique burgers": {
+        "translation": "Tras crear tu primer Sándwich de Pollo, obtienes acceso a una amplia variedad de recetas de sándwiches personalizados, lo que te permite crear tus propias hamburguesas únicas.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft Exhaust": {
+        "translation": "Craftear Escape",
+        "type": "ai",
+        "source": "manual"
+    },
+    "This is a custom claim system that is seperate from OPAC, but integrated with its parties and allies system and claims amount.": {
+        "translation": "Este es un sistema de reclamos personalizado que es separado de OPAC, pero integrado con su sistema de grupos y aliados y la cantidad de reclamos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "You can claim Sub-levels (ships, aircrafts or anything) with the block using its GUI": {
+        "translation": "Puedes reclamar Sub-niveles (barcos, aeronaves o cualquier cosa) con el bloque usando su GUI",
+        "type": "ai",
+        "source": "manual"
+    },
+    "You will have to use Aero claims depending your Sub-level size": {
+        "translation": "Tendrás que usar reclamos de Aero dependiendo del tamaño de tu Sub-nivel",
+        "type": "ai",
+        "source": "manual"
+    },
+    "You can acquire Aero-claims by converting regular OPAC claims to the Aero-claims through commands:": {
+        "translation": "Puedes adquirir Aero-reclamaciones convirtiendo las reclamaciones OPAC regulares a Aero-reclamaciones mediante comandos:",
+        "type": "ai",
+        "source": "manual"
+    },
+    "/aeroclaims info - shows all your “sub-levels”, used and left “aero-claims” info": {
+        "translation": "/aeroclaims info - muestra toda tu información de “sub-niveles”, usados y restantes de “aero-claims”",
+        "type": "ai",
+        "source": "manual"
+    },
+    "/aeroclaims transfer to opac <amount> - transfers your “aero-claims” to “opac-claims”": {
+        "translation": "/aeroclaims transfer to opac <amount> - transfiere tus “aero-claims” a “opac-claims”",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Used for claiming sub-levels as they are seperate from regular claims": {
+        "translation": "Se utiliza para reclamar subniveles, ya que están separados de las reclamaciones regulares.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "/aeroclaims transfer to aero <amount> - transfers your “opac-claims” to “aero-claims”": {
+        "translation": "/aeroclaims transferir a aero <cantidad> - transfiere tus “opac-claims” a “aero-claims”",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Kinetic Battery": {
+        "translation": "Obtener Batería Cinética",
+        "type": "ai",
+        "source": "manual"
+    },
+    "With both of the totem parts you can now start the assembling procedure. Along with the totem parts you will also need to add the emerald eyes of the totem. This is done by placing all the needed parts into four mechanical crafters.": {
+        "translation": "Con ambas partes del tótem ya puedes comenzar el procedimiento de ensamblaje. Junto con las partes del tótem, también necesitarás añadir los ojos de esmeralda del tótem. Esto se hace colocando todas las partes necesarias en cuatro Máquinas de artesanía mecánicas.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Stores kinetic stress for later use. Retains charge in item form to enable long-distance energy transport. Battery capacity, RPM at discharge and stress impact values are all configurable": {
+        "translation": "Almacena tensión cinética para su uso posterior. Retiene la carga en forma de objeto para permitir el transporte de energía a larga distancia. La capacidad de la batería, las RPM durante la descarga y los valores de impacto de tensión son todos configurables.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Transfer stress capacity from one network to another while keeping the networks separate. Guarantees that the source network will not be affected when the destination network is overstressed": {
+        "translation": "Transfiere la capacidad de estrés de una red a otra manteniendo las redes separadas. Garantiza que la red de origen no se verá afectada cuando la red de destino esté sobrecargada.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Connect with a heat source into a boiler heater, spreads heat across all pipes evenly unless pumped.": {
+        "translation": "Conéctate con una fuente de calor en un calentador de caldera, distribuye el calor por todas las tuberías de manera uniforme a menos que se bombee.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Kinetic bridge": {
+        "translation": "Obtén el puente cinético",
+        "type": "ai",
+        "source": "manual"
+    },
+    "\"I am you, but stronger.\"": {
+        "translation": "Soy tú, pero más fuerte.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "An upgraded version of the Copper Diving Boots.": {
+        "translation": "Una versión mejorada de las Botas de Buceo de Cobre.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Don't get blown away": {
+        "translation": "No dejes que te lleve el viento",
+        "type": "ai",
+        "source": "manual"
+    },
+    "You know what a windmill is, right? This uses wind to spin around and generate SUs for use.": {
+        "translation": "Ya sabes lo que es un molino de viento, ¿verdad? Este usa el viento para girar y generar SUs para su uso.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Produce more than 1000 Train Tracks with the same Mechanical Press": {
+        "translation": "Produce más de 1000 Vías de Tren con la misma Máquina de Prensado Mecánico",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Track Factory": {
+        "translation": "Fábrica de Pistas",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Welcome to Create Additions": {
+        "translation": "Bienvenido a Create Additions",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A better fuel than basic coal and charcoal": {
+        "translation": "Un mejor combustible que el carbón básico y el carbón vegetal",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Fiery Coal and Fiery Charcoal": {
+        "translation": "Obtén Carbón Ígneo y Carbón Vegetal Ígneo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain pulse Generator": {
+        "translation": "Obtener Generador de pulso",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A flexible diode that can output precisely timed redstone pulses according to a configured sequence": {
+        "translation": "Un diodo flexible que puede emitir pulsos de redstone cronometrados con precisión según una secuencia configurada",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Just throw magma Block into Crushing wheel and Obtain Blazing rocks": {
+        "translation": "Solo lanza un Bloque de Magma en la Rueda de Trituración y obtén Rocas Ardientes.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Activate Crushing Wheel": {
+        "translation": "Activar Rueda Trituradora",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Deepfry Churros": {
+        "translation": "Churros Fritos",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Crash into another Train while driving backwards": {
+        "translation": "Choca contra otro Tren mientras conduces marcha atrás",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The final part of the process, is to deploy 5 experience blocks or spout 135mB of liquid experience to activate the assembled totem.": {
+        "translation": "La parte final del proceso es desplegar 5 bloques de experiencia o verter 135mB de experiencia líquida para activar el tótem ensamblado.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Blind Spot": {
+        "translation": "Punto Ciego",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Finally you can Craft it.": {
+        "translation": "¡Por fin puedes fabricarlo!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft Trident": {
+        "translation": "Craftear Tridente",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Nautilus Shell": {
+        "translation": "Obtener Caparazón de Nautilo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Chain Pulley": {
+        "translation": "Obtener Polea de Cadena",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Pattern schematics can be used to repeat schematic designs multiple times": {
+        "translation": "Los esquemas de patrones se pueden usar para repetir diseños de esquemas varias veces.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Nautilus shells can be obtained from the ocean or by bulk washing or channeling suspicious rocks.": {
+        "translation": "Las conchas de nautilo se pueden obtener del océano o lavando a granel o canalizando rocas sospechosas.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Some fluids can be infinity extracted from the world as long as the pool the hose pulley is extracting from contains 10000 or more source blocks.\\n\\nYou can search in REI for the fluids that apply using by typing \"$create:bottomless\"": {
+        "translation": "Algunos fluidos pueden extraerse infinitamente del mundo siempre que la piscina de la que la polea de manguera extrae contenga 10000 o más bloques de fuente.\\n\\nPuedes buscar en REI los fluidos que aplican escribiendo \"$create:bottomless\"",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Stores pressurized air for usage with a diving helmet. In other words, the oxygen needed to breathe underwater.": {
+        "translation": "Almacena aire presurizado para su uso con un casco de buceo. En otras palabras, el oxígeno necesario para respirar bajo el agua.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Deepfry a snack": {
+        "translation": "Fritura profunda de un aperitivo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A useful block for building contraptions.": {
+        "translation": "Un bloque útil para construir artilugios.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "There are 3 ways to get Nuggets of Experience: Crushing Wheels, mob farms, and Bottles of Experience": {
+        "translation": "Hay 3 formas de obtener Pepitas de Experiencia: Ruedas Trituradoras, granjas de criaturas y Botellas de Experiencia",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&2Obtain Nuggets of Experience.": {
+        "translation": "&2Obtén Pepitas de Experiencia.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A multi-block structure that lets you store large amounts of energy.": {
+        "translation": "Una estructura de bloques múltiples que te permite almacenar grandes cantidades de energía.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Rod of Constant Rotation": {
+        "translation": "Varilla de Rotación Constante",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Confectionery": {
+        "translation": "Repostería",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Use on a Diesel Engine make it faster. Create Diesel Generators.": {
+        "translation": "Úsalo en un Motor Diésel para hacerlo más rápido. Create Diesel Generators.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A Shaft is another basic but important machinery part that is required to make anything move with rotation. You can also extend the shaft to make it longer and affect more than one contraption that requires rotation.": {
+        "translation": "Un Eje es otra parte de maquinaria básica pero importante que se necesita para hacer que cualquier cosa se mueva con rotación. También puedes extender el eje para hacerlo más largo y afectar a más de una invención que requiera rotación.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Muscle-powered copter. Give it a good push and off it flies!": {
+        "translation": "Helicóptero impulsado por músculos. ¡Dale un buen empujón y saldrá volando!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Lets you create your own custom functional clock.": {
+        "translation": "Te permite crear tu propio reloj funcional personalizado.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Blocks that allow contraptions to harvest crops.": {
+        "translation": "Bloques que permiten que los mecanismos cosechen cultivos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A basic fuel for Furnace": {
+        "translation": "Un combustible básico para el Horno",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft Kindling Sticks": {
+        "translation": "Fabricar Palitos de Yesca",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Use for Creating Different Potions": {
+        "translation": "Úsese para crear diferentes pociones",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Awkward potion": {
+        "translation": "Obtener poción incómoda",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Lets you charge certain items.": {
+        "translation": "Te permite cargar ciertos objetos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "And Use the spout to Create Optical Device.": {
+        "translation": "Y usa el vertedor para Create Dispositivo Óptico.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Terminoloy:\\n\\nStress Units(SU) a number that describes how much stress something generates or requires to run.\\n\\n": {
+        "translation": "Terminoloy:\\n\\nUnidades de Estrés (SU), un número que describe cuánto estrés genera algo o requiere para funcionar.\\n\\n",
+        "type": "ai",
+        "source": "manual"
+    },
+    "I'm so stressed! I need to measure it!": {
+        "translation": "¡Estoy tan estresado! ¡Necesito medirlo!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain &6Tilt Adapter": {
+        "translation": "Obtén &6Adaptador de Inclinación",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft Tinted Glass": {
+        "translation": "Craftea Vidrio Teñido",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Redstone + Create = Complicated": {
+        "translation": "Redstone + Create = Complicado",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Okay, I may be exaggerating a little, but redstone also plays a vital role to Create that the blocks in here make redstone contraptions more compact but also a bit more complicated, have fun studying.": {
+        "translation": "Vale, quizás estoy exagerando un poco, pero la redstone también juega un papel vital para Create que los bloques de aquí hagan que las máquinas de redstone sean más compactas pero también un poco más complicadas, diviértete estudiando.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Better Blast Furnace": {
+        "translation": "Mejor Alto Horno",
+        "type": "ai",
+        "source": "manual"
+    },
+    "An upgrade to the andesite tunnel allowing more configurability in how to deal with items.": {
+        "translation": "Una mejora al túnel de andesita que permite más configurabilidad en cómo manejar los objetos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft a Foundry Basin and Foundry Top": {
+        "translation": "Fabrica una Cuenca de Fundición y una Parte Superior de Fundición",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A redstone component that only allows energy(E) to flow when it's receiving a redstone signal.": {
+        "translation": "Un componente de redstone que solo permite que la energía (E) fluya cuando recibe una señal de redstone.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Grinding it all down to dust.": {
+        "translation": "Moliéndolo todo hasta convertirlo en polvo.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Water makes the area below wet, making the world think it's raining there": {
+        "translation": "El agua moja el área de abajo, haciendo que el mundo piense que está lloviendo allí.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A simple machine with massive potential. Can place blocks but also use items on blocks/entities.": {
+        "translation": "Una máquina sencilla con un potencial enorme. Puede colocar bloques, pero también usar objetos en bloques/entidades.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Activate the Sprinkler by using a Water bucket or connecting a fluid tank": {
+        "translation": "Activa el Aspersor usando un Cubo de Agua o conectando un tanque de fluido",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Are they just gears, but named differently?": {
+        "translation": "¿Son solo engranajes, pero con nombres diferentes?",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Cogwheels are used to either increase rotational speed or to extend contraptions depending on the way they're facing. Play around with the sizes of the cogwheels and see what you can make out of them.": {
+        "translation": "Los engranajes se utilizan para aumentar la velocidad rotacional o para extender artilugios, dependiendo de la dirección hacia la que miren. Experimenta con los tamaños de los engranajes y mira qué puedes crear con ellos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft Slicer": {
+        "translation": "Fabricar Cortadora",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The Slicer is is like Automatic Cutting for use for cutting ingredients": {
+        "translation": "El Rebanador es como un Corte Automático que se usa para cortar ingredientes.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "To make peat": {
+        "translation": "Para hacer turba",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Get any non-dirty minerals dusts": {
+        "translation": "Obtén polvos de cualquier mineral no sucio",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Effective Factory!": {
+        "translation": "¡Fábrica Efectiva!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Forecast a Train's arrival on your Display Board with the help of your Display Links": {
+        "translation": "Predice la llegada de un Tren en tu Tablero de Visualización con la ayuda de tus Enlaces de Visualización",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Forecasting a Train's arrival": {
+        "translation": "Pronosticando la llegada de un Tren",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Don't wear this, it's not for clothes.": {
+        "translation": "No te pongas esto, no es para ropa.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Mechanical belts are useful in moving items either in a straight line and diagonally. Make sure to stick one shaft on each end to connect so it will work.": {
+        "translation": "Las cintas mecánicas son útiles para mover objetos en línea recta y en diagonal. Asegúrate de colocar un eje en cada extremo para conectarlas y que funcionen.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain a Foundry Mixer": {
+        "translation": "Obtén una Mezcladora de Fundición",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Since most blocks in Create don't allow for manual extraction and insertion of liquids these pipes are rather useful.\\n\\nCan also be used to create infinite water by extracting from a source-block that has 2 source-blocks adjacent to it.": {
+        "translation": "Ya que la mayoría de los bloques en Create no permiten la extracción e inserción manual de líquidos, estas tuberías son bastante útiles.\\n\\nTambién se pueden usar para crear agua infinita extrayendo de un bloque de fuente que tenga 2 bloques de fuente adyacentes a él.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "You Spin me Round!": {
+        "translation": "¡Me haces girar!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Laser Blocks": {
+        "translation": "Bloques Láser",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A helmet that lets you use air from an equipped tank to breathe underwater. Don't even think of seeing this work under lava.": {
+        "translation": "Un casco que te permite usar aire de un tanque equipado para respirar bajo el agua. Ni siquiera pienses en ver esto funcionar bajo lava.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Slow and fuel hungry but carries an entire storage": {
+        "translation": "Lento y hambriento de combustible, pero lleva un almacenamiento completo.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Gather Materals": {
+        "translation": "Recolecta Materiales",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain &6Solid and Liquid Burners": {
+        "translation": "Obtén &6Quemadores Sólidos y Líquidos",
+        "type": "ai",
+        "source": "manual"
+    },
+    "For Clutches and Brakes and more": {
+        "translation": "Para Embragues y Frenos y más",
+        "type": "ai",
+        "source": "manual"
+    },
+    "\"A fancier rope pulley\"\\n\\nAllows for the creation of elevators.": {
+        "translation": "\"Una polea de cuerda más elegante\"\\n\\nPermite la creación de ascensores.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Allows for movement of structures linearly using rotational force.": {
+        "translation": "Permite el movimiento de estructuras linealmente usando fuerza rotacional.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Mechanical Piston": {
+        "translation": "Pistón Mecánico",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain a Tungsten Ingot from Wolframite Ore": {
+        "translation": "Obtén un Lingote de Tungsteno del Mineral de Wolframita",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A multi-block item storage that can't be accessed manually. Not even a door can open it.": {
+        "translation": "Un almacenamiento de ítems multi-bloque que no puede ser accedido manualmente. Ni siquiera una puerta puede abrirlo.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The Tungsten Age": {
+        "translation": "La Edad del Tungsteno",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Fast-track poultry product output from chickens, various chicken types, and ducks": {
+        "translation": "Acelera la producción de productos avícolas de gallinas, varios tipos de gallinas y patos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Absorbs experience, also works on contraption": {
+        "translation": "Absorbe experiencia, también funciona en artilugios",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&2Craft Experience Lantern.": {
+        "translation": "&2Craftea Linterna de Experiencia.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Optical Source: emit different types of beams based on the rotational force applied": {
+        "translation": "Fuente Óptica: emite diferentes tipos de haces según la fuerza rotacional aplicada",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Enchantment Industry": {
+        "translation": "Industria de Encantamientos",
+        "type": "ai",
+        "source": "manual"
+    },
+    "+3% Stabilizing -100% Wind effect": {
+        "translation": "+3% Estabilizador -100% Efecto de viento",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Welcome to Create Enchantment Industry, a mod offering more tools and methods to handle experience and enchantment in Create.": {
+        "translation": "Bienvenido a Create Enchantment Industry, un mod que ofrece más herramientas y métodos para manejar la experiencia y el encantamiento en Create.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "+40% Engine power +30% Fuel requirement": {
+        "translation": "+40% Potencia del motor +30% Requerimiento de combustible",
+        "type": "ai",
+        "source": "manual"
+    },
+    "To mix Materials you got it to make coal Briquettes  or charcoal Briquettes ": {
+        "translation": "Para mezclar materiales, tienes que hacer briquetas de carbón o briquetas de carbón vegetal.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Basic and easy to find": {
+        "translation": "Básico y fácil de encontrar",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Activate Mechanical Mixer": {
+        "translation": "Activar Mezcladora Mecánica",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Coal": {
+        "translation": "Obtener Carbón",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Create Aquatic Ambitions is a Create Mod Addon that introduces new machines, processes, and production lines inspired by the ocean. Harness the power of the conduit to transform byproducts into valuable resources and building blocks — and make more materials renewable in the process!": {
+        "translation": "Create Aquatic Ambitions es un Addon de mods de Create que introduce nuevas máquinas, procesos y líneas de producción inspiradas en el océano. ¡Aprovecha el poder del conducto para transformar subproductos en recursos valiosos y bloques de construcción — y haz que más materiales sean renovables en el proceso!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Optical Sensor: emit redstone signal based on the incident beam properties": {
+        "translation": "Sensor Óptico: emitir señal de redstone según las propiedades del haz incidente",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Optical Sensor": {
+        "translation": "Obtener Sensor Óptico",
+        "type": "ai",
+        "source": "manual"
+    },
+    "An encased chain drive with an additional cogwheel for connectivity": {
+        "translation": "Una transmisión de cadena encapsulada con un engranaje adicional para la conectividad",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The thing your train goes on.": {
+        "translation": "La cosa sobre la que va tu tren.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Train Tracks": {
+        "translation": "Vías de Tren",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Diesel Generators are a compact way of generating kinetic energy.": {
+        "translation": "Los Generadores Diésel son una forma compacta de generar energía cinética.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft Concrete Formwork": {
+        "translation": "Fabricar Encofrado de Concreto",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Rope Pulley": {
+        "translation": "Polea de Cuerda",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Mirror: reflect the beam perpendicularly": {
+        "translation": "Espejo: refleja el haz perpendicularmente",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Mirrors": {
+        "translation": "Obtener Espejos",
+        "type": "ai",
+        "source": "manual"
+    },
+    "When placed in front of the Encased Fan this allows it to blast items.": {
+        "translation": "Cuando se coloca delante del Ventilador Encajado, esto le permite lanzar objetos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Deepfry ice?": {
+        "translation": "¿Freír profundamente hielo?",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Prepare Stamppot by Pressing Carrots, Potatoes and Onions in a Basin": {
+        "translation": "Prepara Stamppot presionando Zanahorias, Patatas y Cebollas en una Palangana.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain &6Thruster": {
+        "translation": "Obtener &6Propulsor",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A Create mod add-on adding quality-of-life blocks that you wish existed in Create": {
+        "translation": "Un complemento de mod Create que añade bloques de calidad de vida que deseabas que existieran en Create",
+        "type": "ai",
+        "source": "manual"
+    },
+    "connect both of these directly to a rod. (reminder that the inserter works ONLY in a straight line)": {
+        "translation": "conecta ambos directamente a una varilla. (recuerda que el insertador funciona SOLO en línea recta)",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Can be used as A fuel": {
+        "translation": "Puede usarse como combustible",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Inserting fuel and pumping out heat": {
+        "translation": "Insertando combustible y extrayendo calor",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Coal Coke": {
+        "translation": "Obtener Coque de Carbón",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft a Casting Basin or Casting Table": {
+        "translation": "Fabrica una Cuenca de Fundición o una Mesa de Fundición",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Don't Try To Blow on It!": {
+        "translation": "¡No intentes soplar sobre eso!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Gearshift": {
+        "translation": "Obtener Engranaje de Cambio",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A gearshift that changes rotation direction unless powered": {
+        "translation": "Una palanca de cambios que invierte la dirección de rotación a menos que reciba energía.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "if you don’t have a Conduit Cage and are only using Bulk Washing.": {
+        "translation": "si no tienes una Jaula de Conducto y solo estás usando Lavado en Masa.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Activate the Encased Fan with water": {
+        "translation": "Activa el Ventilador Encasquillado con agua",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Computational Supremacy": {
+        "translation": "Supremacía Computacional",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Place down a Sequenced Pulse Generator": {
+        "translation": "Coloca un Generador de Pulsos Secuenciado",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Turn basic coal or charcoal into fiery ": {
+        "translation": "Convierte carbón básico o carbón vegetal en llamas ardientes",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Activate Spout with lava in it": {
+        "translation": "Activa el Spout con lava dentro",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Allows you to control the train.": {
+        "translation": "Te permite controlar el tren.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A block that can monitor the fill levels of inventories and tanks.": {
+        "translation": "Un bloque que puede monitorear los niveles de llenado de inventarios y tanques.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Used to control the speed of Minecarts or Minecart Contraptions": {
+        "translation": "Se usa para controlar la velocidad de Vagonetas o Mecanismos de Vagoneta",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The main block used for bulk fluid storage.": {
+        "translation": "El bloque principal utilizado para el almacenamiento de fluidos a granel.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain &6Wings": {
+        "translation": "Obtén &6Alas",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Can be used on building blocks or turn them into Briquettes ": {
+        "translation": "Se puede usar en bloques de construcción o convertirlos en Briquetas",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft Peats": {
+        "translation": "Fabrica Peats",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Great , fuel it": {
+        "translation": "Genial, ponle combustible",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain InActive Blaze Core": {
+        "translation": "Obtén Núcleo de Blaze Inactivo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Allows you to stop rotational force coming through when powered by a redstone signal.": {
+        "translation": "Permite detener la fuerza rotacional cuando recibe una señal de redstone.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "For Kinetic battery and Kinetic bridge": {
+        "translation": "Para batería cinética y puente cinético",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Molten Steel": {
+        "translation": "Obtén Acero Fundido",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Brass casing": {
+        "translation": "Obtén el Carcasa de Latón",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain &6Ion Thruster": {
+        "translation": "Obtén &6Propulsor de Iones",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Linked Transmitter": {
+        "translation": "Obtener Transmisor Vinculado",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A compact Redstone Link that adds wireless redstone to buttons, levers, and linked levers without using extra block space": {
+        "translation": "Un Enlace de Redstone compacto que añade redstone inalámbrico a botones, palancas y palancas vinculadas sin usar espacio de bloque adicional.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Spiky Shell": {
+        "translation": "Obtener Caparazón Espinoso",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Modular Diesel Generators function like normal Diesel generators. They can be stacked. They will generate stress proportionally to how much engines you stack.": {
+        "translation": "Los Generadores Diésel Modulares funcionan como los generadores Diésel normales. Se pueden apilar. Generarán tensión proporcionalmente a cuántos motores apiles.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Tunnels are used to manage the flow of items on belts.": {
+        "translation": "Los túneles se utilizan para gestionar el flujo de objetos en las cintas.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Expert Driver": {
+        "translation": "Conductor Experto",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Run a red Train Signal": {
+        "translation": "Activa una Señal de Tren Roja",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Conduit Cage": {
+        "translation": "Obtener Jaula de Conducto",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A redstone component that toggles its state with every redstone pulse.": {
+        "translation": "Un componente de redstone que cambia su estado con cada pulso de redstone.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Gather Materials to Craft Conduit Cage": {
+        "translation": "Recolecta Materiales para Fabricar la Jaula de Conducto",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Blow a Shear Pin": {
+        "translation": "Romper un pasador de cizalla",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Snap!": {
+        "translation": "¡Click!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "You will need 12 blocks surronding a coil in order to maximize its energy generation": {
+        "translation": "Necesitarás 12 bloques rodeando una bobina para maximizar su generación de energía.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Strange rock?": {
+        "translation": "¿Piedra extraña?",
+        "type": "ai",
+        "source": "manual"
+    },
+    "its offering more tools and methods to handle experiences and enchantments": {
+        "translation": "ofrece más herramientas y métodos para manejar experiencias y encantamientos",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&6Welcome to Enchantment Industry.": {
+        "translation": "&6Bienvenido a la Industria de Encantamientos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "+3% Stabilizing -100% Wind affect Mechanical Dashboard": {
+        "translation": "+3% Estabilización -100% Viento afecta Panel Mecánico",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Allows you to setup a sequence of rotations that are executed upon the block receiving a redstone signal.": {
+        "translation": "Permite configurar una secuencia de rotaciones que se ejecutan al recibir la máquina una señal de redstone.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "+100% Durability": {
+        "translation": "+100% Durabilidad",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Many different resources in the modpack can be automated, this quest tab is for providing guidance on some of the possibles of the modpack; happy automating!!": {
+        "translation": "Muchos de los diferentes recursos del modpack pueden automatizarse; esta pestaña de misiones sirve para guiarte en algunas de las posibilidades del modpack. ¡Feliz automatización!!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Molten Slag": {
+        "translation": "Obtener Escoria Fundida",
+        "type": "ai",
+        "source": "manual"
+    },
+    "RedStone Equipments": {
+        "translation": "Equipos de RedStone",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Optical Receptor": {
+        "translation": "Obtener Receptor Óptico",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Mechanical Belt Grinder": {
+        "translation": "Obtener Rectificadora de Cinta Mecánica",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Optical Receptor: transform the received beam into rotational force based on its properties": {
+        "translation": "Receptor Óptico: transforma el haz recibido en fuerza rotacional según sus propiedades",
+        "type": "ai",
+        "source": "manual"
+    },
+    "What a Cheese Grater!": {
+        "translation": "¡Qué Rallador de Queso!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Relays rotation in two directions independently.": {
+        "translation": "Transmite la rotación en dos direcciones de forma independiente.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Cement": {
+        "translation": "Obtener Cemento",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Cross Connector": {
+        "translation": "Obtener Conector Cruzado",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Spout, Press \\& Molten Echo": {
+        "translation": "Canal, Prensa y Eco Fundido",
+        "type": "ai",
+        "source": "manual"
+    },
+    "When Used, Redeems Experience points contained within.": {
+        "translation": "Al usarlo, canjea los puntos de experiencia contenidos en él.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Ride a Train through a portal": {
+        "translation": "Monta en un Tren a través de un portal",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Dimensional Commuter": {
+        "translation": "Conmutador Dimensional",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Can be Find in Ocean.": {
+        "translation": "Se puede encontrar en el Océano.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Gather Materials ": {
+        "translation": "Recolecta Materiales",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain molten Echo bucket": {
+        "translation": "Obtén un cubo de Eco fundido",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Eggs From Chicken Roost": {
+        "translation": "Obtén Huevos del Gallinero",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Auger Blocks": {
+        "translation": "Bloques de Barrena",
+        "type": "ai",
+        "source": "manual"
+    },
+    "This turns the Blaze into a Super Blaze. Just place 2 rods and 2 Blocks of Experience so it won’t explode": {
+        "translation": "Esto convierte al Blaze en un Super Blaze. Solo coloca 2 varitas y 2 Bloques de Experiencia para que no explote.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Same as Blaze Core Fuel but its Blue": {
+        "translation": "Lo mismo que el Combustible de Núcleo de Blaze, pero es Azul",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain SuperHeated Blaze Core": {
+        "translation": "Obtén Núcleo de Blaze Sobrecalentado",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A motor that converts energy(E) into kinetic energy(SU) at any rpm.": {
+        "translation": "Un motor que convierte energía (E) en energía cinética (SU) a cualquier rpm.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Huge Diesel Engines connect to Shafts, they will start generating Kinetic Energy, once you give them some fuel.": {
+        "translation": "Grandes Motores Diésel se conectan a los Ejes, comenzarán a generar Energía Cinética, una vez que les des algo de combustible.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Trigger an Overstress Clutch": {
+        "translation": "Activar un Embrague de Sobretensión",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Circuit Breaker": {
+        "translation": "Disyuntor",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A similar process follows the creation of the totem's body. You simply saw and press a tumbaga alloy, and instead of potions, you deploy a ghast tear to give the totem regenerative powers and then deploy a tumbaga alloy to seal it up.": {
+        "translation": "Un proceso similar sigue la creación del cuerpo del tótem. Simplemente aserras y presionas una aleación de tumbaga, y en lugar de pociones, despliegas una lágrima de ghast para otorgar al tótem poderes regenerativos y luego despliegas una aleación de tumbaga para sellarlo.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A redstone component that extends a pulse to a configurable amount.": {
+        "translation": "Un componente de redstone que extiende un pulso a una cantidad configurable.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Bake your first Kruidnoten": {
+        "translation": "Hornea tus primeros Kruidnoten",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A block that can look for specific items in the world or in inventories.": {
+        "translation": "Un bloque que puede buscar objetos específicos en el mundo o en inventarios.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Used to connect electrical connectors.": {
+        "translation": "Se usa para conectar conectores eléctricos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "I'm watching you.": {
+        "translation": "Te estoy observando.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Better than coal": {
+        "translation": "Mejor que el carbón",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Used for filling items with fluids and crafting certain items using fluids.": {
+        "translation": "Se utiliza para llenar objetos con fluidos y fabricar ciertos objetos usando fluidos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Use on a Diesel Engine to silence it. Create Diesel Generators.": {
+        "translation": "Úsalo en un Motor Diésel para silenciarlo. Create Diesel Generators.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Can be used as a Fuel": {
+        "translation": "Puede usarse como Combustible",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Coal Briquettes and Charcoal Briquettes ": {
+        "translation": "Obten Briquetas de Carbón y Briquetas de Carbón Vegetal",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Welcome to Deep Dark": {
+        "translation": "Bienvenido a Deep Dark",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Same As a Normal Optical Source": {
+        "translation": "Igual que una Fuente Óptica Normal",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Deep Dark is an addon for Create that introduces new end-game content inspired by the Deep Dark biome, featuring rare items, resources, and powerful gear to craft using Create’s mechanics!": {
+        "translation": "Deep Dark es un addon para Create que introduce nuevo contenido de final del juego inspirado en el bioma Deep Dark, con objetos raros, recursos y poderosos engranajes para fabricar usando las mecánicas de Create!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "As the name implies this item allows you to glue blocks together. Perticularly useful when making contraptions. Good thing we don't have fingers or the glue will stick to our hands... wait.": {
+        "translation": "Como su nombre lo indica, este objeto te permite pegar bloques. Particularmente útil al hacer artilugios. Menos mal que no tenemos dedos o el pegamento se nos pegaría a las manos... espera.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft Sticks Bundle": {
+        "translation": "Fabricar Paquete de Palos",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Limesand": {
+        "translation": "Obtener Tierra de Cal",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Lets you see the current stress and stress capacity of a kinetic network, not the stress of someone else.": {
+        "translation": "Te permite ver el estrés y la capacidad de estrés actuales de una red cinética, no el estrés de otra persona.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Lets you place down a mirror that assists you in building symmetrical things.": {
+        "translation": "Te permite colocar un espejo que te ayuda a construir cosas simétricas.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Allows for contraptions that traverse rails in the same way minecarts do.": {
+        "translation": "Permite crear mecanismos que recorren rieles de la misma manera que lo hacen los vagonetas.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "HyperTube": {
+        "translation": "HiperTubo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Encased Mirror: Controls where the beam heading.": {
+        "translation": "Espejo Encapsulado: Controla hacia dónde se dirige el rayo.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Mixing Thorium, Stone and Clay in water will generate thorium": {
+        "translation": "Mezclar Torio, Piedra y Arcilla en agua generará torio",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Generating thorium": {
+        "translation": "Generando torio",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain &6Redstone converter": {
+        "translation": "Obtén el convertidor de &6Redstone",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A flying fortress, slow but heavily armed": {
+        "translation": "Una fortaleza voladora, lenta pero fuertemente armada",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Better solar": {
+        "translation": "Mejor solar",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A clutch that is only coupled if the input RPM is faster than a configurable threshold": {
+        "translation": "Un embrague que solo se acopla si las RPM de entrada son más rápidas que un umbral configurable",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Centrifugal Clutch": {
+        "translation": "Obtener el Embrague Centrífugo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A kinetic source that uses the flow of water as its source of energy. Will generate the same amount of SU at the same RPM as long as one block of flowing water is adjacent.\\n\\nYou can also swich the look of your water wheel by right-clicking it with pretty much any wood plank (including ones from other mods).": {
+        "translation": "Una fuente cinética que utiliza el flujo del agua como fuente de energía. Generará la misma cantidad de SU a las mismas RPM siempre que un bloque de agua en movimiento esté adyacente.\\n\\nTambién puedes cambiar la apariencia de tu rueda de agua haciendo clic derecho con casi cualquier tabla de madera (incluidas las de otros mods).",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain &6Stirling Engine": {
+        "translation": "Obtén &6Motor Stirling",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Allows for contraptions that move across gantries.": {
+        "translation": "Permite crear artilugios que se mueven a lo largo de los pórticos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Copper Coil": {
+        "translation": "Obtener Bobina de Cobre",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Uses for Display and Beam Reader": {
+        "translation": "Usos para el Lector de Pantalla y Haz",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Slow but easy to maneuver. Immersive Aircraft": {
+        "translation": "Lento pero fácil de maniobrar. Immersive Aircraft",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The basis of most things fluid related in Create.\\n\\nCan also be used to encase fluid pipes.": {
+        "translation": "La base de la mayoría de las cosas relacionadas con fluidos en Create.\\n\\nTambién se puede usar para recubrir tuberías de fluidos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Assemble a Control Chip": {
+        "translation": "Ensambla un Chip de Control",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Crates": {
+        "translation": "Cajas",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Precision Fabrication": {
+        "translation": "Fabricación de Precisión",
+        "type": "ai",
+        "source": "manual"
+    },
+    "AHAHAH Pollution, who cares": {
+        "translation": "AHAHAH La contaminación, a quién le importa",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Used for interacting with fluid tank directly": {
+        "translation": "Se utiliza para interactuar directamente con el tanque de fluido.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The basis for more advanced blocks.": {
+        "translation": "La base para bloques más avanzados.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&2Craft Expericence Hatch.": {
+        "translation": "&2Fabricar Compuerta de Experiencia.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Perfect for building, and thats about it": {
+        "translation": "Perfecto para construir, y eso es todo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "In order to make a train you're going to need at least:\\n- 1 Train Casing\\n- 1 Train Station\\n- Enough train tracks to make your railroad.\\n\\nIn order to see how you assemble a train \"ponder\" the train station.": {
+        "translation": "Para hacer un tren, necesitarás al menos:\\n- 1 Carcasa de Tren\\n- 1 Estación de Tren\\n- Suficientes vías de tren para construir tu ferrocarril.\\n\\nPara ver cómo ensamblas un tren, \"reflexiona\" sobre la estación de tren.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "FE in create?": {
+        "translation": "FE en create?",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Blocks that both allow for automatic crafting of normal recipes and the crafting of recipes that are bigger than a normal crafting table would allow for.": {
+        "translation": "Bloques que permiten tanto el crafter automático de recetas normales como el crafter de recetas más grandes de lo que permitiría una mesa de crafteo normal.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Activate the Sprinkler by using a Potions or Connecting Fluid tank": {
+        "translation": "Activa el Aspersor usando una Poción o conectando un tanque de Fluido",
+        "type": "ai",
+        "source": "manual"
+    },
+    "You heard it right lads, FE in create. You'll probably need more than your normal waterwheels to power this thing.": {
+        "translation": "Habéis oído bien, chicos, FE en Create. Probablemente necesitaréis algo más que vuestras ruedas de agua normales para alimentar esta máquina.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft Fishing Net": {
+        "translation": "Fabricar Red de Pesca",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The Fishing Net is a contraption component designed to catch small aquatic animals while also allowing fishing at the same time": {
+        "translation": "La Red de Pesca es un componente de artilugio diseñado para atrapar pequeños animales acuáticos mientras también permite pescar al mismo tiempo.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&bObtain Super Experience Block.": {
+        "translation": "&bObtén el Bloque de Experiencia Súper.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Congratulations! You have obtained Super Experience, which can be used on the Blaze Forger or Enchanter to create more powerful enchants": {
+        "translation": "¡Felicidades! Has obtenido Super Experiencia, que puede usarse en el Forjador de Blaze o el Encantador para crear encantamientos más poderosos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Generates twice as much SU as the regular water wheel but at a slower RPM. Just know that this thing is bigger and bulkier so have a lot of space for it.": {
+        "translation": "Genera el doble de SU que la rueda de agua normal, pero a menores RPM. Solo ten en cuenta que esto es más grande y voluminoso, así que necesitarás mucho espacio para ello.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Use Mechanical Mixer as a Automatic Cooking": {
+        "translation": "Usa la Mezcladora Mecánica como Cocina Automática",
+        "type": "ai",
+        "source": "manual"
+    },
+    "All recipes from Farmer's delight requiring the Cooking Pot are added as heated mixing recipes": {
+        "translation": "Todas las recetas de Farmer's Delight que requieren la Olla de Cocina se añaden como recetas de mezclado calentadas",
+        "type": "ai",
+        "source": "manual"
+    },
+    "90% Create mods uses Andesite Alloy.": {
+        "translation": "El 90% de los mods de Create usa Aleación de Andesita.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Andesite Alloy": {
+        "translation": "Obtener Aleación de Andesita",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Take some blaze cakes, its going to heat up!": {
+        "translation": "¡Toma algunas tortas de blaze, ¡se va a calentar!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Metallury Expert": {
+        "translation": "Experto en Metalurgia",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Set up Mechanical Mixer With blaze burner": {
+        "translation": "Configura la Mezcladora Mecánica con el quemador de blaze",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Activate Deployer": {
+        "translation": "Activar Desplegador",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Put Inactive Blaze core into Depot and active Deployer with Flint and Steel to fuel Blaze core": {
+        "translation": "Coloca Núcleo de Blaze Inactivo en el Depósito y activa el Desplegador con Pedernal y Acero para alimentar el Núcleo de Blaze.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Set up a Blaze Burner, Mechanical Mixer, and Basin to create potions. Place a Mechanical Pipe near the Basin to drain the potions into a Fluid Tank.": {
+        "translation": "Configura un Quemador de Blaze, una Mezcladora Mecánica y una Palangana para crear pociones. Coloca una Tubería Mecánica cerca de la Palangana para drenar las pociones hacia un Tanque de Fluidos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Catch a Herring": {
+        "translation": "Captura un Arenque",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Materials": {
+        "translation": "Materiales",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Materials for Hypertube": {
+        "translation": "Materiales para el Hipertubo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The tutorial is now &afinished&r! ": {
+        "translation": "¡El tutorial ahora está &aterminado&r!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "To view the rest of the quests, put your cursor to the left of the screen and expand the &6Quest Groups&r. ": {
+        "translation": "Para ver el resto de las misiones, coloca el cursor a la izquierda de la pantalla y expande los &6Grupos de Misiones&r.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Feel free to join our &bDiscord &rfor any other questions you may have: https://lunapixel.studio/discord": {
+        "translation": "Siéntete libre de unirte a nuestro &bDiscord &rpara cualquier otra pregunta que tengas: https://lunapixel.studio/discord",
+        "type": "ai",
+        "source": "manual"
+    },
+    "This tutorial will guide you through some basic features. Don't worry, it won't take &otoo &rlong!": {
+        "translation": "Este tutorial te guiará a través de algunas funciones básicas. ¡No te preocupes, no tomará &omucho &rtiempo!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "To start the tutorial, click on this quest and read the description.": {
+        "translation": "Para comenzar el tutorial, haz clic en esta misión y lee la descripción.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "To start, click the checkmark under the word \"&9Tasks&r\" and then claim the &6Quest Reward&r. New quests will start to appear!": {
+        "translation": "Para empezar, haz clic en la marca de verificación debajo de la palabra \"&9Tareas&r\" y luego reclama la &6Recompensa de Misión&r. ¡Empezarán a aparecer nuevas misiones!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "If new quests do not start appearing, try rejoining your world. Do not eat the bread until the tutorial is finished.": {
+        "translation": "Si no empiezan a aparecer nuevas misiones, intenta volver a unirte a tu mundo. No comas el pan hasta que termine el tutorial.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&eWelcome to All of Create!": {
+        "translation": "&e¡Bienvenido a All of Create!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Assemble a train": {
+        "translation": "Ensamblar un tren",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Lets you display real-time information to a connected display board or nixie tube. Don't share personal info.": {
+        "translation": "Te permite mostrar información en tiempo real en un tablero de visualización o tubo nixie conectado. No compartas información personal.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft a Light Bulb": {
+        "translation": "Fabricar una Bombilla",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Copy your written book, enchanted book, name tag and train schedule.": {
+        "translation": "Copia tu libro escrito, libro encantado, etiqueta de nombre y horario de tren.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Essential for any person working with Create. Allows you to see more information about blocks like stress impact.": {
+        "translation": "Esencial para cualquier persona que trabaje con Create. Permite ver más información sobre bloques como el impacto de tensión.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Edison would be proud!": {
+        "translation": "¡Edison estaría orgulloso!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A gearbox with all 4 sides spinning in the same direction": {
+        "translation": "Una caja de engranajes con los 4 lados girando en la misma dirección",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Parallel Gearbox": {
+        "translation": "Obtener Caja de Engranajes Paralela",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Can be used to place or extract large bodies of liquid.": {
+        "translation": "Puede usarse para colocar o extraer grandes volúmenes de líquido.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Echo Ingot": {
+        "translation": "Obtener Lingote de Eco",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain any Graphite Molds": {
+        "translation": "Obtén cualquier Molde de Grafito",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Graphite Molds": {
+        "translation": "Moldes de Grafito",
+        "type": "ai",
+        "source": "manual"
+    },
+    "+3% Stabilizing -100% Wind effect Electronic dashboard": {
+        "translation": "+3% Estabilizador -100% Efecto de viento Panel electrónico",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Platinum Ingot": {
+        "translation": "Obtener Lingote de Platino",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Blocks that allow contraptions to create farmland or launch entities.": {
+        "translation": "Bloques que permiten a los artilugios crear tierra de cultivo o lanzar entidades.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Beam Focuser: new type of recipe based on beam characteristics": {
+        "translation": "Enfocador de Haz: nuevo tipo de receta basado en las características del haz",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Allows for fine tuning of rpm, meaning you can modify how fast or slow it can be.": {
+        "translation": "Permite un ajuste fino de las rpm, lo que significa que puedes modificar qué tan rápido o lento puede ser.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Press &c\"Z\"&r To see How to Use It": {
+        "translation": "Presiona &c\"Z\"&r Para ver Cómo Usarlo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain &6Platinum Fluid Tank": {
+        "translation": "Obtén &6Tanque de Fluido de Platino",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Find Petrol": {
+        "translation": "Encontrar Petróleo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "If given redstone power, it will pack items from the inventory connected into a package.": {
+        "translation": "Si recibe energía de redstone, empaquetará los artículos del inventario conectado en un paquete.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Beam Reader: display the properties of the incident beam": {
+        "translation": "Lector de Haz: muestra las propiedades del haz incidente",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Made by mixing Gold and Copper ingots with a blaze burner": {
+        "translation": "Fabricado mezclando lingotes de Oro y Cobre con un quemador de blaze.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Overstress clutch": {
+        "translation": "Obtén el embrague de sobreesfuerzo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A clutch that uncouples after a set delay when the network is overstressed. Can be reset with a wrench": {
+        "translation": "Un embrague que se desacopla tras un retraso establecido cuando la red está sobrecargada. Puede reiniciarse con una llave inglesa",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A bulkier version of the Spyglass": {
+        "translation": "Una versión más voluminosa del Catalejo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Copy your written book, enchanted book, name tag, train schedule and more": {
+        "translation": "Copia tu libro escrito, libro encantado, etiqueta de nombre, horario de tren y más",
+        "type": "ai",
+        "source": "manual"
+    },
+    "&6Craft Printer.": {
+        "translation": "&6Impresora de Fabricación.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Allows contraptions to transfer fluids to blocks.": {
+        "translation": "Permite que los artilugios transfieran fluidos a los bloques.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "This machine simplifies channeling setups.": {
+        "translation": "Esta máquina simplifica las configuraciones de canalización.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Ever wanted to pipe liquids into your blaze burners? Just hand them a straw and they'll slurp it straight from the pipe.\\n\\nYou can press 'U' on the straw to see what liquids it accepts as well as burn times.": {
+        "translation": "¿Siempre quisiste canalizar líquidos a tus quemadores de blaze? Solo dales una pajita y la beberán directamente de la tubería.\\n\\nPuedes presionar 'U' en la pajita para ver qué líquidos acepta, así como los tiempos de combustión.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Activate the Encased Fan with a Conduit Cage": {
+        "translation": "Activa el Ventilador Encajado con una Jaula de Conductos",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Materials for Flang Cogwheels and Transmission Chain": {
+        "translation": "Materiales para los Engranajes de Brida y la Cadena de Transmisión",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Energy transporting": {
+        "translation": "Transporte de energía",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Put one on recieving end and input then connect with a wire": {
+        "translation": "Coloca uno en el extremo receptor e ingresa, luego conéctalo con un cable.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Welcome to Create: Propulsion": {
+        "translation": "Bienvenido a Create: Propulsión",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A block that allows input and output of inventories 1 item at a time.\\n\\nOne thing not mentioned by the ponder is that the funnel can drop items on the ground when placed on an inventory and will only keep 1 item on the ground if it's close enough to the block the item lands on.": {
+        "translation": "Un bloque que permite la entrada y salida de inventarios de 1 ítem a la vez.\\n\\nUna cosa que no menciona el ponder es que el embudo puede soltar ítems al suelo cuando se coloca sobre un inventario y solo mantendrá 1 ítem en el suelo si está lo suficientemente cerca del bloque sobre el que cae el ítem.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Allows for multiple paralell rotational outputs.": {
+        "translation": "Permite múltiples salidas rotacionales en paralelo.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Assemble a Steam Whistle to your Train and activate it while driving": {
+        "translation": "Ensambla un Silbato de Vapor a tu Tren y actívalo mientras conduces",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Field Trip": {
+        "translation": "Excursión de Campo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Leave a Train Seat over 5000 blocks away from where you started travelling": {
+        "translation": "Deja un Asiento de Tren a más de 5000 bloques de distancia de donde empezaste a viajar.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Beam Splitter: split the beam in two and polarize the resultant beams perpendicularly": {
+        "translation": "Divisor de Haz: divide el haz en dos y polariza los haces resultantes perpendicularmente",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Choo Choo!": {
+        "translation": "¡Chucu chucú!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A more advanced funnel that allows for filtering and higher stack sizes.": {
+        "translation": "Un embudo más avanzado que permite filtrar y tamaños de pila más altos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Place down a Brass Gearbox": {
+        "translation": "Coloca una Caja de Engranajes de Latón",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The Basket and Cutting Board can be supported by the Mechanical Arm and Mechanical saw to manage numerous tasks, including supplying ingredients and cooking": {
+        "translation": "La Cesta y la Tabla de Cortar pueden ser soportadas por el Brazo Mecánico y la Sierra Mecánica para gestionar numerosas tareas, incluyendo suministrar ingredientes y cocinar.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Serious Organization": {
+        "translation": "Organización Serious",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Are we nuclear yet?": {
+        "translation": "¿Ya somos nucleares?",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft Basket - cutting board and Mechanical arm and Mechanical saw": {
+        "translation": "Fabricar Cesta - tabla de cortar y brazo mecánico y sierra mecánica",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Conduit Cage: a machine used for granting/removing effects": {
+        "translation": "Jaula de Conducto: una máquina utilizada para otorgar/eliminar efectos",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Any Potions on Mechanical Mixer ": {
+        "translation": "Obtén Cualquier Poción en la Mezcladora Mecánica",
+        "type": "ai",
+        "source": "manual"
+    },
+    "They can be used as a light source or for crafting.": {
+        "translation": "Pueden usarse como fuente de luz o para fabricar.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Prismarine Crystals": {
+        "translation": "Obtén Cristales de Prismarina",
+        "type": "ai",
+        "source": "manual"
+    },
+    "To Craft inactive Blaze core": {
+        "translation": "Para fabricar el Núcleo de Blaze inactivo",
+        "type": "ai",
+        "source": "manual"
+    },
+    "First step is to saw and press a tumbaga sheet to create the head casing, then you will then need to imbue the head with the effects of fire resistance and regeneration. When that is done, a tumbaga alloy is used to seal the potions and add the iconic nose, finishing the totem head.": {
+        "translation": "El primer paso es cortar y prensar una lámina de tumbaga para crear la carcasa de la cabeza, luego necesitarás imbuir la cabeza con los efectos de resistencia al fuego y regeneración. Cuando eso esté hecho, se usa una aleación de tumbaga para sellar las pociones y añadir la nariz icónica, terminando así la cabeza del tótem.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Run over an enemy with your train": {
+        "translation": "Atropella a un enemigo con tu tren",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Suspicious Rock": {
+        "translation": "Obtener Roca Sospechosa",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Suspicious Indeed.": {
+        "translation": "Sospechoso, de hecho.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Road Kill": {
+        "translation": "Atropello",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Can display text or numbers. This would be useful in making elevators too.": {
+        "translation": "Puede mostrar texto o números. Esto también sería útil para hacer ascensores.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Keep a network running at speed with a powered brake attached": {
+        "translation": "Mantén una red funcionando a velocidad con un freno motorizado acoplado",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Overpowered": {
+        "translation": "Sobrepotenciado",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Zinc Coil.": {
+        "translation": "Obtén el Engranaje de Zinc.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A machine that can autocraft shapeless recepies aswell as mix things like potions.\\n\\nNeeds to rotate at at least 30 rpm to function": {
+        "translation": "Una máquina que puede auto-fabricar recetas sin forma y también mezclar cosas como pociones.\\n\\nNecesita girar a al menos 30 rpm para funcionar",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A gearbox where the rotation direction of all 4 sides are independently configurable": {
+        "translation": "Una caja de engranajes donde la dirección de rotación de los 4 lados es configurable de forma independiente.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "This Mod Based on Transferring Rotational Force by Light": {
+        "translation": "Este Mod se basa en Transferir Fuerza Rotacional mediante Luz",
+        "type": "ai",
+        "source": "manual"
+    },
+    "For cutting food": {
+        "translation": "Para cortar alimentos",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Insert axes or knives into the Slicer": {
+        "translation": "Inserta hachas o cuchillos en la Rebanadora",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Gives off a redstone signal when detecting a train.": {
+        "translation": "Emite una señal de redstone al detectar un tren.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Basically electricity = speed": {
+        "translation": "Básicamente electricidad = velocidad",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Use for the Beam and Optical Devices.": {
+        "translation": "Úselo para el Haz y los Dispositivos Ópticos.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Essentially the an upgrade to the millstone, provides some different recipes so it might be worth keeping both around.": {
+        "translation": "Esencialmente una mejora de la piedra de molino, proporciona algunas recetas diferentes, por lo que podría valer la pena conservar ambas.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Optical Device": {
+        "translation": "Obtener Dispositivo Óptico",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft Sprinkler": {
+        "translation": "Fabricar Aspersor",
+        "type": "ai",
+        "source": "manual"
+    },
+    "The Sprinkler is a block that distributes fluid over a small area below when supplied via a pipe": {
+        "translation": "El Aspersor es un bloque que distribuye fluido sobre un área pequeña debajo de él cuando se le suministra a través de una tubería",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Brake": {
+        "translation": "Obtener Freno",
+        "type": "ai",
+        "source": "manual"
+    },
+    "A device that produces immense stress when powered, halting the network by overstressing it": {
+        "translation": "Un dispositivo que produce un estrés inmenso cuando recibe energía, deteniendo la red al sobrecargarla",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Copycat blocks allow you to make steps and panels out of things that typically cannot take those shapes.": {
+        "translation": "Los bloques imitadores te permiten crear escalones y paneles con materiales que normalmente no pueden adoptar esas formas.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Craft a Graphite": {
+        "translation": "Fabricar un Grafito",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Copycat": {
+        "translation": "Copiadora",
+        "type": "ai",
+        "source": "manual"
+    },
+    "High Carbon Density": {
+        "translation": "Alta Densidad de Carbono",
+        "type": "ai",
+        "source": "manual"
+    },
+    "They can be used for crafting.": {
+        "translation": "Se pueden usar para fabricar.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Prismarine Shards": {
+        "translation": "Obtén Fragmentos de Prismarina",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Sticks to blocks when powered by redstone.": {
+        "translation": "Se adhiere a los bloques cuando recibe energía de redstone.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Create: Bitterballen is an addon for Create which adds Dutch snacks. ": {
+        "translation": "Create: Bitterballen es un addon para Create que añade aperitivos holandeses.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Lets you transfer a redstone signal wirelessly within a range. No, this is not for Wi-Fi.": {
+        "translation": "Te permite transferir una señal de redstone de forma inalámbrica dentro de un rango. No, esto no es para Wi-Fi.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Used to control the flow of trains across tracks and intersections of tracks.": {
+        "translation": "Se usa para controlar el flujo de trenes a través de vías e intersecciones de vías.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Wi-Fi? No?": {
+        "translation": "¿Wi-Fi? ¿No?",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Allows you to walk underwater like you do on land as well as walk on belts without them moving you, if you think about it, must be really slippery.": {
+        "translation": "Te permite caminar bajo el agua como si estuvieras en tierra firme, además de caminar sobre cintas sin que te muevan; si lo piensas, debe ser realmente resbaladizo.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Foundational block for the reactor": {
+        "translation": "Bloque fundamental para el reactor",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Easy to cook and find": {
+        "translation": "Fácil de cocinar y encontrar",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Coal and Charcoal": {
+        "translation": "Obtén Carbón y Carbón Vegetal",
+        "type": "ai",
+        "source": "manual"
+    },
+    "XP": {
+        "translation": "Experiencia",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Early Game Create Pool": {
+        "translation": "Fase inicial Create Pool",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Common Ores": {
+        "translation": "Menas Comunes",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Click me!": {
+        "translation": "¡Haz clic en mí!",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Welcome to Aquatic Ambitions": {
+        "translation": "Bienvenido a Aquatic Ambitions",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Any Wire Spool": {
+        "translation": "Cualquier Carrete de Cable",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Potions": {
+        "translation": "Pociones",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Central Kitchen": {
+        "translation": "Cocina Central",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Any Cogwheel": {
+        "translation": "Cualquier Engranaje",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Welcome to Create Useful equip": {
+        "translation": "Bienvenido al equipo útil de Create",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Quests": {
+        "translation": "Misiones",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Any Knives": {
+        "translation": "Cualquier Cuchillos",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Mimicream": {
+        "translation": "Mimicrema",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Welcome to Blaze Burner Fuels.": {
+        "translation": "Bienvenido a los Combustibles del Quemador de Blaze.",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Continue": {
+        "translation": "Continuar",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Any Mechanical Piston": {
+        "translation": "Cualquier Pistón Mecánico",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Accept": {
+        "translation": "Aceptar",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Any seat": {
+        "translation": "Cualquier asiento",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Welcome to Optical": {
+        "translation": "Bienvenido a Optical",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Obtain Potion Effect ON conduit Cage": {
+        "translation": "Obtener efecto de poción EN jaula de conducto",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Any Train Track": {
+        "translation": "Cualquier Vía de Tren",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Sapling": {
+        "translation": "Brote",
+        "type": "ai",
+        "source": "manual"
+    },
+    "5000x Logs": {
+        "translation": "5000x Troncos",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Welcome to Connected": {
+        "translation": "Bienvenido a Connected",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Any Axes": {
+        "translation": "Cualquier Hacha",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Automation": {
+        "translation": "Automatización",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Silverfish Farms": {
+        "translation": "Granjas de Lepismas",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Use the Spout": {
+        "translation": "Usa el Vertedor",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Welcome": {
+        "translation": "Bienvenido",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Seat": {
+        "translation": "Asiento",
+        "type": "ai",
+        "source": "manual"
+    },
+    "Ornithopter Glider": {
+        "translation": "Planeador Ornitóptero",
+        "type": "ai",
+        "source": "manual"
     }
 }

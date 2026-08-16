@@ -1,4 +1,3 @@
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 import re
 
@@ -13,10 +12,10 @@ from analyzer.mod_scanner import scan_mod_names
 from analyzer.text_extractor import extract_texts
 from analyzer.text_replacer import apply_translations
 from analyzer.translation_decision import decide_translation
-from analyzer.translation_validator import validate_translation
 from formats.handler import get_handler
 from localization.localization_manager import load_interface
 from review.pending_manager import save_pending
+from translation.concurrent_translate import translate_items_concurrently
 from translation.protected_terms_manager import (
     load_protected_terms,
     save_protected_terms
@@ -118,53 +117,25 @@ def translate_file(
         protected_terms=protected_terms
     )
     total_translatable = len(translatable_texts)
-    results = [None] * total_translatable
 
-    def translate_item(item):
-        result = service.translate(
-            item["text"],
-            item["path"],
-            source_language=source_language,
-            target_language=target_language,
-            context=item.get("parent_path")
-        )
-        validation = validate_translation(
-            item["text"],
-            result["translation"]
-        )
-        return {
-            "path": item["path"],
-            "original": item["text"],
-            "translation": result["translation"],
-            "source": result["source"],
-            "valid": result["valid"] and validation["valid"],
-            "validation_reason": (
-                result.get("validation_reason")
-                or validation["reason"]
+    def report_progress(completed, total):
+        print(
+            interface["translating_progress"].format(
+                current=completed,
+                total=total
             ),
-            "attempts": result.get("attempts", 0)
-        }
+            end="\r",
+            flush=True
+        )
 
-    completed = 0
-
-    with ThreadPoolExecutor(max_workers=max(1, concurrency)) as executor:
-        future_to_index = {
-            executor.submit(translate_item, item): index
-            for index, item in enumerate(translatable_texts)
-        }
-
-        for future in as_completed(future_to_index):
-            index = future_to_index[future]
-            results[index] = future.result()
-            completed += 1
-            print(
-                interface["translating_progress"].format(
-                    current=completed,
-                    total=total_translatable
-                ),
-                end="\r",
-                flush=True
-            )
+    results = translate_items_concurrently(
+        translatable_texts,
+        service,
+        source_language=source_language,
+        target_language=target_language,
+        concurrency=concurrency,
+        on_progress=report_progress if total_translatable else None
+    )
 
     if total_translatable:
         print()

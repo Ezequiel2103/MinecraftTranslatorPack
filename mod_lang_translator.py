@@ -1,0 +1,143 @@
+import json
+from pathlib import Path
+
+from analyzer.mod_lang_scanner import scan_mod_lang_sources
+from analyzer.text_extractor import extract_texts
+from analyzer.text_replacer import apply_translations
+from analyzer.translation_decision import decide_translation
+from translation.concurrent_translate import translate_items_concurrently
+from translation.mod_lang_cache import (
+    content_hash,
+    load_cached_translation,
+    save_cached_translation
+)
+from translation.translation_service import TranslationService
+from translator_app import create_ai_translator, resolve_protected_terms
+
+
+PACK_MCMETA = {
+    "pack": {
+        "pack_format": 34,
+        "description": "Traducciones de mods generadas por MinecraftTranslatorPack"
+    }
+}
+
+
+def translate_mod_lang_files(
+    mods_folder,
+    output_resourcepack,
+    source_language="en",
+    target_language="es",
+    ai_provider="mock",
+    ai_model=None,
+    concurrency=4
+):
+    """
+    Translates every mod's own en_us.json (skipping mods that already
+    ship their own translation for the target locale) and assembles the
+    result as a resource pack, so mods are translated without touching
+    their jars.
+
+    Each mod's translation is cached by content hash under
+    mod_lang_cache/<language_pair>/<modid>.json, independent of any
+    specific modpack: the same mod in a different modpack reuses the
+    cached translation instead of being translated again, and a mod
+    update (different text) is detected and re-translated automatically.
+    """
+
+    language_pair = f"{source_language}_{target_language}"
+    sources = scan_mod_lang_sources(mods_folder)
+    protected_terms = resolve_protected_terms(language_pair, mods_folder)
+
+    output_resourcepack = Path(output_resourcepack)
+
+    stats = {
+        "already_translated_by_mod": 0,
+        "reused_from_cache": 0,
+        "translated_fresh": 0,
+        "mods": []
+    }
+
+    for source in sources:
+        modid = source["modid"]
+
+        if source["has_es_es"]:
+            stats["already_translated_by_mod"] += 1
+            continue
+
+        source_hash = content_hash(source["en_us"])
+        cached_translation = load_cached_translation(
+            modid, source_hash, language_pair
+        )
+
+        if cached_translation is not None:
+            translated_lang = cached_translation
+            stats["reused_from_cache"] += 1
+        else:
+            translated_lang = _translate_lang_dict(
+                source["en_us"],
+                language_pair,
+                source_language,
+                target_language,
+                ai_provider,
+                ai_model,
+                protected_terms,
+                concurrency
+            )
+            save_cached_translation(
+                modid, source_hash, translated_lang, language_pair
+            )
+            stats["translated_fresh"] += 1
+
+        lang_path = (
+            output_resourcepack / "assets" / modid / "lang" / "es_es.json"
+        )
+        lang_path.parent.mkdir(parents=True, exist_ok=True)
+
+        with lang_path.open("w", encoding="utf-8") as file:
+            json.dump(translated_lang, file, ensure_ascii=False, indent=4)
+
+        stats["mods"].append(modid)
+
+    mcmeta_path = output_resourcepack / "pack.mcmeta"
+    mcmeta_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with mcmeta_path.open("w", encoding="utf-8") as file:
+        json.dump(PACK_MCMETA, file, ensure_ascii=False, indent=4)
+
+    return stats
+
+
+def _translate_lang_dict(
+    en_us,
+    language_pair,
+    source_language,
+    target_language,
+    ai_provider,
+    ai_model,
+    protected_terms,
+    concurrency
+):
+    texts = extract_texts(en_us)
+    translatable = [
+        item for item in texts
+        if decide_translation(item)["action"] == "translate"
+    ]
+
+    service = TranslationService(
+        language_pair,
+        ai_translator=create_ai_translator(ai_provider, ai_model),
+        protected_terms=protected_terms
+    )
+
+    results = translate_items_concurrently(
+        translatable,
+        service,
+        source_language=source_language,
+        target_language=target_language,
+        concurrency=concurrency
+    )
+
+    service.save_new_translations()
+
+    return apply_translations(dict(en_us), results)

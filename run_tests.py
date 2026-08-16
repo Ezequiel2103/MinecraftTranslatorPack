@@ -1,3 +1,4 @@
+import os
 import subprocess
 import sys
 
@@ -14,6 +15,9 @@ TESTS = [
     "test_format_handlers.py",
     "test_fully_protected_text.py",
     "test_language_pair_memory.py",
+    "test_mod_lang_cache.py",
+    "test_mod_lang_scanner.py",
+    "test_mod_lang_translator.py",
     "test_mod_scanner.py",
     "test_ollama_translator.py",
     "test_openai_translator.py",
@@ -33,12 +37,14 @@ TESTS = [
 
 def main():
     failures = []
+    env = dict(os.environ, PYTHONIOENCODING="utf-8")
 
     for test_file in TESTS:
         print(f"\n=== {test_file} ===")
         result = subprocess.run(
             [sys.executable, test_file],
-            text=True
+            text=True,
+            env=env
         )
 
         if result.returncode != 0:

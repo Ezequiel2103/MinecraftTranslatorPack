@@ -5,6 +5,10 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from mod_lang_translator import translate_mod_lang_files
+from translation.mod_classification_cache import (
+    load_classification,
+    save_classification
+)
 
 
 LANGUAGE_PAIR = "en_estest"
@@ -93,6 +97,45 @@ def main():
             )
 
             assert (output / "pack.png").read_bytes() == b"fake png bytes"
+
+            with zipfile.ZipFile(mods_folder / "modc.jar", "w") as archive:
+                archive.writestr(
+                    "assets/modc/lang/en_us.json",
+                    json.dumps({"option.modc.setting": "Some setting"})
+                )
+
+            filtered = translate_mod_lang_files(
+                mods_folder,
+                output,
+                source_language="en",
+                target_language="estest",
+                ai_provider="mock",
+                content_only=True
+            )
+
+            assert filtered["skipped_config_only"] == 1
+            assert "modc" not in filtered["mods"]
+
+            classification = load_classification(LANGUAGE_PAIR)
+            assert classification["modc"] is False
+            assert classification["moda"] is True
+
+            # Hand-editing the classification must override the
+            # heuristic on the next run instead of being re-derived.
+            classification["modc"] = True
+            save_classification(classification, LANGUAGE_PAIR)
+
+            overridden = translate_mod_lang_files(
+                mods_folder,
+                output,
+                source_language="en",
+                target_language="estest",
+                ai_provider="mock",
+                content_only=True
+            )
+
+            assert overridden["skipped_config_only"] == 0
+            assert "modc" in overridden["mods"]
 
     finally:
         shutil.rmtree(cache_dir, ignore_errors=True)

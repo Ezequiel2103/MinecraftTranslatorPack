@@ -80,6 +80,11 @@ def main():
 
     print(f"✅ Resource pack generado en: {args.output_resourcepack}")
     print(f"📦 Mods incluidos: {len(stats['mods'])}")
+    if args.content_only:
+        print(
+            f"⏭️ Sin contenido real (saltados): "
+            f"{stats['skipped_config_only']}"
+        )
     print(
         f"🟢 Ya tenían traducción propia (sin tocar): "
         f"{stats['already_translated_by_mod']}"

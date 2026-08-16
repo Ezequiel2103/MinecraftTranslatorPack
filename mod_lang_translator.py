@@ -2,12 +2,16 @@ import json
 import shutil
 from pathlib import Path
 
-from analyzer.mod_lang_scanner import scan_mod_lang_sources
+from analyzer.mod_lang_scanner import has_real_content, scan_mod_lang_sources
 from analyzer.text_extractor import extract_texts
 from analyzer.text_replacer import apply_translations
 from analyzer.translation_decision import decide_translation
 from review.pending_manager import save_pending
 from translation.concurrent_translate import translate_items_concurrently
+from translation.mod_classification_cache import (
+    load_classification,
+    save_classification
+)
 from translation.mod_lang_cache import (
     content_hash,
     load_cached_translation,
@@ -56,8 +60,13 @@ def translate_mod_lang_files(
     quest/lang-folder flow.
 
     content_only=True skips mods with no real in-game content (see
-    analyzer.mod_lang_scanner.has_real_content) — mostly optimization
-    and utility mods whose text is config options a player rarely sees.
+    analyzer.mod_lang_scanner.has_real_content). Each mod's
+    classification is cached under
+    mod_lang_cache/<language_pair>/content_classification.json the
+    first time it's seen, so later runs (even for a different modpack
+    that shares the mod) look it up instead of re-analyzing its lang
+    file — and the file can be hand-edited to correct a mod the
+    heuristic got wrong.
 
     pack_icon, if given, is copied in as pack.png — the icon Minecraft
     shows next to the pack's name in the resource pack list, so players
@@ -65,8 +74,10 @@ def translate_mod_lang_files(
     """
 
     language_pair = f"{source_language}_{target_language}"
-    sources = scan_mod_lang_sources(mods_folder, content_only=content_only)
+    sources = scan_mod_lang_sources(mods_folder)
     protected_terms = resolve_protected_terms(language_pair, mods_folder)
+    classification = load_classification(language_pair)
+    classification_changed = False
 
     output_resourcepack = Path(output_resourcepack)
 
@@ -74,12 +85,21 @@ def translate_mod_lang_files(
         "already_translated_by_mod": 0,
         "reused_from_cache": 0,
         "translated_fresh": 0,
+        "skipped_config_only": 0,
         "mods": []
     }
     pending_items = []
 
     for source in sources:
         modid = source["modid"]
+
+        if modid not in classification:
+            classification[modid] = has_real_content(source["en_us"])
+            classification_changed = True
+
+        if content_only and not classification[modid]:
+            stats["skipped_config_only"] += 1
+            continue
 
         if source["has_es_es"]:
             stats["already_translated_by_mod"] += 1
@@ -132,6 +152,9 @@ def translate_mod_lang_files(
             json.dump(translated_lang, file, ensure_ascii=False, indent=4)
 
         stats["mods"].append(modid)
+
+    if classification_changed:
+        save_classification(classification, language_pair)
 
     if pending_items:
         save_pending(

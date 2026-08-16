@@ -7,6 +7,7 @@ TESTS = [
     "test_claude_translator.py",
     "test_deepseek_translator.py",
     "test_end_to_end_formats.py",
+    "test_extract_texts_lists.py",
     "test_format_handlers.py",
     "test_fully_protected_text.py",
     "test_language_pair_memory.py",

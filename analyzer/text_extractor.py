@@ -32,11 +32,22 @@ def extract_texts(data):
 
                 new_path = f"{path}[{index}]"
 
-                walk(
-                    value,
-                    new_path,
-                    path
-                )
+                if isinstance(value, str):
+
+                    texts.append({
+                        "path": new_path,
+                        "key": None,
+                        "text": value,
+                        "parent_path": path
+                    })
+
+                else:
+
+                    walk(
+                        value,
+                        new_path,
+                        path
+                    )
 
     walk(data)
 

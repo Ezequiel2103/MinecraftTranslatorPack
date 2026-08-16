@@ -40,5 +40,621 @@
         "reason": "placeholder_mismatch",
         "source": "ai_failed",
         "attempts": 3
+    },
+    "§aSuccessfully transferred %s claim(s) to opac. §eAero claims: %s / %s": {
+        "path": "mods/aeroclaims/commands.aeroclaims.transfer_back.success",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§aClaim activated and borders refreshed": {
+        "path": "mods/aeroclaims/message.aeroclaims.claim_refreshed",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§cFailed to get ship object!": {
+        "path": "mods/aeroclaims/message.aeroclaims.ship_object_not_found",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§cCannot reduce claims, ship already exceeds the limit!": {
+        "path": "mods/aeroclaims/message.aeroclaims.cannot_reduce_claims_ship_too_large",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§aParty + Ally": {
+        "path": "mods/aeroclaims/screen.aeroclaims.claim_settings.access.party_ally",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§cInvalid ship UUID: %s": {
+        "path": "mods/aeroclaims/commands.aeroclaims.admin.refresh.invalid_ship_uuid",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§cThis command is disabled in config. Enable 'enableClearCommand' to use it.": {
+        "path": "mods/aeroclaims/commands.aeroclaims.sublevels.delete.disabled",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "AERO: %s / %s": {
+        "path": "mods/aeroclaims/screen.aeroclaims.menu.info.aero",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "AERO: ": {
+        "path": "mods/aeroclaims/screen.aeroclaims.menu.info.aero.label",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "UUID: %s": {
+        "path": "mods/aeroclaims/screen.aeroclaims.menu.tooltip.id",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Pos: %s, %s, %s": {
+        "path": "mods/aeroclaims/screen.aeroclaims.menu.tooltip.coords",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Aeroworks": {
+        "path": "mods/aeroworks/key.categories.aeroworks",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "CW": {
+        "path": "mods/aeroworks/tooltip.aeroworks.mechanical_servo.direction_cw",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "John_Create": {
+        "path": "mods/cmpackagecouriers/cmpackagecouriers.ponder.receiving_planes.text_4",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "12 RPM": {
+        "path": "mods/createcasing/createcasing.ponder.chain_gearshift.text_6",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "16 RPM": {
+        "path": "mods/createcasing/createcasing.ponder.shared.rpm16",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "32 RPM": {
+        "path": "mods/createcasing/createcasing.ponder.shared.rpm32",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "8 RPM": {
+        "path": "mods/createcasing/createcasing.ponder.shared.rpm8",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§9Rest (0:30)": {
+        "path": "mods/create_confectionery/item.create_confectionery.chocolate_candy_1.description_0",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§eGingerbread Brick Slab": {
+        "path": "mods/create_confectionery/block.create_confectionery.gingerbread_brick_slab",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§7Hold §eRIGHT-CLICK §7to throw": {
+        "path": "mods/create_blaze_burner_fuels/item.create_blaze_burner_fuels.dung_brick.description_0",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Robo Bee Port": {
+        "path": "mods/create_mobile_packages/block.create_mobile_packages.bee_port",
+        "status": "pending",
+        "reason": "extra_output",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§2Put a §acard §2in your §asecond hand §2and use the Magnifying Glass to §asee the scrip §2of a card": {
+        "path": "mods/create_things_and_misc/item.create_things_and_misc.magnifying_glass.description_0",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Slime": {
+        "path": "mods/create_things_and_misc/fluid.create_addon.slime",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§4Repair item in your §csecond hand §4or in your §carmors slots §4enchant with the §cmending§4 enchantement. The mending rune take xp from your §cxp bar§4 to repair items. The mending rune need to be in your main hand to work !": {
+        "path": "mods/create_things_and_misc/item.create_things_and_misc.mending_rune.description_0",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§5Jump like a §drabbit !": {
+        "path": "mods/create_things_and_misc/block.create_things_and_misc.brass_sticky_launcher.description_0",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Create 2 0 2 2": {
+        "path": "mods/create_things_and_misc/painting.create_things_and_misc.create_2022.title",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "<BNBT:text:SpeakerText>": {
+        "path": "mods/create_things_and_misc/gui.create_things_and_misc.brass_speaker_gui.label_bnbttextspeakertext",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§2Put a §aCard §2in a card inscriber and make §aunique §2cards scripted card §acan’t be reproduced §2by other players": {
+        "path": "mods/create_things_and_misc/block.create_things_and_misc.card_press.description_0",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Radar": {
+        "path": "mods/create_things_and_misc/item.create_things_and_misc.radar",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§2The sprinkler spread §a 1000mB of diluted bonemeal§2 on a §a5x5 area§2.": {
+        "path": "mods/create_things_and_misc/block.create_things_and_misc.sprinkler.description_0",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§7Fragrant white wine with a hint of sweetness": {
+        "path": "mods/create_winery/item.create_winery.riesling.description_0",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Riesling": {
+        "path": "mods/create_winery/item.create_winery.riesling",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Cabernet Sauvignon": {
+        "path": "mods/create_winery/item.create_winery.cabernet_sauvignon",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Merlot": {
+        "path": "mods/create_winery/item.create_winery.merlot",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Zinfandel": {
+        "path": "mods/create_winery/item.create_winery.zinfandel",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Rosé": {
+        "path": "mods/create_winery/item.create_winery.rose",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§7Sweet drink made of grape pomace": {
+        "path": "mods/create_winery/item.create_winery.grape_juice.description_0",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§7Sweet drink made of apple must": {
+        "path": "mods/create_winery/item.create_winery.apple_juice.description_0",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§7Bold red wine with rich flavors": {
+        "path": "mods/create_winery/item.create_winery.cabernet_sauvignon.description_0",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Chardonnay": {
+        "path": "mods/create_winery/item.create_winery.chardonnay",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§7Robust red wine with jammy flavors": {
+        "path": "mods/create_winery/item.create_winery.zinfandel.description_0",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§7Beverage made from fermented apples": {
+        "path": "mods/create_winery/item.create_winery.cider.description_0",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "§7Place your item and close this GUI to wrap your gift": {
+        "path": "mods/create_wrapped/gui.create_wrapped.present_gui.tooltip_tooltip",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "%1$s A bit of Oil": {
+        "path": "mods/createdieselgenerators/createdieselgenerators.actionbar.oil_scanner.oil_low",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "mB/s": {
+        "path": "mods/createdieselgenerators/createdieselgenerators.generic.unit.mbps",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Normal": {
+        "path": "mods/createdieselgenerators/createdieselgenerators.tooltip.crank.normal",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Alt": {
+        "path": "mods/createdieselgenerators/createdieselgenerators.tooltip.keyAlt",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Pizza": {
+        "path": "mods/createfood/block.createfood.sausage_pizza",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Calzone": {
+        "path": "mods/createfood/item.createfood.chicken_calzone",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Burrito": {
+        "path": "mods/createfood/item.createfood.rabbit_burrito_rice",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Taco": {
+        "path": "mods/createfood/item.createfood.pork_taco_lettuce_taco_sauce",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Nachos": {
+        "path": "mods/createfood/item.createfood.nacho_bowl_taco_sauce",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Pasta": {
+        "path": "mods/farmersdelight/item.delightfulcreators.incomplete_pasta_with_mutton_chop",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Pasta ": {
+        "path": "mods/createfood/item.createfood.pasta_plate_pork_meatballs_tomato_sauce",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "S'more": {
+        "path": "mods/createfood/item.createfood.smore",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Tater Tots": {
+        "path": "mods/createfood/item.createfood.tater_tots",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Fright's Delight+": {
+        "path": "mods/createfood/tooltip.compat.raw_spider_eye_cookie",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    " + Chocolate": {
+        "path": "mods/createfood/tooltip.createfood.chocolate_ingredient",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Awooo": {
+        "path": "mods/creategarnished/creategarnished.text.gingerbread_cookie_variant.flea",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Volt Struck": {
+        "path": "mods/creategarnished/effect.creategarnished.volt_struck",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Voltfish": {
+        "path": "mods/creategarnished/entity.creategarnished.voltfish",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Wah Wah, Wah Wah": {
+        "path": "mods/creategarnished/advancement.creategarnished.obtain_peanuts.title",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "%s / %s": {
+        "path": "mods/createpropulsion/createpropulsion.gui.goggles.redstone_transmission.internal_shift_number",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "pN": {
+        "path": "mods/createpropulsion/createpropulsion.gui.goggles.thruster.unit_pn",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Incremental": {
+        "path": "mods/createpropulsion/createpropulsion.redstone_transmission.control_mode.incremental",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Plasma": {
+        "path": "mods/createpropulsion/createpropulsion.gui.goggles.creative_thruster.particle.plasma",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Ion": {
+        "path": "mods/createpropulsion/createpropulsion.gui.goggles.creative_thruster.particle.ion",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Cable": {
+        "path": "mods/createpropulsion/block.createpropulsion.cable",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Coral": {
+        "path": "mods/createpropulsion/fluid_type.createpropulsion.coral",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Neutral": {
+        "path": "mods/dndesires/dndesires.spud_sentry.filter_mode.neutral",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "%s min.": {
+        "path": "mods/dragonlib/dragonlib.time_format.m",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Inv": {
+        "path": "mods/ftbfiltersystem/ftbfiltersystem.gui.item_source.inventory",
+        "status": "pending",
+        "reason": "extra_output",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Mod": {
+        "path": "mods/ftbfiltersystem/filter.ftbfiltersystem.mod.name",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Info": {
+        "path": "mods/ftblibrary/gui.info",
+        "status": "pending",
+        "reason": "extra_output",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Color": {
+        "path": "mods/ftblibrary/gui.color",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "JEI": {
+        "path": "mods/ftblibrary/ftblibrary.select_item.list_mode.jei",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "REI": {
+        "path": "mods/ftblibrary/ftblibrary.select_item.list_mode.rei",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "EMI": {
+        "path": "mods/ftblibrary/ftblibrary.select_item.list_mode.emi",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "FTB Suite": {
+        "path": "mods/ftblibrary/itemGroup.ftbsuite.creative_tab",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Kekie6": {
+        "path": "mods/handcrafted/painting.handcrafted.the_cat_and_the_cup.author",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Ad Astra": {
+        "path": "mods/handcrafted/painting.handcrafted.ad_astra.title",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Cama - Slither": {
+        "path": "mods/idas/jukebox_song.idas.slither",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "Cama - calidum": {
+        "path": "mods/idas/item.idas.music_disc_calidum.desc",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "IDAS": {
+        "path": "mods/idas/itemGroup.idas",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "%ss": {
+        "path": "mods/mechanical_botany/mechanical_botany.text.processing_ticks",
+        "status": "pending",
+        "reason": "placeholder_mismatch",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "auto": {
+        "path": "mods/xaeroworldmap/gui.xaero_wm_cave_mode_start_auto",
+        "status": "pending",
+        "reason": "extra_output",
+        "source": "ai_failed",
+        "attempts": 3
+    },
+    "ms": {
+        "path": "mods/xaeroworldmap/gui.xaero_wm_unit_ms",
+        "status": "pending",
+        "reason": "unchanged_translation",
+        "source": "ai_failed",
+        "attempts": 3
     }
 }

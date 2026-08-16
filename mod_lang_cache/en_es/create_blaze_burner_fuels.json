@@ -1,0 +1,32 @@
+{
+    "source_hash": "a97ee1063ccc7cd5d935509d05bf39cd8a02c685c44fcb3bcf781937e16f7844",
+    "lang": {
+        "item.create_blaze_burner_fuels.charcoal_briquettes": "Briquetas de Carbón",
+        "item.create_blaze_burner_fuels.peat_briquettes": "Briquetas de Turba",
+        "item.create_blaze_burner_fuels.fiery_charcoal": "Carbón Ígneo",
+        "item.create_blaze_burner_fuels.dung_brick.description_0": "§7Hold §eRIGHT-CLICK §7to throw",
+        "item.create_blaze_burner_fuels.blaze_core.description_0": "§7Puede reabastecerse después de su uso.",
+        "item_group.create_blaze_burner_fuels.create_blaze_burner_fuels": "Create: Blaze Burner Fuels",
+        "block.create_blaze_burner_fuels.peat_brick_stairs": "Escaleras de Ladrillo de Turba",
+        "item.create_blaze_burner_fuels.wood_dust": "Polvo de Madera",
+        "item.create_blaze_burner_fuels.peat": "Turba",
+        "block.create_blaze_burner_fuels.peat_bricks": "Ladrillos de Turba",
+        "item.create_blaze_burner_fuels.wood_pellets": "Pellets de Madera",
+        "item.create_blaze_burner_fuels.refined_coal_coke": "Coque de Carbón Refinado",
+        "block.create_blaze_burner_fuels.peat_brick_slab": "Losas de Ladrillo de Turba",
+        "item.create_blaze_burner_fuels.blazing_rocks": "Rocas Ardientes",
+        "item.create_blaze_burner_fuels.coal_briquettes": "Briquetas de Carbón",
+        "block.create_blaze_burner_fuels.peat_brick_wall": "Pared de Ladrillos de Turba",
+        "block.create_blaze_burner_fuels.stick_bundle": "Manojo de Palos",
+        "item.create_blaze_burner_fuels.inactive_blaze_core": "Núcleo de Blaze Inactivo",
+        "item.create_blaze_burner_fuels.superheated_blaze_core.description_0": "§7Puede reabastecerse después de su uso.",
+        "item.create_blaze_burner_fuels.superheated_blaze_core": "Núcleo de Blaze Sobrecalentado",
+        "item.create_blaze_burner_fuels.coal_coke": "Coque de Carbón",
+        "item.create_blaze_burner_fuels.blaze_core": "Núcleo de Blaze",
+        "item.create_blaze_burner_fuels.fiery_coal": "Carbón Ígneo",
+        "item.create_blaze_burner_fuels.dung_brick": "Ladrillo de Estiércol",
+        "block.create_blaze_burner_fuels.stick_trapdoor": "Trampilla improvisada",
+        "item.create_blaze_burner_fuels.kindling_sticks": "Palos de Encendido",
+        "item.create_blaze_burner_fuels.compost": "Abono"
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "source_hash": "77cb75aa8667b5bea17e6978f4a753197761cdfe117681d27aaad907dc1621dd",
+    "lang": {
+        "itemGroup.create_chocolate_fountain.base": "Create Chocolate Fountain",
+        "block.create_chocolate_fountain.chocolate_fountain": "Fuente de Chocolate",
+        "create_chocolate_fountain.ponder.chocolate_fountain.header": "Montando fuentes de chocolate",
+        "create_chocolate_fountain.ponder.chocolate_fountain.text_1": "Las fuentes de chocolate pueden recibir chocolate desde abajo",
+        "create_chocolate_fountain.ponder.chocolate_fountain.text_2": "Una señal de redstone desactivará la fuente",
+        "create_chocolate_fountain.ponder.chocolate_fountain_range.header": "Usando Fuentes de Chocolate",
+        "create_chocolate_fountain.ponder.chocolate_fountain_range.text_1": "Las fuentes de chocolate tienen un alcance de 10 bloques por defecto",
+        "create_chocolate_fountain.ponder.chocolate_fountain_range.text_2": "Los jugadores dentro de este rango son alimentados automáticamente con chocolate",
+        "create_chocolate_fountain.ponder.chocolate_fountain_bees.header": "Tranquilizando abejas con miel",
+        "create_chocolate_fountain.ponder.chocolate_fountain_bees.text_1": "Las Fuentes de Chocolate también funcionan con Miel",
+        "create_chocolate_fountain.ponder.chocolate_fountain_bees.text_2": "Las abejas no se enfadarán cerca de la Fuente de Chocolate",
+        "create_chocolate_fountain.ponder.chocolate_fountain_bees.text_3": "Las abejas ya enfadadas se calmarán al entrar en el área de la fuente."
+    }
+}

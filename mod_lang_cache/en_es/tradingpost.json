@@ -1,0 +1,9 @@
+{
+    "source_hash": "c17f93bb825ca100430edb20d02774c2fa236e4bf8a62a3f308e341493537e12",
+    "lang": {
+        "block.tradingpost.trading_post": "Trading Post",
+        "container.trading_post": "Trading Post",
+        "trading_post.no_trader_found": "No se encontró ningún comerciante disponible cerca",
+        "trading_post.trader_gone": "El comerciante ya no está disponible."
+    }
+}

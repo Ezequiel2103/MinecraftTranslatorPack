@@ -1,0 +1,14 @@
+{
+    "source_hash": "c3315d3d59c054ae4d7a40c3e83adca256449346a4d5c1cf2919711a304673c7",
+    "lang": {
+        "item.idas.music_disc_slither": "Disco de Música",
+        "item.idas.music_disc_slither.desc": "Cama - Slither",
+        "item.idas.music_disc_calidum": "Disco de Música",
+        "item.idas.music_disc_calidum.desc": "Cama - calidum",
+        "item.idas.disc_fragment_slither.desc": "Fragmento de Disco Slither",
+        "item.idas.disc_fragment_slither": "Fragmento de Disco Slither",
+        "jukebox_song.idas.slither": "Cama - Slither",
+        "jukebox_song.idas.calidum": "Cama - cálido",
+        "itemGroup.idas": "IDAS"
+    }
+}

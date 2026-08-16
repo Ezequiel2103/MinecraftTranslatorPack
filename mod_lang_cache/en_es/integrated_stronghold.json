@@ -1,0 +1,14 @@
+{
+    "source_hash": "bd9c3c57b555e0ed66fbbdf82d27527c65659488d58d49667846ec6d5f66df08",
+    "lang": {
+        "item.integrated_stronghold.music_disc_sight": "Disco de Música",
+        "item.integrated_stronghold.music_disc_sight.desc": "Cama - vista",
+        "item.integrated_stronghold.music_disc_forlorn": "Disco de Música",
+        "item.integrated_stronghold.music_disc_forlorn.desc": "Cama - Desolado",
+        "jukebox_song.integrated_stronghold.sight": "Cama - vista",
+        "jukebox_song.integrated_stronghold.forlorn": "Cama - Desamparado",
+        "item.integrated_stronghold.disc_fragment_sight": "Fragmento de Disco",
+        "item.integrated_stronghold.disc_fragment_sight.desc": "Disco de Música - vista",
+        "itemGroup.integrated_stronghold": "Integrated Stronghold"
+    }
+}

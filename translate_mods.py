@@ -52,6 +52,14 @@ def parse_args():
             "text is config options a player rarely sees."
         )
     )
+    parser.add_argument(
+        "--pack-icon",
+        default=None,
+        help=(
+            "Optional image copied in as pack.png, the icon Minecraft "
+            "shows next to the pack's name in the resource pack list."
+        )
+    )
     return parser.parse_args()
 
 
@@ -66,7 +74,8 @@ def main():
         ai_provider=args.ai_provider,
         ai_model=args.ai_model,
         concurrency=args.concurrency,
-        content_only=args.content_only
+        content_only=args.content_only,
+        pack_icon=args.pack_icon
     )
 
     print(f"✅ Resource pack generado en: {args.output_resourcepack}")

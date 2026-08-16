@@ -1,4 +1,5 @@
 import json
+import shutil
 from pathlib import Path
 
 from analyzer.mod_lang_scanner import scan_mod_lang_sources
@@ -33,7 +34,8 @@ def translate_mod_lang_files(
     ai_model=None,
     concurrency=4,
     review_root="review",
-    content_only=False
+    content_only=False,
+    pack_icon=None
 ):
     """
     Translates every mod's own en_us.json (skipping mods that already
@@ -56,6 +58,10 @@ def translate_mod_lang_files(
     content_only=True skips mods with no real in-game content (see
     analyzer.mod_lang_scanner.has_real_content) — mostly optimization
     and utility mods whose text is config options a player rarely sees.
+
+    pack_icon, if given, is copied in as pack.png — the icon Minecraft
+    shows next to the pack's name in the resource pack list, so players
+    can spot the translation at a glance.
     """
 
     language_pair = f"{source_language}_{target_language}"
@@ -142,6 +148,9 @@ def translate_mod_lang_files(
 
     with mcmeta_path.open("w", encoding="utf-8") as file:
         json.dump(PACK_MCMETA, file, ensure_ascii=False, indent=4)
+
+    if pack_icon:
+        shutil.copyfile(pack_icon, output_resourcepack / "pack.png")
 
     return stats
 

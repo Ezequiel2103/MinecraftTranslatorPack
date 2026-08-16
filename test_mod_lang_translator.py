@@ -80,6 +80,20 @@ def main():
             assert second["translated_fresh"] == 0
             assert second["reused_from_cache"] == 1
 
+            icon_source = Path(tmp) / "icon.png"
+            icon_source.write_bytes(b"fake png bytes")
+
+            translate_mod_lang_files(
+                mods_folder,
+                output,
+                source_language="en",
+                target_language="estest",
+                ai_provider="mock",
+                pack_icon=icon_source
+            )
+
+            assert (output / "pack.png").read_bytes() == b"fake png bytes"
+
     finally:
         shutil.rmtree(cache_dir, ignore_errors=True)
         shutil.rmtree(protected_terms_dir, ignore_errors=True)

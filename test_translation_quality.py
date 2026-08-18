@@ -27,6 +27,26 @@ def main():
             assert result["valid"] is False
             assert result["reason"] == expected_reason
 
+    # A translation into a non-Latin-script target language must not be
+    # rejected for containing that language's own script.
+    assert validate_translation_quality(
+        "Diamond", "Алмаз", target_language="ru"
+    )["valid"] is True
+    assert validate_translation_quality(
+        "Diamond", "钻石", target_language="zh"
+    )["valid"] is True
+    assert validate_translation_quality(
+        "Diamond", "다이아몬드", target_language="ko"
+    )["valid"] is True
+
+    # But a Spanish (or any other Latin-script target) translation that
+    # comes back in the wrong script must still be rejected.
+    result = validate_translation_quality(
+        "Diamond", "钻石", target_language="es"
+    )
+    assert result["valid"] is False
+    assert result["reason"] == "wrong_script"
+
     print("Translation quality OK")
 
 

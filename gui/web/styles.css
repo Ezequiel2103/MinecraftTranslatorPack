@@ -394,6 +394,47 @@ html, body {
   font-size: 12px;
 }
 
+.panel-subtitle {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid var(--panel-border);
+}
+
+/* ---------- usage indicator ---------- */
+
+.usage-box {
+  margin-top: 18px;
+}
+
+.usage-bar {
+  position: relative;
+  height: 16px;
+  background: var(--input-bg);
+  border: 2px solid var(--panel-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.usage-fill {
+  height: 100%;
+  background: var(--accent-dark);
+  transition: width 0.2s ease, background 0.2s ease;
+}
+
+.usage-fill.usage-warning {
+  background: var(--danger);
+}
+
+.usage-text {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
 /* ---------- pending list ---------- */
 
 .pending-list {

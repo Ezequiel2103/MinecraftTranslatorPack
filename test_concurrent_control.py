@@ -33,6 +33,11 @@ def test_flush_callback_runs_periodically():
         make_items(20),
         service,
         concurrency=3,
+        # One item per chunk, so flush cadence reflects individual item
+        # completions rather than being batched away — this test is
+        # about flush periodicity, not batching (see test_batch_translation.py
+        # for that).
+        batch_size=1,
         flush_callback=lambda: flush_calls.append(1),
         flush_every=7
     )
@@ -56,6 +61,11 @@ def test_cancel_stops_remaining_work():
         items,
         service,
         concurrency=2,
+        # One item per chunk, so cancellation can actually interrupt
+        # mid-stream instead of an entire (small) item list becoming one
+        # atomic batch that finishes before cancel_event is even checked
+        # again.
+        batch_size=1,
         on_progress=on_progress,
         cancel_event=cancel_event
     )

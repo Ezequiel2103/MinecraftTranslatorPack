@@ -1,0 +1,7 @@
+[
+    {"en_prefix": "&eNote&r: ", "es_prefix": "&eNota&r: ", "en_suffix": "", "es_suffix": ""},
+    {"en_prefix": "&eNote&f: ", "es_prefix": "&eNota&f: ", "en_suffix": "", "es_suffix": ""},
+    {"en_prefix": "&eLocate&f: ", "es_prefix": "&eLocalizar&f: ", "en_suffix": "", "es_suffix": ""},
+    {"en_prefix": "&eKill&f: ", "es_prefix": "&eMatar&f: ", "en_suffix": "", "es_suffix": ""},
+    {"en_prefix": "Note: ", "es_prefix": "Nota: ", "en_suffix": "", "es_suffix": ""}
+]

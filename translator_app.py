@@ -4,6 +4,7 @@ import re
 from ai.ai_translator import (
     ClaudeTranslator,
     DeepSeekTranslator,
+    GoogleTranslateTranslator,
     MockAITranslator,
     OllamaTranslator,
     OpenAITranslator
@@ -16,6 +17,7 @@ from formats.handler import get_handler
 from localization.localization_manager import load_interface
 from review.pending_manager import save_pending
 from translation.concurrent_translate import translate_items_concurrently
+from translation.mod_lang_cache import build_mod_item_glossary
 from translation.protected_terms_manager import (
     load_protected_terms,
     save_protected_terms
@@ -39,6 +41,62 @@ def translated_relative_path(relative_path, target_language, explicit_locale=Non
     return relative_path
 
 
+LOCALE_STEM_PATTERN = re.compile(r"[a-z]{2,3}_[a-z0-9]{2,3}", re.IGNORECASE)
+
+
+def select_source_files(files, source_language):
+    """
+    A lang folder can ship other locales already translated by the
+    modpack (fan translations, regional English variants). Without this
+    filter, every one of those gets treated as if it were the source
+    language and written over the same output file, corrupting it with
+    whatever language processed last.
+
+    Only files that would actually collide on the same output path can
+    corrupt each other that way, and translated_relative_path() keeps
+    each file's original suffix — so "en_us.json" and "en_us.lang" never
+    collide with each other, only with another same-suffix locale file
+    (e.g. "en_gb.json" also colliding on "es_es.json"). So when there's
+    no exact canonical match and several regional variants of the source
+    language exist, only one per suffix is kept — the rest would just
+    reproduce the same last-one-wins corruption this filter exists to
+    prevent, one level down.
+    """
+
+    source_language = source_language.lower()
+    canonical = DEFAULT_LOCALES.get(source_language)
+
+    non_locale_files = [
+        path for path in files if not LOCALE_STEM_PATTERN.fullmatch(path.stem)
+    ]
+    locale_files = [
+        path for path in files if LOCALE_STEM_PATTERN.fullmatch(path.stem)
+    ]
+
+    suffixes = sorted({path.suffix.lower() for path in locale_files})
+    selected = []
+
+    for suffix in suffixes:
+        candidates = [path for path in locale_files if path.suffix.lower() == suffix]
+
+        if canonical:
+            exact_matches = sorted(
+                path for path in candidates if path.stem.lower() == canonical
+            )
+            if exact_matches:
+                selected.append(exact_matches[0])
+                continue
+
+        prefix_matches = sorted(
+            path for path in candidates
+            if path.stem.lower().split("_")[0] == source_language
+        )
+        if prefix_matches:
+            selected.append(prefix_matches[0])
+
+    return non_locale_files + selected
+
+
 def create_ai_translator(provider, model=None):
     if provider == "openai":
         return OpenAITranslator(model=model)
@@ -48,6 +106,8 @@ def create_ai_translator(provider, model=None):
         return ClaudeTranslator(model=model)
     if provider == "deepseek":
         return DeepSeekTranslator(model=model)
+    if provider == "google":
+        return GoogleTranslateTranslator()
     return MockAITranslator()
 
 
@@ -82,6 +142,7 @@ def translate_file(
     review_root="review",
     mods_folder=None,
     protected_terms=None,
+    mod_item_glossary=None,
     translate_mod_names=False,
     concurrency=4,
     on_text_progress=None,
@@ -99,6 +160,8 @@ def translate_file(
             mods_folder,
             translate_mod_names=translate_mod_names
         )
+    if mod_item_glossary is None:
+        mod_item_glossary = build_mod_item_glossary(language_pair)
     data = get_handler(input_path).read(input_path)
     texts = extract_texts(data)
     translatable_texts = []
@@ -117,7 +180,9 @@ def translate_file(
     service = TranslationService(
         language_pair,
         ai_translator=create_ai_translator(ai_provider, ai_model),
-        protected_terms=protected_terms
+        protected_terms=protected_terms,
+        mod_item_glossary=mod_item_glossary,
+        cancel_event=cancel_event
     )
     total_translatable = len(translatable_texts)
 
@@ -208,7 +273,8 @@ def translate_file(
         "translatable_texts": translatable_texts,
         "technical_texts": technical_texts,
         "uncertain_texts": uncertain_texts,
-        "pending_items": pending_items
+        "pending_items": pending_items,
+        "quota_exceeded": service.quota_exceeded
     }
 
 
@@ -233,10 +299,17 @@ def translate_folder(
     input_folder = Path(input_folder)
     output_folder = Path(output_folder)
     language_pair = f"{source_language}_{target_language}"
-    files = [
+    all_matching_files = [
         path for path in input_folder.rglob("*")
         if path.is_file() and path.suffix.lower() in SUPPORTED_SUFFIXES
     ]
+    files = select_source_files(all_matching_files, source_language)
+    if all_matching_files and not files:
+        print(
+            f"Aviso: se encontraron {len(all_matching_files)} archivo(s) en "
+            f"{input_folder}, pero ninguno coincide con el idioma de origen "
+            f"'{source_language}'. Revisa --source-language. No se tradujo nada."
+        )
     save_pending(
         [],
         language_pair,
@@ -250,6 +323,7 @@ def translate_folder(
         mods_folder,
         translate_mod_names=translate_mod_names
     )
+    mod_item_glossary = build_mod_item_glossary(language_pair)
     total_files = len(files)
 
     for index, input_path in enumerate(files, start=1):
@@ -282,6 +356,7 @@ def translate_folder(
             replace_pending=False,
             review_root=review_root,
             protected_terms=protected_terms,
+            mod_item_glossary=mod_item_glossary,
             concurrency=concurrency,
             on_text_progress=on_text_progress,
             cancel_event=cancel_event,

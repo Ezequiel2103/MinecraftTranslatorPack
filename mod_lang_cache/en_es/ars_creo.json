@@ -1,0 +1,23 @@
+{
+    "source_hash": "cdeae9da6ee51f24f94ee58ff5057a4b21e24032dc154ac2d9b479e64c35af3c",
+    "lang": {
+        "block.ars_creo.starbuncle_wheel": "Rueda de Starbuncle",
+        "ars_creo.page1.starbuncle_wheel": "Genera fuerza rotacional para Create. Colocar un bloque de oro frente a la rueda aumentará las RPM.",
+        "ars_creo.page.behaviors": "Ars Creo permite comportamientos especiales de mecanismos para bloques de Ars Nouveau, incluyendo Torretas de Hechizos y Tarros de Fuente. Torreta de Hechizos Básica: dispara un hechizo en el mecanismo al interactuar. Torreta Temporizadora: dispara un hechizo en su intervalo. Torreta de Hechizos Encantada: dispara un hechizo en cada bloque nuevo visitado. Tarro de Fuente: puede ser consumido por torretas en un mecanismo.",
+        "itemGroup.ars_creo.general": "Ars Creo",
+        "ars_creo.display_source.turret.not_enough_space": "No hay suficiente espacio",
+        "ars_creo.display_source.turret.for_turret_status": "para el estado de la torreta",
+        "ars_creo.display_source.turret.no_spell": "No hay conjuro establecido.",
+        "ars_creo.display_source.turret.spell_name": "Hechizo: %s",
+        "ars_creo.display_source.turret.spell": "%s",
+        "ars_creo.display_source.turret_target": "Torreta de Hechizos",
+        "ars_creo.display_source.source_count": "%s",
+        "ars_creo.display_source.for_source_status": "para el estado de la fuente",
+        "ars_creo.display_source.source_jar": "Cantidad de salida",
+        "ars_creo.display_source.turret": "Hechizo",
+        "ars_creo.page1.ars_creo.display_link": "El enlace de visualización puede adjuntarse a un Frasco de Fuente para mostrar la cantidad de fuente en un frasco, o a una torreta de hechizos para mostrar el hechizo actual en un Tablero de Visualización.",
+        "ars_creo.page1.ars_creo.fluid_tank": "Las pociones pueden almacenarse y transferirse entre un tanque de fluido Create usando tuberías y un tanque.",
+        "ars_creo.display_link": "Ars Creo: Enlace de Visualización",
+        "ars_creo.fluid_tank": "Ars Creo: Tanque de Fluidos"
+    }
+}

@@ -4,7 +4,10 @@ import zipfile
 from pathlib import Path
 
 
-_LANG_PATH = re.compile(r"^assets/([a-z0-9_.-]+)/lang/(en_us|es_es)\.json$")
+def _lang_path_pattern(target_locale):
+    return re.compile(
+        rf"^assets/([a-z0-9_.-]+)/lang/(en_us|{re.escape(target_locale)})\.json$"
+    )
 
 # Key prefixes that name something the player actually sees in the world
 # (an item, a block, an advancement, ...), as opposed to config-screen
@@ -30,16 +33,18 @@ def has_real_content(lang_dict):
     )
 
 
-def scan_mod_lang_sources(mods_folder, content_only=False):
+def scan_mod_lang_sources(mods_folder, content_only=False, target_locale="es_es"):
     """
     Reads every .jar in a Minecraft mods folder and finds each mod's own
     en_us.json, so its text can be translated independently of any
     specific modpack.
 
-    Returns a list of dicts: {modid, jar_name, en_us, has_es_es}.
+    Returns a list of dicts: {modid, jar_name, en_us, has_target_translation}.
     Mods without an en_us.json (libraries, mods with no translatable
-    text) are skipped. has_es_es marks mods that already ship their own
-    Spanish translation, so they can be left untouched.
+    text) are skipped. has_target_translation marks mods that already
+    ship their own translation for target_locale (e.g. "es_es", "pt_br"),
+    so they can be left untouched instead of being re-translated for
+    nothing.
 
     content_only=True additionally skips mods whose lang file has no
     real in-game content per has_real_content() — typically performance
@@ -49,23 +54,24 @@ def scan_mod_lang_sources(mods_folder, content_only=False):
 
     mods_folder = Path(mods_folder)
     results = []
+    lang_path_pattern = _lang_path_pattern(target_locale)
 
     for jar_path in sorted(mods_folder.glob("*.jar")):
         try:
             with zipfile.ZipFile(jar_path) as archive:
                 en_us = {}
-                es_es_modids = set()
+                translated_modids = set()
 
                 for entry in archive.namelist():
-                    match = _LANG_PATH.match(entry)
+                    match = lang_path_pattern.match(entry)
 
                     if not match:
                         continue
 
                     modid, locale = match.groups()
 
-                    if locale == "es_es":
-                        es_es_modids.add(modid)
+                    if locale == target_locale:
+                        translated_modids.add(modid)
                         continue
 
                     try:
@@ -85,7 +91,7 @@ def scan_mod_lang_sources(mods_folder, content_only=False):
                         "modid": modid,
                         "jar_name": jar_path.name,
                         "en_us": content,
-                        "has_es_es": modid in es_es_modids
+                        "has_target_translation": modid in translated_modids
                     })
 
         except zipfile.BadZipFile:

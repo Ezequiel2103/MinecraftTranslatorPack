@@ -37,7 +37,7 @@ def main():
                     json.dumps({"item.modb.thing": "Other"})
                 )
                 archive.writestr(
-                    "assets/modb/lang/es_es.json",
+                    "assets/modb/lang/estest.json",
                     json.dumps({"item.modb.thing": "Otro"})
                 )
 
@@ -64,7 +64,7 @@ def main():
             assert "Thing" in pending
             assert pending["Thing"]["path"] == "mods/moda/item.moda.thing"
 
-            moda_lang_path = output / "assets" / "moda" / "lang" / "es_es.json"
+            moda_lang_path = output / "assets" / "moda" / "lang" / "estest.json"
             assert moda_lang_path.exists()
             moda_lang = json.loads(moda_lang_path.read_text(encoding="utf-8"))
             assert "item.moda.thing" in moda_lang

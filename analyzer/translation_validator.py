@@ -72,7 +72,27 @@ def validate_translation(
     }
 
 
-def validate_translation_quality(original, translation):
+SCRIPT_PATTERNS = {
+    "cjk": re.compile(r"[一-鿿]"),        # Chinese/Japanese Kanji
+    "kana": re.compile(r"[぀-ヿ]"),        # Hiragana / Katakana (Japanese)
+    "hangul": re.compile(r"[가-힣]"),      # Hangul syllables (Korean)
+    "cyrillic": re.compile(r"[Ѐ-ӿ]"),     # Russian and other Cyrillic
+    "arabic": re.compile(r"[؀-ۿ]"),
+}
+
+# Scripts a translation is *expected* to use for a given target language, so
+# the "wrong script" check below only flags a script neither the original
+# nor the target language should ever contain — otherwise every correct
+# translation into Russian/Chinese/Japanese/Korean would be rejected too.
+TARGET_LANGUAGE_SCRIPTS = {
+    "zh": {"cjk"},
+    "ja": {"cjk", "kana"},
+    "ko": {"hangul"},
+    "ru": {"cyrillic"},
+}
+
+
+def validate_translation_quality(original, translation, target_language=None):
     """Rejects common AI outputs that are not a clean translation."""
 
     if not translation:
@@ -89,6 +109,17 @@ def validate_translation_quality(original, translation):
             "valid": False,
             "reason": "unchanged_translation"
         }
+
+    allowed_scripts = TARGET_LANGUAGE_SCRIPTS.get(target_language, set())
+
+    for script_name, pattern in SCRIPT_PATTERNS.items():
+        if script_name in allowed_scripts:
+            continue
+        if pattern.search(translation_clean) and not pattern.search(original_clean):
+            return {
+                "valid": False,
+                "reason": "wrong_script"
+            }
 
     if re.search(
         r"(?:^|\n)\s*(translation|traducción|traduccion|answer|respuesta)\s*:",

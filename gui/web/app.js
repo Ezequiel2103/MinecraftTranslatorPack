@@ -118,10 +118,11 @@ async function loadSettings() {
   data.providers.forEach((provider) => {
     const option = document.createElement("option");
     option.value = provider;
-    option.textContent = provider;
+    option.textContent = t(`provider_${provider}`);
     providerSelect.appendChild(option);
   });
   providerSelect.value = currentSettings.ai_provider;
+  toggleGoogleUsageVisibility();
 
   const languageSelect = document.getElementById("select-language");
   languageSelect.innerHTML = "";
@@ -143,6 +144,28 @@ async function loadSettings() {
   if (currentSettings.last_modpack_root) {
     scanModpackPath(currentSettings.last_modpack_root);
   }
+}
+
+function toggleGoogleUsageVisibility() {
+  const isGoogle = document.getElementById("select-provider").value === "google";
+  document.getElementById("google-usage-box").classList.toggle("hidden", !isGoogle);
+  if (isGoogle) {
+    loadGoogleUsage();
+  }
+}
+
+async function loadGoogleUsage() {
+  const usage = await api().get_google_usage();
+  const fill = document.getElementById("google-usage-fill");
+  const text = document.getElementById("google-usage-text");
+
+  fill.style.width = `${usage.percent}%`;
+  fill.classList.toggle("usage-warning", usage.percent >= 90);
+  text.textContent = t("google_usage_text", {
+    used: usage.used.toLocaleString(),
+    limit: usage.limit.toLocaleString(),
+    percent: usage.percent
+  });
 }
 
 async function saveSettingsFromForm() {
@@ -172,6 +195,13 @@ async function saveSettingsFromForm() {
 async function changeUiLanguage(langCode) {
   await loadLocale(langCode);
   currentSettings = await api().save_settings({ ui_language: langCode });
+  refreshProviderLabels();
+}
+
+function refreshProviderLabels() {
+  document.querySelectorAll("#select-provider option").forEach((option) => {
+    option.textContent = t(`provider_${option.value}`);
+  });
 }
 
 async function rememberPaths() {
@@ -274,6 +304,37 @@ async function exportModsDictionary() {
   }
 }
 
+// ---------------- resource pack merging ----------------
+
+async function mergeResourcepacks() {
+  const paths = await api().pick_open_files_multiple([
+    t("file_type_resourcepack_zip")
+  ]);
+  if (!paths || paths.length < 2) {
+    if (paths && paths.length === 1) {
+      setResult(t("result_merge_need_two"), "error");
+    }
+    return;
+  }
+
+  const outputFolder = await api().pick_folder();
+  if (!outputFolder) return;
+
+  const result = await api().merge_resourcepacks_now(paths, outputFolder);
+  if (result.ok) {
+    setResult(
+      t("result_merge_success", {
+        mods: result.merged_mods.length,
+        conflicts: result.conflicts.length,
+        output: result.output_path
+      }),
+      "success"
+    );
+  } else {
+    setResult(t("result_error", { message: result.error }), "error");
+  }
+}
+
 // ---------------- translate now ----------------
 
 async function translateNow() {
@@ -337,6 +398,25 @@ window.onBackendEvent = function (event, payload) {
       }),
       "success"
     );
+    toggleGoogleUsageVisibility();
+    return;
+  }
+
+  if (event === "quota_exceeded") {
+    setProgress(0, t("progress_quota_exceeded"));
+    setBusy(false);
+    setResult(
+      t("result_quota_exceeded", {
+        files: payload.files,
+        mods: payload.mods,
+        pending: payload.pending,
+        output: payload.output_folder,
+        used: payload.used.toLocaleString(),
+        limit: payload.limit.toLocaleString()
+      }),
+      "error"
+    );
+    toggleGoogleUsageVisibility();
     return;
   }
 
@@ -429,7 +509,12 @@ window.addEventListener("pywebviewready", async () => {
   });
 
   document.getElementById("btn-home").addEventListener("click", () => showView("home"));
-  document.getElementById("btn-settings").addEventListener("click", () => showView("settings"));
+  document.getElementById("btn-settings").addEventListener("click", () => {
+    showView("settings");
+    toggleGoogleUsageVisibility();
+  });
+
+  document.getElementById("select-provider").addEventListener("change", toggleGoogleUsageVisibility);
   document.getElementById("btn-pending").addEventListener("click", () => {
     showView("pending");
     loadPending();
@@ -455,6 +540,10 @@ window.addEventListener("pywebviewready", async () => {
   document.getElementById("link-export-mods-dict").addEventListener("click", (event) => {
     event.preventDefault();
     exportModsDictionary();
+  });
+  document.getElementById("link-merge-resourcepacks").addEventListener("click", (event) => {
+    event.preventDefault();
+    mergeResourcepacks();
   });
 
   document.getElementById("btn-translate-now").addEventListener("click", translateNow);

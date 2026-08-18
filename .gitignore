@@ -4,3 +4,5 @@ __pycache__/
 .env.*
 !.env.example
 gui_settings.json
+build/
+dist/

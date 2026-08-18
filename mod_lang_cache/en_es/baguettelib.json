@@ -1,0 +1,8 @@
+{
+    "source_hash": "1962a24c512b7db29cb67b2572a6fad47144a8c4639c12c30219a73642ef93f2",
+    "lang": {
+        "itemGroup.baguettelib": "Pestaña de Mod de Ejemplo",
+        "block.baguettelib.example_block": "Bloque de Ejemplo",
+        "item.baguettelib.example_item": "Objeto de Ejemplo"
+    }
+}

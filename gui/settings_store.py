@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 
-SETTINGS_PATH = Path(__file__).resolve().parent.parent / "gui_settings.json"
+SETTINGS_PATH = Path("gui_settings.json")
 
 DEFAULT_SETTINGS = {
     "ui_language": "es",

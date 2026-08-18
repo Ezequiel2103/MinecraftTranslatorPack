@@ -1,0 +1,8 @@
+{
+    "source_hash": "9dd0fd406bce3ca8200f88408f8d77e03dbacdfeca90e78adb20a7dd155813c0",
+    "lang": {
+        "itemGroup.busy_villagers": "Pestaña de Mod de Ejemplo",
+        "block.busy_villagers.example_block": "Bloque de Ejemplo",
+        "item.busy_villagers.example_item": "Objeto de Ejemplo"
+    }
+}

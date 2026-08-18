@@ -1,0 +1,17 @@
+{
+    "source_hash": "eeb8e6f60093539e1d8a2c3abb301242c0a0b73a1f0b032c6cd5634aae3caa5b",
+    "lang": {
+        "item.ae2things.disk_drive_1k": "Unidad de Disco ME de 1k",
+        "item.ae2things.disk_drive_4k": "Unidad de Disco ME 4k",
+        "item.ae2things.disk_drive_16k": "16k Disco ME",
+        "item.ae2things.disk_drive_64k": "Unidad de Disco ME de 64k",
+        "item.ae2things.disk_drive_256k": "Unidad de Disco ME de 256k",
+        "item.ae2things.disk_housing": "Carcasa de Disco ME",
+        "text.ae2things.disk_drives": "Unidades de Disco ME",
+        "command.ae2things.recover_success": "%s ha recuperado una unidad de DISCO con el UUID de [%s].",
+        "command.ae2things.recover_fail": "Error al recuperar la DISK Drive: el UUID [%s] no existe.",
+        "command.ae2things.getuuid_success": "El UUID del DISCO proporcionado es: [%s]",
+        "command.ae2things.getuuid_fail_nouuid": "Error, el DISCO proporcionado está vacío/no se encontró uuid.",
+        "command.ae2things.getuuid_fail_notdisk": "Error, el objeto proporcionado no es un DISCO."
+    }
+}

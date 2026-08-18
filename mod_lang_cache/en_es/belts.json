@@ -1,0 +1,26 @@
+{
+    "source_hash": "49a966d2b1fe8d04f3989b2d05e66daa097bec5683de428b992d856559367674",
+    "lang": {
+        "message.belts.reset": "¡Restablecer Cinta Transportadora!",
+        "message.belts.started": "¡Inicio Almacenado!",
+        "message.belts.belt_created": "¡Cinturón creado!",
+        "message.belts.midpoint_added": "¡Punto medio almacenado!",
+        "message.belts.midpoint_duplicate": "El punto medio ya está almacenado.",
+        "message.belts.chute_used": "¡Tolva ya en uso!",
+        "message.belts.filter_set": "Conjunto de Filtro de Ítems",
+        "message.belts.filter_reset": "Restablecimiento del Filtro de Ítems",
+        "itemgroup.belts.items": "Simple Belts",
+        "block.belts.chute": "Tolva de Elementos de Cinta Transportadora",
+        "block.belts.chute.tooltip": "Conecta esto a cualquier bloque de inventario. Las cintas se conectan a esto.",
+        "block.belts.chute.tooltip.1": "[Click derecho] con un objeto para configurarlo como filtro.",
+        "block.belts.chute.tooltip.ftbfilters": "Admite filtros inteligentes del mod 'FTB Filters'.",
+        "block.belts.conveyor_support": "Soporte de Transportador",
+        "block.belts.conveyor_support.tooltip": "Se usa para guiar las trayectorias de las cintas transportadoras.",
+        "item.belts.belt": "Cinta Transportadora",
+        "item.belts.belt.tooltip.0": "Úsalo para crear cintas transportadoras de cualquier forma y tamaño. Coloca automáticamente Toboganes de Ítems al inicio y al final (ítems opcionales).",
+        "item.belts.belt.tooltip.1": "Haz clic en las tolvas existentes para marcarlas como inicio/fin. Haz clic en los soportes de cinta transportadora para añadir puntos intermedios opcionales.",
+        "item.belts.belt.tooltip.2": "[Shift] + [Clic Derecho] sin apuntar a un bloque para reiniciar.",
+        "item.belts.belt.tooltip.3": "Los conductos conectados existentes se pueden hacer clic con un objeto para habilitar el filtrado.",
+        "message.belts.show_extra": "Mantén [ctrl] para más información."
+    }
+}

@@ -67,6 +67,7 @@
       <div class="dict-links">
         <a href="#" id="link-export-modpack-dict" data-i18n="link_export_modpack_dict">Exportar diccionario de modpack…</a>
         <a href="#" id="link-export-mods-dict" data-i18n="link_export_mods_dict">Exportar diccionario de mods…</a>
+        <a href="#" id="link-merge-resourcepacks" data-i18n="link_merge_resourcepacks">Combinar resource packs…</a>
       </div>
 
       <button class="btn btn-translate-now" id="btn-translate-now" data-i18n="btn_translate_now">TRADUCIR AHORA</button>
@@ -90,6 +91,13 @@
 
       <label class="field-label" data-i18n="label_ai_provider">MOTOR DE IA</label>
       <select id="select-provider" class="select-field"></select>
+      <p class="field-hint" data-i18n="hint_ai_provider"></p>
+
+      <div class="usage-box hidden" id="google-usage-box">
+        <label class="field-label" data-i18n="label_google_usage">USO DE GOOGLE TRANSLATE ESTE MES</label>
+        <div class="usage-bar"><div class="usage-fill" id="google-usage-fill" style="width:0%"></div></div>
+        <div class="usage-text" id="google-usage-text"></div>
+      </div>
 
       <label class="field-label" data-i18n="label_target_language">TRADUCIR A</label>
       <select id="select-language" class="select-field"></select>

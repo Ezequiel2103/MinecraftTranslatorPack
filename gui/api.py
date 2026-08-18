@@ -13,22 +13,25 @@ from gui.settings_store import load_settings, save_settings
 from mod_lang_translator import translate_mod_lang_files
 from modpack_locator import locate_modpack_paths
 from review.review_manager import approve_translation, load_pending
+from translation.api_usage import DEFAULT_CHARACTER_LIMIT, get_usage
 from translation.dictionary_io import (
     export_mods_dictionary as export_mods_dictionary_file,
     export_quest_dictionary as export_quest_dictionary_file,
     import_mods_dictionary as import_mods_dictionary_file,
     import_quest_dictionary as import_quest_dictionary_file
 )
+from translation.resourcepack_merger import merge_resourcepacks
 from translator_app import translate_folder
 
 
 PROVIDER_ENV_VAR = {
     "openai": "OPENAI_API_KEY",
     "claude": "ANTHROPIC_API_KEY",
-    "deepseek": "DEEPSEEK_API_KEY"
+    "deepseek": "DEEPSEEK_API_KEY",
+    "google": "GOOGLE_TRANSLATE_API_KEY"
 }
 
-AI_PROVIDERS = ["mock", "ollama", "openai", "claude", "deepseek"]
+AI_PROVIDERS = ["mock", "ollama", "openai", "claude", "deepseek", "google"]
 UI_LANGUAGES = ["es", "en"]
 
 PACK_ICON_PATH = Path(__file__).resolve().parent / "assets" / "pack_icon.png"
@@ -86,6 +89,16 @@ class Api:
     def save_settings(self, settings):
         return save_settings(settings)
 
+    def get_google_usage(self):
+        usage = get_usage()
+        used = usage["characters_used"]
+        return {
+            "month": usage["month"],
+            "used": used,
+            "limit": DEFAULT_CHARACTER_LIMIT,
+            "percent": min(100, round(used / DEFAULT_CHARACTER_LIMIT * 100, 1))
+        }
+
     def get_locale(self, lang_code):
         if lang_code not in UI_LANGUAGES:
             lang_code = "es"
@@ -134,6 +147,30 @@ class Api:
             file_types=tuple(file_types)
         )
         return result[0] if result else None
+
+    def pick_open_files_multiple(self, file_types):
+        if not self._window:
+            return []
+
+        result = self._window.create_file_dialog(
+            webview.FileDialog.OPEN,
+            allow_multiple=True,
+            file_types=tuple(file_types)
+        )
+        return list(result) if result else []
+
+    # --- resource pack merging ---------------------------------------------
+
+    def merge_resourcepacks_now(self, source_paths, output_folder):
+        try:
+            result = merge_resourcepacks(
+                source_paths, output_folder,
+                pack_icon=PACK_ICON_PATH if PACK_ICON_PATH.exists() else None
+            )
+        except (OSError, ValueError, zipfile.BadZipFile) as error:
+            return {"ok": False, "error": str(error)}
+
+        return {"ok": True, **result}
 
     # --- modpack discovery ------------------------------------------------
 
@@ -233,6 +270,7 @@ class Api:
         resume_event = self._resume_event
 
         summary = {"files": 0, "mods": 0, "pending": 0}
+        quota_exceeded = False
 
         try:
             self._emit("start", {"phase": "modpack"})
@@ -265,6 +303,9 @@ class Api:
                 summary["pending"] += sum(
                     len(report["pending_items"]) for report in reports
                 )
+                quota_exceeded = quota_exceeded or any(
+                    report.get("quota_exceeded") for report in reports
+                )
 
             if paths["mods_folder"] and not cancel_event.is_set():
                 self._emit("start", {"phase": "mods"})
@@ -295,14 +336,26 @@ class Api:
                 )
                 summary["mods"] = len(stats["mods"])
                 summary["pending"] += stats["pending_items"]
+                quota_exceeded = quota_exceeded or stats.get("quota_exceeded", False)
 
-            done_event = "cancelled" if cancel_event.is_set() else "done"
-            self._emit(done_event, {
-                "files": summary["files"],
-                "mods": summary["mods"],
-                "pending": summary["pending"],
-                "output_folder": str(output_folder)
-            })
+            if quota_exceeded:
+                usage = get_usage()
+                self._emit("quota_exceeded", {
+                    "files": summary["files"],
+                    "mods": summary["mods"],
+                    "pending": summary["pending"],
+                    "output_folder": str(output_folder),
+                    "used": usage["characters_used"],
+                    "limit": DEFAULT_CHARACTER_LIMIT
+                })
+            else:
+                done_event = "cancelled" if cancel_event.is_set() else "done"
+                self._emit(done_event, {
+                    "files": summary["files"],
+                    "mods": summary["mods"],
+                    "pending": summary["pending"],
+                    "output_folder": str(output_folder)
+                })
 
         except Exception as error:
             self._emit("error", {"message": str(error)})

@@ -18,7 +18,11 @@ from translation.mod_lang_cache import (
     save_cached_translation
 )
 from translation.translation_service import TranslationService
-from translator_app import create_ai_translator, resolve_protected_terms
+from translator_app import (
+    DEFAULT_LOCALES,
+    create_ai_translator,
+    resolve_protected_terms
+)
 
 
 PACK_MCMETA = {
@@ -49,7 +53,7 @@ def translate_mod_lang_files(
     Translates every mod's own en_us.json (skipping mods that already
     ship their own translation for the target locale) and assembles the
     result as a single resource pack (all mods under the same
-    assets/<modid>/lang/es_es.json layout), so mods are translated
+    assets/<modid>/lang/<locale>.json layout), so mods are translated
     without touching their jars and the player only installs one pack.
 
     Each mod's translation is cached by content hash under
@@ -78,7 +82,8 @@ def translate_mod_lang_files(
     """
 
     language_pair = f"{source_language}_{target_language}"
-    sources = scan_mod_lang_sources(mods_folder)
+    target_locale = DEFAULT_LOCALES.get(target_language.lower(), target_language.lower())
+    sources = scan_mod_lang_sources(mods_folder, target_locale=target_locale)
     protected_terms = resolve_protected_terms(language_pair, mods_folder)
     classification = load_classification(language_pair)
     classification_changed = False
@@ -90,6 +95,7 @@ def translate_mod_lang_files(
         "reused_from_cache": 0,
         "translated_fresh": 0,
         "skipped_config_only": 0,
+        "quota_exceeded": False,
         "mods": []
     }
     pending_items = []
@@ -112,7 +118,7 @@ def translate_mod_lang_files(
             stats["skipped_config_only"] += 1
             continue
 
-        if source["has_es_es"]:
+        if source["has_target_translation"]:
             stats["already_translated_by_mod"] += 1
             continue
 
@@ -125,7 +131,7 @@ def translate_mod_lang_files(
             translated_lang = cached_translation
             stats["reused_from_cache"] += 1
         else:
-            translated_lang, failed_results = _translate_lang_dict(
+            translated_lang, failed_results, quota_exceeded = _translate_lang_dict(
                 source["en_us"],
                 language_pair,
                 source_language,
@@ -138,6 +144,9 @@ def translate_mod_lang_files(
                 cancel_event,
                 resume_event
             )
+
+            if quota_exceeded:
+                stats["quota_exceeded"] = True
 
             for item in failed_results:
                 pending_items.append({
@@ -153,12 +162,14 @@ def translate_mod_lang_files(
                 })
 
             save_cached_translation(
-                modid, source_hash, translated_lang, language_pair
+                modid, source_hash, translated_lang, language_pair,
+                source_lang=source["en_us"]
             )
             stats["translated_fresh"] += 1
 
         lang_path = (
-            output_resourcepack / "assets" / modid / "lang" / "es_es.json"
+            output_resourcepack / "assets" / modid / "lang"
+            / f"{target_locale}.json"
         )
         lang_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -214,7 +225,11 @@ def _translate_lang_dict(
     service = TranslationService(
         language_pair,
         ai_translator=create_ai_translator(ai_provider, ai_model),
-        protected_terms=protected_terms
+        protected_terms=protected_terms,
+        # Quest-specific templates (e.g. "&eKill&f: ") have no business
+        # matching mod lang text, which uses entirely different phrasing.
+        templates=[],
+        cancel_event=cancel_event
     )
 
     results = translate_items_concurrently(
@@ -238,4 +253,4 @@ def _translate_lang_dict(
 
     translated_lang = apply_translations(dict(en_us), results)
 
-    return translated_lang, failed_results
+    return translated_lang, failed_results, service.quota_exceeded

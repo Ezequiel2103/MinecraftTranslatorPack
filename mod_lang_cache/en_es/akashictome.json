@@ -1,0 +1,16 @@
+{
+    "source_hash": "4c3c21d5eba39c9024c6e9f4e5265bd4986b26b26418f7ead4dc6c24efacd0d2",
+    "lang": {
+        "akashictome.sudo_name": "Akashic Tome (%s)",
+        "akashictome.click_morph": "Mayús-clic derecho para cambiar",
+        "item.akashictome.tome": "Akashic Tome",
+        "akashictome.misc.shift_for_info": "§7Hold §bSHIFT§7 for more info",
+        "akashictome.configuration.Allow all items to be added": "Permitir que se añadan todos los objetos",
+        "akashictome.configuration.Whitelisted Items": "Elementos en lista blanca",
+        "akashictome.configuration.Blacklisted Mods": "Mods en lista negra",
+        "akashictome.configuration.Mod Aliases": "Alias de Mods",
+        "akashictome.configuration.Hide Book Render": "Ocultar representación del libro",
+        "akashictome.configuration.Whitelisted Names": "Nombres en la Lista Blanca",
+        "akashictome.configuration.Blacklisted Items": "Artículos en la lista negra"
+    }
+}

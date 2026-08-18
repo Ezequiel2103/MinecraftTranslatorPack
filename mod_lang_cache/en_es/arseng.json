@@ -1,0 +1,22 @@
+{
+    "source_hash": "fe8c8f2cd6a0b7bc5b97058aaf086677686efd85b6460b01de8cb94cb0cc4ab9",
+    "lang": {
+        "block.arseng.me_source_jar": "Tarro Fuente de ME",
+        "block.arseng.source_acceptor": "Convertidor de Fuente ME",
+        "item.arseng.cable_source_acceptor": "Convertidor de Fuente ME",
+        "item.arseng.portable_source_cell_16k": "Célula de Fuente Portátil de 16k",
+        "item.arseng.portable_source_cell_1k": "Célula de Fuente Portátil de 1k",
+        "item.arseng.portable_source_cell_256k": "Célula de Fuente Portátil de 256k",
+        "item.arseng.portable_source_cell_4k": "4k Célula de Fuente Portátil",
+        "item.arseng.portable_source_cell_64k": "Célula de Fuente Portátil de 64k",
+        "item.arseng.source_cell_housing": "Carcasa de Celda de Fuente ME",
+        "item.arseng.source_p2p_tunnel": "Túnel ME Fuente P2P",
+        "item.arseng.source_storage_cell_16k": "16k Célula de Almacenamiento de Fuente ME",
+        "item.arseng.source_storage_cell_1k": "Célula de almacenamiento de fuente ME de 1k",
+        "item.arseng.source_storage_cell_256k": "Celda de Almacenamiento de Fuente ME de 256k",
+        "item.arseng.source_storage_cell_4k": "Celda de Almacenamiento de Fuente ME de 4k",
+        "item.arseng.source_storage_cell_64k": "Célula de Almacenamiento de Fuente ME de 64k",
+        "item.arseng.spell_p2p_tunnel": "Túnel ME P2P de Hechizo",
+        "itemGroup.arseng": "Ars Énergistique"
+    }
+}

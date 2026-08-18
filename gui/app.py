@@ -1,7 +1,14 @@
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+if getattr(sys, "frozen", False):
+    # Running from a PyInstaller-built exe: bundled files live under the
+    # extracted _MEIPASS folder instead of next to this script.
+    BASE_DIR = Path(sys._MEIPASS)
+else:
+    BASE_DIR = Path(__file__).resolve().parent.parent
+
+sys.path.insert(0, str(BASE_DIR))
 
 import webview
 
@@ -10,7 +17,7 @@ from gui.api import Api
 
 def main():
     api = Api()
-    web_dir = Path(__file__).resolve().parent / "web"
+    web_dir = BASE_DIR / "gui" / "web"
 
     window = webview.create_window(
         "Traductor de Modpacks",

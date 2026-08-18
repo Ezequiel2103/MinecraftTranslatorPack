@@ -33,9 +33,21 @@ def main():
         by_modid = {item["modid"]: item for item in sources}
 
         assert set(by_modid) == {"create", "translatedmod"}
-        assert by_modid["create"]["has_es_es"] is False
+        assert by_modid["create"]["has_target_translation"] is False
         assert by_modid["create"]["en_us"] == {"item.create.wrench": "Wrench"}
-        assert by_modid["translatedmod"]["has_es_es"] is True
+        assert by_modid["translatedmod"]["has_target_translation"] is True
+
+        # A different target locale (e.g. Portuguese) must be detected
+        # independently of the hardcoded Spanish default.
+        with zipfile.ZipFile(mods_folder / "translated_mod.jar", "a") as archive:
+            archive.writestr(
+                "assets/translatedmod/lang/pt_br.json",
+                json.dumps({"item.translatedmod.thing": "Coisa"})
+            )
+        pt_sources = scan_mod_lang_sources(mods_folder, target_locale="pt_br")
+        pt_by_modid = {item["modid"]: item for item in pt_sources}
+        assert pt_by_modid["translatedmod"]["has_target_translation"] is True
+        assert pt_by_modid["create"]["has_target_translation"] is False
 
     print("Mod lang scanner OK")
 

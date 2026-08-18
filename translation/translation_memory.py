@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 
-MEMORY_ROOT = Path(__file__).parent
+MEMORY_ROOT = Path("translation")
 
 
 def memory_path(language_pair="en_es"):

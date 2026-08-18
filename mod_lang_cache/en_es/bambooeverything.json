@@ -1,0 +1,27 @@
+{
+    "source_hash": "d9b6daa9b2c0368ea48a393950733229bd306af621d6dbc05b28d8744c0aaacd",
+    "lang": {
+        "itemGroup.bambooeverything.creative_tab": "Bamboo Everything",
+        "block.bambooeverything.bamboo_ladder": "Escalera de Bambú",
+        "block.bambooeverything.bamboo_fence": "Valla de Bambú",
+        "block.bambooeverything.bamboo_fence_gate": "Puerta de Valla de Bambú",
+        "block.bambooeverything.bamboo_door": "Puerta de Bambú",
+        "block.bambooeverything.bamboo_trapdoor": "Trampilla de Bambú",
+        "block.bambooeverything.bamboo_bundle": "Paquete de Bambú",
+        "block.bambooeverything.bamboo_stairs": "Escaleras de Bambú",
+        "block.bambooeverything.bamboo_slab": "Losa de Bambú",
+        "block.bambooeverything.bamboo_torch": "Antorcha de Bambú",
+        "item.bambooeverything.bamboo_raft": "Balsa de Bambú",
+        "item.bambooeverything.dry_bamboo": "Bambú Seco",
+        "block.bambooeverything.dry_bamboo_ladder": "Escalera de Bambú Seco",
+        "block.bambooeverything.dry_bamboo_fence": "Valla de Bambú Seco",
+        "block.bambooeverything.dry_bamboo_fence_gate": "Puerta de Valla de Bambú Seco",
+        "block.bambooeverything.dry_bamboo_door": "Puerta de Bambú Seco",
+        "block.bambooeverything.dry_bamboo_trapdoor": "Trampilla de Bambú Seco",
+        "block.bambooeverything.dry_bamboo_bundle": "Haz de Bambú Seco",
+        "block.bambooeverything.dry_bamboo_stairs": "Escaleras de Bambú Seco",
+        "block.bambooeverything.dry_bamboo_slab": "Losa de Bambú Seco",
+        "block.bambooeverything.dry_bamboo_torch": "Antorcha de Bambú Seco",
+        "item.bambooeverything.dry_bamboo_raft": "Balsa de Bambú Seco"
+    }
+}

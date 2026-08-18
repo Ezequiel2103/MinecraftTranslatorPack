@@ -70,6 +70,9 @@
         <a href="#" id="link-merge-resourcepacks" data-i18n="link_merge_resourcepacks">Combinar resource packs…</a>
       </div>
 
+      <button class="btn btn-secondary" id="btn-search-community" data-i18n="btn_search_community">🔍 Buscar traducción comunitaria</button>
+      <div id="community-results" class="pending-list hidden"></div>
+
       <button class="btn btn-translate-now" id="btn-translate-now" data-i18n="btn_translate_now">TRADUCIR AHORA</button>
 
       <div class="result-box" id="result-box"></div>
@@ -115,6 +118,10 @@
         <input type="checkbox" id="input-content-only" checked>
         <span data-i18n="label_content_only">Saltar mods sin contenido real (solo config/optimización)</span>
       </label>
+
+      <label class="field-label" data-i18n="label_curseforge_key">API KEY DE CURSEFORGE (OPCIONAL)</label>
+      <input type="password" id="input-curseforge-key" class="input-field" data-i18n-placeholder="placeholder_curseforge_key" placeholder="API_KEY: ****-****-****-****">
+      <p class="field-hint" data-i18n="hint_curseforge_key"></p>
 
       <button class="btn btn-primary" id="btn-save-settings" data-i18n="btn_save">GUARDAR</button>
       <div class="save-confirm hidden" id="save-confirm" data-i18n="save_confirm">✔ Guardado</div>

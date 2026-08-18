@@ -1,4 +1,5 @@
 import re
+from collections import Counter
 
 
 def extract_placeholders(text):
@@ -70,6 +71,61 @@ def validate_translation(
         "valid": True,
         "reason": None
     }
+
+
+def attempt_placeholder_repair(original, translation):
+    """
+    A narrow, safe fix for one specific observed AI failure mode: it
+    repeated a placeholder/color code that should only appear once. If
+    every token the translation is missing is actually just an EXCESS
+    copy of a token that legitimately belongs there (never a token
+    that's outright missing, or one that shouldn't exist at all), the
+    extra copies are stripped and the result re-validated before being
+    returned. Returns None if the mismatch isn't this exact, safe case —
+    a missing token is a content decision, not something to guess at.
+    """
+
+    if not translation:
+        return None
+
+    original_counts = Counter(extract_placeholders(original))
+    translation_counts = Counter(extract_placeholders(translation))
+
+    for token, count in translation_counts.items():
+        if count > original_counts.get(token, 0) and original_counts.get(token, 0) == 0:
+            return None
+
+    for token, count in original_counts.items():
+        if translation_counts.get(token, 0) < count:
+            return None
+
+    repaired = translation
+
+    for token, count in translation_counts.items():
+        extra = count - original_counts.get(token, 0)
+
+        if extra <= 0:
+            continue
+
+        pattern = re.compile(re.escape(token))
+        removed = 0
+
+        def _strip_extra_occurrences(match):
+            nonlocal removed
+            if removed < extra:
+                removed += 1
+                return ""
+            return match.group(0)
+
+        repaired = pattern.sub(_strip_extra_occurrences, repaired)
+
+    if repaired == translation:
+        return None
+
+    if not validate_translation(original, repaired)["valid"]:
+        return None
+
+    return repaired
 
 
 SCRIPT_PATTERNS = {

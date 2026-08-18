@@ -2,6 +2,7 @@ from pathlib import Path
 import re
 
 from ai.ai_translator import (
+    ArgosTranslateTranslator,
     ClaudeTranslator,
     DeepSeekTranslator,
     GoogleTranslateTranslator,
@@ -108,6 +109,8 @@ def create_ai_translator(provider, model=None):
         return DeepSeekTranslator(model=model)
     if provider == "google":
         return GoogleTranslateTranslator()
+    if provider == "argos":
+        return ArgosTranslateTranslator()
     return MockAITranslator()
 
 

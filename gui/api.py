@@ -20,8 +20,14 @@ from translation.dictionary_io import (
     import_mods_dictionary as import_mods_dictionary_file,
     import_quest_dictionary as import_quest_dictionary_file
 )
+from translation.community_import import import_community_resourcepack
+from translation.curseforge_search import (
+    CurseForgeError,
+    download_translation_pack,
+    search_translation_packs
+)
 from translation.resourcepack_merger import merge_resourcepacks
-from translator_app import translate_folder
+from translator_app import DEFAULT_LOCALES, translate_folder
 
 
 PROVIDER_ENV_VAR = {
@@ -31,7 +37,7 @@ PROVIDER_ENV_VAR = {
     "google": "GOOGLE_TRANSLATE_API_KEY"
 }
 
-AI_PROVIDERS = ["mock", "ollama", "openai", "claude", "deepseek", "google"]
+AI_PROVIDERS = ["mock", "ollama", "argos", "openai", "claude", "deepseek", "google"]
 UI_LANGUAGES = ["es", "en"]
 
 PACK_ICON_PATH = Path(__file__).resolve().parent / "assets" / "pack_icon.png"
@@ -168,6 +174,54 @@ class Api:
                 pack_icon=PACK_ICON_PATH if PACK_ICON_PATH.exists() else None
             )
         except (OSError, ValueError, zipfile.BadZipFile) as error:
+            return {"ok": False, "error": str(error)}
+
+        return {"ok": True, **result}
+
+    # --- community translation search (CurseForge) --------------------------
+
+    def search_community_translations(self, modpack_root):
+        settings = load_settings()
+        api_key = settings.get("curseforge_api_key")
+
+        if not api_key:
+            return {"ok": False, "error": "curseforge_key_missing"}
+
+        modpack_name = Path(modpack_root).name
+
+        try:
+            results = search_translation_packs(modpack_name, api_key)
+        except CurseForgeError as error:
+            return {"ok": False, "error": str(error)}
+
+        return {"ok": True, "results": results, "query": modpack_name}
+
+    def import_community_translation(self, download_url, file_name, modpack_root):
+        paths = locate_modpack_paths(modpack_root)
+
+        if not paths["mods_folder"]:
+            return {
+                "ok": False,
+                "error": "No encontré una carpeta de mods en ese modpack."
+            }
+
+        settings = load_settings()
+        language_pair = f"{settings['source_language']}_{settings['target_language']}"
+        target_locale = DEFAULT_LOCALES.get(
+            settings["target_language"].lower(), settings["target_language"].lower()
+        )
+
+        destination = (
+            Path("community_downloads") / (file_name or "community_pack.zip")
+        )
+
+        try:
+            download_translation_pack(download_url, destination)
+            result = import_community_resourcepack(
+                destination, paths["mods_folder"],
+                language_pair=language_pair, target_locale=target_locale
+            )
+        except (CurseForgeError, OSError, ValueError, zipfile.BadZipFile) as error:
             return {"ok": False, "error": str(error)}
 
         return {"ok": True, **result}

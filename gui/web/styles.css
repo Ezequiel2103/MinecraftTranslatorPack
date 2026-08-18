@@ -30,6 +30,13 @@ html, body {
   overflow: hidden;
 }
 
+/* Generic utility: every "toggle .hidden via JS" element relies on this,
+   not just the couple of components that happened to also define their
+   own scoped .some-class.hidden rule. */
+.hidden {
+  display: none !important;
+}
+
 .window-frame {
   width: 100vw;
   height: 100vh;

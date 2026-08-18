@@ -13,7 +13,7 @@ PACK_MCMETA = {
 }
 
 
-def _iter_lang_files(source_root):
+def iter_lang_files(source_root):
     assets_dir = Path(source_root) / "assets"
 
     if not assets_dir.is_dir():
@@ -64,7 +64,7 @@ def merge_resourcepacks(source_paths, output_path, pack_icon=None):
                 )
 
         for root in roots:
-            for modid, locale, lang_file in _iter_lang_files(root):
+            for modid, locale, lang_file in iter_lang_files(root):
                 key = (modid, locale)
 
                 if key in claimed_by:

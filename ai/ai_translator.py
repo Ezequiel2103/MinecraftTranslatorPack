@@ -717,6 +717,93 @@ class GoogleTranslateTranslator(AITranslator):
         }
 
 
+class ArgosTranslateTranslator(AITranslator):
+    """
+    Fully offline neural machine translation via Argos Translate
+    (OpenNMT/CTranslate2 models running locally) — no API key, no
+    per-character cost, no internet needed once the language model is
+    installed. The model itself is downloaded once (a few hundred MB)
+    the first time a given language pair is used; after that this
+    provider never touches the network at all.
+
+    In testing, this model translates full sentences (quest text)
+    reasonably well but is noticeably weaker on short, capitalized,
+    context-free noun phrases (item/block names like "Iron Ingot"),
+    sometimes leaving them partly or fully untranslated without erroring
+    — something the usual validators can't always catch, since a
+    partially-translated phrase isn't an empty, unchanged, or
+    placeholder-broken one. It's a solid free option for quests; treat
+    mod-content results from it with more scrutiny.
+    """
+
+    def __init__(self, model=None):
+        try:
+            import argostranslate.package
+            import argostranslate.translate
+        except ImportError as error:
+            raise RuntimeError(
+                "Argos Translate is required for the argos provider. "
+                "Install it with: pip install argostranslate"
+            ) from error
+
+        self._package = argostranslate.package
+        self._translate_module = argostranslate.translate
+
+    def _ensure_installed(self, source_language, target_language):
+        installed = self._package.get_installed_packages()
+
+        if any(
+            package.from_code == source_language
+            and package.to_code == target_language
+            for package in installed
+        ):
+            return
+
+        self._package.update_package_index()
+        available = self._package.get_available_packages()
+        candidates = [
+            package for package in available
+            if package.from_code == source_language
+            and package.to_code == target_language
+        ]
+
+        if not candidates:
+            raise RuntimeError(
+                "Argos Translate no tiene un modelo instalado ni disponible "
+                f"para traducir de '{source_language}' a '{target_language}'."
+            )
+
+        downloaded_path = candidates[0].download()
+        self._package.install_from_path(downloaded_path)
+
+    def translate(
+        self,
+        text,
+        source_language,
+        target_language,
+        terminology=None,
+        context=None,
+        previous_translation=None,
+        validation_error=None
+    ):
+        self._ensure_installed(source_language, target_language)
+
+        translation = self._translate_module.translate(
+            text, source_language, target_language
+        )
+
+        return {
+            "translation": translation,
+            "source": "argos_translate"
+        }
+
+    def ask(self, prompt):
+        raise NotImplementedError(
+            "Argos Translate is a translation-only engine; it can't "
+            "answer arbitrary prompts."
+        )
+
+
 class MockAITranslator(AITranslator):
     """
     Temporary translator used for testing.

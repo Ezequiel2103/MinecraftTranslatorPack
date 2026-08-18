@@ -11,6 +11,7 @@ from translation.translation_memory import (
 from ai.ai_translator import MockAITranslator, QuotaExceededError
 from analyzer.text_protector import protect_text, restore_text
 from analyzer.translation_validator import (
+    attempt_placeholder_repair,
     validate_translation,
     validate_translation_quality
 )
@@ -52,6 +53,8 @@ class TranslationService:
 
         self._new_memory_entries = {}
         self._new_memory_lock = threading.Lock()
+        self._skeleton_index_cache = None
+        self._skeleton_index_lock = threading.Lock()
 
     def translate(
         self,
@@ -188,6 +191,17 @@ class TranslationService:
         if template_result is not None:
             return template_result
 
+        # 6. Skeleton match: same fixed wording as an existing memory
+        # entry, differing only in the protected content (a color-coded
+        # name, a placeholder value...). Same idea as the hand-written
+        # templates above, but discovered automatically from whatever is
+        # already in memory instead of needing to be curated by hand.
+
+        skeleton_result = self._try_skeleton_match(text)
+
+        if skeleton_result is not None:
+            return skeleton_result
+
         return None
 
     def _ai_translate_with_retry(
@@ -262,6 +276,12 @@ class TranslationService:
                 text,
                 restored_translation
             )
+
+            if not validation["valid"]:
+                repaired = attempt_placeholder_repair(text, restored_translation)
+                if repaired is not None:
+                    restored_translation = repaired
+                    validation = validate_translation(text, restored_translation)
 
             quality = validate_translation_quality(
                 text,
@@ -436,6 +456,13 @@ class TranslationService:
             )
 
             validation = validate_translation(text, restored_translation)
+
+            if not validation["valid"]:
+                repaired = attempt_placeholder_repair(text, restored_translation)
+                if repaired is not None:
+                    restored_translation = repaired
+                    validation = validate_translation(text, restored_translation)
+
             quality = validate_translation_quality(
                 text, restored_translation, target_language=target_language
             )
@@ -526,6 +553,94 @@ class TranslationService:
                 "valid": True,
                 "validation_reason": None,
                 "attempts": variable_result.get("attempts", 0)
+            }
+
+        return None
+
+    def _skeleton_index(self):
+        """
+        Groups every disk-memory entry by its "skeleton" — the text with
+        color codes, placeholders and protected mod names blanked out to
+        __MTP_PROTECTED_N__ markers — so a brand new text sharing that
+        exact skeleton with something already translated can reuse it by
+        swapping in its own protected content, instead of asking the AI
+        to translate a sentence it has effectively already seen. Built
+        once per service instance and cached, since disk memory doesn't
+        change out from under a single translation run.
+        """
+
+        with self._skeleton_index_lock:
+            if self._skeleton_index_cache is not None:
+                return self._skeleton_index_cache
+
+            index = {}
+            memory = load_memory(self.language_pair)
+
+            for original, entry in memory.items():
+                translation = (
+                    entry.get("translation") if isinstance(entry, dict) else entry
+                )
+
+                if not translation:
+                    continue
+
+                skeleton, tokens = protect_text(
+                    original, extra_terms=self.protected_terms
+                )
+
+                # No protected content at all: this is just plain text,
+                # already covered by the exact-match memory tier — a
+                # skeleton with nothing blanked out isn't a template.
+                if not tokens:
+                    continue
+
+                index.setdefault(skeleton, []).append((original, translation))
+
+            self._skeleton_index_cache = index
+            return index
+
+    def _try_skeleton_match(self, text):
+        protected_text, protected_tokens = protect_text(
+            text, extra_terms=self.protected_terms
+        )
+
+        if not protected_tokens:
+            return None
+
+        candidates = self._skeleton_index().get(protected_text)
+
+        if not candidates:
+            return None
+
+        for original_text, translation_text in candidates:
+            if original_text == text:
+                continue
+
+            candidate_translation_skeleton, candidate_translation_tokens = (
+                protect_text(translation_text, extra_terms=self.protected_terms)
+            )
+
+            if len(candidate_translation_tokens) != len(protected_tokens):
+                continue
+
+            combined = restore_text(
+                candidate_translation_skeleton, protected_tokens
+            )
+
+            validation = validate_translation(text, combined)
+
+            if not validation["valid"]:
+                continue
+
+            with self._new_memory_lock:
+                self._new_memory_entries[text] = combined
+
+            return {
+                "translation": combined,
+                "source": "skeleton_match",
+                "valid": True,
+                "validation_reason": None,
+                "attempts": 0
             }
 
         return None

@@ -137,6 +137,7 @@ async function loadSettings() {
   document.getElementById("input-api-key").value = currentSettings.api_key || "";
   document.getElementById("input-concurrency").value = currentSettings.concurrency || 4;
   document.getElementById("input-content-only").checked = !!currentSettings.content_only;
+  document.getElementById("input-curseforge-key").value = currentSettings.curseforge_api_key || "";
 
   document.getElementById("input-modpack-path").value = currentSettings.last_modpack_root || "";
   document.getElementById("input-output-path").value = currentSettings.last_output_folder || "";
@@ -178,7 +179,8 @@ async function saveSettingsFromForm() {
     api_key: document.getElementById("input-api-key").value,
     target_language: document.getElementById("select-language").value,
     concurrency: parseInt(document.getElementById("input-concurrency").value, 10) || 4,
-    content_only: document.getElementById("input-content-only").checked
+    content_only: document.getElementById("input-content-only").checked,
+    curseforge_api_key: document.getElementById("input-curseforge-key").value
   };
 
   currentSettings = await api().save_settings(settings);
@@ -333,6 +335,77 @@ async function mergeResourcepacks() {
   } else {
     setResult(t("result_error", { message: result.error }), "error");
   }
+}
+
+// ---------------- community translation search (CurseForge) ------------
+
+async function searchCommunityTranslations() {
+  const modpackRoot = document.getElementById("input-modpack-path").value.trim();
+  const resultsBox = document.getElementById("community-results");
+
+  if (!modpackRoot) {
+    setResult(t("error_missing_paths"), "error");
+    return;
+  }
+
+  resultsBox.classList.remove("hidden");
+  resultsBox.innerHTML = `<div class="pending-empty">${t("community_searching")}</div>`;
+
+  const response = await api().search_community_translations(modpackRoot);
+
+  if (!response.ok) {
+    if (response.error === "curseforge_key_missing") {
+      resultsBox.innerHTML = `<div class="pending-empty">${t("community_key_missing")}</div>`;
+    } else {
+      resultsBox.innerHTML = `<div class="pending-empty">${escapeHtml(response.error)}</div>`;
+    }
+    return;
+  }
+
+  if (!response.results.length) {
+    resultsBox.innerHTML = `<div class="pending-empty">${t("community_no_results", { query: response.query })}</div>`;
+    return;
+  }
+
+  resultsBox.innerHTML = "";
+  response.results.forEach((candidate) => {
+    const row = document.createElement("div");
+    row.className = "pending-item";
+    row.innerHTML = `
+      <div class="pending-original">${escapeHtml(candidate.name)}</div>
+      <div class="pending-path">${escapeHtml(candidate.summary || "")} — ${candidate.download_count.toLocaleString()} descargas</div>
+      <div class="pending-row">
+        <button class="btn btn-secondary community-use">${t("btn_use_this")}</button>
+      </div>
+    `;
+
+    row.querySelector(".community-use").addEventListener("click", async () => {
+      row.querySelector(".community-use").disabled = true;
+      row.querySelector(".community-use").textContent = t("community_importing");
+
+      const importResult = await api().import_community_translation(
+        candidate.download_url, candidate.file_name, modpackRoot
+      );
+
+      if (importResult.ok) {
+        setResult(
+          t("result_community_import_success", {
+            mods: importResult.mods_matched,
+            pairs: importResult.pairs_added
+          }),
+          "success"
+        );
+        resultsBox.classList.add("hidden");
+        resultsBox.innerHTML = "";
+      } else {
+        setResult(t("result_error", { message: importResult.error }), "error");
+        row.querySelector(".community-use").disabled = false;
+        row.querySelector(".community-use").textContent = t("btn_use_this");
+      }
+    });
+
+    resultsBox.appendChild(row);
+  });
 }
 
 // ---------------- translate now ----------------
@@ -545,6 +618,7 @@ window.addEventListener("pywebviewready", async () => {
     event.preventDefault();
     mergeResourcepacks();
   });
+  document.getElementById("btn-search-community").addEventListener("click", searchCommunityTranslations);
 
   document.getElementById("btn-translate-now").addEventListener("click", translateNow);
   document.getElementById("btn-pause-resume").addEventListener("click", togglePauseResume);

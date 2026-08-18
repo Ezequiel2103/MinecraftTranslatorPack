@@ -12,6 +12,7 @@ DEFAULT_SETTINGS = {
     "target_language": "es",
     "concurrency": 4,
     "content_only": True,
+    "curseforge_api_key": "",
     "last_modpack_root": "",
     "last_output_folder": ""
 }

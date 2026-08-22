@@ -1,19 +1,27 @@
 import json
 import os
+import shutil
 import sys
 import threading
 import zipfile
+from datetime import datetime
 from pathlib import Path
 
 import webview
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from app_paths import data_dir
 from gui.settings_store import load_settings, save_settings
 from mod_lang_translator import translate_mod_lang_files
 from modpack_locator import locate_modpack_paths
-from review.review_manager import approve_translation, load_pending
+from review.review_manager import (
+    approve_translation,
+    load_pending,
+    save_pending_data
+)
 from translation.api_usage import DEFAULT_CHARACTER_LIMIT, get_usage
+from translation.concurrent_translate import translate_items_concurrently
 from translation.dictionary_io import (
     export_mods_dictionary as export_mods_dictionary_file,
     export_quest_dictionary as export_quest_dictionary_file,
@@ -26,8 +34,12 @@ from translation.curseforge_search import (
     download_translation_pack,
     search_translation_packs
 )
+from translation.mod_lang_cache import build_mod_item_glossary, patch_cached_translation
+from translation.protected_terms_manager import load_protected_terms
 from translation.resourcepack_merger import merge_resourcepacks
-from translator_app import DEFAULT_LOCALES, translate_folder
+from translation.translation_memory import add_translation, load_memory
+from translation.translation_service import TranslationService
+from translator_app import DEFAULT_LOCALES, create_ai_translator, translate_folder
 
 
 PROVIDER_ENV_VAR = {
@@ -54,6 +66,27 @@ TARGET_LANGUAGES = [
     {"code": "ja", "label": "日本語 (JA)"},
     {"code": "ko", "label": "한국어 (KO)"}
 ]
+
+
+def _apply_pending_fix(path, original_text, translation, language_pair):
+    """
+    Saves a successfully retried pending translation to wherever
+    translate_now() will actually look for it next time: a mod's cached
+    lang file for a "mods/<modid>/<key>" pending path, or the quest
+    translation memory for anything else. Patching the cache in place
+    (instead of clearing it) is what lets a plain re-run pick this fix
+    up without redoing the whole mod.
+    """
+
+    if path and path.startswith("mods/"):
+        parts = path.split("/", 2)
+
+        if len(parts) == 3:
+            _, modid, key = parts
+            if patch_cached_translation(modid, key, translation, language_pair):
+                return
+
+    add_translation(original_text, translation, language_pair=language_pair)
 
 
 class Api:
@@ -94,6 +127,14 @@ class Api:
 
     def save_settings(self, settings):
         return save_settings(settings)
+
+    def get_memory_stats(self):
+        settings = load_settings()
+        language_pair = f"{settings['source_language']}_{settings['target_language']}"
+        return {
+            "quest_count": len(load_memory(language_pair)),
+            "glossary_count": len(build_mod_item_glossary(language_pair))
+        }
 
     def get_google_usage(self):
         usage = get_usage()
@@ -212,7 +253,7 @@ class Api:
         )
 
         destination = (
-            Path("community_downloads") / (file_name or "community_pack.zip")
+            data_dir() / "community_downloads" / (file_name or "community_pack.zip")
         )
 
         try:
@@ -269,9 +310,15 @@ class Api:
 
     # --- translation (the actual AI-backed run) ---------------------------
 
-    def translate_now(self, modpack_root, output_folder):
+    def translate_now(self, modpack_root, translate_quests=True, translate_mods=True):
         if self._busy:
             return {"ok": False, "error": "Ya hay una traducción en curso."}
+
+        if not translate_quests and not translate_mods:
+            return {
+                "ok": False,
+                "error": "Elegí al menos una cosa para traducir (misiones o mods)."
+            }
 
         paths = locate_modpack_paths(modpack_root)
 
@@ -290,7 +337,7 @@ class Api:
 
         thread = threading.Thread(
             target=self._run_translate_now,
-            args=(paths, output_folder),
+            args=(paths, modpack_root, translate_quests, translate_mods),
             daemon=True
         )
         thread.start()
@@ -315,13 +362,21 @@ class Api:
         if self._resume_event:
             self._resume_event.set()
 
-    def _run_translate_now(self, paths, output_folder):
+    def _run_translate_now(self, paths, modpack_root, translate_quests, translate_mods):
         self._busy = True
         settings = load_settings()
         self._apply_api_key(settings)
-        output_folder = Path(output_folder)
+        modpack_root = Path(modpack_root)
         cancel_event = self._cancel_event
         resume_event = self._resume_event
+
+        fallback_ai_provider = settings.get("fallback_ai_provider")
+        if fallback_ai_provider == "none":
+            fallback_ai_provider = None
+
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        backup_dir = modpack_root / "_translator_backups" / timestamp
+        backed_up = False
 
         summary = {"files": 0, "mods": 0, "pending": 0}
         quota_exceeded = False
@@ -329,7 +384,7 @@ class Api:
         try:
             self._emit("start", {"phase": "modpack"})
 
-            if paths["quests_lang_folder"]:
+            if paths["quests_lang_folder"] and translate_quests:
                 def on_file_progress(current, total, name):
                     self._emit("file_progress", {
                         "current": current, "total": total, "name": name
@@ -340,18 +395,27 @@ class Api:
                         "current": current, "total": total
                     })
 
+                quests_lang_folder = paths["quests_lang_folder"]
+
                 reports = translate_folder(
-                    paths["quests_lang_folder"],
-                    output_folder / "modpack",
+                    quests_lang_folder,
+                    # Write straight into the modpack's own quests/lang
+                    # folder -- output_folder == input_folder -- instead
+                    # of a separate copy the user would have to merge in
+                    # by hand. Anything this overwrites is backed up
+                    # first (see backup_dir below).
+                    quests_lang_folder,
                     source_language=settings["source_language"],
                     target_language=settings["target_language"],
                     ai_provider=settings["ai_provider"],
+                    fallback_ai_provider=fallback_ai_provider,
                     mods_folder=paths["mods_folder"],
                     concurrency=settings["concurrency"],
                     on_file_progress=on_file_progress,
                     on_text_progress=on_text_progress,
                     cancel_event=cancel_event,
-                    resume_event=resume_event
+                    resume_event=resume_event,
+                    backup_dir=backup_dir
                 )
                 summary["files"] = len(reports)
                 summary["pending"] += sum(
@@ -360,8 +424,11 @@ class Api:
                 quota_exceeded = quota_exceeded or any(
                     report.get("quota_exceeded") for report in reports
                 )
+                backed_up = backed_up or any(
+                    report.get("backed_up_to") for report in reports
+                )
 
-            if paths["mods_folder"] and not cancel_event.is_set():
+            if paths["mods_folder"] and translate_mods and not cancel_event.is_set():
                 self._emit("start", {"phase": "mods"})
 
                 def on_mod_progress(current, total, modid):
@@ -374,12 +441,33 @@ class Api:
                         "current": current, "total": total
                     })
 
+                target_locale = DEFAULT_LOCALES.get(
+                    settings["target_language"].lower(),
+                    settings["target_language"].lower()
+                )
+                resourcepack_dir = (
+                    modpack_root / "resourcepacks"
+                    / f"Traduccion_Mods_{target_locale}"
+                )
+
+                # This folder is a build artifact of a previous run, not
+                # something the player hand-edits -- back the whole thing
+                # up and regenerate it fresh rather than overlaying, so a
+                # mod that got removed from the pack doesn't leave a
+                # stale translated entry behind.
+                if resourcepack_dir.exists():
+                    moved_to = backup_dir / "resourcepacks" / resourcepack_dir.name
+                    moved_to.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.move(str(resourcepack_dir), str(moved_to))
+                    backed_up = True
+
                 stats = translate_mod_lang_files(
                     paths["mods_folder"],
-                    output_folder / "mods_resourcepack",
+                    resourcepack_dir,
                     source_language=settings["source_language"],
                     target_language=settings["target_language"],
                     ai_provider=settings["ai_provider"],
+                    fallback_ai_provider=fallback_ai_provider,
                     concurrency=settings["concurrency"],
                     content_only=settings["content_only"],
                     pack_icon=PACK_ICON_PATH if PACK_ICON_PATH.exists() else None,
@@ -392,24 +480,24 @@ class Api:
                 summary["pending"] += stats["pending_items"]
                 quota_exceeded = quota_exceeded or stats.get("quota_exceeded", False)
 
+            payload = {
+                "files": summary["files"],
+                "mods": summary["mods"],
+                "pending": summary["pending"],
+                "modpack_root": str(modpack_root),
+                "backup_dir": str(backup_dir) if backed_up else None
+            }
+
             if quota_exceeded:
                 usage = get_usage()
                 self._emit("quota_exceeded", {
-                    "files": summary["files"],
-                    "mods": summary["mods"],
-                    "pending": summary["pending"],
-                    "output_folder": str(output_folder),
+                    **payload,
                     "used": usage["characters_used"],
                     "limit": DEFAULT_CHARACTER_LIMIT
                 })
             else:
                 done_event = "cancelled" if cancel_event.is_set() else "done"
-                self._emit(done_event, {
-                    "files": summary["files"],
-                    "mods": summary["mods"],
-                    "pending": summary["pending"],
-                    "output_folder": str(output_folder)
-                })
+                self._emit(done_event, payload)
 
         except Exception as error:
             self._emit("error", {"message": str(error)})
@@ -418,10 +506,19 @@ class Api:
             self._busy = False
 
     def _apply_api_key(self, settings):
-        env_var = PROVIDER_ENV_VAR.get(settings["ai_provider"])
+        self._apply_provider_api_key(settings["ai_provider"], settings.get("api_key"))
 
-        if env_var and settings.get("api_key"):
-            os.environ[env_var] = settings["api_key"]
+        fallback_provider = settings.get("fallback_ai_provider")
+        if fallback_provider and fallback_provider != "none":
+            self._apply_provider_api_key(
+                fallback_provider, settings.get("fallback_api_key")
+            )
+
+    def _apply_provider_api_key(self, provider, api_key):
+        env_var = PROVIDER_ENV_VAR.get(provider)
+
+        if env_var and api_key:
+            os.environ[env_var] = api_key
 
     # --- pending review --------------------------------------------------
 
@@ -434,3 +531,87 @@ class Api:
 
     def approve_pending(self, original, translation, language_pair):
         return approve_translation(original, translation, language_pair)
+
+    def retry_pending(self, language_pair):
+        if self._busy:
+            return {"ok": False, "error": "Ya hay una traducción en curso."}
+
+        pending = load_pending(language_pair)
+
+        if not pending:
+            return {"ok": False, "error": "No hay nada pendiente para reintentar."}
+
+        self._cancel_event = threading.Event()
+        self._resume_event = threading.Event()
+        self._resume_event.set()
+
+        thread = threading.Thread(
+            target=self._run_retry_pending,
+            args=(language_pair,),
+            daemon=True
+        )
+        thread.start()
+        return {"ok": True, "count": len(pending)}
+
+    def _run_retry_pending(self, language_pair):
+        self._busy = True
+        settings = load_settings()
+        self._apply_api_key(settings)
+        cancel_event = self._cancel_event
+        resume_event = self._resume_event
+
+        try:
+            pending = load_pending(language_pair)
+            items = [
+                {"text": original, "path": entry.get("path"), "parent_path": None}
+                for original, entry in pending.items()
+            ]
+
+            service = TranslationService(
+                language_pair,
+                ai_translator=create_ai_translator(settings["ai_provider"], None),
+                protected_terms=load_protected_terms(language_pair),
+                mod_item_glossary=build_mod_item_glossary(language_pair),
+                cancel_event=cancel_event
+            )
+
+            self._emit("retry_start", {"total": len(items)})
+
+            def on_progress(current, total):
+                self._emit("retry_progress", {"current": current, "total": total})
+
+            results = translate_items_concurrently(
+                items, service,
+                source_language=settings["source_language"],
+                target_language=settings["target_language"],
+                concurrency=settings["concurrency"],
+                on_progress=on_progress,
+                cancel_event=cancel_event,
+                resume_event=resume_event
+            )
+            service.save_new_translations()
+
+            fixed = 0
+
+            for item, result in zip(items, results):
+                if result["translation"] and result["valid"]:
+                    _apply_pending_fix(
+                        item["path"], item["text"], result["translation"],
+                        language_pair
+                    )
+                    del pending[item["text"]]
+                    fixed += 1
+
+            save_pending_data(pending, language_pair)
+
+            self._emit("retry_done", {
+                "retried": len(items),
+                "fixed": fixed,
+                "still_pending": len(pending)
+            })
+
+        except Exception as error:
+            self._emit("retry_error", {"message": str(error)})
+
+        finally:
+            self._busy = False

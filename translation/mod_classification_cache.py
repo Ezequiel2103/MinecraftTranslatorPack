@@ -1,8 +1,8 @@
-import json
-from pathlib import Path
+from app_paths import data_dir
+from json_io import load_json_safe, write_json_atomic
 
 
-CACHE_ROOT = Path("mod_lang_cache")
+CACHE_ROOT = data_dir() / "mod_lang_cache"
 
 
 def classification_path(language_pair="en_es"):
@@ -16,24 +16,11 @@ def load_classification(language_pair="en_es"):
     automatic heuristic for that mod from then on.
     """
 
-    path = classification_path(language_pair)
-
-    if not path.exists():
-        return {}
-
-    with path.open("r", encoding="utf-8") as file:
-        return json.load(file)
+    return load_json_safe(classification_path(language_pair), {})
 
 
 def save_classification(classification, language_pair="en_es"):
-    path = classification_path(language_pair)
-    path.parent.mkdir(parents=True, exist_ok=True)
-
-    with path.open("w", encoding="utf-8") as file:
-        json.dump(
-            classification,
-            file,
-            ensure_ascii=False,
-            indent=4,
-            sort_keys=True
-        )
+    write_json_atomic(
+        classification_path(language_pair), classification,
+        ensure_ascii=False, indent=4, sort_keys=True
+    )

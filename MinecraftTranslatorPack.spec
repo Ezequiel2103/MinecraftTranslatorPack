@@ -11,6 +11,11 @@ a = Analysis(
         ('gui/web', 'gui/web'),
         ('gui/assets', 'gui/assets'),
         ('localization/es', 'localization/es'),
+        # Hand-curated, read-only content (not user data -- see
+        # app_paths.resource_dir): the fixed-phrase templates and
+        # terminology glossary that ship with the app.
+        ('translation/en_es/templates.json', 'translation/en_es'),
+        ('translation/en_es/terminology.json', 'translation/en_es'),
     ],
     hiddenimports=[
         'webview.platforms.edgechromium',

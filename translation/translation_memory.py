@@ -1,8 +1,8 @@
-import json
-from pathlib import Path
+from app_paths import data_dir
+from json_io import load_json_safe, write_json_atomic
 
 
-MEMORY_ROOT = Path("translation")
+MEMORY_ROOT = data_dir() / "translation"
 
 
 def memory_path(language_pair="en_es"):
@@ -10,13 +10,7 @@ def memory_path(language_pair="en_es"):
 
 
 def load_memory(language_pair="en_es"):
-    path = memory_path(language_pair)
-
-    if not path.exists():
-        return {}
-
-    with path.open("r", encoding="utf-8") as file:
-        return json.load(file)
+    return load_json_safe(memory_path(language_pair), {})
 
 
 def find_translation(text, language_pair="en_es"):
@@ -64,16 +58,4 @@ def add_translation(
         "source": "manual"
     }
 
-    path.parent.mkdir(parents=True, exist_ok=True)
-
-    with path.open(
-        "w",
-        encoding="utf-8"
-    ) as file:
-
-        json.dump(
-            memory,
-            file,
-            ensure_ascii=False,
-            indent=4
-        )
+    write_json_atomic(path, memory, ensure_ascii=False, indent=4)

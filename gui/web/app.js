@@ -4,6 +4,90 @@ let isPaused = false;
 let lastScan = null;
 let currentLocale = {};
 
+// ---------------- estimated time remaining ----------------
+// Recalibrated every time a phase starts (quests, then mods) since the
+// two can translate at very different speeds.
+//
+// The estimate is driven by actual TEXTS translated, not by files/mods
+// completed -- a modpack can have hundreds of mods, so tracking progress
+// by "files done" barely moves while working through the first one and
+// makes the estimate look frozen. Instead this tracks a running total of
+// items already translated (etaItemsDoneCumulative, topped up with the
+// current file's progress) against a projected grand total: the items
+// already accounted for, plus an estimate for files not started yet
+// based on the average items-per-file seen so far. A skipped/cached
+// file (no AI work needed) contributes 0 to that average, which is
+// correct -- it costs no time, so it shouldn't count as "a file's worth
+// of work" when projecting what's left.
+let etaPhaseStart = null;
+let etaFilesTotal = 0;
+let etaFileIndex = 0;
+let etaCurrentFileTotal = 0;
+let etaItemsDoneCumulative = 0;
+let etaPauseStart = null;
+
+function resetEta() {
+  etaPhaseStart = Date.now();
+  etaFilesTotal = 0;
+  etaFileIndex = 0;
+  etaCurrentFileTotal = 0;
+  etaItemsDoneCumulative = 0;
+  document.getElementById("eta-line").textContent = "";
+}
+
+function clearEta() {
+  etaPhaseStart = null;
+  document.getElementById("eta-line").textContent = "";
+}
+
+function advanceEtaFile(current, total) {
+  // A new file/mod just started -- whatever the previous one's item
+  // total was is now fully "done" (it wouldn't be starting a new one
+  // otherwise), so bank it before resetting for the new file.
+  if (etaCurrentFileTotal > 0) {
+    etaItemsDoneCumulative += etaCurrentFileTotal;
+  }
+  etaFilesTotal = total;
+  etaFileIndex = current;
+  etaCurrentFileTotal = 0;
+}
+
+function formatDuration(ms) {
+  const totalSeconds = Math.max(0, Math.round(ms / 1000));
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  if (hours > 0) return `${hours} h ${minutes} min`;
+  if (minutes > 0) return `${minutes} min ${seconds}s`;
+  return `${seconds}s`;
+}
+
+function updateEta(itemCurrent, itemTotal) {
+  if (!etaPhaseStart || !itemTotal) return;
+
+  etaCurrentFileTotal = itemTotal;
+
+  const itemsDoneNow = etaItemsDoneCumulative + itemCurrent;
+  const itemsKnownSoFar = etaItemsDoneCumulative + etaCurrentFileTotal;
+  const filesSeen = Math.max(1, etaFileIndex);
+  const avgItemsPerFile = itemsKnownSoFar / filesSeen;
+  const filesRemaining = Math.max(0, etaFilesTotal - etaFileIndex);
+  const estimatedTotalItems = itemsKnownSoFar + (filesRemaining * avgItemsPerFile);
+
+  if (estimatedTotalItems <= 0) return;
+
+  if (itemsDoneNow <= 0) return;
+
+  const overallFraction = itemsDoneNow / estimatedTotalItems;
+  const elapsedMs = Date.now() - etaPhaseStart;
+  const remainingMs = (elapsedMs / overallFraction) - elapsedMs;
+
+  document.getElementById("eta-line").textContent = t("label_eta", {
+    time: formatDuration(remainingMs)
+  });
+}
+
 function api() {
   return window.pywebview.api;
 }
@@ -124,6 +208,17 @@ async function loadSettings() {
   providerSelect.value = currentSettings.ai_provider;
   toggleGoogleUsageVisibility();
 
+  const fallbackSelect = document.getElementById("select-fallback-provider");
+  fallbackSelect.innerHTML = "";
+  ["none", ...data.providers].forEach((provider) => {
+    const option = document.createElement("option");
+    option.value = provider;
+    option.textContent = t(`provider_${provider}`);
+    fallbackSelect.appendChild(option);
+  });
+  fallbackSelect.value = currentSettings.fallback_ai_provider || "none";
+  document.getElementById("input-fallback-api-key").value = currentSettings.fallback_api_key || "";
+
   const languageSelect = document.getElementById("select-language");
   languageSelect.innerHTML = "";
   data.languages.forEach((lang) => {
@@ -140,7 +235,6 @@ async function loadSettings() {
   document.getElementById("input-curseforge-key").value = currentSettings.curseforge_api_key || "";
 
   document.getElementById("input-modpack-path").value = currentSettings.last_modpack_root || "";
-  document.getElementById("input-output-path").value = currentSettings.last_output_folder || "";
 
   if (currentSettings.last_modpack_root) {
     scanModpackPath(currentSettings.last_modpack_root);
@@ -177,6 +271,8 @@ async function saveSettingsFromForm() {
     ui_language: newLanguage,
     ai_provider: document.getElementById("select-provider").value,
     api_key: document.getElementById("input-api-key").value,
+    fallback_ai_provider: document.getElementById("select-fallback-provider").value,
+    fallback_api_key: document.getElementById("input-fallback-api-key").value,
     target_language: document.getElementById("select-language").value,
     concurrency: parseInt(document.getElementById("input-concurrency").value, 10) || 4,
     content_only: document.getElementById("input-content-only").checked,
@@ -201,15 +297,14 @@ async function changeUiLanguage(langCode) {
 }
 
 function refreshProviderLabels() {
-  document.querySelectorAll("#select-provider option").forEach((option) => {
+  document.querySelectorAll("#select-provider option, #select-fallback-provider option").forEach((option) => {
     option.textContent = t(`provider_${option.value}`);
   });
 }
 
 async function rememberPaths() {
   await api().save_settings({
-    last_modpack_root: document.getElementById("input-modpack-path").value,
-    last_output_folder: document.getElementById("input-output-path").value
+    last_modpack_root: document.getElementById("input-modpack-path").value
   });
 }
 
@@ -246,6 +341,16 @@ async function browseInto(inputId) {
   }
 }
 
+// ---------------- memory stats (how much has been "learned") ----------------
+
+async function refreshMemoryStats() {
+  const stats = await api().get_memory_stats();
+  document.getElementById("memory-stats").textContent = t("label_memory_stats", {
+    quests: stats.quest_count.toLocaleString(),
+    glossary: stats.glossary_count.toLocaleString()
+  });
+}
+
 // ---------------- dictionaries: import (load a shared file) ----------------
 
 async function importModpackDictionary() {
@@ -255,6 +360,7 @@ async function importModpackDictionary() {
   const result = await api().import_quest_dictionary(path);
   if (result.ok) {
     setResult(t("result_import_modpack_success", { added: result.added, total: result.total }), "success");
+    refreshMemoryStats();
   } else {
     setResult(t("result_error", { message: result.error }), "error");
   }
@@ -273,6 +379,7 @@ async function importModsDictionary() {
       }),
       "success"
     );
+    refreshMemoryStats();
   } else {
     setResult(t("result_error", { message: result.error }), "error");
   }
@@ -397,6 +504,7 @@ async function searchCommunityTranslations() {
         );
         resultsBox.classList.add("hidden");
         resultsBox.innerHTML = "";
+        refreshMemoryStats();
       } else {
         setResult(t("result_error", { message: importResult.error }), "error");
         row.querySelector(".community-use").disabled = false;
@@ -414,10 +522,16 @@ async function translateNow() {
   if (isBusy) return;
 
   const modpackRoot = document.getElementById("input-modpack-path").value.trim();
-  const outputFolder = document.getElementById("input-output-path").value.trim();
+  const translateQuests = document.getElementById("input-translate-quests").checked;
+  const translateMods = document.getElementById("input-translate-mods").checked;
 
-  if (!modpackRoot || !outputFolder) {
+  if (!modpackRoot) {
     setResult(t("error_missing_paths"), "error");
+    return;
+  }
+
+  if (!translateQuests && !translateMods) {
+    setResult(t("error_nothing_selected"), "error");
     return;
   }
 
@@ -426,12 +540,29 @@ async function translateNow() {
   setProgress(0, t("progress_starting"));
   setStatus("");
   setResult("");
+  clearEta();
 
-  const response = await api().translate_now(modpackRoot, outputFolder);
+  const response = await api().translate_now(modpackRoot, translateQuests, translateMods);
   if (!response.ok) {
     setResult(response.error, "error");
     setBusy(false);
   }
+}
+
+function resultMessage(key, payload) {
+  let message = t(key, {
+    files: payload.files,
+    mods: payload.mods,
+    pending: payload.pending,
+    used: payload.used ? payload.used.toLocaleString() : undefined,
+    limit: payload.limit ? payload.limit.toLocaleString() : undefined
+  });
+
+  if (payload.backup_dir) {
+    message += "\n" + t("result_backup_note", { backup: payload.backup_dir });
+  }
+
+  return message;
 }
 
 // ---------------- backend events ----------------
@@ -440,55 +571,44 @@ window.onBackendEvent = function (event, payload) {
   if (event === "start") {
     setProgress(0, t(payload.phase === "mods" ? "progress_translating_mods" : "progress_translating_quests"));
     setStatus("");
+    resetEta();
     return;
   }
 
   if (event === "file_progress") {
     setStatus(t("status_file_progress", payload));
+    advanceEtaFile(payload.current, payload.total);
     return;
   }
 
   if (event === "mod_progress") {
     setStatus(t("status_mod_progress", payload));
+    advanceEtaFile(payload.current, payload.total);
     return;
   }
 
   if (event === "text_progress") {
     const percent = payload.total ? Math.round((payload.current / payload.total) * 100) : 0;
     setProgress(percent, t("progress_percent", { percent }));
+    updateEta(payload.current, payload.total);
     return;
   }
 
   if (event === "done") {
     setProgress(100, t("progress_done"));
     setBusy(false);
-    setResult(
-      t("result_done", {
-        files: payload.files,
-        mods: payload.mods,
-        pending: payload.pending,
-        output: payload.output_folder
-      }),
-      "success"
-    );
+    clearEta();
+    setResult(resultMessage("result_done", payload), "success");
     toggleGoogleUsageVisibility();
+    refreshMemoryStats();
     return;
   }
 
   if (event === "quota_exceeded") {
     setProgress(0, t("progress_quota_exceeded"));
     setBusy(false);
-    setResult(
-      t("result_quota_exceeded", {
-        files: payload.files,
-        mods: payload.mods,
-        pending: payload.pending,
-        output: payload.output_folder,
-        used: payload.used.toLocaleString(),
-        limit: payload.limit.toLocaleString()
-      }),
-      "error"
-    );
+    clearEta();
+    setResult(resultMessage("result_quota_exceeded", payload), "error");
     toggleGoogleUsageVisibility();
     return;
   }
@@ -496,42 +616,89 @@ window.onBackendEvent = function (event, payload) {
   if (event === "cancelled") {
     setProgress(0, t("progress_cancelled"));
     setBusy(false);
-    setResult(
-      t("result_cancelled", {
-        files: payload.files,
-        mods: payload.mods,
-        pending: payload.pending,
-        output: payload.output_folder
-      }),
-      "success"
-    );
+    clearEta();
+    setResult(resultMessage("result_cancelled", payload), "success");
+    refreshMemoryStats();
     return;
   }
 
   if (event === "paused") {
     setStatus(t("status_paused"));
+    etaPauseStart = Date.now();
     return;
   }
 
   if (event === "resumed") {
     setStatus(t("status_resumed"));
+    if (etaPauseStart && etaPhaseStart) {
+      // Shift the phase start forward by however long the pause lasted,
+      // so the paused time doesn't get counted as "slow" translating.
+      etaPhaseStart += Date.now() - etaPauseStart;
+    }
+    etaPauseStart = null;
     return;
   }
 
   if (event === "error") {
     setProgress(0, t("progress_error"));
     setBusy(false);
+    clearEta();
     setResult(t("result_error", { message: payload.message }), "error");
+    return;
+  }
+
+  if (event === "retry_start") {
+    document.getElementById("retry-status").textContent = t("retry_starting", { total: payload.total });
+    return;
+  }
+
+  if (event === "retry_progress") {
+    document.getElementById("retry-status").textContent = t("retry_progress", payload);
+    return;
+  }
+
+  if (event === "retry_done") {
+    isBusy = false;
+    document.getElementById("btn-retry-pending").disabled = false;
+    document.getElementById("retry-status").textContent = t("retry_result", payload);
+    loadPending();
+    return;
+  }
+
+  if (event === "retry_error") {
+    isBusy = false;
+    document.getElementById("btn-retry-pending").disabled = false;
+    document.getElementById("retry-status").textContent = t("retry_error_prefix", { message: payload.message });
   }
 };
 
 // ---------------- pending review ----------------
 
+function currentLanguagePair() {
+  return `${currentSettings.source_language || "en"}_${currentSettings.target_language}`;
+}
+
+async function retryPending() {
+  if (isBusy) return;
+
+  const statusEl = document.getElementById("retry-status");
+  const response = await api().retry_pending(currentLanguagePair());
+
+  if (!response.ok) {
+    statusEl.textContent = response.error;
+    return;
+  }
+
+  isBusy = true;
+  document.getElementById("btn-retry-pending").disabled = true;
+  statusEl.textContent = t("retry_starting", { total: response.count });
+}
+
 async function loadPending() {
   const list = document.getElementById("pending-list");
   list.innerHTML = `<div class="pending-empty">${t("pending_loading")}</div>`;
 
-  const languagePair = `${currentSettings.source_language || "en"}_${currentSettings.target_language}`;
+  const languagePair = currentLanguagePair();
   const items = await api().get_pending(languagePair);
 
   if (!items.length) {
@@ -576,6 +743,7 @@ function escapeHtml(text) {
 
 window.addEventListener("pywebviewready", async () => {
   await loadSettings();
+  refreshMemoryStats();
 
   document.getElementById("select-ui-language").addEventListener("change", (event) => {
     changeUiLanguage(event.target.value);
@@ -602,7 +770,6 @@ window.addEventListener("pywebviewready", async () => {
   document.getElementById("input-modpack-path").addEventListener("change", (event) => {
     scanModpackPath(event.target.value.trim());
   });
-  document.getElementById("btn-browse-output").addEventListener("click", () => browseInto("input-output-path"));
 
   document.getElementById("btn-import-modpack-dict").addEventListener("click", importModpackDictionary);
   document.getElementById("btn-import-mods-dict").addEventListener("click", importModsDictionary);
@@ -625,6 +792,7 @@ window.addEventListener("pywebviewready", async () => {
   document.getElementById("btn-cancel").addEventListener("click", cancelTranslation);
   document.getElementById("btn-save-settings").addEventListener("click", saveSettingsFromForm);
   document.getElementById("btn-refresh-pending").addEventListener("click", loadPending);
+  document.getElementById("btn-retry-pending").addEventListener("click", retryPending);
 
   showView("home");
 });

@@ -1,5 +1,5 @@
-import json
-from pathlib import Path
+from app_paths import data_dir
+from json_io import load_json_safe, write_json_atomic
 from translation.translation_memory import add_translation
 
 def load_pending(language_pair):
@@ -8,20 +8,12 @@ def load_pending(language_pair):
     """
 
     path = (
-        Path("review")
+        data_dir() / "review"
         / language_pair
         / "pending.json"
     )
 
-    if not path.exists():
-        return {}
-
-    with path.open(
-        "r",
-        encoding="utf-8"
-    ) as file:
-
-        return json.load(file)
+    return load_json_safe(path, {})
 
 
 def save_pending_data(
@@ -32,29 +24,13 @@ def save_pending_data(
     Saves the current pending translations.
     """
 
-    directory = (
-        Path("review")
+    path = (
+        data_dir() / "review"
         / language_pair
+        / "pending.json"
     )
 
-    directory.mkdir(
-        parents=True,
-        exist_ok=True
-    )
-
-    path = directory / "pending.json"
-
-    with path.open(
-        "w",
-        encoding="utf-8"
-    ) as file:
-
-        json.dump(
-            pending,
-            file,
-            ensure_ascii=False,
-            indent=4
-        )
+    write_json_atomic(path, pending, ensure_ascii=False, indent=4)
 
 
 def approve_translation(

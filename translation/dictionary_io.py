@@ -4,10 +4,11 @@ import zipfile
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from app_paths import data_dir
 from translation.translation_memory import load_memory, memory_path
 
 
-MOD_CACHE_ROOT = Path("mod_lang_cache")
+MOD_CACHE_ROOT = data_dir() / "mod_lang_cache"
 
 
 def export_quest_dictionary(output_path, language_pair="en_es"):

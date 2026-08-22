@@ -1,9 +1,9 @@
-import json
-from pathlib import Path
+from app_paths import data_dir
+from json_io import load_json_safe, write_json_atomic
 
 
 def protected_terms_path(language_pair="en_es"):
-    return Path("translation") / language_pair / "protected_terms.json"
+    return data_dir() / "translation" / language_pair / "protected_terms.json"
 
 
 def load_protected_terms(language_pair="en_es"):
@@ -12,13 +12,7 @@ def load_protected_terms(language_pair="en_es"):
     translated for a given language pair.
     """
 
-    path = protected_terms_path(language_pair)
-
-    if not path.exists():
-        return []
-
-    with path.open("r", encoding="utf-8") as file:
-        return json.load(file)
+    return load_json_safe(protected_terms_path(language_pair), [])
 
 
 def save_protected_terms(terms, language_pair="en_es"):
@@ -27,13 +21,7 @@ def save_protected_terms(terms, language_pair="en_es"):
     by hand before the next translation run.
     """
 
-    path = protected_terms_path(language_pair)
-    path.parent.mkdir(parents=True, exist_ok=True)
-
-    with path.open("w", encoding="utf-8") as file:
-        json.dump(
-            sorted(set(terms)),
-            file,
-            ensure_ascii=False,
-            indent=4
-        )
+    write_json_atomic(
+        protected_terms_path(language_pair), sorted(set(terms)),
+        ensure_ascii=False, indent=4
+    )

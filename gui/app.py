@@ -1,5 +1,21 @@
+import os
 import sys
 from pathlib import Path
+
+# A windowed .exe (no visible console) has no real console attached, so
+# Windows hands Python a stdout/stderr that either doesn't exist or falls
+# back to the system's legacy codepage (cp1252 here) instead of UTF-8.
+# Anything -- our own code or a dependency's (Argos Translate's install/
+# logging path in particular) -- that tries to print an emoji or other
+# non-cp1252 character then crashes the whole run with a
+# UnicodeEncodeError. Force UTF-8 (or a harmless discard stream when
+# there's truly no stream at all) before anything else runs.
+for _stream_name in ("stdout", "stderr"):
+    _stream = getattr(sys, _stream_name)
+    if _stream is None:
+        setattr(sys, _stream_name, open(os.devnull, "w", encoding="utf-8"))
+    elif hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
 
 if getattr(sys, "frozen", False):
     # Running from a PyInstaller-built exe: bundled files live under the

@@ -7,7 +7,10 @@ from analyzer.text_extractor import extract_texts
 from analyzer.text_replacer import apply_translations
 from analyzer.translation_decision import decide_translation
 from review.pending_manager import save_pending
-from translation.concurrent_translate import translate_items_concurrently
+from translation.concurrent_translate import (
+    DEFAULT_BATCH_SIZE,
+    translate_items_concurrently
+)
 from translation.mod_classification_cache import (
     load_classification,
     save_classification
@@ -40,8 +43,10 @@ def translate_mod_lang_files(
     target_language="es",
     ai_provider="mock",
     ai_model=None,
+    fallback_ai_provider=None,
+    fallback_ai_model=None,
     concurrency=4,
-    review_root="review",
+    review_root=None,
     content_only=False,
     pack_icon=None,
     on_mod_progress=None,
@@ -142,7 +147,9 @@ def translate_mod_lang_files(
                 concurrency,
                 on_text_progress,
                 cancel_event,
-                resume_event
+                resume_event,
+                fallback_ai_provider,
+                fallback_ai_model
             )
 
             if quota_exceeded:
@@ -214,13 +221,20 @@ def _translate_lang_dict(
     concurrency,
     on_text_progress=None,
     cancel_event=None,
-    resume_event=None
+    resume_event=None,
+    fallback_ai_provider=None,
+    fallback_ai_model=None
 ):
     texts = extract_texts(en_us)
     translatable = [
         item for item in texts
         if decide_translation(item)["action"] == "translate"
     ]
+
+    fallback_ai_translator = (
+        create_ai_translator(fallback_ai_provider, fallback_ai_model)
+        if fallback_ai_provider else None
+    )
 
     service = TranslationService(
         language_pair,
@@ -229,7 +243,8 @@ def _translate_lang_dict(
         # Quest-specific templates (e.g. "&eKill&f: ") have no business
         # matching mod lang text, which uses entirely different phrasing.
         templates=[],
-        cancel_event=cancel_event
+        cancel_event=cancel_event,
+        fallback_ai_translator=fallback_ai_translator
     )
 
     results = translate_items_concurrently(
@@ -238,6 +253,10 @@ def _translate_lang_dict(
         source_language=source_language,
         target_language=target_language,
         concurrency=concurrency,
+        # See the matching comment in translator_app.py: Argos gains
+        # nothing from grouping (it loops one item at a time internally
+        # either way), so batching it only delays progress updates.
+        batch_size=1 if ai_provider == "argos" else DEFAULT_BATCH_SIZE,
         on_progress=on_text_progress,
         cancel_event=cancel_event,
         resume_event=resume_event,

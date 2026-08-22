@@ -1,9 +1,10 @@
 import json
 from datetime import datetime, timezone
-from pathlib import Path
+
+from app_paths import data_dir
 
 
-USAGE_PATH = Path("translation") / "google_translate_usage.json"
+USAGE_PATH = data_dir() / "translation" / "google_translate_usage.json"
 
 # Google's free tier is 500,000 characters/month; a safety margin is kept
 # below that so a run stops itself before the account could ever actually

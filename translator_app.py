@@ -1,5 +1,6 @@
 from pathlib import Path
 import re
+import shutil
 
 from ai.ai_translator import (
     ArgosTranslateTranslator,
@@ -17,7 +18,10 @@ from analyzer.translation_decision import decide_translation
 from formats.handler import get_handler
 from localization.localization_manager import load_interface
 from review.pending_manager import save_pending
-from translation.concurrent_translate import translate_items_concurrently
+from translation.concurrent_translate import (
+    DEFAULT_BATCH_SIZE,
+    translate_items_concurrently
+)
 from translation.mod_lang_cache import build_mod_item_glossary
 from translation.protected_terms_manager import (
     load_protected_terms,
@@ -141,8 +145,10 @@ def translate_file(
     interface_language="es",
     ai_provider="mock",
     ai_model=None,
+    fallback_ai_provider=None,
+    fallback_ai_model=None,
     replace_pending=True,
-    review_root="review",
+    review_root=None,
     mods_folder=None,
     protected_terms=None,
     mod_item_glossary=None,
@@ -180,12 +186,18 @@ def translate_file(
         else:
             uncertain_texts.append(item)
 
+    fallback_ai_translator = (
+        create_ai_translator(fallback_ai_provider, fallback_ai_model)
+        if fallback_ai_provider else None
+    )
+
     service = TranslationService(
         language_pair,
         ai_translator=create_ai_translator(ai_provider, ai_model),
         protected_terms=protected_terms,
         mod_item_glossary=mod_item_glossary,
-        cancel_event=cancel_event
+        cancel_event=cancel_event,
+        fallback_ai_translator=fallback_ai_translator
     )
     total_translatable = len(translatable_texts)
 
@@ -209,6 +221,13 @@ def translate_file(
         source_language=source_language,
         target_language=target_language,
         concurrency=concurrency,
+        # Argos has no real batch call (see AITranslator.translate_batch's
+        # default): a "batch" for it is just looping translate() one item
+        # at a time inside a single worker, so grouping items only delays
+        # progress reporting until the whole group finishes, with none of
+        # batching's actual benefit (fewer requests). One item per group
+        # keeps progress updates arriving as each one actually completes.
+        batch_size=1 if ai_provider == "argos" else DEFAULT_BATCH_SIZE,
         on_progress=report_progress if total_translatable else None,
         cancel_event=cancel_event,
         resume_event=resume_event,
@@ -289,7 +308,9 @@ def translate_folder(
     interface_language="es",
     ai_provider="mock",
     ai_model=None,
-    review_root="review",
+    fallback_ai_provider=None,
+    fallback_ai_model=None,
+    review_root=None,
     target_locale_name=None,
     mods_folder=None,
     translate_mod_names=False,
@@ -297,10 +318,20 @@ def translate_folder(
     on_file_progress=None,
     on_text_progress=None,
     cancel_event=None,
-    resume_event=None
+    resume_event=None,
+    backup_dir=None
 ):
+    """
+    backup_dir, if given, is where any file about to be overwritten gets
+    copied first (keeping the same relative path it has under
+    output_folder) -- meant for the case where output_folder IS the
+    modpack's real lang folder (translating in place) and a previous
+    run's translation, or a fan translation, already lives there.
+    """
+
     input_folder = Path(input_folder)
     output_folder = Path(output_folder)
+    backup_dir = Path(backup_dir) if backup_dir is not None else None
     language_pair = f"{source_language}_{target_language}"
     all_matching_files = [
         path for path in input_folder.rglob("*")
@@ -348,14 +379,25 @@ def translate_folder(
             target_language,
             target_locale_name
         )
-        reports.append(translate_file(
+        target_path = output_folder / relative_path
+
+        backed_up_from = None
+        if backup_dir is not None and target_path.exists():
+            backup_target = backup_dir / relative_path
+            backup_target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(target_path, backup_target)
+            backed_up_from = str(backup_target)
+
+        report = translate_file(
             input_path,
-            output_folder / relative_path,
+            target_path,
             source_language=source_language,
             target_language=target_language,
             interface_language=interface_language,
             ai_provider=ai_provider,
             ai_model=ai_model,
+            fallback_ai_provider=fallback_ai_provider,
+            fallback_ai_model=fallback_ai_model,
             replace_pending=False,
             review_root=review_root,
             protected_terms=protected_terms,
@@ -364,7 +406,9 @@ def translate_folder(
             on_text_progress=on_text_progress,
             cancel_event=cancel_event,
             resume_event=resume_event
-        ))
+        )
+        report["backed_up_to"] = backed_up_from
+        reports.append(report)
 
     return reports
 

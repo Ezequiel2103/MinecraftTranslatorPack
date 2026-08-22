@@ -1,9 +1,11 @@
 import hashlib
 import json
-from pathlib import Path
+
+from app_paths import data_dir
+from json_io import load_json_safe, write_json_atomic
 
 
-CACHE_ROOT = Path("mod_lang_cache")
+CACHE_ROOT = data_dir() / "mod_lang_cache"
 
 
 def content_hash(data):
@@ -24,18 +26,36 @@ def load_cached_translation(modid, source_hash, language_pair="en_es"):
     since it was cached (a new mod version with different strings).
     """
 
-    path = cache_path(modid, language_pair)
+    cached = load_json_safe(cache_path(modid, language_pair), None)
 
-    if not path.exists():
-        return None
-
-    with path.open("r", encoding="utf-8") as file:
-        cached = json.load(file)
-
-    if cached.get("source_hash") != source_hash:
+    if cached is None or cached.get("source_hash") != source_hash:
         return None
 
     return cached.get("lang")
+
+
+def patch_cached_translation(modid, key, translation, language_pair="en_es"):
+    """
+    Overwrites a single string inside an already-cached mod's translated
+    lang dict, keeping the same source_hash so the cache is still a hit
+    on the next run -- which is what actually gets the fix into a built
+    resource pack, since translate_now() just reuses whatever this cache
+    holds for a mod whose English text hasn't changed. Used to patch in
+    a better translation for one text that failed validation earlier
+    (see gui.api.Api.retry_pending) without redoing the whole mod.
+    Returns False if this mod was never cached in the first place --
+    nothing to patch.
+    """
+
+    path = cache_path(modid, language_pair)
+    cached = load_json_safe(path, None)
+
+    if cached is None:
+        return False
+
+    cached.setdefault("lang", {})[key] = translation
+    write_json_atomic(path, cached, ensure_ascii=False, indent=4)
+    return True
 
 
 def build_text_glossary(source_dict, translated_dict):
@@ -68,51 +88,30 @@ def glossary_path(language_pair="en_es"):
 
 
 def _load_glossary_file(language_pair):
-    path = glossary_path(language_pair)
-
-    if not path.exists():
-        return {}, set()
-
-    try:
-        with path.open("r", encoding="utf-8") as file:
-            data = json.load(file)
-    except (OSError, json.JSONDecodeError):
-        return {}, set()
-
+    data = load_json_safe(glossary_path(language_pair), {})
     return data.get("pairs", {}), set(data.get("conflicts", []))
 
 
 def _save_glossary_file(pairs, conflicts, language_pair):
-    path = glossary_path(language_pair)
-    path.parent.mkdir(parents=True, exist_ok=True)
-
-    with path.open("w", encoding="utf-8") as file:
-        json.dump(
-            {"pairs": pairs, "conflicts": sorted(conflicts)},
-            file,
-            ensure_ascii=False,
-            indent=4
-        )
+    write_json_atomic(
+        glossary_path(language_pair),
+        {"pairs": pairs, "conflicts": sorted(conflicts)},
+        ensure_ascii=False, indent=4
+    )
 
 
 def save_cached_translation(
     modid, source_hash, translated_lang, language_pair="en_es", source_lang=None
 ):
-    path = cache_path(modid, language_pair)
-    path.parent.mkdir(parents=True, exist_ok=True)
-
     payload = {
         "source_hash": source_hash,
         "lang": translated_lang
     }
 
-    with path.open("w", encoding="utf-8") as file:
-        json.dump(
-            payload,
-            file,
-            ensure_ascii=False,
-            indent=4
-        )
+    write_json_atomic(
+        cache_path(modid, language_pair), payload,
+        ensure_ascii=False, indent=4
+    )
 
     if source_lang is not None:
         new_pairs = build_text_glossary(source_lang, translated_lang)

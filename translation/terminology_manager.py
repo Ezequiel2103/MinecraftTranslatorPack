@@ -1,5 +1,5 @@
-import json
-from pathlib import Path
+from app_paths import resource_dir
+from json_io import load_json_safe
 
 
 def load_terminology(language_pair):
@@ -7,19 +7,8 @@ def load_terminology(language_pair):
     Loads the terminology dictionary for a language pair.
     """
 
-    path = Path(
-        "translation"
-    ) / language_pair / "terminology.json"
-
-    if not path.exists():
-        return {}
-
-    with path.open(
-        "r",
-        encoding="utf-8"
-    ) as file:
-
-        return json.load(file)
+    path = resource_dir() / "translation" / language_pair / "terminology.json"
+    return load_json_safe(path, {})
 
 
 def find_term(text, terminology):

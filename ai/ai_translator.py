@@ -737,6 +737,22 @@ class ArgosTranslateTranslator(AITranslator):
     """
 
     def __init__(self, model=None):
+        # Argos Translate's default sentence-splitter picks itself based
+        # on whether a "stanza" folder happens to already exist under the
+        # installed package (see argostranslate/translate.py) rather than
+        # on anything we control -- and once picked, Stanza downloads its
+        # own separate NLP model from a different, unrelated server on
+        # first use, with zero progress shown in this app. That's a
+        # second, surprise network dependency undermining the whole
+        # point of an offline engine, and if that download is slow or
+        # blocked it just looks like the app hung with no feedback.
+        # MiniSBD is the library's own documented fallback and is what
+        # a fresh install would normally use anyway; forcing it removes
+        # the guesswork. Must happen before the first argostranslate
+        # import anywhere in the process, since it reads this once at
+        # import time.
+        os.environ.setdefault("ARGOS_CHUNK_TYPE", "MINISBD")
+
         try:
             import argostranslate.package
             import argostranslate.translate

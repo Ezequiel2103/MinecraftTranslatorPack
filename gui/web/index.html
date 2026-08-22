@@ -35,10 +35,15 @@
       </div>
       <div class="scan-status" id="scan-status"></div>
 
-      <label class="field-label" data-i18n="label_output_path">CARPETA DE SALIDA</label>
       <div class="field-row">
-        <input type="text" id="input-output-path" class="input-field" data-i18n-placeholder="placeholder_output_path" placeholder="C:\Users\...\salida">
-        <button class="btn btn-icon" id="btn-browse-output">📁</button>
+        <label class="checkbox-row">
+          <input type="checkbox" id="input-translate-quests" checked>
+          <span data-i18n="label_translate_quests">Traducir misiones</span>
+        </label>
+        <label class="checkbox-row">
+          <input type="checkbox" id="input-translate-mods" checked>
+          <span data-i18n="label_translate_mods">Traducir mods</span>
+        </label>
       </div>
 
       <div class="progress-wrap">
@@ -47,12 +52,15 @@
           <span class="progress-label" id="progress-label" data-i18n="progress_waiting">EN ESPERA</span>
         </div>
         <div class="status-line" id="status-line"></div>
+        <div class="status-line" id="eta-line"></div>
       </div>
 
       <div class="run-controls hidden" id="run-controls">
         <button class="btn btn-secondary" id="btn-pause-resume">⏸ Pausar</button>
         <button class="btn btn-secondary btn-cancel" id="btn-cancel" data-i18n="btn_cancel">⏹ Cancelar</button>
       </div>
+
+      <div class="field-hint" id="memory-stats"></div>
 
       <div class="action-buttons">
         <button class="btn btn-action" id="btn-import-modpack-dict">
@@ -96,6 +104,11 @@
       <select id="select-provider" class="select-field"></select>
       <p class="field-hint" data-i18n="hint_ai_provider"></p>
 
+      <label class="field-label" data-i18n="label_fallback_provider">MOTOR DE RESPALDO (OPCIONAL)</label>
+      <select id="select-fallback-provider" class="select-field"></select>
+      <p class="field-hint" data-i18n="hint_fallback_provider"></p>
+      <input type="password" id="input-fallback-api-key" class="input-field" data-i18n-placeholder="placeholder_api_key" placeholder="API_KEY: ****-****-****-****">
+
       <div class="usage-box hidden" id="google-usage-box">
         <label class="field-label" data-i18n="label_google_usage">USO DE GOOGLE TRANSLATE ESTE MES</label>
         <div class="usage-bar"><div class="usage-fill" id="google-usage-fill" style="width:0%"></div></div>
@@ -130,7 +143,12 @@
     <!-- ================= PENDING VIEW ================= -->
     <section id="view-pending" class="view view-panel hidden">
       <h2 class="panel-title" data-i18n="pending_title">TEXTOS PENDIENTES</h2>
-      <button class="btn btn-secondary" id="btn-refresh-pending" data-i18n="btn_refresh_pending">↻ Actualizar</button>
+      <div class="field-row">
+        <button class="btn btn-secondary" id="btn-refresh-pending" data-i18n="btn_refresh_pending">↻ Actualizar</button>
+        <button class="btn btn-secondary" id="btn-retry-pending" data-i18n="btn_retry_pending">🔁 Reintentar con IA</button>
+      </div>
+      <p class="field-hint" data-i18n="hint_retry_pending"></p>
+      <div class="status-line" id="retry-status"></div>
       <div id="pending-list" class="pending-list"></div>
     </section>
 

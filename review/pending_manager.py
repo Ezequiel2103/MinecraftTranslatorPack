@@ -1,16 +1,21 @@
-import json
 from pathlib import Path
+
+from app_paths import data_dir
+from json_io import load_json_safe, write_json_atomic
 
 
 def save_pending(
     items,
     language_pair,
     replace=False,
-    review_root="review"
+    review_root=None
 ):
     """
     Saves texts that require translation review.
     """
+
+    if review_root is None:
+        review_root = data_dir() / "review"
 
     review_directory = (
         Path(review_root)
@@ -29,14 +34,8 @@ def save_pending(
 
     pending = {}
 
-    if not replace and pending_path.exists():
-
-        with pending_path.open(
-            "r",
-            encoding="utf-8"
-        ) as file:
-
-            pending = json.load(file)
+    if not replace:
+        pending = load_json_safe(pending_path, {})
 
     for item in items:
 
@@ -61,14 +60,4 @@ def save_pending(
 
         pending[text] = entry
 
-    with pending_path.open(
-        "w",
-        encoding="utf-8"
-    ) as file:
-
-        json.dump(
-            pending,
-            file,
-            ensure_ascii=False,
-            indent=4
-        )
+    write_json_atomic(pending_path, pending, ensure_ascii=False, indent=4)

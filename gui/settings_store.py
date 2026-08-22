@@ -1,30 +1,26 @@
-import json
-from pathlib import Path
+from app_paths import data_dir
+from json_io import load_json_safe, write_json_atomic
 
 
-SETTINGS_PATH = Path("gui_settings.json")
+SETTINGS_PATH = data_dir() / "gui_settings.json"
 
 DEFAULT_SETTINGS = {
     "ui_language": "es",
     "ai_provider": "mock",
     "api_key": "",
+    "fallback_ai_provider": "none",
+    "fallback_api_key": "",
     "source_language": "en",
     "target_language": "es",
     "concurrency": 4,
     "content_only": True,
     "curseforge_api_key": "",
-    "last_modpack_root": "",
-    "last_output_folder": ""
+    "last_modpack_root": ""
 }
 
 
 def load_settings():
-    if not SETTINGS_PATH.exists():
-        return dict(DEFAULT_SETTINGS)
-
-    with SETTINGS_PATH.open("r", encoding="utf-8") as file:
-        stored = json.load(file)
-
+    stored = load_json_safe(SETTINGS_PATH, {})
     settings = dict(DEFAULT_SETTINGS)
     settings.update(stored)
     return settings
@@ -34,7 +30,6 @@ def save_settings(settings):
     merged = load_settings()
     merged.update(settings)
 
-    with SETTINGS_PATH.open("w", encoding="utf-8") as file:
-        json.dump(merged, file, ensure_ascii=False, indent=4)
+    write_json_atomic(SETTINGS_PATH, merged, ensure_ascii=False, indent=4)
 
     return merged

@@ -4,6 +4,7 @@ from pathlib import Path
 from translation.mod_lang_cache import (
     content_hash,
     load_cached_translation,
+    patch_cached_translation,
     save_cached_translation
 )
 
@@ -32,6 +33,23 @@ def main():
         hash_v2 = content_hash(source_v2)
         assert hash_v2 != hash_v1
         assert load_cached_translation("testmod", hash_v2, LANGUAGE_PAIR) is None
+
+        # patch_cached_translation: fixes one string in an already-cached
+        # mod (the "retry a pending item with a different AI" path) while
+        # keeping the same source_hash, so the next real run still treats
+        # this mod as cached and picks up the fix.
+        assert patch_cached_translation(
+            "testmod", "item.testmod.thing", "Cosa Mejorada", LANGUAGE_PAIR
+        ) is True
+        assert load_cached_translation("testmod", hash_v1, LANGUAGE_PAIR) == {
+            "item.testmod.thing": "Cosa Mejorada"
+        }
+
+        # A mod that was never cached has nothing to patch -- reported
+        # back instead of silently creating a bogus cache entry.
+        assert patch_cached_translation(
+            "nevercached", "item.nevercached.thing", "Algo", LANGUAGE_PAIR
+        ) is False
 
     finally:
         shutil.rmtree(cache_dir, ignore_errors=True)

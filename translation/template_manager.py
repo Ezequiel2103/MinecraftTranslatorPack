@@ -1,9 +1,9 @@
-import json
-from pathlib import Path
+from app_paths import resource_dir
+from json_io import load_json_safe
 
 
 def templates_path(language_pair="en_es"):
-    return Path("translation") / language_pair / "templates.json"
+    return resource_dir() / "translation" / language_pair / "templates.json"
 
 
 def load_templates(language_pair="en_es"):
@@ -17,10 +17,4 @@ def load_templates(language_pair="en_es"):
     check beyond placeholder preservation.
     """
 
-    path = templates_path(language_pair)
-
-    if not path.exists():
-        return []
-
-    with path.open("r", encoding="utf-8") as file:
-        return json.load(file)
+    return load_json_safe(templates_path(language_pair), [])

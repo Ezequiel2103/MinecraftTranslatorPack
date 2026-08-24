@@ -11,8 +11,8 @@ formats/        Handlers para JSON, SNBT y archivos .lang
 localization/   Interfaces de usuario
 review/         Pending y revisión humana
 translation/    Servicio, memoria, terminología y retry
+tests/          Pruebas deterministas por componente
 test_modpack/   JSON de prueba de Minecraft
-test_*.py       Pruebas deterministas por componente
 run_tests.py    Suite local unificada
 main.py         Punto de entrada de la aplicación
 ```
@@ -141,7 +141,7 @@ python main.py --ai-provider openai --ai-model gpt-5
 Antes de traducir un modpack completo, usar la prueba controlada:
 
 ```powershell
-python test_openai_live.py --live
+python -m tests.test_openai_live --live
 ```
 
 La prueba realiza una sola solicitud y muestra si la traducción pasó la

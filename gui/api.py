@@ -3,6 +3,7 @@ import os
 import shutil
 import sys
 import threading
+import time
 import zipfile
 from datetime import datetime
 from pathlib import Path
@@ -34,9 +35,17 @@ from translation.curseforge_search import (
     download_translation_pack,
     search_translation_packs
 )
-from translation.mod_lang_cache import build_mod_item_glossary, patch_cached_translation
+from translation.mod_lang_cache import (
+    build_mod_item_glossary,
+    list_translated_mods,
+    patch_cached_translation
+)
 from translation.protected_terms_manager import load_protected_terms
 from translation.resourcepack_merger import merge_resourcepacks
+from translation.translated_registry import (
+    list_translated_modpacks,
+    record_modpack_translation
+)
 from translation.translation_memory import add_translation, load_memory
 from translation.translation_service import TranslationService
 from translator_app import DEFAULT_LOCALES, create_ai_translator, translate_folder
@@ -115,6 +124,29 @@ class Api:
             f"window.onBackendEvent({json.dumps(event)}, {json.dumps(payload)})"
         )
 
+    def _throttled_progress_emitter(self, event, min_interval=0.15):
+        """
+        Wraps _emit for a per-item progress callback so it fires at most
+        a few times a second instead of once per item. Reporting every
+        item individually (needed so the bar doesn't sit still for
+        minutes on a slow engine like Argos, batched or not) means
+        thousands of evaluate_js calls into the window on a big modpack,
+        which is exactly what made the window itself feel laggy while
+        translating. The last item always gets through regardless of
+        timing, so the count on screen still lands on the real total.
+        """
+
+        state = {"last": 0.0}
+
+        def emit_progress(current, total):
+            now = time.monotonic()
+
+            if current >= total or now - state["last"] >= min_interval:
+                state["last"] = now
+                self._emit(event, {"current": current, "total": total})
+
+        return emit_progress
+
     # --- settings -----------------------------------------------------
 
     def get_settings(self):
@@ -135,6 +167,16 @@ class Api:
             "quest_count": len(load_memory(language_pair)),
             "glossary_count": len(build_mod_item_glossary(language_pair))
         }
+
+    def get_translated_modpacks(self):
+        settings = load_settings()
+        language_pair = f"{settings['source_language']}_{settings['target_language']}"
+        return list_translated_modpacks(language_pair)
+
+    def get_translated_mods(self):
+        settings = load_settings()
+        language_pair = f"{settings['source_language']}_{settings['target_language']}"
+        return list_translated_mods(language_pair)
 
     def get_google_usage(self):
         usage = get_usage()
@@ -370,10 +412,6 @@ class Api:
         cancel_event = self._cancel_event
         resume_event = self._resume_event
 
-        fallback_ai_provider = settings.get("fallback_ai_provider")
-        if fallback_ai_provider == "none":
-            fallback_ai_provider = None
-
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         backup_dir = modpack_root / "_translator_backups" / timestamp
         backed_up = False
@@ -390,10 +428,7 @@ class Api:
                         "current": current, "total": total, "name": name
                     })
 
-                def on_text_progress(current, total):
-                    self._emit("text_progress", {
-                        "current": current, "total": total
-                    })
+                on_text_progress = self._throttled_progress_emitter("text_progress")
 
                 quests_lang_folder = paths["quests_lang_folder"]
 
@@ -408,7 +443,6 @@ class Api:
                     source_language=settings["source_language"],
                     target_language=settings["target_language"],
                     ai_provider=settings["ai_provider"],
-                    fallback_ai_provider=fallback_ai_provider,
                     mods_folder=paths["mods_folder"],
                     concurrency=settings["concurrency"],
                     on_file_progress=on_file_progress,
@@ -436,10 +470,7 @@ class Api:
                         "current": current, "total": total, "modid": modid
                     })
 
-                def on_text_progress_mods(current, total):
-                    self._emit("text_progress", {
-                        "current": current, "total": total
-                    })
+                on_text_progress_mods = self._throttled_progress_emitter("text_progress")
 
                 target_locale = DEFAULT_LOCALES.get(
                     settings["target_language"].lower(),
@@ -467,9 +498,8 @@ class Api:
                     source_language=settings["source_language"],
                     target_language=settings["target_language"],
                     ai_provider=settings["ai_provider"],
-                    fallback_ai_provider=fallback_ai_provider,
                     concurrency=settings["concurrency"],
-                    content_only=settings["content_only"],
+                    content_only=True,
                     pack_icon=PACK_ICON_PATH if PACK_ICON_PATH.exists() else None,
                     on_mod_progress=on_mod_progress,
                     on_text_progress=on_text_progress_mods,
@@ -487,6 +517,9 @@ class Api:
                 "modpack_root": str(modpack_root),
                 "backup_dir": str(backup_dir) if backed_up else None
             }
+
+            language_pair = f"{settings['source_language']}_{settings['target_language']}"
+            record_modpack_translation(modpack_root, language_pair, summary)
 
             if quota_exceeded:
                 usage = get_usage()
@@ -507,12 +540,6 @@ class Api:
 
     def _apply_api_key(self, settings):
         self._apply_provider_api_key(settings["ai_provider"], settings.get("api_key"))
-
-        fallback_provider = settings.get("fallback_ai_provider")
-        if fallback_provider and fallback_provider != "none":
-            self._apply_provider_api_key(
-                fallback_provider, settings.get("fallback_api_key")
-            )
 
     def _apply_provider_api_key(self, provider, api_key):
         env_var = PROVIDER_ENV_VAR.get(provider)
@@ -577,8 +604,7 @@ class Api:
 
             self._emit("retry_start", {"total": len(items)})
 
-            def on_progress(current, total):
-                self._emit("retry_progress", {"current": current, "total": total})
+            on_progress = self._throttled_progress_emitter("retry_progress")
 
             results = translate_items_concurrently(
                 items, service,

@@ -1,11 +1,16 @@
 import hashlib
 import json
+from datetime import datetime, timezone
 
 from app_paths import data_dir
 from json_io import load_json_safe, write_json_atomic
 
 
 CACHE_ROOT = data_dir() / "mod_lang_cache"
+
+# Not real mods -- the shared cross-mod glossary and the per-mod content
+# classification cache live in this same folder.
+_NON_MOD_CACHE_FILES = {"_item_glossary", "content_classification"}
 
 
 def content_hash(data):
@@ -17,6 +22,42 @@ def content_hash(data):
 
 def cache_path(modid, language_pair="en_es"):
     return CACHE_ROOT / language_pair / f"{modid}.json"
+
+
+def list_translated_mods(language_pair="en_es"):
+    """
+    Every mod with a cached translation for this language pair,
+    independent of any specific modpack -- the mod cache is shared
+    across all of them by design (see save_cached_translation), so a mod
+    only needs to show up here once no matter how many modpacks use it.
+    """
+
+    directory = CACHE_ROOT / language_pair
+
+    if not directory.is_dir():
+        return []
+
+    mods = []
+
+    for path in sorted(directory.glob("*.json")):
+        if path.stem in _NON_MOD_CACHE_FILES:
+            continue
+
+        cached = load_json_safe(path, None)
+
+        if cached is None:
+            continue
+
+        mods.append({
+            "modid": path.stem,
+            "entry_count": len(cached.get("lang") or {}),
+            "last_translated_at": datetime.fromtimestamp(
+                path.stat().st_mtime, tz=timezone.utc
+            ).isoformat()
+        })
+
+    mods.sort(key=lambda entry: entry["last_translated_at"], reverse=True)
+    return mods
 
 
 def load_cached_translation(modid, source_hash, language_pair="en_es"):

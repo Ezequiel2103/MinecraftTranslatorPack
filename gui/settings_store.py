@@ -6,14 +6,12 @@ SETTINGS_PATH = data_dir() / "gui_settings.json"
 
 DEFAULT_SETTINGS = {
     "ui_language": "es",
+    "ui_theme": "emerald",
     "ai_provider": "mock",
     "api_key": "",
-    "fallback_ai_provider": "none",
-    "fallback_api_key": "",
     "source_language": "en",
     "target_language": "es",
     "concurrency": 4,
-    "content_only": True,
     "curseforge_api_key": "",
     "last_modpack_root": ""
 }

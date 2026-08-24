@@ -6,20 +6,106 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<!-- ICONS:START -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="icon-logo" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9"/>
+    <line x1="3" y1="12" x2="21" y2="12"/>
+    <path d="M12 3c3 3 3 15 0 18"/>
+    <path d="M12 3c-3 3-3 15 0 18"/>
+  </symbol>
+  <symbol id="icon-home" viewBox="0 0 24 24">
+    <path d="M3 11l9-8l9 8"/>
+    <path d="M5 10v10h14V10"/>
+    <path d="M9 20v-6h6v6"/>
+  </symbol>
+  <symbol id="icon-settings" viewBox="0 0 24 24">
+    <line x1="4" y1="6" x2="20" y2="6"/>
+    <circle cx="9" cy="6" r="2"/>
+    <line x1="4" y1="12" x2="20" y2="12"/>
+    <circle cx="15" cy="12" r="2"/>
+    <line x1="4" y1="18" x2="20" y2="18"/>
+    <circle cx="9" cy="18" r="2"/>
+  </symbol>
+  <symbol id="icon-pending" viewBox="0 0 24 24">
+    <rect x="5" y="4" width="14" height="17" rx="2"/>
+    <path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/>
+    <line x1="8" y1="11" x2="16" y2="11"/>
+    <line x1="8" y1="15" x2="16" y2="15"/>
+    <line x1="8" y1="19" x2="13" y2="19"/>
+  </symbol>
+  <symbol id="icon-minimize" viewBox="0 0 24 24">
+    <line x1="5" y1="12" x2="19" y2="12"/>
+  </symbol>
+  <symbol id="icon-close" viewBox="0 0 24 24">
+    <line x1="6" y1="6" x2="18" y2="18"/>
+    <line x1="18" y1="6" x2="6" y2="18"/>
+  </symbol>
+  <symbol id="icon-folder" viewBox="0 0 24 24">
+    <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
+  </symbol>
+  <symbol id="icon-book-down" viewBox="0 0 24 24">
+    <path d="M12 3v12"/>
+    <path d="M7 10l5 5l5-5"/>
+    <path d="M5 19h14"/>
+  </symbol>
+  <symbol id="icon-puzzle-down" viewBox="0 0 24 24">
+    <path d="M21 8l-9-5l-9 5l9 5l9-5z"/>
+    <path d="M3 8v8l9 5l9-5V8"/>
+    <path d="M12 13v8"/>
+  </symbol>
+  <symbol id="icon-search" viewBox="0 0 24 24">
+    <circle cx="11" cy="11" r="7"/>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+  </symbol>
+  <symbol id="icon-refresh" viewBox="0 0 24 24">
+    <path d="M21 12a9 9 0 0 0-9-9a9 9 0 0 0-7.5 4"/>
+    <path d="M3 12a9 9 0 0 0 9 9a9 9 0 0 0 7.5-4"/>
+    <path d="M3 3v6h6"/>
+    <path d="M21 21v-6h-6"/>
+  </symbol>
+  <symbol id="icon-retry" viewBox="0 0 24 24">
+    <path d="M21 12a9 9 0 0 0-9-9a9 9 0 0 0-7.5 4"/>
+    <path d="M3 12a9 9 0 0 0 9 9a9 9 0 0 0 7.5-4"/>
+    <path d="M3 3v6h6"/>
+    <path d="M21 21v-6h-6"/>
+  </symbol>
+  <symbol id="icon-pause" viewBox="0 0 24 24">
+    <line x1="9" y1="5" x2="9" y2="19" stroke-width="3"/>
+    <line x1="15" y1="5" x2="15" y2="19" stroke-width="3"/>
+  </symbol>
+  <symbol id="icon-play" viewBox="0 0 24 24">
+    <polygon points="6 3 20 12 6 21 6 3"/>
+  </symbol>
+  <symbol id="icon-stop" viewBox="0 0 24 24">
+    <line x1="6" y1="6" x2="18" y2="18"/>
+    <line x1="18" y1="6" x2="6" y2="18"/>
+  </symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24">
+    <polyline points="4 12 9 17 20 6"/>
+  </symbol>
+  <symbol id="icon-palette" viewBox="0 0 24 24">
+    <circle cx="8" cy="9" r="5"/>
+    <circle cx="16" cy="9" r="5"/>
+    <circle cx="12" cy="16" r="5"/>
+  </symbol>
+</svg>
+<!-- ICONS:END -->
 
 <div class="window-frame">
 
   <div class="title-bar" id="title-bar">
     <div class="title-bar-left">
-      <span class="title-icon">🌐</span>
+      <svg class="icon title-icon"><use href="#icon-logo"/></svg>
       <span class="title-text" data-i18n="app_title">TRADUCTOR DE MODPACKS</span>
     </div>
     <div class="title-bar-right">
-      <button class="title-btn" id="btn-home" data-i18n-title="title_home" title="Inicio">🏠</button>
-      <button class="title-btn" id="btn-settings" data-i18n-title="title_settings" title="Configuración">⚙</button>
-      <button class="title-btn" id="btn-pending" data-i18n-title="title_pending" title="Pendientes">📋</button>
-      <button class="title-btn" id="btn-minimize" data-i18n-title="title_minimize" title="Minimizar">—</button>
-      <button class="title-btn title-btn-close" id="btn-close" data-i18n-title="title_close" title="Cerrar">✕</button>
+      <button class="title-btn" id="btn-home" data-view="home" data-i18n-title="title_home" title="Inicio"><svg class="icon"><use href="#icon-home"/></svg></button>
+      <button class="title-btn" id="btn-settings" data-view="settings" data-i18n-title="title_settings" title="Configuración"><svg class="icon"><use href="#icon-settings"/></svg></button>
+      <button class="title-btn" id="btn-pending" data-view="pending" data-i18n-title="title_pending" title="Pendientes"><svg class="icon"><use href="#icon-pending"/></svg></button>
+      <button class="title-btn" id="btn-themes" data-view="themes" data-i18n-title="title_themes" title="Temas"><svg class="icon"><use href="#icon-palette"/></svg></button>
+      <button class="title-btn" id="btn-minimize" data-i18n-title="title_minimize" title="Minimizar"><svg class="icon"><use href="#icon-minimize"/></svg></button>
+      <button class="title-btn title-btn-close" id="btn-close" data-i18n-title="title_close" title="Cerrar"><svg class="icon"><use href="#icon-close"/></svg></button>
     </div>
   </div>
 
@@ -31,17 +117,23 @@
       <label class="field-label" data-i18n="label_modpack_path">RUTA DEL MODPACK</label>
       <div class="field-row">
         <input type="text" id="input-modpack-path" class="input-field" data-i18n-placeholder="placeholder_modpack_path" placeholder="C:\Users\...\Instances\MiModpack">
-        <button class="btn btn-icon" id="btn-browse-modpack">📁</button>
+        <button class="btn btn-icon" id="btn-browse-modpack"><svg class="icon"><use href="#icon-folder"/></svg></button>
       </div>
       <div class="scan-status" id="scan-status"></div>
 
       <div class="field-row">
         <label class="checkbox-row">
-          <input type="checkbox" id="input-translate-quests" checked>
+          <span class="toggle">
+            <input type="checkbox" class="toggle-input" id="input-translate-quests" checked>
+            <span class="toggle-visual"></span>
+          </span>
           <span data-i18n="label_translate_quests">Traducir misiones</span>
         </label>
         <label class="checkbox-row">
-          <input type="checkbox" id="input-translate-mods" checked>
+          <span class="toggle">
+            <input type="checkbox" class="toggle-input" id="input-translate-mods" checked>
+            <span class="toggle-visual"></span>
+          </span>
           <span data-i18n="label_translate_mods">Traducir mods</span>
         </label>
       </div>
@@ -56,29 +148,43 @@
       </div>
 
       <div class="run-controls hidden" id="run-controls">
-        <button class="btn btn-secondary" id="btn-pause-resume">⏸ Pausar</button>
-        <button class="btn btn-secondary btn-cancel" id="btn-cancel" data-i18n="btn_cancel">⏹ Cancelar</button>
+        <button class="btn btn-secondary btn-with-icon" id="btn-pause-resume">
+          <svg class="icon" id="icon-pause-resume"><use href="#icon-pause"/></svg>
+          <span id="label-pause-resume">Pausar</span>
+        </button>
+        <button class="btn btn-secondary btn-cancel btn-with-icon" id="btn-cancel">
+          <svg class="icon"><use href="#icon-stop"/></svg>
+          <span data-i18n="btn_cancel">Cancelar</span>
+        </button>
       </div>
 
-      <div class="field-hint" id="memory-stats"></div>
+      <div class="field-hint memory-stats" id="memory-stats">
+        <span id="memory-stats-quests"></span>
+        <span id="memory-stats-glossary"></span>
+      </div>
 
       <div class="action-buttons">
         <button class="btn btn-action" id="btn-import-modpack-dict">
-          <span class="btn-action-icon">📖⬇</span>
+          <span class="btn-action-icon"><svg class="icon"><use href="#icon-book-down"/></svg></span>
           <span data-i18n-html="btn_import_modpack_dict">cargar diccionario<br>modpack</span>
         </button>
         <button class="btn btn-action" id="btn-import-mods-dict">
-          <span class="btn-action-icon">⛏🧪⬇</span>
+          <span class="btn-action-icon"><svg class="icon"><use href="#icon-puzzle-down"/></svg></span>
           <span data-i18n-html="btn_import_mods_dict">cargar diccionario<br>mods</span>
         </button>
       </div>
       <div class="dict-links">
+        <a href="#" id="link-view-translated-modpacks" data-i18n="link_view_translated_modpacks">Ver modpacks traducidos…</a>
+        <a href="#" id="link-view-translated-mods" data-i18n="link_view_translated_mods">Ver mods traducidos…</a>
+      </div>
+      <div class="dict-links">
         <a href="#" id="link-export-modpack-dict" data-i18n="link_export_modpack_dict">Exportar diccionario de modpack…</a>
         <a href="#" id="link-export-mods-dict" data-i18n="link_export_mods_dict">Exportar diccionario de mods…</a>
+      </div>
+      <div class="dict-links dict-links-center">
         <a href="#" id="link-merge-resourcepacks" data-i18n="link_merge_resourcepacks">Combinar resource packs…</a>
       </div>
 
-      <button class="btn btn-secondary" id="btn-search-community" data-i18n="btn_search_community">🔍 Buscar traducción comunitaria</button>
       <div id="community-results" class="pending-list hidden"></div>
 
       <button class="btn btn-translate-now" id="btn-translate-now" data-i18n="btn_translate_now">TRADUCIR AHORA</button>
@@ -104,11 +210,6 @@
       <select id="select-provider" class="select-field"></select>
       <p class="field-hint" data-i18n="hint_ai_provider"></p>
 
-      <label class="field-label" data-i18n="label_fallback_provider">MOTOR DE RESPALDO (OPCIONAL)</label>
-      <select id="select-fallback-provider" class="select-field"></select>
-      <p class="field-hint" data-i18n="hint_fallback_provider"></p>
-      <input type="password" id="input-fallback-api-key" class="input-field" data-i18n-placeholder="placeholder_api_key" placeholder="API_KEY: ****-****-****-****">
-
       <div class="usage-box hidden" id="google-usage-box">
         <label class="field-label" data-i18n="label_google_usage">USO DE GOOGLE TRANSLATE ESTE MES</label>
         <div class="usage-bar"><div class="usage-fill" id="google-usage-fill" style="width:0%"></div></div>
@@ -127,11 +228,6 @@
         bien en nuestras pruebas; si algo empieza a fallar, bajalo.
       </p>
 
-      <label class="checkbox-row">
-        <input type="checkbox" id="input-content-only" checked>
-        <span data-i18n="label_content_only">Saltar mods sin contenido real (solo config/optimización)</span>
-      </label>
-
       <label class="field-label" data-i18n="label_curseforge_key">API KEY DE CURSEFORGE (OPCIONAL)</label>
       <input type="password" id="input-curseforge-key" class="input-field" data-i18n-placeholder="placeholder_curseforge_key" placeholder="API_KEY: ****-****-****-****">
       <p class="field-hint" data-i18n="hint_curseforge_key"></p>
@@ -144,12 +240,62 @@
     <section id="view-pending" class="view view-panel hidden">
       <h2 class="panel-title" data-i18n="pending_title">TEXTOS PENDIENTES</h2>
       <div class="field-row">
-        <button class="btn btn-secondary" id="btn-refresh-pending" data-i18n="btn_refresh_pending">↻ Actualizar</button>
-        <button class="btn btn-secondary" id="btn-retry-pending" data-i18n="btn_retry_pending">🔁 Reintentar con IA</button>
+        <button class="btn btn-secondary btn-with-icon" id="btn-refresh-pending">
+          <svg class="icon"><use href="#icon-refresh"/></svg>
+          <span data-i18n="btn_refresh_pending">Actualizar</span>
+        </button>
+        <button class="btn btn-secondary btn-with-icon" id="btn-retry-pending">
+          <svg class="icon"><use href="#icon-retry"/></svg>
+          <span data-i18n="btn_retry_pending">Reintentar con IA</span>
+        </button>
       </div>
       <p class="field-hint" data-i18n="hint_retry_pending"></p>
       <div class="status-line" id="retry-status"></div>
       <div id="pending-list" class="pending-list"></div>
+    </section>
+
+    <!-- ================= THEMES VIEW ================= -->
+    <section id="view-themes" class="view view-panel hidden">
+      <h2 class="panel-title" data-i18n="themes_title">TEMAS</h2>
+      <p class="field-hint" data-i18n="themes_hint"></p>
+      <div class="theme-grid" id="theme-grid">
+        <button class="theme-card" data-theme="emerald">
+          <span class="theme-swatch theme-swatch-emerald"><svg class="icon theme-check"><use href="#icon-check"/></svg></span>
+          <span class="theme-name" data-i18n="theme_emerald">Esmeralda</span>
+        </button>
+        <button class="theme-card" data-theme="blue">
+          <span class="theme-swatch theme-swatch-blue"><svg class="icon theme-check"><use href="#icon-check"/></svg></span>
+          <span class="theme-name" data-i18n="theme_blue">Azul</span>
+        </button>
+        <button class="theme-card" data-theme="violet">
+          <span class="theme-swatch theme-swatch-violet"><svg class="icon theme-check"><use href="#icon-check"/></svg></span>
+          <span class="theme-name" data-i18n="theme_violet">Violeta</span>
+        </button>
+        <button class="theme-card" data-theme="rose">
+          <span class="theme-swatch theme-swatch-rose"><svg class="icon theme-check"><use href="#icon-check"/></svg></span>
+          <span class="theme-name" data-i18n="theme_rose">Rosa</span>
+        </button>
+        <button class="theme-card" data-theme="amber">
+          <span class="theme-swatch theme-swatch-amber"><svg class="icon theme-check"><use href="#icon-check"/></svg></span>
+          <span class="theme-name" data-i18n="theme_amber">Ámbar</span>
+        </button>
+        <button class="theme-card" data-theme="teal">
+          <span class="theme-swatch theme-swatch-teal"><svg class="icon theme-check"><use href="#icon-check"/></svg></span>
+          <span class="theme-name" data-i18n="theme_teal">Turquesa</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= TRANSLATED MODPACKS VIEW ================= -->
+    <section id="view-translated-modpacks" class="view view-panel hidden">
+      <h2 class="panel-title" data-i18n="translated_modpacks_title">MODPACKS TRADUCIDOS</h2>
+      <div id="translated-modpacks-list" class="pending-list"></div>
+    </section>
+
+    <!-- ================= TRANSLATED MODS VIEW ================= -->
+    <section id="view-translated-mods" class="view view-panel hidden">
+      <h2 class="panel-title" data-i18n="translated_mods_title">MODS TRADUCIDOS</h2>
+      <div id="translated-mods-list" class="pending-list"></div>
     </section>
 
   </div>

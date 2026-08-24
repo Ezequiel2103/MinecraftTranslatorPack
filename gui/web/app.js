@@ -140,6 +140,9 @@ function applyLocale() {
 function showView(name) {
   document.querySelectorAll(".view").forEach((el) => el.classList.add("hidden"));
   document.getElementById(`view-${name}`).classList.remove("hidden");
+  document.querySelectorAll(".title-btn[data-view]").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.view === name);
+  });
 }
 
 function setBusy(busy) {
@@ -154,7 +157,8 @@ function setBusy(busy) {
 }
 
 function updatePauseButtonLabel() {
-  document.getElementById("btn-pause-resume").textContent = t(isPaused ? "btn_resume" : "btn_pause");
+  document.getElementById("label-pause-resume").textContent = t(isPaused ? "btn_resume" : "btn_pause");
+  document.getElementById("icon-pause-resume").querySelector("use").setAttribute("href", isPaused ? "#icon-play" : "#icon-pause");
 }
 
 async function togglePauseResume() {
@@ -196,6 +200,7 @@ async function loadSettings() {
 
   await loadLocale(currentSettings.ui_language || "es");
   document.getElementById("select-ui-language").value = currentSettings.ui_language || "es";
+  applyTheme(currentSettings.ui_theme || "emerald");
 
   const providerSelect = document.getElementById("select-provider");
   providerSelect.innerHTML = "";
@@ -207,17 +212,6 @@ async function loadSettings() {
   });
   providerSelect.value = currentSettings.ai_provider;
   toggleGoogleUsageVisibility();
-
-  const fallbackSelect = document.getElementById("select-fallback-provider");
-  fallbackSelect.innerHTML = "";
-  ["none", ...data.providers].forEach((provider) => {
-    const option = document.createElement("option");
-    option.value = provider;
-    option.textContent = t(`provider_${provider}`);
-    fallbackSelect.appendChild(option);
-  });
-  fallbackSelect.value = currentSettings.fallback_ai_provider || "none";
-  document.getElementById("input-fallback-api-key").value = currentSettings.fallback_api_key || "";
 
   const languageSelect = document.getElementById("select-language");
   languageSelect.innerHTML = "";
@@ -231,7 +225,6 @@ async function loadSettings() {
 
   document.getElementById("input-api-key").value = currentSettings.api_key || "";
   document.getElementById("input-concurrency").value = currentSettings.concurrency || 4;
-  document.getElementById("input-content-only").checked = !!currentSettings.content_only;
   document.getElementById("input-curseforge-key").value = currentSettings.curseforge_api_key || "";
 
   document.getElementById("input-modpack-path").value = currentSettings.last_modpack_root || "";
@@ -271,11 +264,8 @@ async function saveSettingsFromForm() {
     ui_language: newLanguage,
     ai_provider: document.getElementById("select-provider").value,
     api_key: document.getElementById("input-api-key").value,
-    fallback_ai_provider: document.getElementById("select-fallback-provider").value,
-    fallback_api_key: document.getElementById("input-fallback-api-key").value,
     target_language: document.getElementById("select-language").value,
     concurrency: parseInt(document.getElementById("input-concurrency").value, 10) || 4,
-    content_only: document.getElementById("input-content-only").checked,
     curseforge_api_key: document.getElementById("input-curseforge-key").value
   };
 
@@ -296,8 +286,22 @@ async function changeUiLanguage(langCode) {
   refreshProviderLabels();
 }
 
+// ---------------- theme ----------------
+
+function applyTheme(themeName) {
+  document.querySelector(".window-frame").dataset.theme = themeName;
+  document.querySelectorAll(".theme-card").forEach((card) => {
+    card.classList.toggle("active", card.dataset.theme === themeName);
+  });
+}
+
+async function changeTheme(themeName) {
+  applyTheme(themeName);
+  currentSettings = await api().save_settings({ ui_theme: themeName });
+}
+
 function refreshProviderLabels() {
-  document.querySelectorAll("#select-provider option, #select-fallback-provider option").forEach((option) => {
+  document.querySelectorAll("#select-provider option").forEach((option) => {
     option.textContent = t(`provider_${option.value}`);
   });
 }
@@ -312,9 +316,12 @@ async function rememberPaths() {
 
 async function scanModpackPath(path) {
   const statusEl = document.getElementById("scan-status");
+  const resultsBox = document.getElementById("community-results");
 
   if (!path) {
     statusEl.innerHTML = "";
+    resultsBox.classList.add("hidden");
+    resultsBox.innerHTML = "";
     lastScan = null;
     return;
   }
@@ -330,6 +337,15 @@ async function scanModpackPath(path) {
     : `<span class="missing">${t("scan_mods_missing")}</span>`;
 
   statusEl.innerHTML = `${questsMark} &nbsp;·&nbsp; ${modsMark}`;
+
+  // Automatic: check for a ready-made community translation before the
+  // user pays for any AI translation, instead of a manual search button.
+  if (lastScan.mods_folder && currentSettings.curseforge_api_key) {
+    searchCommunityTranslations();
+  } else {
+    resultsBox.classList.add("hidden");
+    resultsBox.innerHTML = "";
+  }
 }
 
 // ---------------- folder pickers ----------------
@@ -345,8 +361,10 @@ async function browseInto(inputId) {
 
 async function refreshMemoryStats() {
   const stats = await api().get_memory_stats();
-  document.getElementById("memory-stats").textContent = t("label_memory_stats", {
-    quests: stats.quest_count.toLocaleString(),
+  document.getElementById("memory-stats-quests").textContent = t("label_memory_stats_quests", {
+    quests: stats.quest_count.toLocaleString()
+  });
+  document.getElementById("memory-stats-glossary").textContent = t("label_memory_stats_glossary", {
     glossary: stats.glossary_count.toLocaleString()
   });
 }
@@ -715,7 +733,7 @@ async function loadPending() {
       <div class="pending-path">${escapeHtml(item.path || "")} — ${escapeHtml(item.reason || "")}</div>
       <div class="pending-row">
         <input type="text" class="input-field pending-translation" placeholder="${escapeHtml(t("placeholder_pending_translation"))}">
-        <button class="btn btn-secondary pending-approve">${t("btn_approve")}</button>
+        <button class="btn btn-secondary btn-with-icon pending-approve"><svg class="icon"><use href="#icon-check"/></svg>${t("btn_approve")}</button>
       </div>
     `;
 
@@ -729,6 +747,69 @@ async function loadPending() {
       }
     });
 
+    list.appendChild(row);
+  });
+}
+
+// ---------------- translated modpacks / mods lists ----------------
+
+function formatDate(isoString) {
+  if (!isoString) return "";
+  const date = new Date(isoString);
+  return isNaN(date.getTime()) ? isoString : date.toLocaleString();
+}
+
+async function loadTranslatedModpacks() {
+  const list = document.getElementById("translated-modpacks-list");
+  list.innerHTML = `<div class="pending-empty">${t("pending_loading")}</div>`;
+
+  const items = await api().get_translated_modpacks();
+
+  if (!items.length) {
+    list.innerHTML = `<div class="pending-empty">${t("translated_modpacks_empty")}</div>`;
+    return;
+  }
+
+  list.innerHTML = "";
+  items.forEach((item) => {
+    const row = document.createElement("div");
+    row.className = "pending-item";
+    row.innerHTML = `
+      <div class="pending-original">${escapeHtml(item.name)}</div>
+      <div class="pending-path">${escapeHtml(item.path || "")}</div>
+      <div class="pending-path">${escapeHtml(t("translated_modpack_summary", {
+        files: item.files, mods: item.mods, pending: item.pending
+      }))}</div>
+      <div class="pending-path">${escapeHtml(t("translated_last_updated", {
+        date: formatDate(item.last_translated_at)
+      }))}</div>
+    `;
+    list.appendChild(row);
+  });
+}
+
+async function loadTranslatedMods() {
+  const list = document.getElementById("translated-mods-list");
+  list.innerHTML = `<div class="pending-empty">${t("pending_loading")}</div>`;
+
+  const items = await api().get_translated_mods();
+
+  if (!items.length) {
+    list.innerHTML = `<div class="pending-empty">${t("translated_mods_empty")}</div>`;
+    return;
+  }
+
+  list.innerHTML = "";
+  items.forEach((item) => {
+    const row = document.createElement("div");
+    row.className = "pending-item";
+    row.innerHTML = `
+      <div class="pending-original">${escapeHtml(item.modid)}</div>
+      <div class="pending-path">${escapeHtml(t("translated_mod_summary", { count: item.entry_count }))}</div>
+      <div class="pending-path">${escapeHtml(t("translated_last_updated", {
+        date: formatDate(item.last_translated_at)
+      }))}</div>
+    `;
     list.appendChild(row);
   });
 }
@@ -760,6 +841,10 @@ window.addEventListener("pywebviewready", async () => {
     showView("pending");
     loadPending();
   });
+  document.getElementById("btn-themes").addEventListener("click", () => showView("themes"));
+  document.querySelectorAll(".theme-card").forEach((card) => {
+    card.addEventListener("click", () => changeTheme(card.dataset.theme));
+  });
   document.getElementById("btn-minimize").addEventListener("click", () => api().minimize_window());
   document.getElementById("btn-close").addEventListener("click", () => api().close_window());
 
@@ -785,7 +870,16 @@ window.addEventListener("pywebviewready", async () => {
     event.preventDefault();
     mergeResourcepacks();
   });
-  document.getElementById("btn-search-community").addEventListener("click", searchCommunityTranslations);
+  document.getElementById("link-view-translated-modpacks").addEventListener("click", (event) => {
+    event.preventDefault();
+    showView("translated-modpacks");
+    loadTranslatedModpacks();
+  });
+  document.getElementById("link-view-translated-mods").addEventListener("click", (event) => {
+    event.preventDefault();
+    showView("translated-mods");
+    loadTranslatedMods();
+  });
 
   document.getElementById("btn-translate-now").addEventListener("click", translateNow);
   document.getElementById("btn-pause-resume").addEventListener("click", togglePauseResume);

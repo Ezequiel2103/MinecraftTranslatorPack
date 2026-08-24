@@ -1,26 +1,77 @@
 /*
-  Placeholder skin. Every visual piece here (title bar, buttons, panels,
-  progress bar) is meant to be swapped for the pixel-art assets later —
-  the class names are the hooks, keep them when re-skinning.
+  Modern flat UI — dark, neutral surfaces, a single emerald accent,
+  soft shadows instead of pixel-art bevels. Native Windows UI font
+  stack (no webfont to load). Icons are the inline stroke-based
+  <symbol> sprite injected near the top of <body>.
 */
 
 :root {
-  --bg: #1b1712;
-  --panel: #2a231a;
-  --panel-border: #4a3d2c;
-  --accent: #7cb342;
-  --accent-dark: #5a8a2c;
-  --text: #e8ddc8;
-  --text-dim: #a89a80;
-  --input-bg: #14110d;
-  --danger: #b3402f;
+  --bg: #0f1115;
+  --surface: #171a20;
+  --surface-2: #1f232b;
+  --surface-3: #262b34;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --text: #e8eaed;
+  --text-dim: #9098a8;
+  --text-faint: #5b6472;
+  --accent: #22c55e;
+  --accent-hover: #34d876;
+  --accent-active: #16a34a;
+  --accent-soft: rgba(34, 197, 94, 0.16);
+  --success: #22c55e;
+  --danger: #ef4444;
+  --danger-soft: rgba(239, 68, 68, 0.14);
+  --warning: #f59e0b;
+  --radius: 10px;
+  --radius-sm: 7px;
+}
+
+/* ---------- accent themes ---------- */
+/* Swapping .window-frame's data-theme redefines just the accent tokens;
+   every component below already reads color through var(--accent...),
+   so no component rule needs to know themes exist. */
+
+.window-frame[data-theme="blue"] {
+  --accent: #3b82f6;
+  --accent-hover: #5b9dff;
+  --accent-active: #2563eb;
+  --accent-soft: rgba(59, 130, 246, 0.16);
+}
+
+.window-frame[data-theme="violet"] {
+  --accent: #8b5cf6;
+  --accent-hover: #a684fa;
+  --accent-active: #7c3aed;
+  --accent-soft: rgba(139, 92, 246, 0.16);
+}
+
+.window-frame[data-theme="rose"] {
+  --accent: #ec4899;
+  --accent-hover: #f472b6;
+  --accent-active: #db2777;
+  --accent-soft: rgba(236, 72, 153, 0.16);
+}
+
+.window-frame[data-theme="amber"] {
+  --accent: #f59e0b;
+  --accent-hover: #fbb130;
+  --accent-active: #d97e06;
+  --accent-soft: rgba(245, 158, 11, 0.16);
+}
+
+.window-frame[data-theme="teal"] {
+  --accent: #14b8a6;
+  --accent-hover: #2dd4c0;
+  --accent-active: #0d9488;
+  --accent-soft: rgba(20, 184, 166, 0.16);
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Consolas", "Courier New", monospace;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
 }
 
 html, body {
@@ -44,17 +95,18 @@ html, body {
   color: var(--text);
   display: flex;
   flex-direction: column;
-  border: 2px solid var(--panel-border);
-  border-radius: 8px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
 }
 
 /* ---------- title bar ---------- */
 
 .title-bar {
   -webkit-app-region: drag;
-  background: linear-gradient(180deg, #3a2f20, #241d14);
-  border-bottom: 2px solid var(--panel-border);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
   padding: 10px 12px;
   display: flex;
   align-items: center;
@@ -65,42 +117,82 @@ html, body {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.title-icon {
-  font-size: 18px;
+  color: var(--text);
 }
 
 .title-text {
-  font-weight: bold;
-  letter-spacing: 1px;
-  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  font-size: 13px;
+  color: var(--text-dim);
 }
 
 .title-bar-right {
   -webkit-app-region: no-drag;
   display: flex;
-  gap: 4px;
+  gap: 2px;
 }
 
 .title-btn {
   -webkit-app-region: no-drag;
-  background: #3a2f20;
-  border: 1px solid var(--panel-border);
-  color: var(--text);
-  width: 28px;
-  height: 24px;
+  background: transparent;
+  color: var(--text-dim);
+  width: 30px;
+  height: 28px;
   cursor: pointer;
-  border-radius: 4px;
-  font-size: 12px;
+  border: none;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+/* ---------- icons ---------- */
+/* Stroke-based line icons — <symbol>s from the sprite injected near
+   the top of <body>. Size follows font-size (1em), color follows
+   text color. */
+
+.icon {
+  width: 1.05em;
+  height: 1.05em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.title-icon {
+  font-size: 17px;
+  color: var(--accent);
+}
+
+.btn-with-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .title-btn:hover {
-  background: var(--accent-dark);
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.title-btn:active {
+  background: var(--surface-3);
 }
 
 .title-btn-close:hover {
-  background: var(--danger);
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.title-btn.active {
+  background: var(--accent-soft);
+  color: var(--accent);
 }
 
 /* ---------- content ---------- */
@@ -120,9 +212,11 @@ html, body {
 .field-label {
   display: block;
   font-size: 11px;
+  font-weight: 600;
   color: var(--text-dim);
-  letter-spacing: 1px;
-  margin: 14px 0 6px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  margin: 16px 0 6px;
 }
 
 .field-row {
@@ -138,7 +232,7 @@ html, body {
 }
 
 .scan-status .found {
-  color: var(--accent);
+  color: var(--success);
 }
 
 .scan-status .missing {
@@ -147,17 +241,23 @@ html, body {
 
 .input-field, .select-field {
   flex: 1;
-  background: var(--input-bg);
-  border: 2px solid var(--panel-border);
+  background: var(--surface-2);
   color: var(--text);
-  padding: 8px 10px;
-  border-radius: 4px;
+  padding: 9px 11px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   font-size: 13px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input-field::placeholder {
+  color: var(--text-faint);
 }
 
 .input-field:focus, .select-field:focus {
   outline: none;
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .field-hint {
@@ -167,37 +267,107 @@ html, body {
   color: var(--text-dim);
 }
 
+.memory-stats {
+  display: flex;
+  gap: 16px;
+}
+
+.memory-stats span {
+  flex: 1;
+}
+
+.memory-stats span:last-child {
+  text-align: right;
+}
+
 .checkbox-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   margin: 14px 0;
   font-size: 12px;
   color: var(--text-dim);
+  cursor: pointer;
+}
+
+/* Toggle switch (pure CSS pill, no images) */
+.toggle {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.toggle-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.toggle-visual {
+  position: absolute;
+  inset: 0;
+  background: var(--surface-3);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.toggle-visual::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.toggle-input:checked + .toggle-visual {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.toggle-input:checked + .toggle-visual::before {
+  transform: translateX(16px);
+  background: #fff;
+}
+
+.toggle-input:focus-visible + .toggle-visual {
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 /* ---------- buttons ---------- */
 
 .btn {
   cursor: pointer;
-  border: 2px solid var(--panel-border);
-  border-radius: 4px;
-  background: #3a2f20;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
   color: var(--text);
-  transition: background 0.15s, border-color 0.15s;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
 }
 
 .btn:hover {
-  border-color: var(--accent);
+  background: var(--surface-3);
+  border-color: var(--border-strong);
 }
 
 .btn:active {
-  background: var(--accent-dark);
+  transform: scale(0.98);
 }
 
 .btn-icon {
   width: 40px;
-  font-size: 16px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-primary {
@@ -205,18 +375,24 @@ html, body {
   width: 100%;
   margin-top: 20px;
   padding: 10px;
-  background: var(--accent-dark);
+  background: var(--accent);
   border-color: var(--accent);
-  font-weight: bold;
-  letter-spacing: 1px;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.2px;
 }
 
 .btn-primary:hover {
-  background: var(--accent);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.btn-primary:active {
+  background: var(--accent-active);
 }
 
 .btn-secondary {
-  padding: 8px 14px;
+  padding: 9px 14px;
   font-size: 12px;
   margin-bottom: 12px;
 }
@@ -239,8 +415,9 @@ html, body {
 }
 
 .btn-cancel:hover {
-  background: var(--danger);
+  background: var(--danger-soft);
   border-color: var(--danger);
+  color: var(--danger);
 }
 
 /* ---------- action buttons ---------- */
@@ -258,10 +435,11 @@ html, body {
   align-items: center;
   gap: 10px;
   padding: 18px 10px;
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  background: linear-gradient(180deg, #3a2f20, #241d14);
+  letter-spacing: 0.4px;
+  background: var(--surface);
 }
 
 .btn-action:disabled {
@@ -270,7 +448,8 @@ html, body {
 }
 
 .btn-action-icon {
-  font-size: 28px;
+  font-size: 22px;
+  color: var(--accent);
 }
 
 /* ---------- dictionary export links ---------- */
@@ -292,6 +471,10 @@ html, body {
   text-decoration: underline;
 }
 
+.dict-links-center {
+  justify-content: center;
+}
+
 /* ---------- translate now ---------- */
 
 .btn-translate-now {
@@ -299,22 +482,27 @@ html, body {
   width: 100%;
   margin-top: 18px;
   padding: 14px;
-  font-size: 15px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  background: linear-gradient(180deg, var(--accent), var(--accent-dark));
-  color: #14110d;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  background: var(--accent);
+  color: #fff;
   border-color: var(--accent);
+  box-shadow: 0 4px 16px var(--accent-soft);
 }
 
 .btn-translate-now:hover {
-  filter: brightness(1.1);
+  background: var(--accent-hover);
+}
+
+.btn-translate-now:active {
+  background: var(--accent-active);
 }
 
 .btn-translate-now:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  filter: none;
+  box-shadow: none;
 }
 
 /* ---------- progress ---------- */
@@ -325,22 +513,16 @@ html, body {
 
 .progress-bar {
   position: relative;
-  height: 26px;
-  background: var(--input-bg);
-  border: 2px solid var(--panel-border);
-  border-radius: 4px;
+  height: 22px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: repeating-linear-gradient(
-    45deg,
-    var(--accent-dark),
-    var(--accent-dark) 10px,
-    var(--accent) 10px,
-    var(--accent) 20px
-  );
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
   transition: width 0.2s ease;
 }
 
@@ -353,9 +535,10 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
-  font-weight: bold;
-  text-shadow: 1px 1px 2px #000;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--text);
 }
 
 .status-line {
@@ -375,7 +558,7 @@ html, body {
 }
 
 .result-box.success {
-  color: var(--accent);
+  color: var(--success);
 }
 
 .result-box.error {
@@ -389,26 +572,28 @@ html, body {
 }
 
 .panel-title {
-  font-size: 15px;
-  letter-spacing: 1px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
   margin-bottom: 8px;
-  color: var(--accent);
+  color: var(--text);
 }
 
 .save-confirm {
   margin-top: 10px;
-  color: var(--accent);
+  color: var(--success);
   font-size: 12px;
 }
 
 .panel-subtitle {
-  font-size: 12px;
-  letter-spacing: 1px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
   text-transform: uppercase;
   color: var(--text-dim);
   margin-top: 22px;
   padding-top: 14px;
-  border-top: 1px solid var(--panel-border);
+  border-top: 1px solid var(--border);
 }
 
 /* ---------- usage indicator ---------- */
@@ -419,16 +604,16 @@ html, body {
 
 .usage-bar {
   position: relative;
-  height: 16px;
-  background: var(--input-bg);
-  border: 2px solid var(--panel-border);
-  border-radius: 4px;
+  height: 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
   overflow: hidden;
 }
 
 .usage-fill {
   height: 100%;
-  background: var(--accent-dark);
+  background: var(--accent);
   transition: width 0.2s ease, background 0.2s ease;
 }
 
@@ -452,22 +637,24 @@ html, body {
 }
 
 .pending-item {
-  border: 2px solid var(--panel-border);
-  border-radius: 4px;
-  padding: 10px 12px;
-  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left-width: 3px;
+  border-left-color: var(--accent);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  background: var(--surface);
 }
 
 .pending-original {
   font-size: 12px;
-  color: var(--text-dim);
+  color: var(--text);
   margin-bottom: 4px;
   word-break: break-word;
 }
 
 .pending-path {
   font-size: 10px;
-  color: #6b5f4a;
+  color: var(--text-faint);
   margin-bottom: 8px;
 }
 
@@ -480,4 +667,83 @@ html, body {
   color: var(--text-dim);
   font-size: 12px;
   padding: 20px 0;
+}
+
+/* ---------- themes ---------- */
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+  max-width: 420px;
+}
+
+.theme-card {
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 16px 10px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.15s ease, border-color 0.15s, background 0.15s;
+}
+
+.theme-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
+  background: var(--surface-2);
+}
+
+.theme-card.active {
+  border-color: var(--theme-preview, var(--accent));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--theme-preview, var(--accent)) 25%, transparent);
+}
+
+.theme-swatch {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.25), inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.theme-swatch-emerald { --theme-preview: #22c55e; background: linear-gradient(145deg, #34d876, #16a34a); }
+.theme-swatch-blue    { --theme-preview: #3b82f6; background: linear-gradient(145deg, #5b9dff, #2563eb); }
+.theme-swatch-violet  { --theme-preview: #8b5cf6; background: linear-gradient(145deg, #a684fa, #7c3aed); }
+.theme-swatch-rose    { --theme-preview: #ec4899; background: linear-gradient(145deg, #f472b6, #db2777); }
+.theme-swatch-amber   { --theme-preview: #f59e0b; background: linear-gradient(145deg, #fbb130, #d97e06); }
+.theme-swatch-teal    { --theme-preview: #14b8a6; background: linear-gradient(145deg, #2dd4c0, #0d9488); }
+
+.theme-card.active .theme-swatch {
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.35), inset 0 -3px 6px rgba(0, 0, 0, 0.3), 0 0 0 3px var(--bg), 0 0 0 4px var(--theme-preview);
+}
+
+.theme-check {
+  width: 16px;
+  height: 16px;
+  stroke: #fff;
+  stroke-width: 3;
+  opacity: 0;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.4));
+  transition: opacity 0.15s;
+}
+
+.theme-card.active .theme-check {
+  opacity: 1;
+}
+
+.theme-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
+.theme-card.active .theme-name {
+  color: var(--text);
 }

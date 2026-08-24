@@ -43,8 +43,6 @@ def translate_mod_lang_files(
     target_language="es",
     ai_provider="mock",
     ai_model=None,
-    fallback_ai_provider=None,
-    fallback_ai_model=None,
     concurrency=4,
     review_root=None,
     content_only=False,
@@ -147,9 +145,7 @@ def translate_mod_lang_files(
                 concurrency,
                 on_text_progress,
                 cancel_event,
-                resume_event,
-                fallback_ai_provider,
-                fallback_ai_model
+                resume_event
             )
 
             if quota_exceeded:
@@ -221,20 +217,13 @@ def _translate_lang_dict(
     concurrency,
     on_text_progress=None,
     cancel_event=None,
-    resume_event=None,
-    fallback_ai_provider=None,
-    fallback_ai_model=None
+    resume_event=None
 ):
     texts = extract_texts(en_us)
     translatable = [
         item for item in texts
         if decide_translation(item)["action"] == "translate"
     ]
-
-    fallback_ai_translator = (
-        create_ai_translator(fallback_ai_provider, fallback_ai_model)
-        if fallback_ai_provider else None
-    )
 
     service = TranslationService(
         language_pair,
@@ -243,8 +232,7 @@ def _translate_lang_dict(
         # Quest-specific templates (e.g. "&eKill&f: ") have no business
         # matching mod lang text, which uses entirely different phrasing.
         templates=[],
-        cancel_event=cancel_event,
-        fallback_ai_translator=fallback_ai_translator
+        cancel_event=cancel_event
     )
 
     results = translate_items_concurrently(

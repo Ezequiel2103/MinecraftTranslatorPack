@@ -145,8 +145,6 @@ def translate_file(
     interface_language="es",
     ai_provider="mock",
     ai_model=None,
-    fallback_ai_provider=None,
-    fallback_ai_model=None,
     replace_pending=True,
     review_root=None,
     mods_folder=None,
@@ -186,18 +184,12 @@ def translate_file(
         else:
             uncertain_texts.append(item)
 
-    fallback_ai_translator = (
-        create_ai_translator(fallback_ai_provider, fallback_ai_model)
-        if fallback_ai_provider else None
-    )
-
     service = TranslationService(
         language_pair,
         ai_translator=create_ai_translator(ai_provider, ai_model),
         protected_terms=protected_terms,
         mod_item_glossary=mod_item_glossary,
-        cancel_event=cancel_event,
-        fallback_ai_translator=fallback_ai_translator
+        cancel_event=cancel_event
     )
     total_translatable = len(translatable_texts)
 
@@ -308,8 +300,6 @@ def translate_folder(
     interface_language="es",
     ai_provider="mock",
     ai_model=None,
-    fallback_ai_provider=None,
-    fallback_ai_model=None,
     review_root=None,
     target_locale_name=None,
     mods_folder=None,
@@ -396,8 +386,6 @@ def translate_folder(
             interface_language=interface_language,
             ai_provider=ai_provider,
             ai_model=ai_model,
-            fallback_ai_provider=fallback_ai_provider,
-            fallback_ai_model=fallback_ai_model,
             replace_pending=False,
             review_root=review_root,
             protected_terms=protected_terms,

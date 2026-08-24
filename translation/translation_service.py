@@ -155,8 +155,7 @@ class TranslationService:
         protected_terms=None,
         mod_item_glossary=None,
         templates=None,
-        cancel_event=None,
-        fallback_ai_translator=None
+        cancel_event=None
     ):
         self.language_pair = language_pair
         self.terminology = load_terminology(language_pair)
@@ -173,14 +172,6 @@ class TranslationService:
             ai_translator = MockAITranslator()
 
         self.ai_translator = ai_translator
-
-        # Optional second opinion, tried only when the primary engine's
-        # result gets rejected (a known weak spot like Argos on short
-        # item names, or just a translation that never validates after
-        # every retry) -- so a free/offline engine can stay the default
-        # for everything without leaving its rough edges for a human to
-        # clean up by hand in Pending every time.
-        self.fallback_ai_translator = fallback_ai_translator
 
         self.retry_manager = TranslationRetryManager(
             max_attempts=3
@@ -341,79 +332,6 @@ class TranslationService:
 
         return None
 
-    def _attempt_fallback(
-        self, text, source_language, target_language,
-        active_terminology, context
-    ):
-        """
-        One extra try with the fallback engine (if one is configured),
-        for a text the primary engine's result was rejected for. Called
-        both when Argos leaves a word untranslated (retrying Argos again
-        would just repeat the same answer) and when the primary's own
-        retry loop is exhausted. Runs the exact same protect/validate/
-        repair pipeline as the primary path, just once (no retry loop of
-        its own) -- if the fallback's answer doesn't pass either, this
-        gives up quietly and lets the caller fall through to Pending,
-        same as if no fallback had been configured at all.
-        """
-
-        if self.fallback_ai_translator is None:
-            return None
-
-        protected_text, protected_tokens = protect_text(
-            text, extra_terms=self.protected_terms
-        )
-
-        try:
-            result = self.fallback_ai_translator.translate(
-                protected_text, source_language, target_language,
-                terminology=active_terminology, context=context
-            )
-        except QuotaExceededError:
-            # The fallback running out of quota is not this run's
-            # problem to stop over -- the primary engine is still fine,
-            # this text just doesn't get the second opinion this time.
-            return None
-
-        translation = result.get("translation")
-        restored_translation = restore_text(translation or "", protected_tokens)
-
-        if result.get("source") == "argos_translate":
-            word_repaired = self._repair_leftover_words(text, restored_translation)
-            if word_repaired is not None:
-                restored_translation = word_repaired
-
-        validation = validate_translation(text, restored_translation)
-
-        if not validation["valid"]:
-            repaired = attempt_placeholder_repair(text, restored_translation)
-            if repaired is not None:
-                restored_translation = repaired
-                validation = validate_translation(text, restored_translation)
-
-        quality = validate_translation_quality(
-            text, restored_translation, target_language=target_language
-        )
-
-        if not (validation["valid"] and quality["valid"]):
-            return None
-
-        if result.get("source") == "argos_translate" and self._has_leftover_words(
-            text, restored_translation
-        ):
-            return None
-
-        with self._new_memory_lock:
-            self._new_memory_entries[text] = restored_translation
-
-        return {
-            "translation": restored_translation,
-            "source": result["source"],
-            "valid": True,
-            "validation_reason": None,
-            "attempts": 1
-        }
-
     def _ai_translate_with_retry(
         self, text, source_language, target_language,
         active_terminology, context
@@ -513,21 +431,12 @@ class TranslationService:
                 # unchanged as a whole, not the wrong script). Word-level
                 # repair above already fixed what it could recognize; if
                 # something is still left over, don't ship it silently —
-                # give the fallback engine (if any) one shot at it, and
-                # only then send it to Pending for a human to check.
-                # Argos ignores retry feedback, so another attempt on it
-                # would just produce the exact same result: no point
-                # looping.
+                # send it to Pending for a human to check. Argos ignores
+                # retry feedback, so another attempt on it would just
+                # produce the exact same result: no point looping.
                 if result.get("source") == "argos_translate" and (
                     self._has_leftover_words(text, restored_translation)
                 ):
-                    fallback_result = self._attempt_fallback(
-                        text, source_language, target_language,
-                        active_terminology, context
-                    )
-                    if fallback_result is not None:
-                        return fallback_result
-
                     return {
                         "translation": restored_translation,
                         "source": result["source"],
@@ -554,12 +463,6 @@ class TranslationService:
                 if not validation["valid"]
                 else quality["reason"]
             )
-
-        fallback_result = self._attempt_fallback(
-            text, source_language, target_language, active_terminology, context
-        )
-        if fallback_result is not None:
-            return fallback_result
 
         return {
             "translation": None,
@@ -730,18 +633,11 @@ class TranslationService:
             if validation["valid"] and quality["valid"]:
                 # Same reasoning as the single-item path: a leftover word
                 # Argos couldn't be repaired for goes to Pending instead
-                # of being retried (retrying won't change Argos's answer)
-                # -- unless a fallback engine is configured, in which
-                # case it gets one shot at this specific text first.
+                # of being retried (retrying won't change Argos's answer).
                 if entry_source == "argos_translate" and (
                     self._has_leftover_words(text, restored_translation)
                 ):
-                    fallback_result = self._attempt_fallback(
-                        text, source_language, target_language,
-                        active_terminology, items[index].get("parent_path")
-                    )
-
-                    results[index] = fallback_result or {
+                    results[index] = {
                         "translation": restored_translation,
                         "source": entry_source,
                         "valid": False,

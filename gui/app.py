@@ -17,10 +17,40 @@ for _stream_name in ("stdout", "stderr"):
     elif hasattr(_stream, "reconfigure"):
         _stream.reconfigure(encoding="utf-8", errors="replace")
 
+def _unblock_bundled_dotnet_files(base_dir):
+    """
+    Windows tags every file extracted from a zip that was downloaded
+    off the internet with a hidden "Mark of the Web" marker, and .NET
+    refuses to load an assembly carrying one -- which is exactly what
+    breaks pythonnet's Python.Runtime.dll the moment someone downloads
+    a release, unzips it and runs the exe, with a cryptic "Failed to
+    resolve Python.Runtime.Loader.Initialize" crash before the window
+    ever opens. It only reproduces on a machine that actually downloaded
+    the zip (unblocking isn't needed running from source, or from a
+    build that was never zipped), which is why this can pass every
+    local test and still break for every single person you send it to.
+    Strip the marker from the handful of files pythonnet needs before
+    anything gets a chance to load them.
+    """
+
+    for subfolder in ("pythonnet", "clr_loader"):
+        folder = base_dir / subfolder
+        if not folder.is_dir():
+            continue
+
+        for path in folder.rglob("*"):
+            if path.is_file():
+                try:
+                    os.remove(f"{path}:Zone.Identifier")
+                except OSError:
+                    pass
+
+
 if getattr(sys, "frozen", False):
     # Running from a PyInstaller-built exe: bundled files live under the
     # extracted _MEIPASS folder instead of next to this script.
     BASE_DIR = Path(sys._MEIPASS)
+    _unblock_bundled_dotnet_files(BASE_DIR)
 else:
     BASE_DIR = Path(__file__).resolve().parent.parent
 

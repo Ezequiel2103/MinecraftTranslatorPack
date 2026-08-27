@@ -118,6 +118,8 @@
 
   "result_done": "✔ Listo.\nArchivos de misiones: {files}\nMods traducidos: {mods}\nPendientes de revisión: {pending}\nSe tradujo directo en el modpack.",
   "modal_done_title": "✔ Traducción terminada",
+  "modal_section_quests": "Misiones",
+  "modal_section_mods": "Mods",
   "modal_done_translated": "Traducido",
   "modal_done_pending": "En revisión",
   "modal_done_detail": "{translated} de {total} textos traducidos · {pending} quedaron en revisión.",

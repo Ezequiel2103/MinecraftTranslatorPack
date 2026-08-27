@@ -416,13 +416,21 @@ class Api:
         backup_dir = modpack_root / "_translator_backups" / timestamp
         backed_up = False
 
-        summary = {"files": 0, "mods": 0, "pending": 0, "total_items": 0}
+        summary = {
+            "files": 0, "mods": 0, "pending": 0, "total_items": 0,
+            "quests_total": 0, "quests_pending": 0,
+            "mods_total": 0, "mods_pending": 0
+        }
         quota_exceeded = False
+        ran_quests = False
+        ran_mods = False
 
         try:
             self._emit("start", {"phase": "modpack"})
 
             if paths["quests_lang_folder"] and translate_quests:
+                ran_quests = True
+
                 def on_file_progress(current, total, name):
                     self._emit("file_progress", {
                         "current": current, "total": total, "name": name
@@ -452,12 +460,14 @@ class Api:
                     backup_dir=backup_dir
                 )
                 summary["files"] = len(reports)
-                summary["pending"] += sum(
+                summary["quests_pending"] = sum(
                     len(report["pending_items"]) for report in reports
                 )
-                summary["total_items"] += sum(
+                summary["quests_total"] = sum(
                     len(report["translatable_texts"]) for report in reports
                 )
+                summary["pending"] += summary["quests_pending"]
+                summary["total_items"] += summary["quests_total"]
                 quota_exceeded = quota_exceeded or any(
                     report.get("quota_exceeded") for report in reports
                 )
@@ -466,6 +476,7 @@ class Api:
                 )
 
             if paths["mods_folder"] and translate_mods and not cancel_event.is_set():
+                ran_mods = True
                 self._emit("start", {"phase": "mods"})
 
                 def on_mod_progress(current, total, modid):
@@ -510,23 +521,35 @@ class Api:
                     resume_event=resume_event
                 )
                 summary["mods"] = len(stats["mods"])
-                summary["pending"] += stats["pending_items"]
-                summary["total_items"] += stats["total_items"]
+                summary["mods_pending"] = stats["pending_items"]
+                summary["mods_total"] = stats["total_items"]
+                summary["pending"] += summary["mods_pending"]
+                summary["total_items"] += summary["mods_total"]
                 quota_exceeded = quota_exceeded or stats.get("quota_exceeded", False)
 
-            translated_items = summary["total_items"] - summary["pending"]
-            percent_translated = (
-                round(translated_items / summary["total_items"] * 100)
-                if summary["total_items"] else 100
-            )
+            def percent_translated(total, pending):
+                return round((total - pending) / total * 100) if total else 100
 
             payload = {
                 "files": summary["files"],
                 "mods": summary["mods"],
                 "pending": summary["pending"],
                 "total_items": summary["total_items"],
-                "percent_translated": percent_translated,
-                "percent_pending": 100 - percent_translated,
+                "percent_translated": percent_translated(
+                    summary["total_items"], summary["pending"]
+                ),
+                "ran_quests": ran_quests,
+                "quests_total": summary["quests_total"],
+                "quests_pending": summary["quests_pending"],
+                "quests_percent": percent_translated(
+                    summary["quests_total"], summary["quests_pending"]
+                ),
+                "ran_mods": ran_mods,
+                "mods_total": summary["mods_total"],
+                "mods_pending": summary["mods_pending"],
+                "mods_percent": percent_translated(
+                    summary["mods_total"], summary["mods_pending"]
+                ),
                 "modpack_root": str(modpack_root),
                 "backup_dir": str(backup_dir) if backed_up else None
             }

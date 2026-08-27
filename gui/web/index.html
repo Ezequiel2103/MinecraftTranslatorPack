@@ -303,17 +303,37 @@
   <div class="modal-overlay hidden" id="done-modal">
     <div class="modal-box">
       <h3 class="modal-title" data-i18n="modal_done_title">✔ Traducción terminada</h3>
-      <div class="modal-percent-row">
-        <div class="modal-percent">
-          <span class="modal-percent-value" id="done-modal-percent-translated">0%</span>
-          <span class="modal-percent-label" data-i18n="modal_done_translated">Traducido</span>
+
+      <div class="modal-section hidden" id="done-modal-quests-section">
+        <p class="modal-section-title" data-i18n="modal_section_quests">Misiones</p>
+        <div class="modal-percent-row">
+          <div class="modal-percent">
+            <span class="modal-percent-value" id="done-modal-quests-percent-translated">0%</span>
+            <span class="modal-percent-label" data-i18n="modal_done_translated">Traducido</span>
+          </div>
+          <div class="modal-percent modal-percent-dim">
+            <span class="modal-percent-value" id="done-modal-quests-percent-pending">0%</span>
+            <span class="modal-percent-label" data-i18n="modal_done_pending">En revisión</span>
+          </div>
         </div>
-        <div class="modal-percent modal-percent-dim">
-          <span class="modal-percent-value" id="done-modal-percent-pending">0%</span>
-          <span class="modal-percent-label" data-i18n="modal_done_pending">En revisión</span>
-        </div>
+        <p class="modal-detail" id="done-modal-quests-detail"></p>
       </div>
-      <p class="modal-detail" id="done-modal-detail"></p>
+
+      <div class="modal-section hidden" id="done-modal-mods-section">
+        <p class="modal-section-title" data-i18n="modal_section_mods">Mods</p>
+        <div class="modal-percent-row">
+          <div class="modal-percent">
+            <span class="modal-percent-value" id="done-modal-mods-percent-translated">0%</span>
+            <span class="modal-percent-label" data-i18n="modal_done_translated">Traducido</span>
+          </div>
+          <div class="modal-percent modal-percent-dim">
+            <span class="modal-percent-value" id="done-modal-mods-percent-pending">0%</span>
+            <span class="modal-percent-label" data-i18n="modal_done_pending">En revisión</span>
+          </div>
+        </div>
+        <p class="modal-detail" id="done-modal-mods-detail"></p>
+      </div>
+
       <button class="btn btn-primary" id="btn-close-done-modal" data-i18n="btn_close_modal">Cerrar</button>
     </div>
   </div>

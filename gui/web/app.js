@@ -583,14 +583,28 @@ function resultMessage(key, payload) {
   return message;
 }
 
-function showDoneModal(payload) {
-  const total = payload.total_items || 0;
-  const pending = payload.pending || 0;
+function fillDoneModalSection(prefix, total, pending, percent) {
+  const section = document.getElementById(`done-modal-${prefix}-section`);
   const translated = total - pending;
 
-  document.getElementById("done-modal-percent-translated").textContent = `${payload.percent_translated}%`;
-  document.getElementById("done-modal-percent-pending").textContent = `${payload.percent_pending}%`;
-  document.getElementById("done-modal-detail").textContent = t("modal_done_detail", { translated, total, pending });
+  document.getElementById(`done-modal-${prefix}-percent-translated`).textContent = `${percent}%`;
+  document.getElementById(`done-modal-${prefix}-percent-pending`).textContent = `${100 - percent}%`;
+  document.getElementById(`done-modal-${prefix}-detail`).textContent = t("modal_done_detail", { translated, total, pending });
+  section.classList.remove("hidden");
+}
+
+function showDoneModal(payload) {
+  document.getElementById("done-modal-quests-section").classList.add("hidden");
+  document.getElementById("done-modal-mods-section").classList.add("hidden");
+
+  if (payload.ran_quests) {
+    fillDoneModalSection("quests", payload.quests_total, payload.quests_pending, payload.quests_percent);
+  }
+
+  if (payload.ran_mods) {
+    fillDoneModalSection("mods", payload.mods_total, payload.mods_pending, payload.mods_percent);
+  }
+
   document.getElementById("done-modal").classList.remove("hidden");
 }
 

@@ -765,8 +765,8 @@ html, body {
 }
 
 .modal-box {
-  width: 320px;
-  padding: 24px;
+  width: 340px;
+  padding: 28px 24px;
   background: var(--surface);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius);
@@ -775,16 +775,34 @@ html, body {
 }
 
 .modal-title {
-  margin: 0 0 18px;
+  margin: 0 0 20px;
   font-size: 15px;
   font-weight: 600;
   color: var(--text);
 }
 
+.modal-section {
+  margin-bottom: 20px;
+}
+
+.modal-section.hidden {
+  display: none;
+}
+
+.modal-section-title {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--text-dim);
+  text-align: left;
+}
+
 .modal-percent-row {
   display: flex;
   gap: 16px;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .modal-percent {

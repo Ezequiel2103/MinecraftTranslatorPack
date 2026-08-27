@@ -118,6 +118,8 @@
 
   "result_done": "✔ Done.\nQuest files: {files}\nMods translated: {mods}\nPending review: {pending}\nTranslated straight into the modpack.",
   "modal_done_title": "✔ Translation finished",
+  "modal_section_quests": "Quests",
+  "modal_section_mods": "Mods",
   "modal_done_translated": "Translated",
   "modal_done_pending": "Pending review",
   "modal_done_detail": "{translated} of {total} texts translated · {pending} left pending review.",

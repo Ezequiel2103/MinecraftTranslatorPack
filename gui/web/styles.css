@@ -747,3 +747,74 @@ html, body {
 .theme-card.active .theme-name {
   color: var(--text);
 }
+
+/* ---------- done modal ---------- */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 100;
+}
+
+.modal-overlay.hidden {
+  display: none;
+}
+
+.modal-box {
+  width: 320px;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  text-align: center;
+}
+
+.modal-title {
+  margin: 0 0 18px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.modal-percent-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.modal-percent {
+  flex: 1;
+  padding: 14px 8px;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+}
+
+.modal-percent-value {
+  display: block;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.modal-percent-dim .modal-percent-value {
+  color: var(--text-dim);
+}
+
+.modal-percent-label {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.modal-detail {
+  margin: 0 0 4px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-dim);
+}

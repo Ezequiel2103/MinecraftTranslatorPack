@@ -117,6 +117,11 @@
   "label_eta": "⏱ Tiempo estimado restante: {time}",
 
   "result_done": "✔ Listo.\nArchivos de misiones: {files}\nMods traducidos: {mods}\nPendientes de revisión: {pending}\nSe tradujo directo en el modpack.",
+  "modal_done_title": "✔ Traducción terminada",
+  "modal_done_translated": "Traducido",
+  "modal_done_pending": "En revisión",
+  "modal_done_detail": "{translated} de {total} textos traducidos · {pending} quedaron en revisión.",
+  "btn_close_modal": "Cerrar",
   "result_error": "✖ Error: {message}",
   "result_import_modpack_success": "✔ Glosario de modpack cargado.\nTextos nuevos agregados: {added}\nTotal en memoria: {total}",
   "result_import_mods_success": "✔ Glosario de mods cargado.\nMods nuevos: {added_mods}\nClasificaciones nuevas: {added_classifications}",

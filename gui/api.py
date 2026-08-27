@@ -416,7 +416,7 @@ class Api:
         backup_dir = modpack_root / "_translator_backups" / timestamp
         backed_up = False
 
-        summary = {"files": 0, "mods": 0, "pending": 0}
+        summary = {"files": 0, "mods": 0, "pending": 0, "total_items": 0}
         quota_exceeded = False
 
         try:
@@ -454,6 +454,9 @@ class Api:
                 summary["files"] = len(reports)
                 summary["pending"] += sum(
                     len(report["pending_items"]) for report in reports
+                )
+                summary["total_items"] += sum(
+                    len(report["translatable_texts"]) for report in reports
                 )
                 quota_exceeded = quota_exceeded or any(
                     report.get("quota_exceeded") for report in reports
@@ -508,12 +511,22 @@ class Api:
                 )
                 summary["mods"] = len(stats["mods"])
                 summary["pending"] += stats["pending_items"]
+                summary["total_items"] += stats["total_items"]
                 quota_exceeded = quota_exceeded or stats.get("quota_exceeded", False)
+
+            translated_items = summary["total_items"] - summary["pending"]
+            percent_translated = (
+                round(translated_items / summary["total_items"] * 100)
+                if summary["total_items"] else 100
+            )
 
             payload = {
                 "files": summary["files"],
                 "mods": summary["mods"],
                 "pending": summary["pending"],
+                "total_items": summary["total_items"],
+                "percent_translated": percent_translated,
+                "percent_pending": 100 - percent_translated,
                 "modpack_root": str(modpack_root),
                 "backup_dir": str(backup_dir) if backed_up else None
             }

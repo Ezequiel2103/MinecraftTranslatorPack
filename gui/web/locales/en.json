@@ -117,6 +117,11 @@
   "label_eta": "⏱ Estimated time remaining: {time}",
 
   "result_done": "✔ Done.\nQuest files: {files}\nMods translated: {mods}\nPending review: {pending}\nTranslated straight into the modpack.",
+  "modal_done_title": "✔ Translation finished",
+  "modal_done_translated": "Translated",
+  "modal_done_pending": "Pending review",
+  "modal_done_detail": "{translated} of {total} texts translated · {pending} left pending review.",
+  "btn_close_modal": "Close",
   "result_error": "✖ Error: {message}",
   "result_import_modpack_success": "✔ Modpack glossary loaded.\nNew texts added: {added}\nTotal in memory: {total}",
   "result_import_mods_success": "✔ Mods glossary loaded.\nNew mods: {added_mods}\nNew classifications: {added_classifications}",

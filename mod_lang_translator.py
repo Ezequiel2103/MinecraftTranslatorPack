@@ -36,6 +36,13 @@ PACK_MCMETA = {
 }
 
 
+def _translatable_items(en_us):
+    return [
+        item for item in extract_texts(en_us)
+        if decide_translation(item)["action"] == "translate"
+    ]
+
+
 def translate_mod_lang_files(
     mods_folder,
     output_resourcepack,
@@ -99,7 +106,8 @@ def translate_mod_lang_files(
         "translated_fresh": 0,
         "skipped_config_only": 0,
         "quota_exceeded": False,
-        "mods": []
+        "mods": [],
+        "total_items": 0
     }
     pending_items = []
     total_sources = len(sources)
@@ -124,6 +132,12 @@ def translate_mod_lang_files(
         if source["has_target_translation"]:
             stats["already_translated_by_mod"] += 1
             continue
+
+        # Counted here (not just for translated_fresh) so a cache hit
+        # contributes the same "how much is actually translated" total
+        # as translating it fresh would have -- the cache holds the
+        # exact same content either way.
+        stats["total_items"] += len(_translatable_items(source["en_us"]))
 
         source_hash = content_hash(source["en_us"])
         cached_translation = load_cached_translation(
@@ -219,11 +233,7 @@ def _translate_lang_dict(
     cancel_event=None,
     resume_event=None
 ):
-    texts = extract_texts(en_us)
-    translatable = [
-        item for item in texts
-        if decide_translation(item)["action"] == "translate"
-    ]
+    translatable = _translatable_items(en_us)
 
     service = TranslationService(
         language_pair,

@@ -583,6 +583,17 @@ function resultMessage(key, payload) {
   return message;
 }
 
+function showDoneModal(payload) {
+  const total = payload.total_items || 0;
+  const pending = payload.pending || 0;
+  const translated = total - pending;
+
+  document.getElementById("done-modal-percent-translated").textContent = `${payload.percent_translated}%`;
+  document.getElementById("done-modal-percent-pending").textContent = `${payload.percent_pending}%`;
+  document.getElementById("done-modal-detail").textContent = t("modal_done_detail", { translated, total, pending });
+  document.getElementById("done-modal").classList.remove("hidden");
+}
+
 // ---------------- backend events ----------------
 
 window.onBackendEvent = function (event, payload) {
@@ -617,6 +628,7 @@ window.onBackendEvent = function (event, payload) {
     setBusy(false);
     clearEta();
     setResult(resultMessage("result_done", payload), "success");
+    showDoneModal(payload);
     toggleGoogleUsageVisibility();
     refreshMemoryStats();
     return;
@@ -887,6 +899,9 @@ window.addEventListener("pywebviewready", async () => {
   document.getElementById("btn-save-settings").addEventListener("click", saveSettingsFromForm);
   document.getElementById("btn-refresh-pending").addEventListener("click", loadPending);
   document.getElementById("btn-retry-pending").addEventListener("click", retryPending);
+  document.getElementById("btn-close-done-modal").addEventListener("click", () => {
+    document.getElementById("done-modal").classList.add("hidden");
+  });
 
   showView("home");
 });

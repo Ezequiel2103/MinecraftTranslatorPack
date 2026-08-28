@@ -78,7 +78,9 @@ def main():
     )
 
     api.set_window(window)
-    webview.start(debug=False)
+
+    icon_path = BASE_DIR / "gui" / "assets" / "app_icon.ico"
+    webview.start(debug=False, icon=str(icon_path) if icon_path.is_file() else None)
 
 
 if __name__ == "__main__":
